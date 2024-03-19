@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+    .dashboard-container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .dashboard-container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  

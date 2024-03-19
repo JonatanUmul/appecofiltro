@@ -1,0 +1,16 @@
+.fade {
+    transition: opacity 0.3s ease-out;
+}
+
+.fade .modal-dialog {
+    transition: transform 0.3s ease-out, opacity 0.8s ease-out;
+}
+
+/* .fade.show {
+    opacity: 0;
+} */
+
+.fade.show .modal-dialog {
+    transform: translate(0, 0);
+    opacity: 1;
+}
