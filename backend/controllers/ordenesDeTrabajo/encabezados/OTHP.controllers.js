@@ -12,7 +12,7 @@ export const postOTHP = async(req, res)=>{
             console.log('Uno o svarios datos estan vacios')
         }
         else{
-            const consulta='INSERT INTO OTHP(id_MP,id_est,id_creador)Values(?, ?, ?)';
+            const consulta='INSERT INTO othp(id_MP,id_est,id_creador)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_enc, estado, id_creador])
         res.send({rows});
         }
