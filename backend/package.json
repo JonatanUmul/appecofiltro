@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node src/index.js",
-    "start": "node index.js"
+    "start": "npm rebuild && node src/index.j && node index.js"
   },
   "keywords": [],
   "author": "",
