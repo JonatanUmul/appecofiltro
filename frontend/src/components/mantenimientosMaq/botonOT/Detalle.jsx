@@ -35,25 +35,25 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   const renderSelectedForm = () => {
     switch (encabezado) {
     
-      case 'MTA':
+      case 'mta':
         return <ConsultaMTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MEXT':
+      case 'mext':
         return <ConsultaMEXT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MBT':
+      case 'mbt':
         return <ConsultaMBT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MCTA':
+      case 'mcta':
         return <ConsultaMCTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MTAM':
+      case 'mtam':
         return <ConsultaMTAM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MM2':
+      case 'mm2':
         return <ConsultaMM2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MMM':
+      case 'mmm':
         return <ConsultaMMM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MPH2':
+      case 'mph2':
         return <ConsultaMPH2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MPHM':
+      case 'mphm':
         return <ConsultaMPHM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MPM':
+      case 'mpm':
         return <ConsultaMPM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
      
 

@@ -32,29 +32,29 @@ console.log('propr recibios', encabezado, id)
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
-      case 'OTHP':
+      case 'othp':
         return <DTHP id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
 
-      case 'OTSA':
+      case 'otsa':
         return <DTSASERRIN id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
 
-      case 'OTCA1':
+      case 'otca1':
         return <DTCMP1 id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
 
-      case 'OTCA2':
+      case 'otca2':
         return <DTCA2 id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
 
-      case 'OTPV':
+      case 'otpv':
           return <DTPV id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
     
-      case 'OTFM':
+      case 'otfm':
           return <DTFM id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
     
-      case 'OTP':
+      case 'otp':
             return <DTP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
-      case 'OTHH':
+      case 'othh':
             return <DTHH id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
   

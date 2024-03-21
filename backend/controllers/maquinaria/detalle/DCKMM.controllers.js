@@ -26,7 +26,7 @@ export const postDCKMM = async(req, res)=>{
    
     try{
     
-       const consulta=`INSERT INTO DCKMM(
+       const consulta=`INSERT INTO dckmm (
         id_CKMM,
         id_limpiezaGeneral,
         id_AccionamientoCorrectoTornillos,

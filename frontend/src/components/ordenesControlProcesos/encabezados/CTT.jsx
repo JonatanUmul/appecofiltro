@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 // import './user.css'
-
+const URL = process.env.REACT_APP_URL;
 const CTT = () => {
   const { handleSubmit, register } = useForm();
   const [mtp, setMtp] = useState([]);
@@ -16,7 +16,7 @@ const CTT = () => {
   
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/MateriaPrima"),
+      axios.get(`${URL}/MateriaPrima`),
     ])
       .then(([estadosResponse, rolesResponse]) => {
         setMtp(estadosResponse.data);
@@ -41,9 +41,9 @@ const CTT = () => {
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        'http://localhost:3001/CTT',formData
+        `${URL}/CTT`,formData
       );
-      window.location.href = "/Home/TablaOT";
+      window.location.href = "/Home/TablaCP";
       console.log("Respuesta del servidor:", response.data);
       // Aquí podrías agregar lógica adicional, como mostrar un mensaje de éxito al usuario, por ejemplo
     } catch (error) {

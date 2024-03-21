@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 // import './user.css'
-
+const URL = process.env.REACT_APP_URL;
 const CKCTAM = ({enviarId, modalTitle}) => {
   const { handleSubmit, register } = useForm();
   const [maquina, setMaquina] = useState([]);
@@ -13,7 +13,7 @@ const maquinaria=modalTitle;
   useEffect(() => {
     Promise.all([
      
-      axios.get(`http://localhost:3001/maquinaria/${maquinaria}`),
+      axios.get(` ${URL}/maquinaria/${maquinaria}`),
     ])
       .then(([maquinaResponse]) => {
         setMaquina(maquinaResponse.data);
@@ -35,7 +35,7 @@ const maquinaria=modalTitle;
       const id_maq = maquina.rows[0]?.id_maq;
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        'http://localhost:3001/CKCTAM',
+        `${URL}/CKCTAM`,
        
         { id_maq : id_maq }
       );

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+const URL = process.env.REACT_APP_URL
 
 const DTPV = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
@@ -10,7 +11,7 @@ const DTPV = ({ encabezado, EncName, fecha_creacion,id }) => {
 
 useEffect(() => {
   try {
-    const url='http://localhost:3001/MateriaPrima'
+    const url=`${URL}/MateriaPrima`
 
     axios.get(url).then((MateriaPrimresponse)=>{setMatPrim(MateriaPrimresponse.data)})
     
@@ -23,7 +24,7 @@ console.log(matPrim)
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/DTPV', {
+      const response = await axios.post(`${URL}/DTPV`, {
         id_OTPV: id.toString(),
         cantidad: formData.cantidad,
         humedad: formData.humedad,

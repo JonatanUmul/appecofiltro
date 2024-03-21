@@ -10,7 +10,7 @@ export const postMPHM = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO MPHM(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
+       const consulta='INSERT INTO mphm(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_maquina, id_creador, id_estado])
         res.send({rows});
         
@@ -32,7 +32,7 @@ export const putMPHM = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE MPHM SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE mphm SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

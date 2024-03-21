@@ -4,7 +4,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estilosFormatos.css'
 import Swal from 'sweetalert2'; // Importar SweetAlert
-
+const URL = process.env.REACT_APP_URL;
 const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [respuestas, setRespuestas] = useState([]);
@@ -12,7 +12,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/respuestas"),
+      axios.get(`${URL}/respuestas`),
 
     ])
       .then(([RespuestasResponse]) => {
@@ -28,7 +28,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/DCKCTA', {
+      const response = await axios.post(`${URL}/DCKCTA`, {
         id_CKCTA: id.toString(),
         id_verificarCableDeCorteEnBuenEstado: formData.id_verificarCableDeCorteEnBuenEstado,
         id_lubricarGuiasDelCortador: formData.id_lubricarGuiasDelCortador,

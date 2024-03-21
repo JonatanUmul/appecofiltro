@@ -10,7 +10,7 @@ export const postMPM = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO MPM(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
+       const consulta='INSERT INTO mpm(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_maquina, id_creador, id_estado])
         res.send({rows});
         
@@ -30,7 +30,7 @@ export const putMPM = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE MPM SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE mpm SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

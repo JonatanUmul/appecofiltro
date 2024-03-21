@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 // import './user.css'
+const URL = process.env.REACT_APP_URL
 
 const OTCMP = ({enviarId}) => {
   const { handleSubmit, register } = useForm();
@@ -15,7 +16,7 @@ const OTCMP = ({enviarId}) => {
   useEffect(() => {
     Promise.all([
      
-      axios.get("http://localhost:3001/MateriaPrima"),
+      axios.get(`${URL}/MateriaPrima`),
     ])
       .then(([estadosResponse, rolesResponse]) => {
         setMtp(estadosResponse.data);
@@ -39,7 +40,7 @@ const OTCMP = ({enviarId}) => {
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        'http://localhost:3001/OTCA1',
+        `${URL}/OTCA1`,
         formData
       );
       window.location.href = "/Home/TablaOT";

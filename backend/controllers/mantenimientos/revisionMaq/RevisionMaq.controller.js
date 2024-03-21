@@ -3,7 +3,7 @@ import { pool } from "../../../src/db.js";
 export const getRevisionMaquinaria = async (req, res) => {
     try {
         // Consulta SQL para seleccionar el usuario por nombre y contraseña
-        const [rows] = await pool.query("select * from revisionMaquinaria");
+        const [rows] = await pool.query("select * from revisionmaquinaria");
 
         // Verifica si se encontró algún dato
         if (rows.length === 0) {

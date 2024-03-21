@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 // import './user.css'
+const URL = process.env.REACT_APP_URL
 
 const OTPV = () => {
   const { handleSubmit, register } = useForm();
@@ -11,7 +12,7 @@ const OTPV = () => {
   
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/MateriaPrima"),
+      axios.get(`${URL}/MateriaPrima`),
     ])
       .then(([estadosResponse, rolesResponse]) => {
         setMtp(estadosResponse.data);
@@ -33,7 +34,7 @@ const OTPV = () => {
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        'http://localhost:3001/OTPV',{
+        `${URL}/OTPV`,{
           id_creador:8
         }
       );

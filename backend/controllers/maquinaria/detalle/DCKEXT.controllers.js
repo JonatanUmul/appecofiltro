@@ -21,7 +21,7 @@ export const postDCKEXT = async(req, res)=>{
    
     try{
     
-       const consulta=`INSERT INTO DCKEXT(
+       const consulta=`INSERT INTO dckext(
         id_CKEXT,
         id_limpiezaBazucaDeSalida,
         id_lubricarChumacerasAlFinalTurno,

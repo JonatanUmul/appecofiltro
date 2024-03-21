@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+const URL = process.env.REACT_APP_URL
 const EstadoProc = ({ id, encabezado }) => {
   const [estado, setEstado] = useState([]);
   const [cambiarEst, setCambiarEst] = useState(""); // Estado para almacenar el estado seleccionado
@@ -9,7 +9,7 @@ const EstadoProc = ({ id, encabezado }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://localhost:3001/EstadosProc';
+        const url = `${URL}/EstadosProc`;
         const response = await axios.get(url);
         setEstado(response.data);
         console.log('datos: ', response.data);
@@ -29,17 +29,17 @@ const EstadoProc = ({ id, encabezado }) => {
   // Definir la ruta basada en el encabezado seleccionado
   useEffect(() => {
     switch (encabezado) {
-      case 'CPS':
-        setCambiarRuta('CPS');
+      case 'cps':
+        setCambiarRuta('cps');
         break;
-      case 'CPB':
-        setCambiarRuta('CPB');
+      case 'cpb':
+        setCambiarRuta('cpb');
         break;
-      case 'CRM':
-        setCambiarRuta('CRM');
+      case 'crm':
+        setCambiarRuta('crm');
         break;
-      case 'CTT':
-        setCambiarRuta('CTT');
+      case 'ctt':
+        setCambiarRuta('ctt');
         break;
      
     }
@@ -50,7 +50,7 @@ const EstadoProc = ({ id, encabezado }) => {
     const enviarEstado = async () => {
       if (cambiarEst !== "") {
         try {
-          const response = await axios.put(`http://localhost:3001/${cambiarRuta}`, { id_est: cambiarEst, id });
+          const response = await axios.put(`${URL}/${cambiarRuta}`, { id_est: cambiarEst, id });
           console.log('Datos de la tabla:', response.data);
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
           window.location.href = "/Home/TablaCP";

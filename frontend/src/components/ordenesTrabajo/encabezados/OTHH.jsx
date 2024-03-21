@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-
+const URL = process.env.REACT_APP_URL
 
 const OTHH = () => {
   const { handleSubmit, register } = useForm();
@@ -21,7 +21,7 @@ const OTHH = () => {
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        'http://localhost:3001/OTHH',
+        `${URL}/OTHH`,
         formData
       );
       window.location.href = "/Home/TablaOT";

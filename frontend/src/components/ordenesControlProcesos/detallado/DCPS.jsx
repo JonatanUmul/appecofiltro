@@ -3,7 +3,7 @@
   import axios from "axios";
   import Swal from 'sweetalert2'; // Importar SweetAlert
   import { formatFecha } from "../../utilidades/FormatearFecta";
-
+  const URL = process.env.REACT_APP_URL;
   const DCPS= ({ encabezado, EncName, fecha_creacion, id }) => {
     const { handleSubmit, register } = useForm();
     const [prensador, setPrensador] = useState([]);
@@ -15,10 +15,10 @@
     const maquinaria = 'Prensa';
     useEffect(() => {
       Promise.all([
-        axios.get(`http://localhost:3001/Operarios/${id_area}`),
-        axios.get(`http://localhost:3001/maquinaria/${maquinaria}`),
-        axios.get(`http://localhost:3001/calificacion`),
-        axios.get(`http://localhost:3001/ModelosUF`),
+        axios.get(`${URL}/Operarios/${id_area}`),
+        axios.get(`${URL}/maquinaria/${maquinaria}`),
+        axios.get(`${URL}/calificacion`),
+        axios.get(`${URL}/ModelosUF`),
       ])
         .then(([PrensadorResponse, MoldeResponse, CalificacionesResponse, ModelosResponse]) => {
           setPrensador(PrensadorResponse.data);
@@ -36,7 +36,7 @@
     const onSubmit = async (formData) => {
       console.log('Datod enviaados',formData)
       try {
-        const response = await axios.post('http://localhost:3001/DCPS', {
+        const response = await axios.post(`${URL}/DCPS`, {
           id_DCPS: id.toString(),
           codigo: formData.codigo,
           id_prensador: formData.id_prensador,

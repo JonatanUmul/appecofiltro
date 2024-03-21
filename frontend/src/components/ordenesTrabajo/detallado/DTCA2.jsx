@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
-
+const URL = process.env.REACT_APP_URL
 const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [aserradero, setAserradero] = useState([]);
@@ -11,8 +11,8 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/Aserradero"),
-      axios.get("http://localhost:3001/TipoCernido"),
+      axios.get(`${URL}/Aserradero`),
+      axios.get(`${URL}/TipoCernido`),
     ])
       .then(([AserraderoResponse, TIpCernidoResponse]) => {
         setAserradero(AserraderoResponse.data);
@@ -27,7 +27,7 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/DTCA2', {
+      const response = await axios.post(`${URL}/DTCA2`, {
         id_OTCA2: id.toString(),
         id_aserradero: formData.id_asrd,
         cantidad_inicial: formData.cantidad_inicial,

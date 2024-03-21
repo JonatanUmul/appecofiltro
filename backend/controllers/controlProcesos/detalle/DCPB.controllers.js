@@ -10,7 +10,7 @@ export const postDCPB = async(req, res)=>{
    
     try{
     
-       const consulta='INSERT INTO DCPB(id_CPB, id_modelo, id_pulidor, id_prensa, id_modulo, pulido,id_calificacion, fechaProduccion)Values(?, ?,?,?,?,?,?,?)';
+       const consulta='INSERT INTO dcpb(id_CPB, id_modelo, id_pulidor, id_prensa, id_modulo, pulido,id_calificacion, fechaProduccion)Values(?, ?,?,?,?,?,?,?)';
         const [rows]= await pool.query(consulta,[id_CPB, id_modelo, id_pulidor, id_prensa,id_modulo, pulido,id_calificacion, fechaProduccion])
         res.send({rows});
         

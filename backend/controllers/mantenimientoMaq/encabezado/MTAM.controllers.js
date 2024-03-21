@@ -10,7 +10,7 @@ export const postCKTAM = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO CKCTAM(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
+       const consulta='INSERT INTO ckctam (id_maquina, id_creador, id_estado)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_maquina, id_creador, id_estado])
         res.send({rows});
         

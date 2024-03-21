@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const URL = process.env.REACT_APP_URL;
 
 const EstadoProc = ({ id, encabezado }) => {
   const [estado, setEstado] = useState([]);
@@ -9,7 +10,7 @@ const EstadoProc = ({ id, encabezado }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://localhost:3001/EstadosProc';
+        const url = `${URL}/EstadosProc`;
         const response = await axios.get(url);
         setEstado(response.data);
         console.log('datos: ', response.data);
@@ -29,35 +30,35 @@ const EstadoProc = ({ id, encabezado }) => {
   // Definir la ruta basada en el encabezado seleccionado
   useEffect(() => {
     switch (encabezado) {
-      case 'MTA':
-        setCambiarRuta('MTA');
+      case 'mta':
+        setCambiarRuta('mta');
         break;
-      case 'MEXT':
-        setCambiarRuta('MEXT');
+      case 'mext':
+        setCambiarRuta('mext');
         break;
-      case 'MCTA':
-        setCambiarRuta('MCTA');
+      case 'mcta':
+        setCambiarRuta('mcta');
         break;
-      case 'MTAM':
-        setCambiarRuta('MTAM');
+      case 'mtam':
+        setCambiarRuta('mtam');
         break;
-      case 'MM2':
-          setCambiarRuta('MM2');
+      case 'mm2':
+          setCambiarRuta('mm2');
           break;
-      case 'MMM':
-          setCambiarRuta('MMM');
+      case 'mmm':
+          setCambiarRuta('mmm');
           break;
-      case 'MPH2':
-          setCambiarRuta('MPH2');
+      case 'mph2':
+          setCambiarRuta('mph2');
           break;
-      case 'MPHM':
-          setCambiarRuta('MPHM');
+      case 'mphm':
+          setCambiarRuta('mphm');
           break;
-      case 'MPM':
-          setCambiarRuta('MPM');
+      case 'mpm':
+          setCambiarRuta('mpm');
           break;
-          case 'MBT':
-            setCambiarRuta('MBT');
+          case 'mbt':
+            setCambiarRuta('mbt');
             break;
      
     }
@@ -68,7 +69,7 @@ const EstadoProc = ({ id, encabezado }) => {
     const enviarEstado = async () => {
       if (cambiarEst !== "") {
         try {
-          const response = await axios.put(`http://localhost:3001/${cambiarRuta}`, { id_estado: cambiarEst, id });
+          const response = await axios.put(`${URL}/${cambiarRuta}`, { id_estado: cambiarEst, id });
           console.log('Datos de la tabla:', response.data);
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
           window.location.href = "/Home/TableMantenimientoMaq";

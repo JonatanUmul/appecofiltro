@@ -4,6 +4,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estilosFormatos.css'
 import Swal from 'sweetalert2'; // Importar SweetAlert
+const URL = process.env.REACT_APP_URL;
 
 const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
@@ -17,11 +18,11 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
 const id_area=8
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/EstadosMaq"),
-      axios.get("http://localhost:3001/RevisionMaquinaria"),
-      axios.get("http://localhost:3001/Provedores"),
-      axios.get(`http://localhost:3001/Operarios/${id_area}`),
-      axios.get(`http://localhost:3001/TipoMantenimiento`),
+      axios.get(`${URL}/EstadosMaq`),
+      axios.get(`${URL}/RevisionMaquinaria`),
+      axios.get(`${URL}/Provedores`),
+      axios.get(`${URL}/Operarios/${id_area}`),
+      axios.get(`${URL}/TipoMantenimiento`),
     ])
       .then(([RespuestasResponse, RevisionResponse, ProveedoresResponse, OperarioResponse,TipoMantenimientoResponse]) => {
         setEstadosMaq(RespuestasResponse.data)
@@ -39,7 +40,7 @@ const id_area=8
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/DMEXT', {
+      const response = await axios.post(`${URL}/DMEXT`, {
         id_MEXT: id.toString(),
         id_estadomaq: formData.id_estadomaq,
         id_tipoMantenimiento:formData.id_tipoMantenimiento,

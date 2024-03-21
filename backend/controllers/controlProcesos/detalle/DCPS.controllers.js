@@ -9,7 +9,7 @@ export const postDCPS = async(req, res)=>{
    
     try{
     
-       const consulta='INSERT INTO DCPS(id_DCPS, codigo, id_prensador, id_prensa, id_mod, id_calificacion)Values(?, ?,?,?,?,?)';
+       const consulta='INSERT INTO dcps(id_DCPS, codigo, id_prensador, id_prensa, id_mod, id_calificacion)Values(?, ?,?,?,?,?)';
         const [rows]= await pool.query(consulta,[id_DCPS, codigo, id_prensador, id_prensa, id_mod, id_calificacion])
         res.send({rows});
         

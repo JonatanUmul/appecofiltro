@@ -6,7 +6,7 @@ export const postDTT = async (req, res) => {
   const { id_CTT,id_tunel, id_modelo,cabezaDerecha1, pieDerecho1, cabezaDerecha2,pieDerecho2, cabezaDerecha3,pieIzquierdo1,cabezaizquierda1, pieIzquierdo2  } = req.body;
   
   try {
-    const consulta = 'INSERT INTO DTT (id_CTT, id_tunel, id_modelo,cabezaDerecha1, pieDerecho1, cabezaDerecha2,pieDerecho2, cabezaDerecha3,pieIzquierdo1,cabezaizquierda1, pieIzquierdo2  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?)';
+    const consulta = 'INSERT INTO dtt (id_CTT, id_tunel, id_modelo,cabezaDerecha1, pieDerecho1, cabezaDerecha2,pieDerecho2, cabezaDerecha3,pieIzquierdo1,cabezaizquierda1, pieIzquierdo2  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?)';
     const [rows] = await pool.query(consulta, [id_CTT,id_tunel, id_modelo,cabezaDerecha1, pieDerecho1, cabezaDerecha2,pieDerecho2, cabezaDerecha3,pieIzquierdo1,cabezaizquierda1, pieIzquierdo2  ]);
     res.send({ rows });
   } catch (err) {

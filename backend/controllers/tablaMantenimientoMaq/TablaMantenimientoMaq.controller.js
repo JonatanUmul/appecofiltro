@@ -5,63 +5,63 @@ export const getMantenimientoMaq = async (req, res) => {
         // Consulta SQL para seleccionar los estados
         const consulta = `
        
-        SELECT 'MTA' AS encabezado, 'Tanque de Agua 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MTA 
+        SELECT 'mta' AS encabezado, 'Tanque de Agua 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mta 
          WHERE id_estado = 2
         
         UNION all
         
-        SELECT 'MEXT' AS encabezado, 'Extrusora 2.0' AS EncName,id, fechaCreacion, id_creador, id_maquina
-        FROM MEXT 
+        SELECT 'mext' AS encabezado, 'Extrusora 2.0' AS EncName,id, fechaCreacion, id_creador, id_maquina
+        FROM mext 
         WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'MBT' AS encabezado, 'Banda Transportadora 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MBT 
+        SELECT 'mbt' AS encabezado, 'Banda Transportadora 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mbt 
          WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'MCTA' AS encabezado, 'Cortador Automatico 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MCTA   
+        SELECT 'mcta' AS encabezado, 'Cortador Automatico 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mcta   
          WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'MTAM' AS encabezado, 'Tanque de Agua Mini' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MTAM 
+        SELECT 'mtam' AS encabezado, 'Tanque de Agua Mini' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mtam 
          WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'MM2' AS encabezado, 'Mezcladora 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MM2 
+        SELECT 'mm2' AS encabezado, 'Mezcladora 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mm2 
         WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'MMM' AS encabezado, 'Mezcladora Mini' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MMM 
+        SELECT 'mmm' AS encabezado, 'Mezcladora Mini' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mmm 
          WHERE id_estado = 2
        
         
         UNION all
        
-        SELECT 'MPH2' AS encabezado, 'Prensa Hidraulica 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MPH2 
+        SELECT 'mph2' AS encabezado, 'Prensa Hidraulica 2.0' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mph2 
         WHERE id_estado = 2
         
          UNION all
        
-        SELECT 'MPHM' AS encabezado, 'Prensa Hidraulica Mini' AS EncName, id, fechaCreacion, id_creador, id_maquina
-        FROM MPHM 
+        SELECT 'mphm' AS encabezado, 'Prensa Hidraulica Mini' AS EncName, id, fechaCreacion, id_creador, id_maquina
+        FROM mphm 
          WHERE id_estado = 2
 
          UNION all
        
-         SELECT 'MPM' AS encabezado, 'Prensa Hidraulica Manual' AS EncName, id, fechaCreacion, id_creador, id_maquina
-         FROM MPM 
+         SELECT 'mpm' AS encabezado, 'Prensa Hidraulica Manual' AS EncName, id, fechaCreacion, id_creador, id_maquina
+         FROM mpm 
           WHERE id_estado = 2
         `;
 

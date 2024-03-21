@@ -6,4 +6,4 @@ const LogoEco = () => {
   )
 }
 
-export default LogoEco
+export default LogoEco  

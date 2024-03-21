@@ -17,7 +17,7 @@ export const postDCKCTA = async(req, res)=>{
    
     try{
     
-       const consulta=`INSERT INTO DCKCTA(
+       const consulta=`INSERT INTO dckcta (
         id_CKCTA,
         id_verificarCableDeCorteEnBuenEstado,
         id_lubricarGuiasDelCortador,
@@ -62,7 +62,7 @@ export const getDCKCTA= async(req, res)=>{
     d.observacion2,
     d.observacion3
     
-    FROM DCKCTA d
+    FROM dckcta d
     
     join respuestas r1 on d.id_verificarCableDeCorteEnBuenEstado = r1.id
     join respuestas r2 on d.id_lubricarGuiasDelCortador = r2.id

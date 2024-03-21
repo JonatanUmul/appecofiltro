@@ -2,6 +2,7 @@
   import { useForm } from 'react-hook-form';
   import axios from 'axios';
   import './roles.css'
+  const URL = process.env.REACT_APP_URL;
 
   const Roles = () => {
     const { handleSubmit, register } = useForm();
@@ -23,7 +24,7 @@
             descripcion: formData.descripcion
           })
               // Realizar la solicitud POST al servidor con los datos del formulario
-              const response = await axios.post('http://localhost:3001/Rolrouter', formData);
+              const response = await axios.post(`${URL}/Rolrouter`, formData);
               setSuccesMessage('Datos Guardados');
               // Aquí podrías agregar lógica adicional, como mostrar un mensaje de éxito al usuario, por ejemplo
               window.location.href = '/Home/TablaRoles';

@@ -28,7 +28,7 @@ export const postDMTAM = async(req, res)=>{
         ) {
           res.status(400).send('Uno o varios datos están vacíos');
         } else {
-          const consulta = `INSERT INTO DMTAM (
+          const consulta = `INSERT INTO dmtam  (
             id_MTAM,
             id_estadomaq,
             id_tipoMantenimiento,
@@ -78,7 +78,7 @@ d.detalle,
 d.fechaCreacion,
 d.horaCreacion
 
-from DMTAM d
+from dmtam d
 
 join est_maq on d.id_estadomaq = est_maq.id_est
 join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id

@@ -10,7 +10,7 @@ export const postCTT = async(req, res)=>{
    
     try{
     
-       const consulta='INSERT INTO CTT(id_est, codigoInicio, codigoFinal)Values(?,?, ?)';
+       const consulta='INSERT INTO ctt(id_est, codigoInicio, codigoFinal)Values(?,?, ?)';
         const [rows]= await pool.query(consulta,[id_est, codigoInicio, codigoFinal])
         res.send({rows});
         
@@ -31,7 +31,7 @@ export const putCTT = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE CTT SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE ctt SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

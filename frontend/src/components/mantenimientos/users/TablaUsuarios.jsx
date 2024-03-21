@@ -4,14 +4,15 @@ import axios from 'axios'; // Importa Axios
 import User from './Usr'
 import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import '../EstiloModal.css'
+const URL = process.env.REACT_APP_URL;
 
 const TablaUsuarios = () => {
     const [datos, setDatos] = useState([]);
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        const URL = 'http://localhost:3001/UsuariosR';
-        axios.get(URL)
+        const URLS = `${URL}/UsuariosR`;
+        axios.get(URLS)
             .then(response => {
                 setDatos(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })

@@ -4,14 +4,15 @@ import axios from 'axios'; // Importa Axios
 import { formatFecha } from '../../utilidades/FormatearFecta';
 import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import CreateTipProv from './TipProvedor'
+const URL = process.env.REACT_APP_URL;
 
 const TablaTipProv = () => {
     const [prov, setProv] = useState([]);
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        const URL = 'http://localhost:3001/TipoProv';
-        axios.get(URL)
+        const URLS = `${URL}/TipoProv`;
+        axios.get(URLS)
             .then(response => {
                 setProv(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })

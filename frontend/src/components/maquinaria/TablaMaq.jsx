@@ -6,7 +6,7 @@ import { formatFecha } from "../utilidades/FormatearFecta";
 import CrearOT from "./botonOT/Crear_OT";
 import Detalle from "./botonOT/Detalle";
 import './TablaEstilos.css'
-
+const URL = process.env.REACT_APP_URL;
 const TablaMaq = ({ OTDats }) => {
   const [estOT, setEstot] = useState([]);
   const [error, setError] = useState("");
@@ -14,7 +14,7 @@ const TablaMaq = ({ OTDats }) => {
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/TablaMaquinaria");
+        const response = await axios.get(`${URL}/TablaMaquinaria`);
         setEstot(response.data);
         console.log("ver aca ", response);
       } catch (error) {

@@ -32,25 +32,25 @@ console.log('propr recibios', encabezado, id)
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
-      case 'CKBT':
+      case 'ckbt':
         return <DCKBT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKTA':
+      case 'ckta':
         return <DCKTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKEXT':
+      case 'ckext':
          return <DCKEXT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKCTA':
+      case 'ckcta':
          return <DCKCTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKCTAM':
+      case 'ckctam':
          return <DCKCTAM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKM2':
+      case 'ckm2':
           return <DCKCM2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKMM':
+      case 'ckmm':
           return <DCKMM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKPH2':
+      case 'ckph2':
           return <DCKPH2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKPHM':
+      case 'ckphm':
           return <DCKPHM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKPM':
+      case 'ckpm':
           return <DCKPM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
           
   

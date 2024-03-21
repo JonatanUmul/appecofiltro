@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const URL = process.env.REACT_APP_URL;
 
 const EstadoProc = ({ id, encabezado }) => {
   const [estado, setEstado] = useState([]);
@@ -9,7 +10,7 @@ const EstadoProc = ({ id, encabezado }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://localhost:3001/EstadosProc';
+        const url = `${URL}/EstadosProc`;
         const response = await axios.get(url);
         setEstado(response.data);
         console.log('datos: ', response.data);
@@ -29,35 +30,35 @@ const EstadoProc = ({ id, encabezado }) => {
   // Definir la ruta basada en el encabezado seleccionado
   useEffect(() => {
     switch (encabezado) {
-      case 'CKTA':
-        setCambiarRuta('CKTA');
+      case 'ckta':
+        setCambiarRuta('ckta');
         break;
-      case 'CKEXT':
-        setCambiarRuta('CKEXT');
+      case 'ckext':
+        setCambiarRuta('ckext');
         break;
-      case 'CKBT':
-        setCambiarRuta('CKBT');
+      case 'ckbt':
+        setCambiarRuta('ckbt');
         break;
-      case 'CKCTA':
-        setCambiarRuta('CKCTA');
+      case 'ckcta':
+        setCambiarRuta('ckcta');
         break;
-      case 'CKCTAM':
-          setCambiarRuta('CKCTAM');
+      case 'ckctam':
+          setCambiarRuta('ckctam');
           break;
-      case 'CKM2':
-          setCambiarRuta('CKM2');
+      case 'ckm2':
+          setCambiarRuta('ckm2');
           break;
-      case 'CKMM':
-          setCambiarRuta('CKMM');
+      case 'ckmm':
+          setCambiarRuta('ckmm');
           break;
-      case 'CKPH2':
-          setCambiarRuta('CKPH2');
+      case 'ckph2':
+          setCambiarRuta('ckph2');
           break;
-      case 'CKPHM':
-          setCambiarRuta('CKPHM');
+      case 'ckphm':
+          setCambiarRuta('ckphm');
           break;
-      case 'CKPM':
-            setCambiarRuta('CKPM');
+      case 'ckpm':
+            setCambiarRuta('ckpm');
             break;
      
     }
@@ -68,7 +69,7 @@ const EstadoProc = ({ id, encabezado }) => {
     const enviarEstado = async () => {
       if (cambiarEst !== "") {
         try {
-          const response = await axios.put(`http://localhost:3001/${cambiarRuta}`, { id_estado: cambiarEst, id });
+          const response = await axios.put(`${URL}/${cambiarRuta}`, { id_estado: cambiarEst, id });
           console.log('Datos de la tabla:', response.data);
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
           window.location.href = "/Home/TablaMaq";

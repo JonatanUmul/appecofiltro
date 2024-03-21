@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+const URL = process.env.REACT_APP_URL
 
 const EstadoProc = ({ id, encabezado }) => {
   const [estado, setEstado] = useState([]);
@@ -9,8 +10,8 @@ const EstadoProc = ({ id, encabezado }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://localhost:3001/EstadosProc';
-        const response = await axios.get(url);
+        const urls = `${URL}/EstadosProc`;
+        const response = await axios.get(urls);
         setEstado(response.data);
         console.log('datos: ', response.data);
       } catch (error) {
@@ -29,33 +30,33 @@ const EstadoProc = ({ id, encabezado }) => {
   // Definir la ruta basada en el encabezado seleccionado
   useEffect(() => {
     switch (encabezado) {
-      case 'OTHP':
-        setCambiarRuta('OTHP');
+      case 'othp':
+        setCambiarRuta('othp');
         break;
-      case 'OTSA':
-        setCambiarRuta('OTSA');
+      case 'otsa':
+        setCambiarRuta('otsa');
         break;
-      case 'OTCA1':
-        setCambiarRuta('OTCA1');
+      case 'otca1':
+        setCambiarRuta('otca1');
         break;
-      case 'OTCA2':
-        setCambiarRuta('OTCA2');
+      case 'otca2':
+        setCambiarRuta('otca2');
         break;
-      case 'OTPV':
-        setCambiarRuta('OTPV');
+      case 'otpv':
+        setCambiarRuta('otpv');
         break;
-      case 'OTP':
-        setCambiarRuta('OTP');
+      case 'otp':
+        setCambiarRuta('otp');
         break;
-      case 'OTHH':
-        setCambiarRuta('OTHH');
+      case 'othh':
+        setCambiarRuta('othh');
         break;
-      case 'OTFM':
-        setCambiarRuta('OTFM');
+      case 'otfm':
+        setCambiarRuta('otfm');
         break;
-      default:
-        setCambiarRuta('ruta-por-defecto');
-        break;
+      // default:
+      //   setCambiarRuta('ruta-por-defecto');
+      //   break;
     }
   }, [encabezado]); // Ejecutar el efecto cuando el encabezado cambie 
 
@@ -64,7 +65,7 @@ const EstadoProc = ({ id, encabezado }) => {
     const enviarEstado = async () => {
       if (cambiarEst !== "") {
         try {
-          const response = await axios.put(`http://localhost:3001/${cambiarRuta}`, { id_est: cambiarEst, id });
+          const response = await axios.put(`${URL}/${cambiarRuta}`, { id_est: cambiarEst, id });
           console.log('Datos de la tabla:', response.data);
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
           window.location.href = "/Home/TablaOT";

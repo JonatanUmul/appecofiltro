@@ -9,7 +9,7 @@ export const postCPS = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO CPS(id_est,id_creador)Values(?, ?)';
+       const consulta='INSERT INTO cps(id_est,id_creador)Values(?, ?)';
         const [rows]= await pool.query(consulta,[id_est, id_creador])
         res.send({rows});
         
@@ -30,7 +30,7 @@ export const putCPS = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE CPS SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE cps SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

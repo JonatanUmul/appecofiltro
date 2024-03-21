@@ -10,7 +10,7 @@ export const postMTAM = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO MTAM(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
+       const consulta='INSERT INTO mtam(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_maquina, id_creador, id_estado])
         res.send({rows});
         
@@ -30,7 +30,7 @@ export const putMTAM = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE MTAM SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE mtam SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

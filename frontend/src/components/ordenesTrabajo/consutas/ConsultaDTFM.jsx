@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
+const URL = process.env.REACT_APP_URL
 
 const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [error, setError] = useState('');
@@ -9,7 +10,7 @@ const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
 
   
   useEffect(() => {
-    axios.get(`http://localhost:3001/DTFM/${id}`)
+    axios.get(`${URL}/DTFM/${id}`)
 
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data

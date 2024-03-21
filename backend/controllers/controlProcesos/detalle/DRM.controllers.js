@@ -6,7 +6,7 @@ export const postDRM = async (req, res) => {
   const { id_CRM, codigo, id_modelo, id_motivo } = req.body;
   
   try {
-    const consulta = 'INSERT INTO DRM (id_CRM, codigo, id_modelo, id_motivo) VALUES (?, ?, ?, ?)';
+    const consulta = 'INSERT INTO drm (id_CRM, codigo, id_modelo, id_motivo) VALUES (?, ?, ?, ?)';
     const [rows] = await pool.query(consulta, [id_CRM, codigo, id_modelo, id_motivo]);
     res.send({ rows });
   } catch (err) {

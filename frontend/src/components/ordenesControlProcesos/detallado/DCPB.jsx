@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
-
+const URL = process.env.REACT_APP_URL;
 const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [ pulidor, setPulidor] = useState([]);
@@ -16,11 +16,11 @@ const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
   const maquinaria = 'Prensa';
   useEffect(() => {
     Promise.all([
-      axios.get(`http://localhost:3001/Operarios/${id_area}`),
-      axios.get(`http://localhost:3001/maquinaria/${maquinaria}`),
-      axios.get(`http://localhost:3001/calificacion`),
-      axios.get(`http://localhost:3001/ModelosUF`),
-      axios.get('http://localhost:3001/modulosTarimas')
+      axios.get(`${URL}/Operarios/${id_area}`),
+      axios.get(`${URL}/maquinaria/${maquinaria}`),
+      axios.get(`${URL}/calificacion`),
+      axios.get(`${URL}/ModelosUF`),
+      axios.get(`${URL}/modulosTarimas`)
     ])
       .then(([PulidorResponse, MoldeResponse, CalificacionesResponse, ModelosResponse, ModulosResponse]) => {
         setPulidor(PulidorResponse.data);
@@ -39,7 +39,7 @@ const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
   const onSubmit = async (formData) => {
     console.log('Datod enviaados',formData)
     try {
-      const response = await axios.post('http://localhost:3001/DCPB', {
+      const response = await axios.post(`${URL}/DCPB`, {
         id_CPB: id.toString(),
         id_modelo: formData.id_modelo ,
         id_pulidor: formData.id_pulidor,  

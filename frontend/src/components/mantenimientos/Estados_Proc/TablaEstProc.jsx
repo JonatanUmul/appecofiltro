@@ -4,15 +4,15 @@ import axios from 'axios'; // Importa Axios
 import { formatFecha } from '../../utilidades/FormatearFecta';
 import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import CrearEstadoProc from './CrearEstadoProc'
-
+const URL = process.env.REACT_APP_URL;
 
 const TablaEstProc = () => {
     const [estadosProc, setEstadosProc] = useState([]);
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        const URL = 'http://localhost:3001/EstadosProc';
-        axios.get(URL)
+        const URLS = `${URL}/EstadosProc`;
+        axios.get(URLS)
             .then(response => {
                 setEstadosProc(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })

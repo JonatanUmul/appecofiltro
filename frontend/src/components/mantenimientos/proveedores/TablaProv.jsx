@@ -5,13 +5,15 @@ import { formatFecha } from '../../utilidades/FormatearFecta';
 import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import FormCrearProv from './Form.CreatProv' 
 
+const URL = process.env.REACT_APP_URL;
+
 const TablaProv = () => {
     const [proved, setProv] = useState([]);
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        const URL = 'http://localhost:3001/Provedores';
-        axios.get(URL)
+        const URLS = `${URL}/Provedores`;
+        axios.get(URLS)
             .then(response => {
                 setProv(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })

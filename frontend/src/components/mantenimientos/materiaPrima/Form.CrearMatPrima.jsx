@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import './roles.css';
+const URL = process.env.REACT_APP_URL;
 
 const CrearMatPrim = () => {
   const { handleSubmit, register } = useForm();
@@ -16,7 +17,7 @@ const CrearMatPrim = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://localhost:3001/Provedores';
+        const url = `${URL}/Provedores`;
         const response = await axios.get(url);
         setProv(response.data.rows);
       } catch (error) {

@@ -10,7 +10,7 @@ export const postMM2 = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO MM2(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
+       const consulta='INSERT INTO mm2(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_maquina, id_creador, id_estado])
         res.send({rows});
         
@@ -30,7 +30,7 @@ export const putMM2 = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE MM2 SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE mm2 SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

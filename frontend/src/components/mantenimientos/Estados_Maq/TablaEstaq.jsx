@@ -5,14 +5,15 @@ import CrearEstMaq from '../Estados_Maq/EstadosMaq'
 import { formatFecha } from '../../utilidades/FormatearFecta';
 import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import '../EstiloModal.css'
+const URL = process.env.REACT_APP_URL;
 
 const TablaUsuarios = () => {
     const [estadosM, setestadosM] = useState([]);
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        const URL = 'http://localhost:3001/EstadosMaq';
-        axios.get(URL)
+        const URLS = `${URL}/EstadosMaq`;
+        axios.get(URLS)
             .then(response => {
                 setestadosM(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })

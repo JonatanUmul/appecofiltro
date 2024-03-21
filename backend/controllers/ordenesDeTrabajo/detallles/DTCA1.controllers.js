@@ -8,7 +8,7 @@ export const postDTCA1 = async (req, res) => {
         if (id_OTCA1 === '' || id_aserradero === '' || CantidadInicial === '' || CantidadFinal === '' ) {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'INSERT INTO DTCA1(id_OTCA1, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal) VALUES (?, ?, ?, ?,?)';
+            const consulta = 'INSERT INTO dtca1 (id_OTCA1, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal) VALUES (?, ?, ?, ?,?)';
             const [rows] = await pool.query(consulta, [ id_OTCA1, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal]);
             res.send({ rows });
         }

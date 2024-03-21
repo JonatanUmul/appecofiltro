@@ -5,63 +5,63 @@ export const getTablaMaquinaria = async (req, res) => {
         // Consulta SQL para seleccionar los estados
         const consulta = `
        
-        SELECT 'CKTA' AS encabezado, 'Tanque de Agua 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKTA 
+        SELECT 'ckta' AS encabezado, 'Tanque de Agua 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckta 
          WHERE id_estado = 2
         
         UNION all
         
-        SELECT 'CKEXT' AS encabezado, 'Extrusora 2.0' AS EncName,id, fecha_creacion, id_creador, id_maquina
-        FROM CKEXT 
+        SELECT 'ckext' AS encabezado, 'Extrusora 2.0' AS EncName,id, fecha_creacion, id_creador, id_maquina
+        FROM ckext 
         WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'CKBT' AS encabezado, 'Banda Transportadora 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKBT 
+        SELECT 'ckbt' AS encabezado, 'Banda Transportadora 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckbt 
          WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'CKCTA' AS encabezado, 'Cortador Automatico 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKCTA   
+        SELECT 'ckcta' AS encabezado, 'Cortador Automatico 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckcta   
          WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'CKCTAM' AS encabezado, 'Tanque de Agua Mini' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKCTAM 
+        SELECT 'ckctam' AS encabezado, 'Tanque de Agua Mini' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckctam 
          WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'CKM2' AS encabezado, 'Mezcladora 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKM2 
+        SELECT 'ckm2' AS encabezado, 'Mezcladora 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckm2 
         WHERE id_estado = 2
        
         UNION all
        
-        SELECT 'CKMM' AS encabezado, 'Mezcladora Mini' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKMM 
+        SELECT 'ckmm' AS encabezado, 'Mezcladora Mini' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckmm 
          WHERE id_estado = 2
        
         
         UNION all
        
-        SELECT 'CKPH2' AS encabezado, 'Prensa Hidraulica 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKPH2 
+        SELECT 'ckph2' AS encabezado, 'Prensa Hidraulica 2.0' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckph2 
         WHERE id_estado = 2
         
          UNION all
        
-        SELECT 'CKPHM' AS encabezado, 'Prensa Hidraulica Mini' AS EncName, id, fecha_creacion, id_creador, id_maquina
-        FROM CKPHM 
+        SELECT 'ckphm' AS encabezado, 'Prensa Hidraulica Mini' AS EncName, id, fecha_creacion, id_creador, id_maquina
+        FROM ckphm 
          WHERE id_estado = 2
 
          UNION all
        
-         SELECT 'CKPM' AS encabezado, 'Prensa Hidraulica Manual' AS EncName, id, fecha_creacion, id_creador, id_maquina
-         FROM CKPM 
+         SELECT 'ckpm' AS encabezado, 'Prensa Hidraulica Manual' AS EncName, id, fecha_creacion, id_creador, id_maquina
+         FROM ckpm 
           WHERE id_estado = 2
         `;
 

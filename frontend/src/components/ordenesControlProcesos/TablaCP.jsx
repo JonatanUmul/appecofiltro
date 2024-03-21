@@ -6,7 +6,7 @@ import { formatFecha } from "../utilidades/FormatearFecta";
 import CrearCP from "./botonCP/Crear_CP";
 import Detalle from "./botonCP/Detalle";
 import '../maquinaria/TablaEstilos.css'
-
+const URL = process.env.REACT_APP_URL
 const TablaCP = () => {
   const [estOT, setEstot] = useState([]);
   const [error, setError] = useState("");
@@ -14,7 +14,7 @@ const TablaCP = () => {
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/TablaCP");
+        const response = await axios.get(`${URL}/TablaCP`);
         setEstot(response.data);
         console.log("ver aca ", response);
       } catch (error) {

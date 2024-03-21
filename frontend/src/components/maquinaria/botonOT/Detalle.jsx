@@ -32,25 +32,25 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
-      case 'CKTA':
+      case 'ckta':
         return <ConsultaCKTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKEXT':
+      case 'ckext':
         return <ConsultaCKEXT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKBT':
+      case 'ckbt':
         return <ConsultaCKBT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKCTA':
+      case 'ckta':
         return <ConsultaCKCTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKCTAM':
+      case 'ckctam':
         return <ConsultaCKCTAM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKM2':
+      case 'ckm2':
         return <ConsultaCKCM2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKMM':
+      case 'ckmm':
         return <ConsultaCKMM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKPH2':
+      case 'ckph2':
         return <ConsultaCKPH2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKPHM':
+      case 'ckphm':
         return <ConsultaCKPHM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'CKPM':
+      case 'ckpm':
         return <ConsultaCKPM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
                 
         

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+const URL = process.env.REACT_APP_URL
 
 const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
@@ -19,12 +20,12 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
   useEffect(() => {
     try {
       Promise.all([
-        axios.get("http://localhost:3001/Turnos"),
-        axios.get("http://localhost:3001/Aserradero"),
-        axios.get("http://localhost:3001/ModelosUF"),
-        axios.get("http://localhost:3001/TipoCernido"),
-        axios.get(`http://localhost:3001/maquinaria/${maquinaria}`),
-        axios.get(`http://localhost:3001/Operarios/${id_area}`)
+        axios.get(`${URL}/Turnos`),
+        axios.get(`${URL}/Aserradero`),
+        axios.get(`${URL}/ModelosUF`),
+        axios.get(`${URL}/TipoCernido`),
+        axios.get(`${URL}/maquinaria/${maquinaria}`),
+        axios.get(`${URL}/Operarios/${id_area}`)
       ])
         .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, TipoCernidoResponse, HornosResponse, OperariosResponse]) => {
           setTurno(TurnosResponse.data);
@@ -45,7 +46,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/DTHH' ,
+      const response = await axios.post(`${URL}/DTHH` ,
       {
         id_OTHH: id.toString(),
         id_turno:formData.id_turno,

@@ -1,7 +1,7 @@
   import React, {useState } from 'react';
   import { useForm } from 'react-hook-form';
   import axios from 'axios';
-  
+  const URL = process.env.REACT_APP_URL;
 
   const CrearEstMaq = () => {
     const { handleSubmit, register } = useForm();
@@ -24,7 +24,7 @@
           descripcion: formData.descripcion,
           id_creador: formData.id_creador
                  });
-        const response = await axios.post('http://localhost:3001/EstadosMaq', formData);
+        const response = await axios.post(`${URL}/EstadosMaq`, formData);
         console.log('Respuesta del servidor:', response.data);
         // Aquí podrías agregar lógica adicional, como mostrar un mensaje de éxito al usuario, por ejemplo
         window.location.href = '/Home/TablaEstadosMaq';

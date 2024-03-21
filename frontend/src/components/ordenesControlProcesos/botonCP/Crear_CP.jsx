@@ -26,13 +26,13 @@ console.log('propr recibios', encabezado, id)
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
-      case 'CPB':
+      case 'cpb':
         return <DCPB  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
-      case 'CPS':
+      case 'cps':
         return <DCPS  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
-      case 'CRM':
+      case 'crm':
         return <DRM  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
-      case 'CTT':
+      case 'ctt':
         return <DTT  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
       
   

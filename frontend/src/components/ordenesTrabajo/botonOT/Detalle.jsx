@@ -31,29 +31,29 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
-      case 'OTHP':
+      case 'othp':
         return <ConsultaDTHP id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
 
-      case 'OTSA':
+      case 'otsa':
         return <ConsultaDTSA id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
 
-      case 'OTCA1':
+      case 'otca1':
         return <ConsultaDTCA1 id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
 
-      case 'OTCA2':
+      case 'otca2':
         return <ConsultaDTCA2 id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
 
-      case 'OTPV':
+      case 'otpv':
           return <ConsultaDTPV id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
     
-      case 'OTFM':
+      case 'otfm':
           return <ConsultaDTFM id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
     
-      case 'OTP':
+      case 'otp':
             return <ConsultaDTP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
-      case 'OTHH':
+      case 'othh':
             return <ConsultaDTHH id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
         
     

@@ -3,7 +3,7 @@
     import { formatFecha } from "../../utilidades/FormatearFecta";
     import PdfROTHP from './pdfECO/PdfROTHP'
     import ExcelROTHP from './Excel/ExcelRothp'
-
+    const URL = process.env.REACT_APP_URL
 
 
     const ROTHP = () => {
@@ -23,7 +23,7 @@
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `http://localhost:3001/DTCA2/${fecha_creacion || 'null'}/${id_aserradero || 'null'}`;
+        const url = `${URL}/DTCA2/${fecha_creacion || 'null'}/${id_aserradero || 'null'}`;
 
         axios.get(url)
           .then((response) => {
@@ -38,8 +38,8 @@
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
-          axios.get('http://localhost:3001/Aserradero'),
-          axios.get('http://localhost:3001/MateriaPrima'),
+          axios.get(`${URL}/Aserradero`),
+          axios.get(`${URL}/MateriaPrima`),
        
         ])
         .then(axios.spread((aserraderoResponse, materiaPrimResponse, ) => {

@@ -16,7 +16,7 @@ export const postDCKCTAM = async(req, res)=>{
     
     try{
     
-       const consulta=`INSERT INTO DCKTAM(
+       const consulta=`INSERT INTO dcktam(
         id_CKTAM,
         id_visorNivelFuncionado,
         id_accionamieentoCorrectroLLaveDeAgua,

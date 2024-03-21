@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+const URL = process.env.REACT_APP_URL;
 
 const CrearEstMaq = () => {
   const { handleSubmit, register } = useForm();
@@ -25,7 +26,7 @@ const CrearEstMaq = () => {
 
         });
         const response = await axios.post(
-          "http://localhost:3001/EstadosProc",
+          `${URL}/EstadosProc`,
           formData
         );
         console.log("Respuesta del servidor:", response.data);

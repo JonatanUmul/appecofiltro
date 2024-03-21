@@ -28,7 +28,7 @@ export const postDMPH2 = async(req, res)=>{
         ) {
           res.status(400).send('Uno o varios datos están vacíos');
         } else {
-          const consulta = `INSERT INTO DMPH2 (
+          const consulta = `INSERT INTO dmph2 (
             id_MPH2,
             id_estadomaq,
             id_tipoMantenimiento,
@@ -78,7 +78,7 @@ d.detalle,
 d.fechaCreacion,
 d.horaCreacion
 
-from DMPH2 d
+from dmph2 d
 
 join est_maq on d.id_estadomaq = est_maq.id_est
 join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id

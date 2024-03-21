@@ -28,7 +28,7 @@ export const postDMCTA = async(req, res)=>{
     ) {
       res.status(400).send('Uno o varios datos están vacíos');
     } else {
-      const consulta = `INSERT INTO DMCTA (
+      const consulta = `INSERT INTO dmcta (
         id_MCTA,
         id_estadomaq,
         id_tipoMantenimiento,
@@ -78,7 +78,7 @@ d.detalle,
 d.fechaCreacion,
 d.horaCreacion
 
-from DMCTA d
+from dmcta d
 
 join est_maq on d.id_estadomaq = est_maq.id_est
 join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id

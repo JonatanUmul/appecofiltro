@@ -5,51 +5,51 @@ export const getTablaOT = async (req, res) => {
         // Consulta SQL para seleccionar los estados
         const consulta = `
        
- SELECT 'OTHP' AS encabezado, 'Humedad en Patios' AS EncName, id, fecha_creacion, id_creador
- FROM OTHP 
+ SELECT 'othp' AS encabezado, 'Humedad en Patios' AS EncName, id, fecha_creacion, id_creador
+ FROM othp 
  WHERE id_est = 2
  
  UNION all
  
- SELECT 'OTSA' AS encabezado, 'Secado de Aserrín' AS EncName,id, fecha_creacion, id_creador
- FROM OTSA 
+ SELECT 'otsa' AS encabezado, 'Secado de Aserrín' AS EncName,id, fecha_creacion, id_creador
+ FROM otsa 
  WHERE id_est = 2
 
  UNION all
 
- SELECT 'OTCA1' AS encabezado, 'Cernido 1' AS EncName, id, fecha_creacion, id_creador
- FROM OTCA1 
+ SELECT 'otca1' AS encabezado, 'Cernido 1' AS EncName, id, fecha_creacion, id_creador
+ FROM otca1 
  WHERE id_est = 2
 
  UNION all
 
- SELECT 'OTCA2' AS encabezado, 'Cernido 2' AS EncName, id, fecha_creacion, id_creador
- FROM OTCA2 
+ SELECT 'otca2' AS encabezado, 'Cernido 2' AS EncName, id, fecha_creacion, id_creador
+ FROM otca2 
  WHERE id_est = 2
 
  UNION all
 
- SELECT 'OTPV' AS encabezado, 'Pulverizado de materia prima' AS EncName, id, fecha_creacion, id_creador
- FROM OTPV 
+ SELECT 'otpv' AS encabezado, 'Pulverizado de materia prima' AS EncName, id, fecha_creacion, id_creador
+ FROM otpv 
  WHERE id_est = 2
 
  UNION all
 
- SELECT 'OTFM' AS encabezado, 'Formulación' AS EncName, id, fecha_creacion, id_creador
- FROM OTFM 
+ SELECT 'otfm' AS encabezado, 'Formulación' AS EncName, id, fecha_creacion, id_creador
+ FROM otfm 
  WHERE id_est = 2
 
  UNION all
 
- SELECT 'OTP' AS encabezado, 'Producción' AS EncName, id, fecha_creacion, id_creador
- FROM OTP 
+ SELECT 'otp' AS encabezado, 'Producción' AS EncName, id, fecha_creacion, id_creador
+ FROM otp 
  WHERE id_est = 2
 
  
  UNION all
 
- SELECT 'OTHH' AS encabezado, 'Horneados' AS EncName, id, fecha_creacion, id_creador
- FROM OTHH 
+ SELECT 'othh' AS encabezado, 'Horneados' AS EncName, id, fecha_creacion, id_creador
+ FROM othh 
  WHERE id_est = 2
         `;
 

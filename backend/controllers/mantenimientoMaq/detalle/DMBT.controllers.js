@@ -18,7 +18,7 @@ export const postDMBT = async(req, res)=>{
    
     try{
     
-       const consulta=`INSERT INTO DMBT(
+       const consulta=`INSERT INTO dmbt(
         id_DMBT,
         id_estadomaq,
         id_tipoMantenimiento,
@@ -66,7 +66,7 @@ export const getDMBT= async(req, res)=>{
     d.fechaCreacion,
     d.horaCreacion
     
-    from DMBT d
+    from dmbt d
     
     join est_maq on d.id_estadomaq = est_maq.id_est
     join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id

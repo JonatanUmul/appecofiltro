@@ -26,7 +26,7 @@ export const postDMMM = async (req, res) => {
       ) {
         res.status(400).send('Uno o varios datos están vacíos');
       } else {
-        const consulta = `INSERT INTO DMMM (
+        const consulta = `INSERT INTO dmmm (
           id_MMM,
           id_estadomaq,
           id_tipoMantenimiento,
@@ -76,7 +76,7 @@ d.detalle,
 d.fechaCreacion,
 d.horaCreacion
 
-from DMMM d
+from dmmm d
 
 join est_maq on d.id_estadomaq = est_maq.id_est
 join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id

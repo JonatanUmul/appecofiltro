@@ -10,7 +10,7 @@ export const postMCTA = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO MCTA(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
+       const consulta='INSERT INTO mcta(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_maquina, id_creador, id_estado])
         res.send({rows});
         
@@ -31,7 +31,7 @@ export const putMCTA = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE MCTA SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE mcta SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

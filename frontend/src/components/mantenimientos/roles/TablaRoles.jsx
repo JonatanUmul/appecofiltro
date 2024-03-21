@@ -5,14 +5,15 @@ import { formatFecha } from '../../utilidades/FormatearFecta';
 import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import Role from './Roles';
 import '../EstiloModal.css'
+const URL = process.env.REACT_APP_URL;
 
 const TablaRoles = () => {
     const [Roles, setRoles] = useState([]);
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        const URL = 'http://localhost:3001/Rolrouter';
-        axios.get(URL)
+        const URLS = `${URL}/Rolrouter`;
+        axios.get(URLS)
             .then(response => {
                 setRoles(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })

@@ -40,7 +40,7 @@ export const postDCKPM = async(req, res)=>{
       id_LimpiezaLubricacionBarrasBujesEquipoAnterior ===''||
       id_IntegridadBujesBarrasPrincipalesOptimas ){
 
-        const consulta=`INSERT INTO DCKPM(
+        const consulta=`INSERT INTO dckpm (
           id_CKPM,  
           id_GrupoAnteriorCompletoSatisfactoriamenteLimpiezaGeneral,
     id_AccionamientoCorrectoMotorBomba ,

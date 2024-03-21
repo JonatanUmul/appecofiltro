@@ -5,25 +5,25 @@ export const getTablaCP = async (req, res) => {
         // Consulta SQL para seleccionar los estados
         const consulta = `
        
-        SELECT 'CPS' AS encabezado, 'Pulida Superior' AS EncName, COALESCE(NULL, '-') AS codigoInicio,  COALESCE(NULL, '-') AS codigoFinal,  id, fecha_creacion, id_creador
+        SELECT 'cps' AS encabezado, 'Pulida Superior' AS EncName, COALESCE(NULL, '-') AS codigoInicio,  COALESCE(NULL, '-') AS codigoFinal,  id, fecha_creacion, id_creador
         FROM cps 
         WHERE id_est = 2
         
         union all 
        
-         SELECT 'CPB' AS encabezado, 'Pulida Base' AS EncName,  COALESCE(NULL, '-') AS codigoInicio,  COALESCE(NULL, '-') AS codigoFinal,  id, fecha_creacion, id_creador
+         SELECT 'cpb' AS encabezado, 'Pulida Base' AS EncName,  COALESCE(NULL, '-') AS codigoInicio,  COALESCE(NULL, '-') AS codigoFinal,  id, fecha_creacion, id_creador
         FROM cpb 
         WHERE id_est = 2
         
         union all 
         
-       SELECT 'CRM' AS encabezado, 'Reporte de Mermas' AS EncName, COALESCE(NULL, '-') AS codigoInicio,  COALESCE(NULL, '-') AS codigoFinal,  id, fecha_creacion, id_creador
+       SELECT 'crm' AS encabezado, 'Reporte de Mermas' AS EncName, COALESCE(NULL, '-') AS codigoInicio,  COALESCE(NULL, '-') AS codigoFinal,  id, fecha_creacion, id_creador
         FROM crm 
         WHERE id_est = 2
         
         union all 
         
-        SELECT 'CTT' AS encabezado, 'Temperatura Tunel' AS EncName, codigoInicio, codigoFinal,  id, fecha_creacion, id_creador
+        SELECT 'ctt' AS encabezado, 'Temperatura Tunel' AS EncName, codigoInicio, codigoFinal,  id, fecha_creacion, id_creador
         FROM ctt 
         WHERE id_est = 2
         `;

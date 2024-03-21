@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
+const URL = process.env.REACT_APP_URL
 
 const ConsultaDTP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/DTP/${id}`)
+    axios.get(`${URL}/DTP/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
         console.log(response.data.data)

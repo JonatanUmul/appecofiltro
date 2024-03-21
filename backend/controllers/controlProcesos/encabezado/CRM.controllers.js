@@ -9,7 +9,7 @@ export const postCRM = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO CRM(id_est,id_creador)Values(?, ?)';
+       const consulta='INSERT INTO crm(id_est,id_creador)Values(?, ?)';
         const [rows]= await pool.query(consulta,[id_est, id_creador])
         res.send({rows});
         
@@ -30,7 +30,7 @@ export const putCRM = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE CRM SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE crm SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

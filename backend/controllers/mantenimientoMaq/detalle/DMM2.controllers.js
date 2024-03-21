@@ -17,7 +17,7 @@ export const postDMM2 = async(req, res)=>{
    
     try{
     
-       const consulta=`INSERT INTO DMM2(
+       const consulta=`INSERT INTO dmm2(
         id_MM2 ,
         id_estadomaq ,
         id_revision ,
@@ -63,7 +63,7 @@ export const getDMM2= async(req, res)=>{
     d.fechaCreacion,
     d.horaCreacion
     
-    from DMM2 d
+    from dmm2 d
     
     join est_maq on d.id_estadomaq = est_maq.id_est
     join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id

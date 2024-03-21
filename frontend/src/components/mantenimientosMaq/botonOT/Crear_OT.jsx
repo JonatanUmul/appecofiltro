@@ -35,25 +35,25 @@ console.log('propr recibios', encabezado, id)
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
-      case 'MBT':
+      case 'mbt':
         return <DMBT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MTA':
+      case 'mta':
         return <DMTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MEXT':
+      case 'mext':
          return <DMEXT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MCTA':
+      case 'mcta':
          return <DMCTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MTAM':
+      case 'mtam':
          return <DMTAM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MM2':
+      case 'mm2':
           return <DMM2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MMM':
+      case 'mmm':
           return <DMMM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MPH2':
+      case 'mph2':
           return <DMPH2 id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MPHM':
+      case 'mphm':
           return <DMPHM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'MPM':
+      case 'mpm':
           return <DMPM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
           
           

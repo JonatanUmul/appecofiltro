@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
+const URL = process.env.REACT_APP_URL;
 
 const ConsultaCKTA = ({ id }) => {
   const [error, setError] = useState('');
@@ -8,7 +9,7 @@ const ConsultaCKTA = ({ id }) => {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/DCKPHM/${id}`)
+    axios.get(`${URL}/DCKPHM/${id}`)
       .then((response) => {
         setFila(response.data.data);
       })

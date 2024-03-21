@@ -10,7 +10,7 @@ export const postCKM2 = async(req, res)=>{
 
     try{
     
-       const consulta='INSERT INTO CKM2(id_maquina, id_creador, id_estado)Values(?, ?, ?)';
+       const consulta='INSERT INTO ckm2 (id_maquina, id_creador, id_estado)Values(?, ?, ?)';
         const [rows]= await pool.query(consulta,[id_maquina, id_creador, id_estado])
         res.send({rows});
         
@@ -31,7 +31,7 @@ export const putCKM2 = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE CKM2 SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE ckm2 SET id_estado = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

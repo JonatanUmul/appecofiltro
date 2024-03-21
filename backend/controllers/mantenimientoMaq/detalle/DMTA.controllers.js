@@ -28,7 +28,7 @@ export const postDMTA = async(req, res)=>{
         ) {
           res.status(400).send('Uno o varios datos están vacíos');
         } else {
-          const consulta = `INSERT INTO DMTA (
+          const consulta = `INSERT INTO dmta (
             id_MTA,
             id_estadomaq,
             id_tipoMantenimiento,

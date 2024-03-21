@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Progress, Space } from 'antd';
 import axios from 'axios';
 
+const URL = process.env.REACT_APP_URL;
+
 const today = () => {
   const date = new Date();
   const year = date.getFullYear();
@@ -18,7 +20,7 @@ const DasAserrin = () => {
 // Ajusta la solicitud HTTP en el componente de React para incluir la fecha en la URL
 useEffect(() => {
   const fecha = today();
-  axios.get(`http://localhost:3001/DTHP/${fecha}`)
+  axios.get(`${URL}/DTHP/${fecha}`)
     .then((response) => {
       // Asegúrate de acceder correctamente a los datos en la respuesta
       console.log("Data de respuesta:", response.data);

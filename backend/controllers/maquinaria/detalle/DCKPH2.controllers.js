@@ -32,7 +32,7 @@ export const postDCKPH2 = async(req, res)=>{
       id_integridadDeLosBujesYBarrasPrincipalesEstaBuenEstadoSinDaños===''||
       id_elGrupoAnteriorCompletoSatisfactoriamenteLimpiezaGenera){
 
-        const consulta=`INSERT INTO DCKPH2(
+        const consulta=`INSERT INTO dckph2 (
           id_CKPH2,
           id_verificadoCorrectoAccionamientoDebomba,
           id_sensorInfrarrojaLimpio,

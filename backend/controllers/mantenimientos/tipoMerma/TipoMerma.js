@@ -3,7 +3,7 @@ import { pool } from "../../../src/db.js";
 export const getTipoMermas = async (req, res) => {
     try {
         // Consulta SQL para seleccionar el usuario por nombre y contraseña
-        const [rows] = await pool.query("SELECT * FROM tipoMerma");
+        const [rows] = await pool.query("SELECT * FROM tipomerma");
         
         // Verifica si se encontró un usuario
         if (rows.length === 0) {

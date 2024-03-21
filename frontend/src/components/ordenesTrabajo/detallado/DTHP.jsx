@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+const URL = process.env.REACT_APP_URL
 
 const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
@@ -11,8 +12,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/Aserradero"),
-      axios.get("http://localhost:3001/Patios"),
+      axios.get(`${URL}/Aserradero`),
+      axios.get(`${URL}/Patios`),
     ])
       .then(([AserraderoResponse, PatiosResponse]) => {
         setAserradero(AserraderoResponse.data);
@@ -25,7 +26,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/DTHP', {
+      const response = await axios.post(`${URL}/DTHP`, {
         id_OTHP: id.toString(),
         id_asrd: formData.id_asrd,
         id_patio: formData.id_patio,

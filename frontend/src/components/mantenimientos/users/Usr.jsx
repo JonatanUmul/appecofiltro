@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 // import './user.css'
+const URL = import.meta.ECO_URL_BE;
 
 const Usr = () => {
   const { handleSubmit, register } = useForm();
@@ -21,8 +22,8 @@ const Usr = () => {
   
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/EstadosProc"),
-      axios.get("http://localhost:3001/Rolrouter"),
+      axios.get(`${URL}/EstadosProc`),
+      axios.get(`${URL}/Rolrouter`),
     ])
       .then(([estadosResponse, rolesResponse]) => {
         setEstados(estadosResponse.data);
@@ -49,7 +50,7 @@ const Usr = () => {
 
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        "http://localhost:3001/UsuariosR",
+        `${URL}/UsuariosR`,
         formData
       );
       console.log("Respuesta del servidor:", response.data);

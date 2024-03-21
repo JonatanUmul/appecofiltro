@@ -4,14 +4,15 @@ import axios from 'axios'; // Importa Axios
 import {formatFecha} from '../../utilidades/FormatearFecta.js'
 import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import CrearMatPrima from './Form.CrearMatPrima.jsx'
+const URL = process.env.REACT_APP_URL;
 
 const TablaMatPrima = () => {
     const [matPrima, setMatPrima] = useState([]);
     const [modal, setModal] = useState(false)
 
     useEffect(() => {
-        const URL = 'http://localhost:3001/MateriaPrima';
-        axios.get(URL)
+        const URLS = `${URL}/MateriaPrima`;
+        axios.get(URLS)
             .then(response => {
                 setMatPrima(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })

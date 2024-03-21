@@ -28,17 +28,17 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
-      case 'CPB':
+      case 'cpb':
         return <ConsultaDCPB id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
 
-      case 'CPS':
+      case 'cps':
         return <ConsultaDCPS id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
 
-      case 'CRM':
+      case 'crm':
         return <ConsultaDRM id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
 
-      case 'CTT':
+      case 'ctt':
         return <ConsultaDTT id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
   
       default:

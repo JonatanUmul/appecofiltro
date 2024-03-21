@@ -4,6 +4,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estilosFormatos.css'
 import Swal from 'sweetalert2'; // Importar SweetAlert
+const URL = process.env.REACT_APP_URL;
 
 const DCKCM2= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
@@ -13,7 +14,7 @@ const DCKCM2= ({ encabezado, EncName, fecha_creacion, id }) => {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:3001/respuestas"),
+      axios.get(`${URL}/respuestas`),
 
     ])
       .then(([RespuestasResponse]) => {
@@ -29,7 +30,7 @@ const DCKCM2= ({ encabezado, EncName, fecha_creacion, id }) => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/DCKM2', {
+      const response = await axios.post(`${URL}/DCKM2`, {
         id_CKM2: id.toString(),
         id_limpiezaGeneral: formData.id_limpiezaGeneral,
         id_accionamientoCorrectoTornillos: formData.id_accionamientoCorrectoTornillos,

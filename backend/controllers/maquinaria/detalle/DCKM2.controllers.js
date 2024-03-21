@@ -29,7 +29,7 @@ export const postDCKM2 = async(req, res)=>{
    
     try{
     
-       const consulta=`INSERT INTO DCKM2(
+       const consulta=`INSERT INTO dckm2 (
         id_CKM2,
         id_limpiezaGeneral,
        id_accionamientoCorrectoTornillos,

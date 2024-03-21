@@ -17,7 +17,7 @@ export const postDCKTA = async(req, res)=>{
    
     try{
     
-       const consulta=`INSERT INTO DCKTA(
+       const consulta=`INSERT INTO dckta (
         id_CKTA,
         id_visorFuncionandoNivelDeAguaVisible,
         id_accionamientoCorrectoSelenoideAlimentacion,

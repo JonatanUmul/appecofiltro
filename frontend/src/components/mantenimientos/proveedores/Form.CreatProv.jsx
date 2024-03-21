@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-
+const URL = process.env.REACT_APP_URL;
 
 const CreatProv = () => {
   const { handleSubmit, register } = useForm();
@@ -19,7 +19,7 @@ const CreatProv = () => {
 
   useEffect(() => {
     Promise.all([
-      axios.get('http://localhost:3001/TipoProv'),
+      axios.get(`${URL}/TipoProv`),
     ])
     .then(([TipsProvResponse]) => {
       setTipoProv(TipsProvResponse.data);
@@ -52,7 +52,7 @@ const CreatProv = () => {
   
   
       // Realizar la solicitud POST al servidor con los datos del formulario
-      const response = await axios.post('http://localhost:3001/Provedores', formData);
+      const response = await axios.post(`${URL}/Provedores`, formData);
       console.log('Respuesta del servidor:', response.data);
       // Aquí podrías agregar lógica adicional, como mostrar un mensaje de éxito al usuario, por ejemplo
       window.location.href = '/Home/TabProvedores';

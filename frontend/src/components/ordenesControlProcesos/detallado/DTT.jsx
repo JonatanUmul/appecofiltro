@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
-
+const URL = process.env.REACT_APP_URL;
 const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFinal }) => {
   const { handleSubmit, register } = useForm();
   const [modeloUF, setModeloUf] = useState([]);
@@ -13,8 +13,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
 
   useEffect(() => {
     Promise.all([
-      axios.get(`http://localhost:3001/ModelosUF`),
-      axios.get(`http://localhost:3001/maquinaria/${maquinaria}`),
+      axios.get(`${URL}/ModelosUF`),
+      axios.get(`${URL}/maquinaria/${maquinaria}`),
     ])
       .then(([ModelosResponse, TunelResponse]) => {
         setModeloUf(ModelosResponse.data);
@@ -29,7 +29,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
     try {
       
    
-      const response = await axios.post("http://localhost:3001/DTT", {
+      const response = await axios.post(`${URL}/DTT`, {
         id_CTT: id.toString(),
         id_modelo: formData.id_modelo,
         id_tunel: formData.id_tunel,

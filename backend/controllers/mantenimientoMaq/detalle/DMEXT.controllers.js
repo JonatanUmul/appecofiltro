@@ -28,7 +28,7 @@ export const postDMEXT = async(req, res)=>{
     ) {
       res.status(400).send('Uno o varios datos están vacíos');
     } else {
-      const consulta = `INSERT INTO DMEXT (
+      const consulta = `INSERT INTO dmext (
         id_MEXT,
         id_estadomaq,
         id_tipoMantenimiento,
