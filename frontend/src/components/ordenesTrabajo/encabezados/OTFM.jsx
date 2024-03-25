@@ -55,7 +55,7 @@ const OTPV = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
       <div className="mb-3">
         <label htmlFor="estados" className="form-label">
-          Formaulación
+          Formulación
         </label>
       
       </div>

@@ -1,4 +1,6 @@
 import { pool } from "../src/db.js";
+import jwt from 'jsonwebtoken';
+
 // import bcrypt from 'bcrypt';
 
 export const postUsuarios = async (req, res) => {
@@ -30,8 +32,10 @@ console.log(username, password)
         
 
         console.log("Inicio de sesión exitoso");
-        res.status(200).json({ message: "Inicio de sesión exitoso" });
 
+        const token = jwt.sign({ username }, "Stack", { expiresIn: '1m' });
+        res.status(200).json({ message: "Inicio de sesión exitoso", token, username });
+        
     } catch (error) {
         console.error("Error al ejecutar la consulta:", error);
         res.status(500).json({ error: "Error del servidor" });

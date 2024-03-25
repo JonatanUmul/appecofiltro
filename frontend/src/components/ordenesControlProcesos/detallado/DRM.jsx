@@ -8,7 +8,7 @@ const DRM = ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [merma, setMerma] = useState([]);
   const [modeloUF, setModeloUf] = useState([]);
-
+  const [formData, setFormData] = useState([]);
   // const id_area = 2;
 
   useEffect(() => {
@@ -58,12 +58,16 @@ const DRM = ({ encabezado, EncName, fecha_creacion, id }) => {
 
   const [inputs, setInputs] = useState([{ id: Date.now() }]);
 
+  // const handleAddInput = () => {
+  //   setInputs([...inputs, { id: Date.now() }]);
+ 
+ 
+  // };
   const handleAddInput = () => {
     setInputs([...inputs, { id: Date.now() }]);
- 
- 
+    // Agrega una nueva línea al estado formData cuando se hace clic en el botón "Agregar"
+    setFormData([...formData, {}]);
   };
-
   
 
   return (

@@ -141,56 +141,56 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
 
   <div className="row text-center mt-2" >
   
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
       Cabeza Derecha 1
     </label>  
     <input type="text"  className="form-control" id="pieIZ1" {...register(`cabezaDerecha1`)} required/>
     
     </div>
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
       Pie Derecho 1
     </label>  
     <input type="text"  className="form-control" id="cabezaIZ1" {...register(`pieDerecho1`)} required />
     
     </div>
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
     Cabeza Derecha 2
     </label>  
     <input type="text"  className="form-control" id="cabezaIZ2" {...register(`cabezaDerecha2`)} required/>
     
     </div>
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
     Pie Derecho 2
     </label>  
     <input type="text" className="form-control"  id="cabezaIZ3" {...register(`pieDerecho2`)} required/>
     
     </div>
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
     Cabeza Derecha 3
     </label>  
     <input type="text" className="form-control" id="pieIZ1" {...register(`cabezaDerecha3`)} required/>
     
     </div>
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
     Pie Izquierdo 1
     </label>  
     <input type="text"  className="form-control" id="cabezaDR1" {...register(`pieIzquierdo1`)}required/>
     
     </div>
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
     Cabeza Izquierda 1
     </label> 
     <input type="text" className="form-control" id="cabezaDR2" {...register(`cabezaizquierda1`)} required/>
     
     </div>
-    <div className="col-md-3">
+    <div className="col-md-auto">
     <label htmlFor={`modelo`} className="form-label">
     Pie Izquierdo 2
     </label>  

@@ -5,7 +5,7 @@ import CPS from '../encabezados/CPS';
 import CPI from '../encabezados/CPB';
 import CRM from '../encabezados/CRM';
 import CTT from '../encabezados/CTT';
-
+import CTH from '../encabezados/CTH'
 
 
 const BotonOT = () => {
@@ -46,7 +46,10 @@ const BotonOT = () => {
     
       case '4':
           return <CTT />;
-      
+      case '5':
+            return <CTH />;
+        
+
     
       default:
         return null;
@@ -92,6 +95,9 @@ const BotonOT = () => {
 
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Temperatura Tunel')}>
           4. Temperatura Tunel
+        </a>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Temperatura Hornos')}>
+          5. Temperatura Hornos
         </a>
       
     

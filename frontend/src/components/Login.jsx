@@ -5,37 +5,33 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Login.css';
 const URL = process.env.REACT_APP_URL;
 
-
-
-// // Definir la URL de la API como una constante
-// const API_URL = process.env.REACT_APP_API_URL;
-
 const Login = () => {
-  // Definimos los estados para el nombre de usuario y la contraseña
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorlogin, setErrorlogin] = useState('');
   const navigate = useNavigate();
 
-  // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Realizamos una solicitud POST al endpoint de login
       const response = await Axios.post(`${URL}/Loginroutes`, {
         username: username, 
         password: password
       });
-      console.log(process.env.REACT_APP_API_URL);
 
-      // Si la solicitud es exitosa, imprimimos la respuesta y redirigimos al usuario a la página principal
       console.log('Respuesta del servidor:', response.data);
-      console.log('Inicio de sesión exitoso');
-      navigate('/Home/Dashboard');
+
+      if(response.data.token) { // Verificar si hay un token en la respuesta
+        localStorage.setItem('token', response.data.token);
+        navigate('/Home/Dashboard');
+      } else {
+        setErrorlogin('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
+        setUsername('');
+        setPassword('');
+      }
     } catch (error) {
-      // Si hay algún error, lo manejamos aquí
-      setErrorlogin('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
+      setErrorlogin('Ocurrió un error al iniciar sesión. Por favor, inténtalo de nuevo.');
       setUsername('');
       setPassword('');
     }
@@ -65,7 +61,6 @@ const Login = () => {
 
             <button type="submit" className="btn btn-primary btn-block">Iniciar Sesión</button>
           </form>
-          
         </div>
       </div>
     </div>

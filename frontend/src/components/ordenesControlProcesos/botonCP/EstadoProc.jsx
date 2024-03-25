@@ -41,6 +41,9 @@ const EstadoProc = ({ id, encabezado }) => {
       case 'ctt':
         setCambiarRuta('ctt');
         break;
+      case 'cth':
+        setCambiarRuta('cth');
+        break;
      
     }
   }, [encabezado]); // Ejecutar el efecto cuando el encabezado cambie 

@@ -1,4 +1,4 @@
-import { pool } from '../../../backend/src/db.js';
+import { pool } from '../../src/db.js';
 
 export const getTablaOT = async (req, res) => {
     try {

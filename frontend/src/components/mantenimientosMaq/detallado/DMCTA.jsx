@@ -40,7 +40,7 @@ const id_area=8
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post(`${URL}//DMCTA`, {
+      const response = await axios.post(`${URL}/DMCTA`, {
         id_MCTA: id.toString(),
         id_estadomaq: formData.id_estadomaq,
         id_tipoMantenimiento:formData.id_tipoMantenimiento,

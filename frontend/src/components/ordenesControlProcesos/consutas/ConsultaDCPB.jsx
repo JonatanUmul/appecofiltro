@@ -3,7 +3,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
 const URL = process.env.REACT_APP_URL;
-const ConsultaDCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
+const ConsultaDCPB = ({  id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
 

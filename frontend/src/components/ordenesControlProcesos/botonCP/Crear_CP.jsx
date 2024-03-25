@@ -4,6 +4,7 @@ import DCPB from '../detallado/DCPB'
 import DCPS from '../detallado/DCPS'
 import DRM from '../detallado/DRM'
 import DTT from '../detallado/DTT'
+import DTH from '../detallado/DTH'
 import LogoEco from '../../utilidades/LogoEco'
 
 
@@ -34,7 +35,9 @@ console.log('propr recibios', encabezado, id)
         return <DRM  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
       case 'ctt':
         return <DTT  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
-      
+      case 'cth':
+          return <DTH  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
+        
   
       default:
         return <p>Formulario no encontrado</p>;
@@ -57,7 +60,7 @@ console.log('propr recibios', encabezado, id)
         OT
       </button>
       {/* Modal */}
-      <Modal isOpen={modalVisible} toggle={handleCloseModal} size='md' backdrop="static">
+      <Modal isOpen={modalVisible} toggle={handleCloseModal} size='xl' backdrop="static" style={ {maxwidth: '90%'}}>
         <ModalHeader toggle={handleCloseModal}><LogoEco/></ModalHeader>
         <ModalBody>
           {/* Renderiza el componente correspondiente al formulario seleccionado dentro del modal */}
