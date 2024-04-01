@@ -5,23 +5,18 @@ const URL = process.env.REACT_APP_URL
 
 const FormEHP = () => {
   const { handleSubmit, register } = useForm();
-  const [datos, setDatos] = useState({
-    id_creador: "",
-  });
-  
+ 
   
 
 
   const onSubmit = async (formData) => {
     // formData.preventDefault();
     try {
-      // Actualizar el estado 'datos' con los valores del formulario
-      setDatos("id_creador", formData.id_creador);
-    
+  
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
         `${URL}/OTIP`,
-        formData
+        {id_creador:""}
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);
@@ -45,7 +40,7 @@ const dayMonthYear = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${c
   <div className="container">
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
       <div className="mb-3">
-        <h1>Orden de Produccion</h1>
+        <h1>Orden de Impregnación</h1>
         <h5 className="mt-3">Con fecha:</h5>
         <p>{dayMonthYear}</p>
       </div>

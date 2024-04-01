@@ -6,38 +6,17 @@ const URL = process.env.REACT_APP_URL;
 
 const OTCMP = () => {
   const { handleSubmit, register } = useForm();
-  const [mtp, setMtp] = useState([]);
-  const [datos, setDatos] = useState({
-    id_enc: "",
-    id_creador: "",
-  });
+
   
   
-  useEffect(() => {
-    Promise.all([
-      axios.get(`${URL}/MateriaPrima`),
-    ])
-      .then(([estadosResponse, rolesResponse]) => {
-        setMtp(estadosResponse.data);
-        console.log("Datos de Estadosroutes:", estadosResponse.data);
-      })
-      .catch((error) => {
-        console.log("Error al obtener los datos:", error);
-      });
-  }, []);
+  
 
 
   const onSubmit = async (formData) => {
     // formData.preventDefault();
     try {
-      // Actualizar el estado 'datos' con los valores del formulario
-      setDatos("id_enc", formData.id_enc);
-      setDatos("id_creador", formData.id_creador);
-    
-      // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        `${URL}/OTCA2`,
-        formData
+        `${URL}/OTCA2`,{id_creador:''}
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);
@@ -47,7 +26,9 @@ const OTCMP = () => {
       // Aquí podrías manejar el error, mostrar un mensaje al usuario, etc.
     }
   };
-
+  const currentDate = new Date();
+  const dayMonthYear = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+  
 
   // console.log(estados);
   return (
@@ -55,29 +36,10 @@ const OTCMP = () => {
   {/* <h5 className="text-muted">Orden de Trabajo - Cernido de Materia Prima</h5> */}
   <div className="container">
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
-      <div className="mb-3">
-        <label htmlFor="estados" className="form-label">
-          Materia Prima
-        </label>
-        <select
-          className="form-select"
-          id="id_enc"
-          {...register("id_enc")}
-        >
-          {Array.isArray(mtp.rows) && mtp.rows.length > 0 ? (
-            mtp.rows.map((material) => (
-              <option key={material.id_enc} value={material.id_enc}>
-                {material.nom_matPrima}
-              </option>
-            ))
-          ) : (
-            <option value="">No hay materia prima disponible</option>
-          )}
-        </select>
-      </div>
+    <label htmlFor="fecha">Fecha: {dayMonthYear}</label>
       <div className="d-grid gap-2">
         <button type="submit" className="btn btn-primary">
-          Guardar
+          Crear
         </button>
       </div>
     </form>

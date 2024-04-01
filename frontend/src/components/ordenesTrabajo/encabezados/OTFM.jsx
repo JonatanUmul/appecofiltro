@@ -61,7 +61,7 @@ const OTPV = () => {
       </div>
       <div className="d-grid gap-2">
         <button type="submit" className="btn btn-primary">
-          Guardar
+          Crear
         </button>
       </div>
     </form>
