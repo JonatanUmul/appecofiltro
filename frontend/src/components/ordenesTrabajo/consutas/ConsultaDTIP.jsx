@@ -4,15 +4,15 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
 const URL = process.env.REACT_APP_URL
 
-const ConsultaDTCA1 = ({ id }) => {
+const ConsultaDTP = ({  id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
 
   useEffect(() => {
-    axios.get(`${URL}/DTCA2/${id}`)
+    axios.get(`${URL}/DTIP/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
-        
+       
       })
       .catch((error) => {
         setError("Error al obtener los datos: " + error.message);
@@ -21,21 +21,20 @@ const ConsultaDTCA1 = ({ id }) => {
 
  
   return (
-    <div className="table-responsive">
+    <div className="table-responsive text-center">
       {error && <div>Error: {error}</div>}
-      <table className="table text-center">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Fecha de Producción</th>
-            <th scope="col">OTCA2</th>
-            <th scope="col">Materia Prima</th>
-            <th scope="col">Aserradero</th>
-         
-            <th scope="col">Cantidad Inicial</th>
-            <th scope="col">Cernido Fino</th>
-            <th scope="col">Cernido Grueso</th>
-         
+            <th scope="col">Fecha de Impregnación</th>
+            <th scope="col">OTIP</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Código Inicio</th>
+            <th scope="col">Código Final</th>
+            <th scope="col">Impregnados</th>
+            <th scope="col">Mermas</th>
+            
            
           </tr>
         </thead>
@@ -43,13 +42,14 @@ const ConsultaDTCA1 = ({ id }) => {
           {Array.isArray(fila) && fila.length > 0 && fila.map((fila, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{formatFecha(fila.fecha_creacion)}</td>
-              <td>{fila.id_otca2}</td>
-              <td>{fila.matPrima}</td>
-              <td>{fila.aserradero}</td>
-              <td>{fila.cantidad_inicial}</td>
-              <td>{fila.cernido_fino}</td>
-              <td>{fila.cernido_grueso}</td>
+              <td>{formatFecha(fila.fechaCreacion)}</td>
+              <td>{fila.id_otip}</td>
+              <td>{fila.modelo}</td>
+              <td>{fila.codigoInicio}</td>
+              <td>{fila.codigoFinal}</td>
+              <td>{fila.impregnados}</td>
+              <td>{fila.mermas}</td>
+             
               
             </tr>
           ))}
@@ -59,4 +59,6 @@ const ConsultaDTCA1 = ({ id }) => {
   );
 };
 
-export default ConsultaDTCA1;
+export default ConsultaDTP;
+
+  
