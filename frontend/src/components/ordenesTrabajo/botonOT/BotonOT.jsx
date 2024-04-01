@@ -9,6 +9,7 @@ import OTPV from '../encabezados/OTPV';
 import OTFM from '../encabezados/OTFM';
 import OTP from '../encabezados/OTP';
 import OTHH from '../encabezados/OTHH';
+import OTIP from '../encabezados/OTIP'
 
 
 
@@ -55,7 +56,9 @@ const BotonOT = () => {
           return <OTP />;
       case '8':
           return <OTHH />;
-    
+      case '9':
+          return <OTIP />;
+      
             
       default:
         return null;
@@ -108,10 +111,12 @@ const BotonOT = () => {
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Orden de Trabajo - Producción')}>
           7.Producción 
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '8', 'Orden de Trabajo - Producción')}>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '8', 'Orden de Trabajo - Hornos')}>
           8.Hornos 
         </a>
-    
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '9', 'Orden de Trabajo - Impregnación')}>
+          9.Impregnación
+        </a>
 
         {/* Agrega más elementos del menú desplegable aquí */}
       </div>

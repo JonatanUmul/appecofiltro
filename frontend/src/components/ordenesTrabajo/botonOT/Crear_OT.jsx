@@ -9,7 +9,7 @@ import DTFM from '../detallado/DTFM'
 import DTP from '../detallado/DTP'
 import DTHH from '../detallado/DTHH'
 import LogoEco from '../../utilidades/LogoEco'
-
+import DTIP from '../detallado/DTIP'
 
 
 const CrearOT = ({ encabezado, id,EncName, fecha_creacion }) => {
@@ -57,6 +57,9 @@ console.log('propr recibios', encabezado, id)
       case 'othh':
             return <DTHH id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
+      case 'otip':
+            return <DTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
+        
   
       default:
         return <p>Formulario no encontrado</p>;
