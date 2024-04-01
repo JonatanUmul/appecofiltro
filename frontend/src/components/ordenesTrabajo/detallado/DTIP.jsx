@@ -7,25 +7,16 @@ const URL = process.env.REACT_APP_URL
 
 const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
-  const [aserradero, setAserradero] = useState([]);
-  const [turno, setTurno] = useState([]);
   const [modelos, setModelos] = useState([]);
-  const [tipoCernido, setTipoCernido] = useState([]);
   const [error, setError]= useState('')
 
   useEffect(() => {
     Promise.all([
-      axios.get(`${URL}/Turnos`),
-      axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/ModelosUF`),
-      axios.get(`${URL}/TipoCernido`),
-    
+   
     ])
-      .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, TipoCernidoResponse]) => {
-        setTurno(TurnosResponse.data);
-        setAserradero(AserraderoResponse.data);
+      .then(([ ModelosufResponse]) => {
         setModelos(ModelosufResponse.data);
-        setTipoCernido(TipoCernidoResponse.data);
      
       })
       .catch((error) => {
@@ -35,21 +26,15 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post(`${URL}/DTP` ,
+      const response = await axios.post(`${URL}/DTIP` ,
       {
-        id_OTP: id.toString(),
-        id_turno: formData.id_turno,
-        id_tipoCernido: formData.id_tipoCernido,
-        id_Aserradero: formData.id_Aserradero,
-        id_ufmodelo: formData.id_ufmodelo,
-        producido: formData.producido,
+        id_OTIP: id.toString(),
+        id_modelo: formData.id_modelo,
         codigoInicio: formData.codigoInicio,
         codigoFinal: formData.codigoFinal,
-        librasBarro: formData.librasBarro,
-        librasAserrin: formData.librasAserrin,
-        
-       
-
+        impregnados: formData.impregnados,
+        mermas: formData.mermas,
+        id_creador:''
       });Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',
@@ -69,7 +54,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
 console.log('datos props',encabezado, EncName, fecha_creacion,id)
   return (
     <div className="mt-4">
-      <h4 style={{ textAlign: 'center', color: 'gray' }}>Producción</h4>
+      <h4 style={{ textAlign: 'center', color: 'gray' }}>Impregnación</h4>
       <div className="card">
         <div className="card-body">
           <label htmlFor="materiaPrima" className="form-label">
@@ -86,33 +71,6 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
       {/*iniioc de form */}
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
 
-      <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-              Turno de Producción
-          </label>
-          <select className="form-select" id="id_turno" {...register("id_turno")}>
-            {Array.isArray(turno.rows)
-            && turno.rows.length>0 && turno.rows.map((turno) => (
-              <option key={turno.id} value={turno.id}>
-                {turno.turno}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-              Aserradero
-          </label>
-          <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")}>
-            {Array.isArray(aserradero.rows)
-            && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
-              <option key={aserradero.id} value={aserradero.id}>
-                {aserradero.nombre_aserradero}
-              </option>
-            ))}
-          </select>
-        </div>
 
         
    
@@ -120,7 +78,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
               Modelo
           </label>
-          <select className="form-select" id="id_ufmodelo" {...register("id_ufmodelo")}>
+          <select className="form-select" id="id_modelo" {...register("id_modelo")}>
             {Array.isArray(modelos.rows)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
@@ -130,29 +88,6 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           </select>
         </div>
 
-        <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-              Tipo de Cernido
-          </label>
-          <select className="form-select" id="id_tipoCernido" {...register("id_tipoCernido")}>
-            {Array.isArray(tipoCernido.rows)
-            && tipoCernido.rows.length>0 && tipoCernido.rows.map((tipoCernido) => (
-              <option key={tipoCernido.id} value={tipoCernido.id}>
-                {tipoCernido.tipoCernido}
-              </option>
-            ))}
-          </select>
-        </div>
-       
-   
-        
-    
-        <div className="col-md-6">
-          <label htmlFor="esquinaSI" className="form-label">
-            Producido
-          </label>
-          <input type="number" className="form-control" id="producido" {...register("producido")} required />
-        </div>
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">
             Codigo de Inicio
@@ -166,17 +101,18 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <input type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
         </div>
       
+  
         <div className="col-md-6">
-          <label htmlFor="esquinaII" className="form-label">
-            Libras de Barro
+          <label htmlFor="esquinaID" className="form-label">
+           Impregnados
           </label>
-          <input type="text" className="form-control" id="librasBarro" {...register("librasBarro")} required />
+          <input type="number" className="form-control" id="impregnados" {...register("impregnados")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaID" className="form-label">
-           Libras de Aserrin
+           Mermas
           </label>
-          <input type="text" className="form-control" id="librasAserrin" {...register("librasAserrin")} required />
+          <input type="number" className="form-control" id="mermas" {...register("mermas")} required />
         </div>
         <div className="col-12">
           <label style={{ color: 'red' }}>{error}</label>

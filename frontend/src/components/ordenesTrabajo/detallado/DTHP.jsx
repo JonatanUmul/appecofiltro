@@ -9,15 +9,18 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
   const [aserradero, setAserradero] = useState([]);
   const [patio, setPatio] = useState([]);
+  const [matPrim, setMatPrim]= useState([])
 
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/Patios`),
+      axios.get(`${URL}/MateriaPrima`)
     ])
-      .then(([AserraderoResponse, PatiosResponse]) => {
+      .then(([AserraderoResponse, PatiosResponse, MatprimaResponse]) => {
         setAserradero(AserraderoResponse.data);
         setPatio(PatiosResponse.data);
+        setMatPrim(MatprimaResponse.data)
       })
       .catch((error) => {
         console.log("Error al obtener los datos:", error);
@@ -29,6 +32,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       const response = await axios.post(`${URL}/DTHP`, {
         id_OTHP: id.toString(),
         id_asrd: formData.id_asrd,
+        id_matPrima: formData.id_matPrima,
         id_patio: formData.id_patio,
         esquinaSupIZ: formData.esquinaSupIZ,
         esquinaSupDA: formData.esquinaSupDA,
@@ -67,11 +71,26 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
+      <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Materia Prima
+          </label>
+          <select className="form-select" id="id_matPrima" {...register("id_matPrima")}>
+            <option>Materia Prima</option>
+            {Array.isArray(matPrim.rows)
+            && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
+              <option key={matPrim.id_enc} value={matPrim.id_enc}>
+                {matPrim.nom_matPrima}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Aserradero
           </label>
           <select className="form-select" id="id_asrd" {...register("id_asrd")}>
+           <option>Aserradero</option>
             {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
@@ -85,6 +104,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Patio
           </label>
           <select className="form-select" id="id_patio" {...register("id_patio")}>
+           <option>Patio</option>
             {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
               <option key={patio.id} value={patio.id}>
                 {patio.nombrePatio}
