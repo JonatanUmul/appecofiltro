@@ -15,7 +15,7 @@ const ContentMenu = () => {
     <Content style={{ margin: "0 16px" }}>
      <Breadcrumb style={{ margin: "16px 0" }} separator=">">
   <Breadcrumb.Item>User</Breadcrumb.Item>
-  <Breadcrumb.Item>Jonatan</Breadcrumb.Item>
+  <Breadcrumb.Item></Breadcrumb.Item>
 </Breadcrumb>
       <div
         style={{
