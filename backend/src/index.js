@@ -14,6 +14,7 @@
     import TablaCp from './routes/tablaCP/TablaCP.js'
     import TablaMaquinaria from './routes/tablaMaquinaria/TablaMaquinaria.js'
     import OTHP from './routes/ordenesDeTrabajo/encabezados/OTHP.routes.js'
+    import OTIP from './routes/ordenesDeTrabajo/encabezados/OTIP.routes.js'
     import OTSA from './routes/ordenesDeTrabajo/encabezados/OTSMP.routes.js'
     import OTCA1 from './routes/ordenesDeTrabajo/encabezados/OTCA1.routes.js'
     import OTPV from './routes/ordenesDeTrabajo/encabezados/OTPV.routes.js'
@@ -32,6 +33,7 @@
     import DTFM from './routes/ordenesDeTrabajo/detallados/DTFM.routes.js'
     import Turnos from './routes/mantenimientos/turnos/Turnos.routes.js'
     import DTP from './routes/ordenesDeTrabajo/detallados/DTP.routes.js'
+   import DTIP from './routes/ordenesDeTrabajo/detallados/DTIP.routes.js'
     import OTHH from './routes/ordenesDeTrabajo/encabezados/OTHH.routes.js'
     import maquinaria from './routes/mantenimientos/maquinaria/Maquinaria.routes.js'
     import Operarios from './routes/mantenimientos/operarios/OperariosAreas.routes.js'
@@ -95,7 +97,12 @@
     import DMPHM from './routes/mantenimientoMaq/detallados/DMPHM.routes.js'
     import DMPM from './routes/mantenimientoMaq/detallados/DMPM.routes.js'
     import TipoMantenimiento from './routes/mantenimientos/tipoMantenimiento/tipoMantenimiento.js'
+    import dotenv from 'dotenv';
+
+// Carga las variables de entorno desde el archivo .env
+   dotenv.config();
     
+    const Origen =  process.env.ALLOWED_ORIGIN;
 
 
     const app = express()
@@ -103,10 +110,18 @@
     // app.use(cors);
     app.use(cors({
       
-      origin: 'https://appproduccion.onrender.com', // Utiliza la variable de entorno correcta
+      origin: Origen, // Utiliza la variable de entorno correcta
       methods: ['GET', 'POST', 'PUT'], // Métodos permitidos
       allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
     }));
+
+    // Middleware para configurar CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", Origen);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
     app.use(bodyParser.json());
     app.use(express.json())   
 
@@ -205,6 +220,11 @@
     //Hornos
     app.use(OTHH)
     app.use(DTHH)
+
+    //Impregnados
+    app.use(OTIP)
+    app.use(DTIP)
+    
 
     //Personal por area
     app.use(Operarios)
