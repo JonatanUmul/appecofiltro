@@ -29,6 +29,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       const response = await axios.post(`${URL}/DTIP` ,
       {
         id_OTIP: id.toString(),
+        fecha_real:fecha_creacion,
         id_modelo: formData.id_modelo,
         codigoInicio: formData.codigoInicio,
         codigoFinal: formData.codigoFinal,
