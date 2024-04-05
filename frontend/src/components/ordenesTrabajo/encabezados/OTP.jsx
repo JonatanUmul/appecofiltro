@@ -20,7 +20,7 @@ const FormEHP = () => {
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        `${URL}/OTIP`,
+        `${URL}/OTP`,
         formData
       );
       window.location.href = "/Home/TablaOT";
