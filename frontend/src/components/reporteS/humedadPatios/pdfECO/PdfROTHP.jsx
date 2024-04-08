@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
 });
 
 const MyDocument = ({ datos }) => (
+  
   <Document>
     <Page style={styles.page}>
       <View style={styles.container}>
@@ -131,26 +132,36 @@ const MyDocument = ({ datos }) => (
           <Text style={[styles.section, styles.title, {textAlign:'justify'}]}>15/03/24</Text>
         </View>
       </View>
+    
       <View >
-        <View style={[styles.container, { marginTop: 8 }]}>
-          <Text style={[styles.sectionHeader, { flex: 2, padding:3 }]}>MATERIAS PRIMAS:</Text>
-          <Text style={[styles.sectionHeader, { flex: 2, padding:3 }]}>BARRO</Text>
-          <Text style={[styles.sectionHeader, { flex: 2, padding:3 }]}>ASERRIN</Text>
-        </View>
-        <View style={[styles.container, { border:0.5 }]}>
-          <Text style={[styles.sectionHeader, { flex: 2, padding:3 }]}>FECHA:</Text>
-          <Text style={[styles.sectionHeader, { flex: 2, padding:3 }]}> {formatFecha(new Date())}</Text>
-        </View>
+      {/* {datos.map((filas, index) => ( */}
+      <View style={[styles.container, { marginTop: 8 }]}>
+  <Text style={[styles.sectionHeader, { flex: 2, padding: 3 }]}>MATERIA PRIMA:</Text>
+  <Text style={[styles.sectionHeader, { flex: 2, padding: 3 }]}>{(datos[0].materiaPrima)}</Text>
+</View>
+        {/* ))} */}
+       
+  <View style={[styles.container, { marginTop: 8  }]}>
+    <Text style={[styles.sectionHeader, { flex: 2, padding: 3 }]}>FECHA:</Text>
+    <Text style={[styles.sectionHeader, { flex: 2, padding: 3 }]}>
+      {formatFecha(datos[0].fecha_creacion)}
+    </Text>
+  </View>
+
+
         <View style={[styles.container, {  }]}>
           <Text style={[styles.sectionHeader, { flex: 2, padding:3 }]}>patio:</Text>
-          <Text style={[styles.sectionHeader, { flex: 2,padding:3 }]}> </Text>
+          <Text style={[styles.sectionHeader, { flex: 2,padding:3 }]}>{datos[0].patio} </Text>
         </View>
         <View style={[styles.container, {  }]}>
-          <Text style={[styles.sectionHeader, { flex: 2 ,padding:3 }]}>Hora Tendido</Text>
-          <Text style={[styles.sectionHeader, { flex: 2,padding:3 }]}>Hora Recoleccion</Text>
+          <Text style={[styles.sectionHeader, { flex: 2 ,padding:3 }]}>Hora Tendido:   {datos[0].hora_creacion}</Text>
+          <Text style={[styles.sectionHeader, { flex: 2,padding:3 }]}>Hora Recoleccion:   {datos[datos.length - 1].hora_creacion}</Text>
           <Text style={[styles.sectionHeader, { flex: 2 ,padding:3}]}>Cantidad Recolectada</Text>
+         
         </View>
+       
       </View>
+    
       <View style={styles.table}>
         <View style={styles.tableHeader}>
           <Text style={styles.tableCell}>Hora</Text>

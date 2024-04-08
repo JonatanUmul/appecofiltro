@@ -47,6 +47,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         codigoFinal: formData.codigoFinal,
         librasBarro: formData.librasBarro,
         librasAserrin: formData.librasAserrin,
+        observacion: formData.observacion
         
        
 
@@ -178,6 +179,10 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           </label>
           <input type="text" className="form-control" id="librasAserrin" {...register("librasAserrin")} required />
         </div>
+        <div className="col-md-6">
+              <label htmlFor="detalle" className="form-label">Observaciòn:</label>
+              <textarea className="form-control" id="observacion" rows="3" {...register('observacion')} ></textarea>
+            </div>
         <div className="col-12">
           <label style={{ color: 'red' }}>{error}</label>
         </div>

@@ -4,16 +4,15 @@ import { pool } from "../../../src/db.js";
 
 export const postOTCAS1 = async(req, res)=>{
     const estado= 2;
-    const id_enc= req.body.id_enc;
-    const id_creador= 4;
+    const id_creador= req.body.id_creador;
 
     try{
-        if(estado==='', id_enc===''){
+        if(estado===''){
             console.log('Uno o varios datos estan vacios')
         }
         else{
-            const consulta='INSERT INTO otca1(id_MP,id_est,id_creador)Values(?, ?, ?)';
-        const [rows]= await pool.query(consulta,[id_enc, estado, id_creador])
+            const consulta='INSERT INTO otca1(id_est,id_creador)Values(?, ?)';
+        const [rows]= await pool.query(consulta,[ estado, id_creador])
         res.send({rows});
         }
         

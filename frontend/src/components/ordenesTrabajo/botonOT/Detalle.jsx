@@ -10,7 +10,7 @@ import ConsultaDTCA2 from '../consutas/ConsultaDTCA2'
 import ConsultaDTPV from '../consutas/ConsultaDTPV'
 import ConsultaDTFM from '../consutas/ConsultaDTFM'
 import ConsultaDTHH from '../consutas/ConsultaDTHH'
-
+import ConsultaDTIP from '../consutas/ConsultaDTIP'
 const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   const [modalVisible, setModalVisible] = useState(false); 
 
@@ -55,7 +55,10 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
       
       case 'othh':
             return <ConsultaDTHH id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-        
+  
+      case 'otip':
+              return <ConsultaDTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
+          
     
 
       default:

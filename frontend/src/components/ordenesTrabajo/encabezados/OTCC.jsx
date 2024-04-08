@@ -1,41 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-// import './user.css'
 const URL = process.env.REACT_APP_URL
 
-const OTPV = () => {
+const FormEHP = () => {
   const { handleSubmit, register } = useForm();
-  const [mtp, setMtp] = useState([]);
   const [datos, setDatos] = useState({
-
     id_creador: "",
   });
   
   
-  useEffect(() => {
-    Promise.all([
-      axios.get(`${URL}/MateriaPrima`),
-    ])
-      .then(([estadosResponse, rolesResponse]) => {
-        setMtp(estadosResponse.data);
-        console.log("Datos de Estadosroutes:", estadosResponse.data);
-      })
-      .catch((error) => {
-        console.log("Error al obtener los datos:", error);
-      });
-  }, []);
 
 
   const onSubmit = async (formData) => {
     // formData.preventDefault();
     try {
       // Actualizar el estado 'datos' con los valores del formulario
-      setDatos("id_creador");
+      setDatos("id_creador", formData.id_creador);
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        `${URL}/OTFM`
+        `${URL}/OTCC`,
+        formData
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);
@@ -46,21 +32,25 @@ const OTPV = () => {
     }
   };
 
+  const currentDate = new Date();
+const dayMonthYear = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+ 
+
 
   // console.log(estados);
   return (
     <div className="mt-4 text-center">
-  {/* <h5 className="text-muted">Orden de Trabajo - Cernido de Materia Prima</h5> */}
+  {/* <h5 className="text-muted">Orden de Trabajo - Secado de Materia Prima</h5> */}
   <div className="container">
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
       <div className="mb-3">
-        <label htmlFor="estados" className="form-label">
-          Formulación
-        </label>
-      
+        <h1>Orden de Control de Calidad</h1>
+        <h5 className="mt-3">Con fecha:</h5>
+        <p>{dayMonthYear}</p>
       </div>
       <div className="d-grid gap-2">
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary mt-5">
           Crear
         </button>
       </div>
@@ -72,4 +62,4 @@ const OTPV = () => {
 };
 
 
-    export default OTPV;
+    export default FormEHP;

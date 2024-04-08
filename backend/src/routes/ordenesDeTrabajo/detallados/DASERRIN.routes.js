@@ -10,6 +10,6 @@ router.post('/DASERRIN', postDASERRIN);
 
 router.get('/DASERRIN/:id', getDASERRIN);
 
-router.get('/DASERRIN/:fecha_creacion/:id_asrdSMP/:id_patio', getDASERRI);
+router.get('/DASERRIN/:fecha_creacion_inicio/:fecha_creacion_fin/:id_asrdSMP/:id_patio', getDASERRI);
 
 export default router;

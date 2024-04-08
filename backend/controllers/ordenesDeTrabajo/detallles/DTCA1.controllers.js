@@ -2,14 +2,13 @@ import { pool } from "../../../src/db.js";
 
 export const postDTCA1 = async (req, res) => {
 
-    const { id_OTCA1, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal} = req.body;
-    console.log( id_OTCA1, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal)
+    const { id_OTCA1,id_MP, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal} = req.body;
     try {
-        if (id_OTCA1 === '' || id_aserradero === '' || CantidadInicial === '' || CantidadFinal === '' ) {
+        if (id_OTCA1 === '' ||id_MP===''|| id_aserradero === '' || CantidadInicial === '' || CantidadFinal === '' ) {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'INSERT INTO dtca1 (id_OTCA1, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal) VALUES (?, ?, ?, ?,?)';
-            const [rows] = await pool.query(consulta, [ id_OTCA1, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal]);
+            const consulta = 'INSERT INTO dtca1 (id_OTCA1,id_MP, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal) VALUES (?, ?, ?, ?,?,?)';
+            const [rows] = await pool.query(consulta, [ id_OTCA1, id_MP, id_aserradero, id_tipoCernido, CantidadInicial, CantidadFinal]);
             res.send({ rows });
         }
     } catch (err) {
@@ -32,10 +31,13 @@ export const getDTCA1 = async (req, res) => {
       d.CantidadFinal,
       d.fecha_creacion,
       otca1.id AS id_otca1,
+      enc_matprima.nom_matPrima as matPrima,
       aserradero.nombre_aserradero AS aserradero
     
   FROM 
       dtca1 d
+  JOIN 
+      enc_matprima ON d.id_MP = enc_matprima.id_enc
   JOIN 
       otca1 ON d.id_OTCA1 = otca1.id
   JOIN 
@@ -72,6 +74,7 @@ export const getDTCAA1 = async (req, res) => {
 		d.hora_creacion,
 		d.fecha_creacion,
 		OTCA1.id AS id_OTCA1,
+        enc_matprima.nom_matPrima as matPrima,
 		aserradero.nombre_aserradero AS aserradero
    
 	
@@ -79,6 +82,8 @@ export const getDTCAA1 = async (req, res) => {
 		dtca1 d
 	JOIN 
 		otca1 ON d.id_OTCA1 = otca1.id
+    JOIN 
+        enc_matprima ON d.id_MP = enc_matprima.id_enc
 	JOIN 
 		aserradero ON d.id_aserradero = aserradero.id
 
@@ -96,6 +101,10 @@ export const getDTCAA1 = async (req, res) => {
         if (fecha_creacion !== 'null') {
             consulta += ' AND (d.fecha_creacion IS NULL OR d.fecha_creacion = ?)';
             params.push(fecha_creacion);
+        }
+        if (id_MP !== 'null') {
+            consulta += ' AND (d.id_MP IS NULL OR d.id_MP = ?)';
+            params.push(id_MP);
         }
   
         const [rows] = await pool.query(consulta, params);

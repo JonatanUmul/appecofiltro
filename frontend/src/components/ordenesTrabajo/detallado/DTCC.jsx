@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Swal from 'sweetalert2';
 import { formatFecha } from "../../utilidades/FormatearFecta";
-import Swal from 'sweetalert2'; // Importar SweetAlert
-const URL = process.env.REACT_APP_URL
 
-const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
+const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
-  const [aserradero, setAserradero] = useState([]);
-  const [patio, setPatio] = useState([]);
-  const [matPrim, setMatPrim]= useState([])
+ 
+  const [operario, setOperario] = useState([]);
+  const [modelo, setModelo] = useState([]);
+  const [turno, setTurno] = useState([]);
+  const id_area = 4;
 
   useEffect(() => {
     Promise.all([
-      axios.get(`${URL}/Aserradero`),
-      axios.get(`${URL}/Patios`),
-      axios.get(`${URL}/MateriaPrima`)
+      axios.get(`${URL}/Operarios/${id_area}`),
+      axios.get(`${URL}/ModelosUF`),
+      axios.get(`${URL}/Turnos`),
     ])
-      .then(([AserraderoResponse, PatiosResponse, MatprimaResponse]) => {
-        setAserradero(AserraderoResponse.data);
-        setPatio(PatiosResponse.data);
-        setMatPrim(MatprimaResponse.data)
+      .then(([OperariosResponse, ufModeloResponse, turnoResponse]) => {
+        setOperario(OperariosResponse.data);
+        setModelo(ufModeloResponse.data);
+        setTurno(turnoResponse.data);
       })
       .catch((error) => {
         console.log("Error al obtener los datos:", error);
@@ -29,7 +30,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
 
   const onSubmit = async (formData) => {
     try {
-      const response = await axios.post(`${URL}/DTHP`, {
+      await axios.post(`${URL}`, {
         id_OTHP: id.toString(),
         id_asrd: formData.id_asrd,
         id_matPrima: formData.id_matPrima,
@@ -39,17 +40,14 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         esquinaCentro: formData.esquinaCentro,
         esquinaInfIZ: formData.esquinaInfIZ,
         esquinaInfDR: formData.esquinaInfDR
-      });Swal.fire({
+      });
+      Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',
         showConfirmButton: false,
         timer: 1500
       });
- 
-      // Redirigir a la página de TablaOT después de 1.5 segundos
-      setTimeout(() => {
-        window.location.href = "/Home/TablaOT";
-      },1500 );
+     
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
@@ -73,60 +71,86 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
       <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
-            Materia Prima
+            Responsable de CC
           </label>
           <select className="form-select" id="id_matPrima" {...register("id_matPrima")}>
-            <option>Materia Prima</option>
-            {Array.isArray(matPrim.rows)
-            && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
-              <option key={matPrim.id_enc} value={matPrim.id_enc}>
-                {matPrim.nom_matPrima}
+            <option></option>
+            {Array.isArray(operario.rows)
+            && operario.rows.length>0 && operario.rows.map((operario) => (
+              <option key={operario.id} value={operario.id}>
+                {operario.Nombre}
               </option>
             ))}
           </select>
         </div>
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
-            Aserradero
+            Modelo
           </label>
-          <select className="form-select" id="id_asrd" {...register("id_asrd")}>
-           <option>Aserradero</option>
-            {Array.isArray(aserradero.rows)
-            && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
-              <option key={aserradero.id} value={aserradero.id}>
-                {aserradero.nombre_aserradero}
+          <select className="form-select" id="modelo" {...register("modelo")}>
+            <option></option>
+            {Array.isArray(modelo.rows)
+            && modelo.rows.length>0 && modelo.rows.map((modelo) => (
+              <option key={modelo.id_mod} value={modelo.id_mod}>
+                {modelo.nombre_modelo}
               </option>
             ))}
           </select>
         </div>
         <div className="col-md-6">
-          <label htmlFor="patio" className="form-label">
-            Patio
+          <label htmlFor="aserradero" className="form-label">
+            Turno de CC
           </label>
-          <select className="form-select" id="id_patio" {...register("id_patio")}>
-           <option>Patio</option>
-            {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
-              <option key={patio.id} value={patio.id}>
-                {patio.nombrePatio}
+          <select className="form-select" id="turnoCC" {...register("turnoCC")}>
+            <option></option>
+            {Array.isArray(turno.rows)
+            && turno.rows.length>0 && turno.rows.map((turno) => (
+              <option key={modelo.id} value={turno.id}>
+                {turno.turno}
               </option>
             ))}
           </select>
         </div>
+
         <div className="col-md-6">
           <label htmlFor="esquinaSI" className="form-label">
-            Esquina Superior Izquierda
+            Fecha Horneado
+          </label>
+          <input type="date" className="form-control" id="fechaHorneado" {...register("fechaHorneado")} required />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Turno de Horneado
+          </label>
+          <select className="form-select" id="turnoHorneado" {...register("turnoHorneado")}>
+            <option></option>
+            {Array.isArray(turno.rows)
+            && turno.rows.length>0 && turno.rows.map((turno) => (
+              <option key={modelo.id} value={turno.id}>
+                {turno.turno}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+       
+     
+        <div className="col-md-6">
+          <label htmlFor="esquinaSI" className="form-label">
+            Aptobados
           </label>
           <input type="number" className="form-control" id="esquinaSupIZ" {...register("esquinaSupIZ")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">
-            Esquina Superior Derecha
+            Altos
           </label>
           <input type="number" className="form-control" id="esquinaSupDA" {...register("esquinaSupDA")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="centro" className="form-label">
-            Centro
+            Bajos
           </label>
           <input type="number" className="form-control" id="esquinaCentro" {...register("esquinaCentro")} required />
         </div>

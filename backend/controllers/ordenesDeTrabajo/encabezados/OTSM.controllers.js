@@ -4,16 +4,15 @@ import { pool } from "../../../src/db.js";
 
 export const postOTSA = async(req, res)=>{
     const estado= 2;
-    const id_MP= req.body.id_MP;
     const id_creador=req.body.id_creador
 
     try{
-        if(estado==='', id_MP===''){
+        if(estado===''){
             console.log('Uno o varios datos estan vacios')
         }
         else{
-            const consulta='INSERT INTO otsa(id_MP,id_est,id_creador)Values(?, ?, ?)';
-        const [rows]= await pool.query(consulta,[id_MP, estado, id_creador])
+            const consulta='INSERT INTO otsa(id_est,id_creador)Values(?, ?)';
+        const [rows]= await pool.query(consulta,[ estado, id_creador])
         res.send({rows});
         }
         

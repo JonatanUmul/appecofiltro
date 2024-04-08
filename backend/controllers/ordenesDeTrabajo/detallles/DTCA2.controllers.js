@@ -2,15 +2,14 @@ import { pool } from "../../../src/db.js";
 
 export const postDTCA2 = async (req, res) => {
 
-    const { id_OTCA2, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso} = req.body;
-    console.log( id_OTCA2, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso)
+    const { id_OTCA2,id_MP, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso} = req.body;
     try {
     
-        if (id_OTCA2 === '' || id_aserradero === '' || cantidad_inicial === '' || cernido_fino === '' ||cernido_grueso==='' ) {
+        if (id_OTCA2 === '' ||id_MP===''|| id_aserradero === '' || cantidad_inicial === '' || cernido_fino === '' ||cernido_grueso==='' ) {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'INSERT INTO dtca2(id_OTCA2, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso) VALUES (?, ?, ?, ?,?)';
-            const [rows] = await pool.query(consulta, [ id_OTCA2, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso]);
+            const consulta = 'INSERT INTO dtca2(id_OTCA2,id_MP, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso) VALUES (?, ?, ?, ?,?,?)';
+            const [rows] = await pool.query(consulta, [ id_OTCA2, id_MP, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso]);
             res.send({ rows });
         }
     } catch (err) {
@@ -32,12 +31,15 @@ export const getDTCA2 = async (req, res) => {
       d.cernido_grueso,
       d.fecha_creacion,
       otca2.id AS id_otca2,
+      enc_matprima.nom_matPrima as matPrima,
       aserradero.nombre_aserradero AS aserradero
     
   FROM 
       dtca2 d
   JOIN 
       otca2 ON d.id_OTCA2 = otca2.id
+  JOIN 
+      enc_matprima ON d.id_MP = enc_matprima.id_enc
   JOIN 
       aserradero ON d.id_aserradero = aserradero.id
         
@@ -72,11 +74,14 @@ export const getDTCAA2 = async (req, res) => {
 		d.hora_creacion,
 		d.fecha_creacion,
 		OTCA2.id AS id_OTCA2,
+        enc_matprima.nom_matPrima as matPrima,
 		aserradero.nombre_aserradero AS aserradero
    
 	
 	FROM 
 		dtca2 d
+    JOIN 
+        enc_matprima ON d.id_MP = enc_matprima.id_enc
 	JOIN 
 		otca2 ON d.id_OTCA2 = otca2.id
 	JOIN 

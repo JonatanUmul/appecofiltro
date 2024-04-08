@@ -9,15 +9,19 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [aserradero, setAserradero] = useState([]);
   const [patio, setPatio] = useState([]);
-  console.log('Hola', encabezado, EncName)
+  const [matPrim, setMatPrim]= useState([]);
+
+ 
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/Patios`),
+      axios.get(`${URL}/MateriaPrima`)
     ])
-      .then(([AserraderoResponse, PatiosResponse]) => {
+      .then(([AserraderoResponse, PatiosResponse, MatprimaResponse]) => {
         setAserradero(AserraderoResponse.data);
         setPatio(PatiosResponse.data);
+        setMatPrim(MatprimaResponse.data)
       })
       .catch((error) => {
         console.log("Error al obtener los datos:", error);
@@ -29,6 +33,7 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
       const response = await axios.post(`${URL}/DASERRIN`, {
         id_OTSaserrin: id.toString(),
         id_asrd: formData.id_asrd,
+        id_MP: formData.id_MP,
         id_patio: formData.id_patio,
         cantidad_inicial: formData.cantidad_inicial,
         cantidad_final: formData.cantidad_final,
@@ -39,7 +44,7 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
         showConfirmButton: false,
         timer: 1500
       });
- 
+      console.log('hoa aca',formData.id_MP)
       // Redirigir a la página de TablaOT después de 1.5 segundos
       setTimeout(() => {
         window.location.href = "/Home/TablaOT";
@@ -67,6 +72,20 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
+      <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Materia Prima
+          </label>
+          <select className="form-select" id="id_MP" {...register("id_MP")}>
+            <option>Materia Prima</option>
+            {Array.isArray(matPrim.rows)
+            && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
+              <option key={matPrim.id_enc} value={matPrim.id_enc}>
+                {matPrim.nom_matPrima}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Aserradero

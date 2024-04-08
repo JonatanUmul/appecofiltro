@@ -4,7 +4,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
 const URL = process.env.REACT_APP_URL;
-const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFinal }) => {
+const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [modeloUF, setModeloUf] = useState([]);
   const [maquina, setMaquina]= useState([]);
@@ -34,6 +34,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
    
       const response = await axios.post(`${URL}/DTH`, {
         id_cth: id.toString(),
+        fecha_real: fecha_creacion,
         id_modelo: formData.id_modelo,
         id_horno: formData.id_horno,
         id_turno: formData.id_turno,

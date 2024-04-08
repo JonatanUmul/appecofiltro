@@ -9,22 +9,26 @@
     const ROTHP = () => {
       const [datos, setDatos] = useState([]);
       const [aserradero, setAserradero] = useState([]);
-      const [materiaPrim, setMatPrim] = useState([]);
+      const [matPrim, setMatPrim] = useState([]);
       const [patios, setPatios] = useState([]);
-      const [fecha_creacion, setFecha] = useState('');
+      const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
+      const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [id_asrd, setIdAserradero] = useState('');
+      const [id_enc, setIDEnc] = useState('');
       const [id_patio, setIdPatio] = useState('');
 
-      const limpiarInputs = () => {
-        setFecha('');
-        setIdAserradero('');
-        setIdPatio(''); 
-      };
-
+      // const fechaActual = new Date();
+      // const fechaformateada=formatFecha(fechaActual)
+      // const formatearFecha = () => {
+      //  setFecha(fechaformateada)
+      // };
+     
+     
+console.log(matPrim)
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DTHP/${fecha_creacion || 'null'}/${id_asrd || 'null'}/${id_patio || 'null'}`;
+        const url = `${URL}/DTHP/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_asrd || 'null'}/${id_patio || 'null'}/${id_enc || 'null'}`;
 
         axios.get(url)
           .then((response) => {
@@ -34,7 +38,9 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion, id_asrd, id_patio]);
+      }, [fecha_creacion_inicio, fecha_creacion_fin, id_asrd, id_patio, id_enc]);
+
+      
 
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
@@ -53,12 +59,32 @@
         });
       }, []);
 
+      const limpiarInputs = () => {
+        setFecha('');
+        setFecha2('');
+        setIDEnc('');
+        setIdAserradero('');
+        setIdPatio(''); 
+      };
       return (
         <div className="row mb-3">
         <div className="row mb-3">
       <div className="col-md-3">
-        <label htmlFor="fecha" className="form-label">Fecha:</label>
-        <input className="form-control" type="date" value={fecha_creacion} onChange={(e) => setFecha(e.target.value)} />
+        <label htmlFor="fecha" className="form-label">Fecha 1</label>
+        <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />
+      </div>
+      <div className="col-md-3">
+        <label htmlFor="fecha" className="form-label">Fecha 2</label>
+        <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
+      </div>
+      <div className="col-md-3">
+        <label htmlFor="Materia Prima" className="form-label">Materia Prima:</label>
+        <select className="form-select" name="id_enc" value={id_enc} onChange={(e) => setIDEnc(e.target.value)}>
+          <option value="">Materia Prima</option>
+          {Array.isArray(matPrim.rows) && matPrim.rows.map((item) => (
+            <option key={item.id_enc} value={item.id_enc}>{item.nom_matPrima}</option>
+          ))}
+        </select>
       </div>
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Aserradero:</label>
@@ -95,7 +121,9 @@
                 <th scope="col">#</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Hora</th>
+                <th scope="col">Materia Prima</th>
                 <th scope="col">Patio</th>
+                
                 <th scope="col">Aserradero</th>
                 
                 <th scope="col">Esquina Inferior Derecha</th>
@@ -111,9 +139,9 @@
                   <th scope="row">{index + 1}</th>
                   <td>{formatFecha(fila.fecha_creacion) }</td>
                   <td>{fila.hora_creacion}</td>
+                  <td>{fila.materiaPrima}</td>
                   <td>{fila.patio}</td>
                   <td>{fila.aserradero}</td>
-                  
                   <td>{fila.esquinaInfDR}</td>
                   <td>{fila.esquinaInfIZ}</td>
                   <td>{fila.esquinaCentro}</td>

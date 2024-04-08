@@ -3,7 +3,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
 const URL = process.env.REACT_APP_URL
-const ConsultaDTCA1 = ({ encabezado, EncName, fecha_creacion, id }) => {
+const ConsultaDTCA1 = ({id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
 
@@ -11,7 +11,7 @@ const ConsultaDTCA1 = ({ encabezado, EncName, fecha_creacion, id }) => {
     axios.get(`${URL}/DTCA1/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
-        console.log(response.data.data)
+        
       })
       .catch((error) => {
         setError("Error al obtener los datos: " + error.message);
@@ -28,6 +28,7 @@ const ConsultaDTCA1 = ({ encabezado, EncName, fecha_creacion, id }) => {
             <th scope="col">#</th>
             <th scope="col">Fecha de Producción</th>
             <th scope="col">OTCA1</th>
+            <th scope="col">Materi Prima</th>
             <th scope="col">Aserradero</th>
          
             <th scope="col">Cantidad Inicial</th>
@@ -42,6 +43,7 @@ const ConsultaDTCA1 = ({ encabezado, EncName, fecha_creacion, id }) => {
               <td>{index + 1}</td>
               <td>{formatFecha(fila.fecha_creacion)}</td>
               <td>{fila.id_otca1}</td>
+              <td>{fila.matPrima}</td>
               <td>{fila.aserradero}</td>
               <td>{fila.CantidadInicial}</td>
               <td>{fila.CantidadFinal}</td>

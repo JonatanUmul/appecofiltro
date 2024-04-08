@@ -11,12 +11,14 @@
       const [aserradero, setAserradero] = useState([]);
       const [materiaPrim, setMatPrim] = useState([]);
       const [patios, setPatios] = useState([]);
-      const [fecha_creacion, setFecha] = useState('');
+      const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
+      const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [id_asrdSMP, setIdAserradero] = useState('');
       const [id_patio, setIdPatio] = useState('');
 
       const limpiarInputs = () => {
         setFecha('');
+        setFecha2('');
         setIdAserradero('');
         setIdPatio(''); 
       };
@@ -24,8 +26,9 @@
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DASERRIN/${fecha_creacion || 'null'}/${id_asrdSMP || 'null'}/${id_patio || 'null'}`;
+        const url = `${URL}/DASERRIN/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_asrdSMP || 'null'}/${id_patio || 'null'}`;
 
+        
         axios.get(url)
           .then((response) => {
             setDatos(response.data);
@@ -34,8 +37,8 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion, id_asrdSMP, id_patio]);
-
+      }, [fecha_creacion_inicio, fecha_creacion_fin,  id_asrdSMP, id_patio]);
+console.log(datos)
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
@@ -54,11 +57,18 @@
       }, []);
 
       return (
+      
         <div className="row mb-3">
+         <p style={{textAlign: 'center'}}>Secado De Aserrín</p>
+
         <div className="row mb-3">
+        <div className="col-md-3">
+        <label htmlFor="fecha" className="form-label">Fecha 1</label>
+        <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />
+      </div>
       <div className="col-md-3">
-        <label htmlFor="fecha" className="form-label">Fecha:</label>
-        <input className="form-control" type="date" value={fecha_creacion} onChange={(e) => setFecha(e.target.value)} />
+        <label htmlFor="fecha" className="form-label">Fecha 2</label>
+        <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
       </div>
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Aserradero:</label>
@@ -119,6 +129,13 @@
             
                 </tr>
               ))}
+
+<tr>
+          <td colSpan="5"><strong>Totales:s</strong></td>
+          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_inicial), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_final), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.merma), 0)}</strong></td>
+ </tr>
             </tbody>
           </table>
         </div>

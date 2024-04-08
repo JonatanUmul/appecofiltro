@@ -9,15 +9,18 @@ const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [aserradero, setAserradero] = useState([]);
   const [tipCernido, setTipCernido] = useState([]);
+  const [matPrim, setMatPrim]= useState([])
 
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/TipoCernido`),
+      axios.get(`${URL}/MateriaPrima`)
     ])
-      .then(([AserraderoResponse, TIpCernidoResponse]) => {
+      .then(([AserraderoResponse, TIpCernidoResponse, MatprimaResponse]) => {
         setAserradero(AserraderoResponse.data);
         setTipCernido(TIpCernidoResponse.data);
+        setMatPrim(MatprimaResponse.data)
       })
       .catch((error) => {
         console.log("Error al obtener los datos:", error);
@@ -29,6 +32,7 @@ const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
       const response = await axios.post(`${URL}/DTCA1`, {
         id_OTCA1: id.toString(),
         id_aserradero: formData.id_asrd,
+        id_MP: formData.id_MP,
         id_tipoCernido: formData.tipCernido,
         CantidadInicial: formData.cantidad_inicial,
         CantidadFinal: formData.cantidad_final,
@@ -76,6 +80,20 @@ const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
+      <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Materia Prima
+          </label>
+          <select className="form-select" id="id_MP" {...register("id_MP")}>
+            <option>Materia Prima</option>
+            {Array.isArray(matPrim.rows)
+            && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
+              <option key={matPrim.id_enc} value={matPrim.id_enc}>
+                {matPrim.nom_matPrima}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Aserradero

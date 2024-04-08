@@ -28,6 +28,7 @@ const ConsultaDTT = ({  id }) => {
       <tr>
       <th scope="col">#</th>
             <th scope="col">Fecha de Horneado</th>
+            <th scope="col">Hora</th>
             <th scope="col">CTH</th>
             <th scope="col">Modelo</th>
             <th scope="col">Horno</th>
@@ -38,6 +39,7 @@ const ConsultaDTT = ({  id }) => {
             <th scope="col">Cabeza Derecha</th>
             <th scope="col">Centro Derecha</th>
             <th scope="col">Pie Derecho</th>
+            <th scope="col">Promedio</th>
       </tr>
     </thead>
     <tbody>
@@ -45,6 +47,7 @@ const ConsultaDTT = ({  id }) => {
         <tr key={index}>
           <td>{index + 1}</td>
           <td className="text-wrap">{formatFecha(fila.fecha_creacion)}</td>
+          <td>{fila.hora_creacion}</td>
           <td>{fila.id_cth}</td>
           <td>{fila.modelo}</td>
           <td>{fila.horno}</td>
@@ -55,6 +58,8 @@ const ConsultaDTT = ({  id }) => {
           <td>{fila.tempCabezaDR}°</td>
           <td>{fila.tempCentroDR}°</td>
           <td>{fila.tempPieDR}°</td>
+          <td><strong>{fila.promedio}°</strong></td>
+
         
         </tr>
       ))}

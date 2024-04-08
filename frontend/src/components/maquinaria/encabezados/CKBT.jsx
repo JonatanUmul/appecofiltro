@@ -39,7 +39,7 @@ const maquinaria=modalTitle;
         `${URL}/CKBT`,
         {id_maq : id_maq }
       );
-      window.location.href = "/Home/TablaOT";
+      window.location.href = "/Home/TablaMaq";
       console.log("Respuesta del servidor:", response.data);
       // Aquí podrías agregar lógica adicional, como mostrar un mensaje de éxito al usuario, por ejemplo
     } catch (error) {

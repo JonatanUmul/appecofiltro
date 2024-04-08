@@ -2,17 +2,17 @@ import { pool } from "../../../src/db.js";
 
 
 
-export const postOTCA2 = async(req, res)=>{
+export const postOTIP = async(req, res)=>{
     const estado= 2;
     const id_creador= req.body.id_creador;
 
     try{
         if(estado===''){
-            console.log('Uno o varios datos estan vacios')
+            console.log('Uno o svarios datos estan vacios')
         }
         else{
-            const consulta='INSERT INTO otca2(id_est,id_creador)Values( ?, ?)';
-        const [rows]= await pool.query(consulta,[ estado, id_creador])
+            const consulta='INSERT INTO otip(id_est,id_creador)Values(?, ?)';
+        const [rows]= await pool.query(consulta,[estado, id_creador])
         res.send({rows});
         }
         
@@ -22,7 +22,7 @@ export const postOTCA2 = async(req, res)=>{
 }
 
 
-export const putOTCA2 = async (req, res) => {
+export const putOTIP = async (req, res) => {
     const estado = req.body.id_est;
     const id = req.body.id;
     const fechaCierre = new Date().toISOString().split('T')[0]; // Fecha actual del sistema en formato: YYYY-MM-DD
@@ -32,7 +32,7 @@ export const putOTCA2 = async (req, res) => {
         if (estado === '' || id === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'UPDATE otca2 SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
+            const consulta = 'UPDATE otip SET id_est = ?, fechaCierre = ?, horaCierre = ? WHERE id = ?';
             const [rows] = await pool.query(consulta, [estado, fechaCierre, horaCierre, id]);
             res.send({ rows });
         }

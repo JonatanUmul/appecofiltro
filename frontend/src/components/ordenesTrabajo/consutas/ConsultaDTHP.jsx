@@ -4,7 +4,7 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
 const URL = process.env.REACT_APP_URL
 
-const ConsultaDTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
+const ConsultaDTHP = ({  id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
 
@@ -29,7 +29,9 @@ const ConsultaDTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
       <tr>
         <th scope="col">#</th>
         <th scope="col">Fecha de Producción</th>
+        <th scope="col">Hora</th>
         <th scope="col">OTHP</th>
+        <th scope="col">Materia Prima</th>
         <th scope="col">Aserradero</th>
         <th scope="col">Patio</th>
         <th scope="col">Esquina Superior Izquierda</th>
@@ -37,6 +39,7 @@ const ConsultaDTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
         <th scope="col">Centro</th>
         <th scope="col">Esquina Inferior Izquierda</th>
         <th scope="col">Esquina Inferior Derecha</th>
+        <th scope="col">Promedio</th>
       </tr>
     </thead>
     <tbody>
@@ -44,7 +47,9 @@ const ConsultaDTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
         <tr key={index}>
           <td>{index + 1}</td>
           <td className="text-wrap">{formatFecha(fila.fecha_creacion)}</td>
+          <td>{fila.hora_creacion}</td>
           <td>{fila.id_OTHP}</td>
+          <td>{fila.materiaPrima}</td>
           <td>{fila.aserradero}</td>
           <td>{fila.patio}</td>
           <td>{fila.esquinaSupIZ}%</td>
@@ -52,6 +57,7 @@ const ConsultaDTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
           <td>{fila.esquinaCentro}%</td>
           <td>{fila.esquinaInfIZ}%</td>
           <td>{fila.esquinaInfDR}%</td>
+          <td><strong>{fila.promedio}%</strong></td>
         </tr>
       ))}
     </tbody>

@@ -45,13 +45,13 @@ const dayMonthYear = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${c
   <div className="container">
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
       <div className="mb-3">
-        <h1>Crear Orden de Produccion</h1>
+        <h1>Orden de Produccion</h1>
         <h5 className="mt-3">Con fecha:</h5>
         <p>{dayMonthYear}</p>
       </div>
       <div className="d-grid gap-2">
         <button type="submit" className="btn btn-primary mt-5">
-          Guardar
+          Crear
         </button>
       </div>
     </form>

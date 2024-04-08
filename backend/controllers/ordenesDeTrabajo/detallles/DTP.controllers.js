@@ -3,13 +3,12 @@ import { pool } from "../../../src/db.js";
 export const postDTP = async (req, res) => {
    
   const {
-    id_OTP, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin} = req.body;
+    id_OTP, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin, observacion} = req.body;
 
-  console.log(id_OTP, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin,
-    );
+
 
   try {
-      const consulta ="INSERT INTO dtp( id_OTP, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin) VALUES (?, ?, ?, ?,?, ?, ?, ?,?, ?)";
+      const consulta ="INSERT INTO dtp( id_OTP, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin, observacion) VALUES (?, ?, ?, ?,?, ?, ?, ?,?, ?,?)";
       const [rows] = await pool.query(consulta, [
         id_OTP,
     id_turno,
@@ -21,6 +20,7 @@ export const postDTP = async (req, res) => {
     codigoFinal,
     librasBarro,
     librasAserrin,
+    observacion
       
       ]);
       res.send({ rows });
