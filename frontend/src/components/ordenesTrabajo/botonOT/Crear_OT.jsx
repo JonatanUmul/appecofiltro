@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 import DTHP from '../detallado/DTHP'
@@ -80,7 +81,7 @@ console.log('propr recibios', encabezado, id)
   };
 
   return (
-    <>
+    <div>
       {/* Botón para abrir el modal */}
       <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center' }} onClick={handleClick}>
         OT
@@ -98,7 +99,7 @@ console.log('propr recibios', encabezado, id)
           {/* Puedes agregar botones de acción necesarios */}
         </ModalFooter>
       </Modal>
-    </>
+    </div>
   );
 }
 

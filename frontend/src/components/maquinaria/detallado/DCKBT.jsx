@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -165,7 +166,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
 <p style={{ color: errors ? 'red' : 'inherit' }}>{errors}</p>
 
  
-  {/* Agrega más preguntas aquí siguiendo el mismo patrón */}
+
   
   <div className="col-12">
     <button type="submit" className="btn btn-primary">Guardar</button>

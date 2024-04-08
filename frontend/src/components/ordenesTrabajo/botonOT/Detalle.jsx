@@ -1,3 +1,4 @@
+
 import React, {  useState } from 'react'
 
 import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
@@ -76,7 +77,7 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   };
 
   return (
-    <>
+    <div>
       {/* Botón para abrir el modal */}
       <a type="button"  onClick={handleClick}>
       <i class="bi bi-arrow-bar-right"></i>
@@ -92,7 +93,7 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
           {/* Puedes agregar botones de acción necesarios */}
         </ModalFooter>
       </Modal>
-    </>
+    </div>
   );
 }
 

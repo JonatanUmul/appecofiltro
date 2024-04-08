@@ -1,3 +1,4 @@
+
 import { pool } from "../../../src/db.js";
 
 export const postDTP = async (req, res) => {
@@ -80,6 +81,5 @@ JOIN
     res.status(500).json({ error: "Error al obtener los datos de la tabla dtp" });
   }
 };
-
 
 

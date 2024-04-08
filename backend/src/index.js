@@ -1,3 +1,4 @@
+
     import express  from "express";
     import cors from 'cors'
     import bodyParser from "body-parser"
@@ -13,7 +14,6 @@
     import TablaOT from './routes/tablaOT/TablaOT.js'
     import TablaCp from './routes/tablaCP/TablaCP.js'
     import TablaMaquinaria from './routes/tablaMaquinaria/TablaMaquinaria.js'
-    import OTCC from './routes/ordenesDeTrabajo/encabezados/OTCC.routes.js'
     import OTHP from './routes/ordenesDeTrabajo/encabezados/OTHP.routes.js'
     import OTIP from './routes/ordenesDeTrabajo/encabezados/OTIP.routes.js'
     import OTSA from './routes/ordenesDeTrabajo/encabezados/OTSMP.routes.js'
@@ -198,10 +198,6 @@ app.use(function(req, res, next) {
     app.use(OTCA1)
     app.use(DTCA1)
 
-     //OT Contro de Calidad
-     app.use(OTCC)
-    //  app.use(DTCC)
-
     //Encabezado Cernido de aserrin 2 y Detalle Cernido 2
     app.use(OTCA2)
     app.use(DTCA2)
@@ -299,5 +295,6 @@ app.use(function(req, res, next) {
 
   
     app.listen(process.env.PORT || 3001)
+
 
     console.log('puerto escuchando en el puerto 3001')

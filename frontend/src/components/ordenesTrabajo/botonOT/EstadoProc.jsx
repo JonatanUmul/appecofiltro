@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 const URL = process.env.REACT_APP_URL
@@ -109,3 +110,4 @@ const EstadoProc = ({ id, encabezado }) => {
 };
 
 export default EstadoProc;
+

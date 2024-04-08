@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
@@ -69,5 +70,3 @@ const ConsultaDTHP = ({  id }) => {
 };
 
 export default ConsultaDTHP;
-
-
