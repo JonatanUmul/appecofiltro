@@ -103,7 +103,7 @@
     // app.use(cors);
     app.use(cors({
       
-      origin: 'http://localhost:3000', // Utiliza la variable de entorno correcta
+      origin: 'https://appproduccion.onrender.com', // Utiliza la variable de entorno correcta
       methods: ['GET', 'POST', 'PUT'], // Métodos permitidos
       allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
     }));
