@@ -77,7 +77,8 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
             Materia Prima
           </label>
           <select className="form-select" id="id_MP" {...register("id_MP")}>
-            <option>Materia Prima</option>
+          <option>--</option>  
+          <option>Materia Prima</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
               <option key={matPrim.id_enc} value={matPrim.id_enc}>
@@ -91,7 +92,8 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
             Aserradero
           </label>
           <select className="form-select" id="id_asrd" {...register("id_asrd")}>
-            {Array.isArray(aserradero.rows)
+          <option>--</option>  
+          {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
                 {aserradero.nombre_aserradero}
@@ -104,7 +106,8 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
             Patio
           </label>
           <select className="form-select" id="id_patio" {...register("id_patio")}>
-            {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
+          <option>--</option>
+          {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
               <option key={patio.id} value={patio.id}>
                 {patio.nombrePatio}
               </option>
