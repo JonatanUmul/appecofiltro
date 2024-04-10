@@ -20,7 +20,7 @@
     font-family: 'Poppins', sans-serif;
   }
   
-  .form-group {
+  .form-group-input {
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
   }
@@ -32,18 +32,18 @@
     font-family: 'Poppins', sans-serif;
   }
   
-  .form-group input {
+  .form-group-input {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color:transparent;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.5s;
     font-family: 'Poppins', sans-serif;
   }
   
-  .form-group input:focus {
+  .form-group-input:focus {
     outline: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     font-family: 'Poppins', sans-serif;
@@ -67,7 +67,7 @@
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    padding: 20px; /* Ajusta el relleno interno según sea necesario */
+    padding: 20px;
     font-family: 'Poppins', sans-serif;
   }
   

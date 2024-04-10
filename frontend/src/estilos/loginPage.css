@@ -1,12 +1,12 @@
 body {
-    background-color: #f8f9fa; /* Color de fondo del body */
-    font-family: Arial, sans-serif; /* Fuente del texto */
-    margin: 0; /* Elimina los márgenes predeterminados del body */
-    padding: 0; /* Elimina los rellenos predeterminados del body */
-    display: flex; /* Utiliza flexbox para centrar el contenido verticalmente */
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    height: 100vh; /* Establece la altura del body al 100% del viewport height */
+    background-color: #f8f9fa; 
+    font-family: Arial, sans-serif;
+    margin: 0; 
+    padding: 0;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
   }
   
 .container {

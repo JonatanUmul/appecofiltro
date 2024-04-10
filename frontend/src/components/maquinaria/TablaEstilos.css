@@ -1,15 +1,15 @@
 .table th,
 .table td {
-  font-size: 12px; /* Tamaño de fuente más pequeño */
+  font-size: 12px; 
 }
 .table td:hover {
     font-weight: bold;
   }
 
 .table th {
-  padding: 5px; /* Ajustar el padding para que los encabezados sean más compactos */
+  padding: 5px; 
 }
 
 .table td {
-  padding: 8px; /* Ajustar el padding para que los datos de la tabla sean más compactos */
+  padding: 8px;
 }

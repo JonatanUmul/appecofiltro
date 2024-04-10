@@ -49,11 +49,11 @@ const Login = () => {
                 style={{ width: '150px', padding: '15px', marginRight: '10px' }}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-input">
               <label htmlFor="username"><UserOutlined /> Usuario</label>
               <input type="text" className="form-control" name="username" id="username" value={username}  onChange={(e)=>setUsername(e.target.value)} required/>
             </div>
-            <div className="form-group">
+            <div className="form-group-input">
               <label htmlFor="password"><LockOutlined /> Contraseña</label>
               <input type="password" className="form-control" name="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
             </div>

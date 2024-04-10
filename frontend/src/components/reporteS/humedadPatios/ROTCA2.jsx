@@ -10,12 +10,14 @@
       const [datos, setDatos] = useState([]);
       const [aserradero, setAserradero] = useState([]);
       const [materiaPrim, setMatPrim] = useState([]);
-      const [fecha_creacion, setFecha] = useState('');
+      const [fecha_creacion_inicio, setFecha] = useState('');
+      const [fecha_creacion_fin, setFecha2] = useState('');
       const [id_aserradero, setIdAserradero] = useState('');
   
 
       const limpiarInputs = () => {
         setFecha('');
+        setFecha2('');
         setIdAserradero('');
     
       };
@@ -23,7 +25,7 @@
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DTCA2/${fecha_creacion || 'null'}/${id_aserradero || 'null'}`;
+        const url = `${URL}/DTCA2/${fecha_creacion_inicio || 'null'}/DTCA2/${fecha_creacion_fin || 'null'}/${id_aserradero || 'null'}`;
 
         axios.get(url)
           .then((response) => {
@@ -33,8 +35,8 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion, id_aserradero]);
-
+      }, [fecha_creacion_inicio, fecha_creacion_fin, id_aserradero]);
+console.log('datos', datos)
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
@@ -55,9 +57,13 @@
       return (
         <div className="row mb-3">
         <div className="row mb-3">
+        <div className="col-md-3">
+        <label htmlFor="fecha" className="form-label">Fecha 1 </label>
+        <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />
+      </div>
       <div className="col-md-3">
-        <label htmlFor="fecha" className="form-label">Fecha:</label>
-        <input className="form-control" type="date" value={fecha_creacion} onChange={(e) => setFecha(e.target.value)} />
+        <label htmlFor="fecha" className="form-label">Fecha 2</label>
+        <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha(e.target.value)} />
       </div>
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Aserradero:</label>

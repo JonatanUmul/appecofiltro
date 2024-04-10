@@ -36,9 +36,9 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
         return <ConsultaCKTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
       case 'ckext':
         return <ConsultaCKEXT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'ckbt':
+      case 'ckbt':  
         return <ConsultaCKBT id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-      case 'ckta':
+      case 'ckcta':
         return <ConsultaCKCTA id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
       case 'ckctam':
         return <ConsultaCKCTAM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />

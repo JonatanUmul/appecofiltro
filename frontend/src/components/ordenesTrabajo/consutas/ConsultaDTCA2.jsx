@@ -61,4 +61,3 @@ const ConsultaDTCA1 = ({ id }) => {
 };
 
 export default ConsultaDTCA1;
-

@@ -110,4 +110,3 @@ const EstadoProc = ({ id, encabezado }) => {
 };
 
 export default EstadoProc;
-

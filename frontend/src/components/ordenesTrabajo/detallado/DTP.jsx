@@ -92,8 +92,9 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
               Turno de Producción
           </label>
-          <select className="form-select" id="id_turno" {...register("id_turno")}>
-            {Array.isArray(turno.rows)
+          <select className="form-select" id="id_turno" {...register("id_turno")} required>
+          <option>--</option>
+          {Array.isArray(turno.rows)
             && turno.rows.length>0 && turno.rows.map((turno) => (
               <option key={turno.id} value={turno.id}>
                 {turno.turno}
@@ -106,8 +107,10 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
               Aserradero
           </label>
-          <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")}>
-            {Array.isArray(aserradero.rows)
+          <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")} required>
+          <option>--</option> 
+          
+          {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
                 {aserradero.nombre_aserradero}
@@ -122,8 +125,9 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
               Modelo
           </label>
-          <select className="form-select" id="id_ufmodelo" {...register("id_ufmodelo")}>
-            {Array.isArray(modelos.rows)
+          <select className="form-select" id="id_ufmodelo" {...register("id_ufmodelo")} required>
+          <option>--</option> 
+          {Array.isArray(modelos.rows)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
                 {modelo.nombre_modelo}
@@ -136,8 +140,9 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
               Tipo de Cernido
           </label>
-          <select className="form-select" id="id_tipoCernido" {...register("id_tipoCernido")}>
-            {Array.isArray(tipoCernido.rows)
+          <select className="form-select" id="id_tipoCernido" {...register("id_tipoCernido")} required> 
+          <option>--</option>
+          {Array.isArray(tipoCernido.rows)
             && tipoCernido.rows.length>0 && tipoCernido.rows.map((tipoCernido) => (
               <option key={tipoCernido.id} value={tipoCernido.id}>
                 {tipoCernido.tipoCernido}

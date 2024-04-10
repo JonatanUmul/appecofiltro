@@ -61,33 +61,29 @@ export const getDTCA2 = async (req, res) => {
   
 
 export const getDTCAA2 = async (req, res) => {
-    const { id_aserradero, fecha_creacion } = req.params; // Obtener los parámetros de la URL
+    const { id_aserradero, fecha_creacion_inicio,fecha_creacion_fin } = req.params; // Obtener los parámetros de la URL
   
     try {
         let consulta = `
         SELECT 
 		d.id,
 		d.cantidad_inicial,
-		(d.cantidad_inicial-(d.cernido_fino + d.cernido_grueso)) AS merma,
+		d.fecha_creacion,
+		d.hora_creacion,
 		d.cernido_fino,
-        d.cernido_grueso,
+		d.cernido_grueso,
 		d.hora_creacion,
 		d.fecha_creacion,
-		OTCA2.id AS id_OTCA2,
         enc_matprima.nom_matPrima as matPrima,
 		aserradero.nombre_aserradero AS aserradero
-   
-	
+
 	FROM 
 		dtca2 d
     JOIN 
         enc_matprima ON d.id_MP = enc_matprima.id_enc
-	JOIN 
-		otca2 ON d.id_OTCA2 = otca2.id
+
 	JOIN 
 		aserradero ON d.id_aserradero = aserradero.id
-
-    
     WHERE 1=1`;
   
         const params = [];
@@ -98,10 +94,20 @@ export const getDTCAA2 = async (req, res) => {
         }
     
   
-        if (fecha_creacion !== 'null') {
-            consulta += ' AND (d.fecha_creacion IS NULL OR d.fecha_creacion = ?)';
-            params.push(fecha_creacion);
+       
+        if (fecha_creacion_inicio !== 'null' && fecha_creacion_fin !== 'null') {
+            if (fecha_creacion_inicio !== 'null' && fecha_creacion_fin !== 'null') {
+                consulta += ' AND (d.fecha_creacion BETWEEN ? AND ?)';
+                params.push(fecha_creacion_inicio, fecha_creacion_fin);
+            } else if (fecha_creacion_inicio !== 'null') {
+                consulta += ' AND d.fecha_creacion >= ?';
+                params.push(fecha_creacion_inicio);
+            } else {
+                consulta += ' AND d.fecha_creacion <= ?';
+                params.push(fecha_creacion_fin);
+            }
         }
+      
   
         const [rows] = await pool.query(consulta, params);
   

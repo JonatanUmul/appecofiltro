@@ -149,6 +149,13 @@ console.log(matPrim)
                   <td>{fila.esquinaSupIZ}</td>
                 </tr>
               ))}
+
+              <tr>
+          <td colSpan="5"><strong>Totales:</strong></td>
+          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_inicial), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_final), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.merma), 0)}</strong></td>
+ </tr>
             </tbody>
           </table>
         </div>
