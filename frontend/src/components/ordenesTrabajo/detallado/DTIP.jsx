@@ -9,34 +9,38 @@ const URL = process.env.REACT_APP_URL
 const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
   const [modelos, setModelos] = useState([]);
+  const [plata, setPlata]=useState([])
   const [error, setError]= useState('')
 
+  const insumo='Plata' 
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/ModelosUF`),
+      axios.get(`${URL}/Insumos/${insumo}`),
    
     ])
-      .then(([ ModelosufResponse]) => {
+      .then(([ ModelosufResponse, insumoResponse]) => {
         setModelos(ModelosufResponse.data);
-     
+        setPlata(insumoResponse.data)
       })
       .catch((error) => {
         setError("Error al obtener los datos", error);
       });
   }, []);
-
+  console.log('Plata',plata)
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post(`${URL}/DTIP` ,
       {
         id_OTIP: id.toString(),
+        TipoPlata:formData.TipoPlata,
         fecha_real:fecha_creacion,
         id_modelo: formData.id_modelo,
         codigoInicio: formData.codigoInicio,
         codigoFinal: formData.codigoFinal,
         impregnados: formData.impregnados,
         mermas: formData.mermas,
-        id_creador:''
+        id_creadot:''
       });Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',
@@ -85,6 +89,19 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
                 {modelo.nombre_modelo}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+              Tipo de Plata
+          </label>
+          <select className="form-select" id="TipoPlata" {...register("TipoPlata")}>
+            {Array.isArray(plata.rows)
+            && plata.rows.length>0 && plata.rows.map((plata) => (
+              <option key={plata.id} value={plata.id}>
+                {plata.insumo}
               </option>
             ))}
           </select>

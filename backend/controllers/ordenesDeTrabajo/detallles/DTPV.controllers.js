@@ -32,9 +32,9 @@ export const getDTPV = async (req, res) => {
         enc_matprima.nom_matPrima AS descripcion_matprima
     FROM 
         dtpv d
-    JOIN 
+    LEFT JOIN
         otpv ON d.id_OTPV = otpv.id
-    JOIN 
+    LEFT JOIN
         enc_matprima ON d.id_MP = enc_matprima.id_enc
 
     where otpv.id=?
@@ -74,9 +74,9 @@ export const getDTPV = async (req, res) => {
 	
 	FROM 
 		dtca2 d
-	JOIN 
+	LEFT JOIN
 		otca2 ON d.id_OTCA2 = otca2.id
-	JOIN 
+	LEFT JOIN
 		aserradero ON d.id_aserradero = aserradero.id
 
     

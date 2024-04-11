@@ -101,14 +101,14 @@ try {
     
     FROM dckmm d
     
-    join respuestas r1 on d.id_limpiezaGeneral = r1.id
-    join respuestas r2 on d.id_AccionamientoCorrectoTornillos = r2.id
-    join respuestas r3 on d.id_AccionamientoCorrectoCompuertaPolvos = r3.id
-    join respuestas r4 on d.id_VerificarAjusteCorrectoTornillosChumaceras = r4.id
-    join respuestas r5 on d.id_VerificarVisualmenteEstadoPaletasTornilloSeco = r5.id
-    join respuestas r6 on d.id_VerificarTornillosGuardasDeSeguridad = r6.id
-    join respuestas r7 on d.id_LubricaciónYLimpiezaExcesosGrasa = r7.id
-	join user on d.id_creador= user.id
+    left join respuestas r1 on d.id_limpiezaGeneral = r1.id
+    left join respuestas r2 on d.id_AccionamientoCorrectoTornillos = r2.id
+    left join respuestas r3 on d.id_AccionamientoCorrectoCompuertaPolvos = r3.id
+    left join respuestas r4 on d.id_VerificarAjusteCorrectoTornillosChumaceras = r4.id
+    left join respuestas r5 on d.id_VerificarVisualmenteEstadoPaletasTornilloSeco = r5.id
+    left join respuestas r6 on d.id_VerificarTornillosGuardasDeSeguridad = r6.id
+    left join respuestas r7 on d.id_LubricaciónYLimpiezaExcesosGrasa = r7.id
+	left join user on d.id_creador= user.id
      where d.id_CKMM =?;
   `
   const [rows]= await pool.query(consulta, [id])

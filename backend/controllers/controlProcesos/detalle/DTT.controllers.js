@@ -23,6 +23,7 @@ try {
   select 
 d.id,
 d.fecha_creacion,
+d.hora_creacion,
 d.cabezaDerecha1,
 d.pieDerecho1,
 d.cabezaDerecha2,
@@ -31,7 +32,7 @@ d.cabezaDerecha3,
 d.pieIzquierdo1,
 d.cabezaizquierda1,
 d.pieIzquierdo2,
-
+ROUND(((d.cabezaDerecha1+d.pieDerecho1+d.cabezaDerecha2+d.pieDerecho2+d.cabezaDerecha3+d.pieIzquierdo1+d.cabezaizquierda1+d.pieIzquierdo2) / 8)) AS promedio,
 ctt.id as id_ctt,
 ufmodelo.nombre_modelo as modelo,
 enc_maq.nombre_maq as tunel 

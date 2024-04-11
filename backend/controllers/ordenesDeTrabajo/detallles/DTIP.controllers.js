@@ -3,14 +3,14 @@ import { pool } from "../../../src/db.js";
 
 export const postDTIP = async (req, res) => {
 
-    const { id_OTIP,fecha_real, id_modelo,  codigoInicio, codigoFinal, impregnados, mermas, id_creadot } = req.body;
-    
+    const { id_OTIP,TipoPlata,fecha_real, id_modelo,  codigoInicio, codigoFinal, impregnados, mermas, id_creadot } = req.body;
+   
     try {
-        if (id_OTIP === '' || id_modelo === '', codigoInicio==='' || codigoFinal === '' || impregnados === '' || mermas === '' ) {
+        if (id_OTIP === '' ||TipoPlata===''|| id_modelo === '', codigoInicio==='' || codigoFinal === '' || impregnados === '' || mermas === '' ) {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'INSERT INTO dtip (id_OTIP,fecha_real, id_modelo,  codigoInicio, codigoFinal, impregnados, mermas, id_creadot) VALUES (?, ?, ?, ?, ?, ?, ?)';
-            const [rows] = await pool.query(consulta, [id_OTIP, fecha_real,id_modelo,  codigoInicio, codigoFinal, impregnados, mermas, id_creadot]);
+            const consulta = 'INSERT INTO dtip (id_OTIP,TipoPlata,fecha_real, id_modelo,  codigoInicio, codigoFinal, impregnados, mermas, id_creadot) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            const [rows] = await pool.query(consulta, [id_OTIP, TipoPlata, fecha_real,id_modelo,  codigoInicio, codigoFinal, impregnados, mermas, id_creadot]);
             res.send({ rows });
         }
     } catch (err) {
@@ -33,13 +33,16 @@ export const getDTIP = async (req, res) => {
       d.mermas,
       d.fechaCreacion,
       d.horaCreacion,
+      insumos.insumo as TipoPlata,
       ufmodelo.nombre_modelo as modelo
 
   FROM 
       dtip d
 
-  JOIN 
+  LEFT JOIN 
       ufmodelo ON d.id_modelo = ufmodelo.id_mod
+LEFT JOIN 
+      insumos ON d.TipoPlata = insumos.id
       
       WHERE d.id_otip= ?
   `;
@@ -74,13 +77,13 @@ export const getDTIP = async (req, res) => {
                 enc_matprima.nom_matPrima AS materiaPrima
             FROM 
                 dthp d
-            JOIN 
+            LEFT JOIN 
                 othp ON d.id_othp = othp.id
-            JOIN 
+            LEFT JOIN 
                 aserradero ON d.id_asrd = aserradero.id
-            JOIN 
+            LEFT JOIN 
                 patios ON d.id_patio = patios.id
-            JOIN 
+            LEFT JOIN 
                 enc_matprima ON d.id_matPrima = enc_matprima.id_enc
     
             WHERE 1 = 1`;

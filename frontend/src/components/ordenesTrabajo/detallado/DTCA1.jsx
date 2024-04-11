@@ -86,7 +86,7 @@ const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
             Materia Prima
           </label>
           <select className="form-select" id="id_MP" {...register("id_MP")}>
-            <option>Materia Prima</option>
+          <option>--</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
               <option key={matPrim.id_enc} value={matPrim.id_enc}>
@@ -100,7 +100,8 @@ const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
             Aserradero
           </label>
           <select className="form-select" id="id_asrd" {...register("id_asrd")}>
-            {Array.isArray(aserradero.rows)
+          <option>--</option>  
+          {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserrado) => (
               <option key={aserrado.id} value={aserrado.id}>
                 {aserrado.nombre_aserradero}

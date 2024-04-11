@@ -68,10 +68,10 @@ try {
   
   FROM dckbt d
   
-  join respuestas r1 on d.id_limpiezaBandaYRodillos = r1.id
-  join respuestas r2 on d.id_lubricacionChumaceras = r2.id
-  join respuestas r3 on d.id_accionamientoCorrectoDeMotor = r3.id
-  join user on d.id_creador = user.id
+  left join respuestas r1 on d.id_limpiezaBandaYRodillos = r1.id
+  left join respuestas r2 on d.id_lubricacionChumaceras = r2.id
+  left join respuestas r3 on d.id_accionamientoCorrectoDeMotor = r3.id
+  left join user on d.id_creador = user.id
   where d.id_CKBT=?
   `
   const [rows]= await pool.query(consulta, [id])

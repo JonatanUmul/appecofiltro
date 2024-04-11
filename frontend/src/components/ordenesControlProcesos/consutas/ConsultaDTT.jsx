@@ -23,11 +23,12 @@ const ConsultaDTT = ({ id }) => {
     
 <div className="table-responsive">
   {error && <div>Error: {error}</div>}
-  <table className="table text-center">
+  <table className="table text-center" style={{ fontSize: '5px' }}>
     <thead>
       <tr>
       <th scope="col">#</th>
             <th scope="col">Fecha de Producción</th>
+            <th scope="col">Hora</th>
             <th scope="col">CTT</th>
             <th scope="col">Modelo</th>
             <th scope="col">Tunel</th>
@@ -39,6 +40,7 @@ const ConsultaDTT = ({ id }) => {
             <th scope="col">Pie Izquierdo 1</th>
             <th scope="col">Cabeza Izquierda 1</th>
             <th scope="col">Pie Izquierdo 2</th>
+            <th scope="col">Promedio</th>
       </tr>
     </thead>
     <tbody>
@@ -46,6 +48,7 @@ const ConsultaDTT = ({ id }) => {
         <tr key={index}>
           <td>{index + 1}</td>
           <td className="text-wrap">{formatFecha(fila.fecha_creacion)}</td>
+          <td>{fila.hora_creacion}</td>
           <td>{fila.id_ctt}</td>
           <td>{fila.modelo}</td>
           <td>{fila.tunel}</td>
@@ -57,6 +60,7 @@ const ConsultaDTT = ({ id }) => {
           <td>{fila.pieIzquierdo1}°</td>
           <td>{fila.cabezaizquierda1}°</td>
           <td>{fila.pieIzquierdo2}°</td>
+          <td style={{color:'red'}}><strong>{fila.promedio}°</strong></td>
         </tr>
       ))}
     </tbody>

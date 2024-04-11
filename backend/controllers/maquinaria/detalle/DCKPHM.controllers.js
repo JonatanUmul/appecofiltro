@@ -132,16 +132,16 @@ try {
 
     FROM dckphm d
     
-    join respuestas r1 on d.id_GrupoAnteriorCompletoSatisfactoriamenteLimpiezaGeneral = r1.id
-    join respuestas r2 on d.id_AccionamientoCorrectoMotorBomba = r2.id
-    join respuestas r3 on d.id_NivelDeAceiteEnTanqueHidraulicoCorrecto = r3.id
-    join respuestas r4 on d.id_MangueraHidraulicaEstaEnBuenEstadoSinFugasAceite = r4.id
-    join respuestas r5 on d.id_FuncionamientoCorrectamenteCilindroHidraulicoParaSubirBajar = r5.id
-    join respuestas r6 on d.id_EstructuraPrensaEncuentraSinFisuras = r6.id
-	join respuestas r7 on d.id_EstructuraDeMoldesEncuentraSinFisurasDefectos = r7.id
-	join respuestas r8 on d.id_LimpiezaLubricacionBarrasBujesEquipoAnterior = r8.id
-	join respuestas r9 on d.id_IntegridadBujesBarrasPrincipalesOptimas = r9.id
-	join user on d.id_creador= user.id
+    left join respuestas r1 on d.id_GrupoAnteriorCompletoSatisfactoriamenteLimpiezaGeneral = r1.id
+    left join respuestas r2 on d.id_AccionamientoCorrectoMotorBomba = r2.id
+    left join respuestas r3 on d.id_NivelDeAceiteEnTanqueHidraulicoCorrecto = r3.id
+    left join respuestas r4 on d.id_MangueraHidraulicaEstaEnBuenEstadoSinFugasAceite = r4.id
+    left join respuestas r5 on d.id_FuncionamientoCorrectamenteCilindroHidraulicoParaSubirBajar = r5.id
+    left join respuestas r6 on d.id_EstructuraPrensaEncuentraSinFisuras = r6.id
+	left join respuestas r7 on d.id_EstructuraDeMoldesEncuentraSinFisurasDefectos = r7.id
+	left join respuestas r8 on d.id_LimpiezaLubricacionBarrasBujesEquipoAnterior = r8.id
+	left join respuestas r9 on d.id_IntegridadBujesBarrasPrincipalesOptimas = r9.id
+	left join user on d.id_creador= user.id
      where d.id_CKPHM =?;
   `
   const [rows]= await pool.query(consulta, [id])

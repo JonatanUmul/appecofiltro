@@ -39,6 +39,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       const response = await axios.post(`${URL}/DTP` ,
       {
         id_OTP: id.toString(),
+        fecha_real:fecha_creacion,
         id_turno: formData.id_turno,
         id_tipoCernido: formData.id_tipoCernido,
         id_Aserradero: formData.id_Aserradero,

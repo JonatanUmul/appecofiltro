@@ -32,6 +32,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
     try {
       const response = await axios.post(`${URL}/DTHP`, {
         id_OTHP: id.toString(),
+        fecha_real:fecha_creacion,
         id_asrd: formData.id_asrd,
         id_matPrima: formData.id_matPrima,
         id_patio: formData.id_patio,
@@ -77,7 +78,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Materia Prima
           </label>
           <select className="form-select" id="id_matPrima" {...register("id_matPrima")}>
-            <option>Materia Prima</option>
+            <option> --</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
               <option key={matPrim.id_enc} value={matPrim.id_enc}>
@@ -91,7 +92,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Aserradero
           </label>
           <select className="form-select" id="id_asrd" {...register("id_asrd")}>
-           <option>Aserradero</option>
+           <option>--</option>
             {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
@@ -105,7 +106,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Patio
           </label>
           <select className="form-select" id="id_patio" {...register("id_patio")}>
-           <option>Patio</option>
+           <option>--</option>
             {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
               <option key={patio.id} value={patio.id}>
                 {patio.nombrePatio}
@@ -117,31 +118,31 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="esquinaSI" className="form-label">
             Esquina Superior Izquierda
           </label>
-          <input type="number" className="form-control" id="esquinaSupIZ" {...register("esquinaSupIZ")} required />
+          <input type="text" className="form-control" id="esquinaSupIZ" {...register("esquinaSupIZ")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">
             Esquina Superior Derecha
           </label>
-          <input type="number" className="form-control" id="esquinaSupDA" {...register("esquinaSupDA")} required />
+          <input type="text" className="form-control" id="esquinaSupDA" {...register("esquinaSupDA")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="centro" className="form-label">
             Centro
           </label>
-          <input type="number" className="form-control" id="esquinaCentro" {...register("esquinaCentro")} required />
+          <input type="text" className="form-control" id="esquinaCentro" {...register("esquinaCentro")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaII" className="form-label">
             Esquina Inferior Izquierda
           </label>
-          <input type="number" className="form-control" id="esquinaInfIZ" {...register("esquinaInfIZ")} required />
+          <input type="text" className="form-control" id="esquinaInfIZ" {...register("esquinaInfIZ")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaID" className="form-label">
             Esquina Inferior Derecha
           </label>
-          <input type="number" className="form-control" id="esquinaInfDR" {...register("esquinaInfDR")} required />
+          <input type="text" className="form-control" id="esquinaInfDR" {...register("esquinaInfDR")} required />
         </div>
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>

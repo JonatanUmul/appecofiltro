@@ -70,11 +70,11 @@ export const getDCKCTA= async(req, res)=>{
     END AS observacion3
 FROM 
     dckta d
-JOIN 
+left JOIN 
     respuestas r1 ON d.id_visorFuncionandoNivelDeAguaVisible = r1.id
-JOIN 
+left JOIN 
     respuestas r2 ON d.id_accionamientoCorrectoSelenoideAlimentacion = r2.id
-JOIN 
+left JOIN 
     respuestas r3 ON d.id_accionamientoCorrectoSelenoideAlimentacion = r3.id
 WHERE 
     d.id_CKTA = 1;

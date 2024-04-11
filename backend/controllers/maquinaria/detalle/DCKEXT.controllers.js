@@ -80,11 +80,11 @@ try {
   
   FROM dckext d
   
-  join respuestas r1 on d.id_limpiezaBazucaDeSalida = r1.id
-  join respuestas r2 on d.id_lubricarChumacerasAlFinalTurno = r2.id
-  join respuestas r3 on d.id_AccionamientoCorrectoMotor = r3.id
-  join respuestas r4 on d.id_verificarTornillosGuardasDeSeguridad = r4.id
-  join respuestas r5 on d.id_limpiezaInternaExternaEquipo = r5.id
+  left join respuestas r1 on d.id_limpiezaBazucaDeSalida = r1.id
+  left join respuestas r2 on d.id_lubricarChumacerasAlFinalTurno = r2.id
+  left join respuestas r3 on d.id_AccionamientoCorrectoMotor = r3.id
+  left join respuestas r4 on d.id_verificarTornillosGuardasDeSeguridad = r4.id
+  left join respuestas r5 on d.id_limpiezaInternaExternaEquipo = r5.id
   
   where d.id_CKEXT= ?
  

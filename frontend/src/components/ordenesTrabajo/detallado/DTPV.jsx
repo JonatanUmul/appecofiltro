@@ -48,7 +48,7 @@ console.log(matPrim)
   };
 console.log('datos props',encabezado, EncName, fecha_creacion,id)
   return (
-    <div className="mt-4">
+    <div className="mt-4 container">
       <h4 style={{ textAlign: 'center', color: 'gray' }}>Pulverizado de Barro</h4>
       <div className="card">
         <div className="card-body">
@@ -65,7 +65,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
        
 
-      <div className="col-md-6">
+      <div className="form-group mt-3">
 
           <label htmlFor="esquinaSI" className="form-label">
             Materia Prima
@@ -83,18 +83,18 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           </div>
          
         </div>
-        <div className="col-md-6">
+        <div className="form-group mt-3">
           
           <label htmlFor="esquinaSI" className="form-label">
             Sacos
           </label>
-          <input type="text" className="form-control" id="cantidad" {...register("cantidad")} required />
+          <input type="text" className="form-control mt-2" id="cantidad" {...register("cantidad")} required />
         </div>
-        <div className="col-md-6">
+        <div className="form-group mt-3">
           <label htmlFor="esquinaSD" className="form-label">
             Humedad
           </label>
-          <input type="number" className="form-control" id="humedad" {...register("humedad")} required />
+          <input type="text" className="form-control mt-2" id="humedad" {...register("humedad")} required />
         </div>
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>

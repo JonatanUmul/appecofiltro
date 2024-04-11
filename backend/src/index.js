@@ -98,6 +98,9 @@
     import DMPHM from './routes/mantenimientoMaq/detallados/DMPHM.routes.js'
     import DMPM from './routes/mantenimientoMaq/detallados/DMPM.routes.js'
     import TipoMantenimiento from './routes/mantenimientos/tipoMantenimiento/tipoMantenimiento.js'
+    import Insumos from './routes/mantenimientos/insumos/Insumos.routes.js'
+    import  OTCC from './routes/ordenesDeTrabajo/encabezados/OTCC.routes.js'
+    import DTCC from './routes/ordenesDeTrabajo/detallados/DTCC.routes.js'
     import dotenv from 'dotenv';
 
 // Carga las variables de entorno desde el archivo .env
@@ -107,7 +110,7 @@
 
 
     const app = express()
-
+   
     // app.use(cors);
     app.use(cors({
       
@@ -190,6 +193,9 @@ app.use(function(req, res, next) {
     //Modelos UF
     app.use(ModelosUF)
 
+     //Insumos
+     app.use(Insumos)
+
     //OT Secado de aserrin y detallado
     app.use(OTSA)
     app.use(DASERRIN)
@@ -197,6 +203,10 @@ app.use(function(req, res, next) {
     //OT Cernido de aserrin 1 y DEtalle Cernido 1
     app.use(OTCA1)
     app.use(DTCA1)
+
+    //OT Cernido de aserrin 1 y DEtalle Cernido 1
+    app.use(OTCC)
+    app.use(DTCC)
 
     //Encabezado Cernido de aserrin 2 y Detalle Cernido 2
     app.use(OTCA2)

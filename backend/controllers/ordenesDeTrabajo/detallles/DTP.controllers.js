@@ -4,7 +4,7 @@ import { pool } from "../../../src/db.js";
 export const postDTP = async (req, res) => {
    
   const {
-    id_OTP, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin, observacion} = req.body;
+    id_OTP,fecha_real, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin, observacion} = req.body;
 
 
 
@@ -13,9 +13,10 @@ export const postDTP = async (req, res) => {
     { console.log('Uno o varios datos están vacíos');
     return res.status(400).json({ error: 'Uno o varios datos están vacíos' });
   }else{
-      const consulta ="INSERT INTO dtp( id_OTP, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin, observacion) VALUES (?, ?, ?, ?,?, ?, ?, ?,?, ?,?)";
+      const consulta ="INSERT INTO dtp( id_OTP, fecha_real, id_turno, id_tipoCernido, id_Aserradero, id_ufmodelo, producido, codigoInicio, codigoFinal, librasBarro, librasAserrin, observacion) VALUES (?, ?, ?, ?, ?,?, ?, ?, ?,?, ?,?)";
       const [rows] = await pool.query(consulta, [
         id_OTP,
+        fecha_real,
     id_turno,
     id_tipoCernido,
     id_Aserradero,

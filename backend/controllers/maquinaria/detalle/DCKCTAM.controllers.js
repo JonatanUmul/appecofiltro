@@ -62,9 +62,9 @@ export const getDCKCTAM= async(req, res)=>{
     
     FROM dcktam d
     
-    join respuestas r1 on d.id_visorNivelFuncionado = r1.id
-    join respuestas r2 on d.id_accionamieentoCorrectroLLaveDeAgua = r2.id
-	join user on d.id_creador= user.id
+    left join respuestas r1 on d.id_visorNivelFuncionado = r1.id
+    left join respuestas r2 on d.id_accionamieentoCorrectroLLaveDeAgua = r2.id
+	left join user on d.id_creador= user.id
      where d.id_CKTAM =?;
     `
     const [rows]= await pool.query(consulta, [id])

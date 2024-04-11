@@ -80,7 +80,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Materia Prima
           </label>
           <select className="form-select" id="id_matPrim" {...register("id_matPrim")}>
-            {Array.isArray(matPrima.rows)
+          <option>--</option> 
+          {Array.isArray(matPrima.rows)
             && matPrima.rows.length>0 && matPrima.rows.map((matPrima) => (
               <option key={matPrima.id_enc} value={matPrima.id_enc}>
                 {matPrima.nom_matPrima}
@@ -93,7 +94,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Aserradero
           </label>
           <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")}>
-            {Array.isArray(aserradero.rows)
+          <option>--</option> 
+          {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
                 {aserradero.nombre_aserradero}
@@ -118,7 +120,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="centro" className="form-label">
             Humedad
           </label>
-          <input type="number" className="form-control" id="humedad" {...register("humedad")} required />
+          <input type="text" className="form-control" id="humedad" {...register("humedad")} required />
         </div>  
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>

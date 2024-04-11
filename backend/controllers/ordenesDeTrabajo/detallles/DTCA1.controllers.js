@@ -36,11 +36,11 @@ export const getDTCA1 = async (req, res) => {
     
   FROM 
       dtca1 d
-  JOIN 
+  LEFT JOIN
       enc_matprima ON d.id_MP = enc_matprima.id_enc
-  JOIN 
+  LEFT JOIN
       otca1 ON d.id_OTCA1 = otca1.id
-  JOIN 
+  LEFT JOIN
       aserradero ON d.id_aserradero = aserradero.id
 
       where otca1.id=?
@@ -81,9 +81,9 @@ export const getDTCAA1 = async (req, res) => {
 	FROM 
 		dtca1 d
 
-    JOIN 
+    LEFT JOIN
         enc_matprima ON d.id_MP = enc_matprima.id_enc
-	JOIN 
+	LEFT JOIN
 		aserradero ON d.id_aserradero = aserradero.id
         
     WHERE 1=1`;

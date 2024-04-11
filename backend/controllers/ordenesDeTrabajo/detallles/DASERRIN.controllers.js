@@ -51,13 +51,13 @@ export const getDASERRIN = async (req, res) => {
 
 	FROM 
 		daserrin d
-  JOIN 
+    LEFT JOIN
 		otsa ON d.id_OTSaserrin = otsa.id
-  JOIN 
+    LEFT JOIN 
   enc_matprima ON d.id_MP = enc_matprima.id_enc
-	JOIN 
+	LEFT JOIN 
 		aserradero ON d.id_asrdSMP = aserradero.id
-	JOIN 
+    LEFT JOIN 
 		patios ON d.id_patio = patios.id	
 
     where otsa.id= ?
@@ -95,13 +95,13 @@ export const getDASERRI = async (req, res) => {
       patios.nombrePatio AS patio
   FROM 
       daserrin d
-  JOIN 
+      LEFT JOIN
       otsa ON d.id_OTSaserrin = otsa.id
-   JOIN 
+      LEFT JOIN
       enc_matprima ON d.id_MP = enc_matprima.id_enc
-  JOIN 
+      LEFT JOIN
       aserradero ON d.id_asrdSMP = aserradero.id
-  JOIN 
+      LEFT JOIN
       patios ON d.id_patio = patios.id
 
   WHERE 1=1`;

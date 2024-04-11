@@ -64,9 +64,9 @@ export const getDCKCTA= async(req, res)=>{
     
     FROM dckcta d
     
-    join respuestas r1 on d.id_verificarCableDeCorteEnBuenEstado = r1.id
-    join respuestas r2 on d.id_lubricarGuiasDelCortador = r2.id
-    join respuestas r3 on d.id_limpiezaGeneralDeCorrederasGuiasCortador = r3.id 
+    left join respuestas r1 on d.id_verificarCableDeCorteEnBuenEstado = r1.id
+    left join respuestas r2 on d.id_lubricarGuiasDelCortador = r2.id
+    left join respuestas r3 on d.id_limpiezaGeneralDeCorrederasGuiasCortador = r3.id 
      where d.id_CKCTA =?
     `
     const [rows]= await pool.query(consulta, [id])

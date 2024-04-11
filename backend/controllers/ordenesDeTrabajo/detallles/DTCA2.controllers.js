@@ -8,7 +8,7 @@ export const postDTCA2 = async (req, res) => {
         if (id_OTCA2 === '' ||id_MP===''|| id_aserradero === '' || cantidad_inicial === '' || cernido_fino === '' ||cernido_grueso==='' ) {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'INSERT INTO dtca2(id_OTCA2,id_MP, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso) VALUES (?, ?, ?, ?,?,?)';
+            const consulta = 'INSERT INTO dtca2(id_OTCA2, id_MP, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso) VALUES (?, ?, ?, ?,?,?)';
             const [rows] = await pool.query(consulta, [ id_OTCA2, id_MP, id_aserradero, cantidad_inicial, cernido_fino, cernido_grueso]);
             res.send({ rows });
         }
@@ -29,6 +29,7 @@ export const getDTCA2 = async (req, res) => {
       d.cantidad_inicial,
       d.cernido_fino,
       d.cernido_grueso,
+      (cantidad_inicial-(cernido_fino+cernido_grueso)) as merma,
       d.fecha_creacion,
       otca2.id AS id_otca2,
       enc_matprima.nom_matPrima as matPrima,
@@ -36,11 +37,11 @@ export const getDTCA2 = async (req, res) => {
     
   FROM 
       dtca2 d
-  JOIN 
+      LEFT JOIN 
       otca2 ON d.id_OTCA2 = otca2.id
-  JOIN 
+      LEFT JOIN 
       enc_matprima ON d.id_MP = enc_matprima.id_enc
-  JOIN 
+      LEFT JOIN 
       aserradero ON d.id_aserradero = aserradero.id
         
       where otca2.id=?
@@ -72,6 +73,7 @@ export const getDTCAA2 = async (req, res) => {
 		d.hora_creacion,
 		d.cernido_fino,
 		d.cernido_grueso,
+        (cantidad_inicial-(cernido_fino+cernido_grueso)) as merma,
 		d.hora_creacion,
 		d.fecha_creacion,
         enc_matprima.nom_matPrima as matPrima,
@@ -79,10 +81,10 @@ export const getDTCAA2 = async (req, res) => {
 
 	FROM 
 		dtca2 d
-    JOIN 
+        LEFT JOIN 
         enc_matprima ON d.id_MP = enc_matprima.id_enc
 
-	JOIN 
+        LEFT JOIN 
 		aserradero ON d.id_aserradero = aserradero.id
     WHERE 1=1`;
   

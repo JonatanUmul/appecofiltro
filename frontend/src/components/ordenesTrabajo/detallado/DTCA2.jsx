@@ -4,8 +4,21 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+
+import {  Skeleton, Space } from 'antd';
+
 const URL = process.env.REACT_APP_URL
 const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
+
+  const [loading, setLoading] = useState(false);
+  
+  const showSkeleton = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
+
   const { handleSubmit, register } = useForm();
   const [aserradero, setAserradero] = useState([]);
   const [tipCernido, setTipCernido] = useState([]);
@@ -31,6 +44,7 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
 
   const onSubmit = async (formData) => {
     try {
+      setLoading(false)
       const response = await axios.post(`${URL}/DTCA2`, {
         id_OTCA2: id.toString(),
         id_aserradero: formData.id_asrd,
@@ -38,9 +52,11 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
         cantidad_inicial: formData.cantidad_inicial,
         cernido_fino: formData.cernido_fino,
         cernido_grueso: formData.cernido_grueso,
-
+        
        
       });
+      console.log(formData.cantidad_inicial)
+      setLoading(false)
        // Mostrar SweetAlert de éxito
        Swal.fire({
         icon: 'success',
@@ -55,13 +71,17 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
       }, 1500);
     } catch (error) {
       console.error("Error al enviar los datos:", error);
+      setLoading(false)
     }
   };
   console.log('hola',aserradero, tipCernido)  
 
   return (
+
+    
     <div className="mt-4">
-      <h4 style={{ textAlign: 'center', color: 'gray' }}>Cernido 2 - {encabezado}</h4>
+
+    <h4 style={{ textAlign: 'center', color: 'gray' }}>Cernido 2 - {encabezado}</h4>
       <h5 style={{ textAlign: 'center', color: 'gray' }}>{EncName}</h5>
       <div className="card">
         <div className="card-body">
@@ -76,13 +96,29 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
           <p id="fecha" className="form-control-static">{formatFecha(fecha_creacion)}</p>
         </div>
       </div>
+      
+      {loading ? (
+        <Space
+          direction="vertical"
+          style={{
+            width: '100%',
+          }}
+          size={16}
+        >
+          <Skeleton loading={loading}>
+          </Skeleton>
+        </Space>
+      ) 
+      :
+      (
+        
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
       <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Materia Prima
           </label>
           <select className="form-select" id="id_MP" {...register("id_MP")}>
-            <option>Materia Prima</option>
+          <option>--</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
               <option key={matPrim.id_enc} value={matPrim.id_enc}>
@@ -96,7 +132,8 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
             Aserradero
           </label>
           <select className="form-select" id="id_asrd" {...register("id_asrd")}>
-            {Array.isArray(aserradero.rows)
+          <option>--</option>
+          {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserrado) => (
               <option key={aserrado.id} value={aserrado.id}>
                 {aserrado.nombre_aserradero}
@@ -126,10 +163,14 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
           <input type="number" className="form-control" id="cernido_grueso" {...register("cernido_grueso")} required />
         </div>
         <div className="col-12">
-          <button type="submit" className="btn btn-primary">Guardar</button>
+          <button type="submit" className="btn btn-primary"   disabled={loading}>Guardar</button>
         </div>
       </form>
-    </div>
+ 
+      )}
+    
+  
+         </div>
   );
 };
 

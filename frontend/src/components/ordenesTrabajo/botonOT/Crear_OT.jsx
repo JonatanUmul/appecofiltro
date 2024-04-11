@@ -87,7 +87,7 @@ console.log('propr recibios', encabezado, id)
         OT
       </button>
       {/* Modal */}
-      <Modal isOpen={modalVisible} toggle={handleCloseModal}>
+      <Modal isOpen={modalVisible} toggle={handleCloseModal} backdrop="static">
         <ModalHeader toggle={handleCloseModal}>
           <LogoEco/>
         </ModalHeader>

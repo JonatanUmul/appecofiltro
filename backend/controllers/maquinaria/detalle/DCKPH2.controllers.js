@@ -111,13 +111,13 @@ try {
   
   FROM dckph2 d
   
-  join respuestas r1 on d.id_verificadoCorrectoAccionamientoDebomba = r1.id
-  join respuestas r2 on d.id_sensorInfrarrojaLimpio = r2.id
-  join respuestas r3 on d.id_SecompruebaSensorBarreraInfrarrojaFuncionaCorrectamente = r3.id
-  join respuestas r4 on d.id_mangueraHidráulicaEstaEnBuenEstadoSinFugasAceite = r4.id
-  join respuestas r5 on d.id_integridadDeLosBujesYBarrasPrincipalesEstaBuenEstadoSinDaños = r5.id
-  join respuestas r6 on d.id_integridadDeLosBujesYBarrasPrincipalesEstaBuenEstadoSinDaños = r6.id
-join user on d.id_creador= user.id
+  left join respuestas r1 on d.id_verificadoCorrectoAccionamientoDebomba = r1.id
+  left join respuestas r2 on d.id_sensorInfrarrojaLimpio = r2.id
+  left join respuestas r3 on d.id_SecompruebaSensorBarreraInfrarrojaFuncionaCorrectamente = r3.id
+  left join respuestas r4 on d.id_mangueraHidráulicaEstaEnBuenEstadoSinFugasAceite = r4.id
+  left join respuestas r5 on d.id_integridadDeLosBujesYBarrasPrincipalesEstaBuenEstadoSinDaños = r5.id
+  left join respuestas r6 on d.id_integridadDeLosBujesYBarrasPrincipalesEstaBuenEstadoSinDaños = r6.id
+left join user on d.id_creador= user.id
    where d.id_CKPH2 =?;
   `
   const [rows]= await pool.query(consulta, [id])

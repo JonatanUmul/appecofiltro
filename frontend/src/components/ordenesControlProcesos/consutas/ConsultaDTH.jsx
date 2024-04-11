@@ -23,7 +23,7 @@ const ConsultaDTT = ({  id }) => {
     
 <div className="table-responsive">
   {error && <div>Error: {error}</div>}
-  <table className="table text-center">
+  <table className="table text-center" >
     <thead>
       <tr>
       <th scope="col">#</th>
@@ -58,7 +58,8 @@ const ConsultaDTT = ({  id }) => {
           <td>{fila.tempCabezaDR}°</td>
           <td>{fila.tempCentroDR}°</td>
           <td>{fila.tempPieDR}°</td>
-          <td><strong>{fila.promedio}°</strong></td>
+          <td style={{ color: 'red' }}><strong>{fila.promedio}°</strong></td>
+          
 
         
         </tr>

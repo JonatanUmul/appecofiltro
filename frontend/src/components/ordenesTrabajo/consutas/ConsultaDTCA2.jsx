@@ -36,6 +36,7 @@ const ConsultaDTCA1 = ({ id }) => {
             <th scope="col">Cantidad Inicial</th>
             <th scope="col">Cernido Fino</th>
             <th scope="col">Cernido Grueso</th>
+            <th scope="col">Merma</th>
          
            
           </tr>
@@ -51,7 +52,8 @@ const ConsultaDTCA1 = ({ id }) => {
               <td>{fila.cantidad_inicial}</td>
               <td>{fila.cernido_fino}</td>
               <td>{fila.cernido_grueso}</td>
-              
+              <td style={{ color: 'red' }}><strong>{fila.merma}</strong></td>
+
             </tr>
           ))}
         </tbody>

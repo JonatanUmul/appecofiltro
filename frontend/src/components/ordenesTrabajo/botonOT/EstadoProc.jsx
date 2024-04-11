@@ -57,6 +57,9 @@ const EstadoProc = ({ id, encabezado }) => {
         break;
       case 'otip':
           setCambiarRuta('otip');
+          break; 
+          case 'otcc':
+          setCambiarRuta('otcc');
           break;  
       // default:
       //   setCambiarRuta('ruta-por-defecto');

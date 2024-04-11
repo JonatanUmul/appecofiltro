@@ -2,14 +2,14 @@ import { pool } from "../../../src/db.js";
 
 export const postDTHP = async (req, res) => {
 
-    const { id_OTHP,id_matPrima,  id_asrd, id_patio, esquinaSupIZ, esquinaSupDA, esquinaCentro, esquinaInfIZ, esquinaInfDR } = req.body;
+    const { id_OTHP,id_matPrima, fecha_real, id_asrd, id_patio, esquinaSupIZ, esquinaSupDA, esquinaCentro, esquinaInfIZ, esquinaInfDR } = req.body;
     console.log(id_OTHP)
     try {
         if (id_OTHP === '' || id_asrd === '', id_matPrima==='' || id_patio === '' || esquinaSupIZ === '' || esquinaSupDA === '' || esquinaCentro === '' || esquinaInfIZ === '' || esquinaInfDR === '') {
             console.log('Uno o varios datos están vacíos');
         } else {
-            const consulta = 'INSERT INTO dthp (id_OTHP,id_matPrima,  id_asrd, id_patio, esquinaSupIZ, esquinaSupDA, esquinaCentro, esquinaInfDR, esquinaInfIZ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-            const [rows] = await pool.query(consulta, [id_OTHP,id_matPrima, id_asrd, id_patio, esquinaSupIZ, esquinaSupDA, esquinaCentro, esquinaInfIZ, esquinaInfDR]);
+            const consulta = 'INSERT INTO dthp (id_OTHP,id_matPrima,fecha_real,  id_asrd, id_patio, esquinaSupIZ, esquinaSupDA, esquinaCentro, esquinaInfDR, esquinaInfIZ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+            const [rows] = await pool.query(consulta, [id_OTHP,id_matPrima,fecha_real, id_asrd, id_patio, esquinaSupIZ, esquinaSupDA, esquinaCentro, esquinaInfIZ, esquinaInfDR]);
             res.send({ rows });
         }
     } catch (err) {
@@ -41,13 +41,13 @@ export const getDTHP = async (req, res) => {
 
   FROM 
       dthp d
-  JOIN 
+  LEFT JOIN
       othp ON d.id_OTHP = othp.id
-  JOIN 
+  LEFT JOIN
       aserradero ON d.id_asrd = aserradero.id
-  JOIN 
+  LEFT JOIN
       patios ON d.id_patio = patios.id
-  JOIN 
+  LEFT JOIN
       enc_matprima ON d.id_matPrima = enc_matprima.id_enc
       where othp.id= ?
   `;
@@ -83,13 +83,13 @@ export const getDTHP = async (req, res) => {
                 enc_matprima.nom_matPrima AS materiaPrima
             FROM 
                 dthp d
-            JOIN 
+            LEFT JOIN
                 othp ON d.id_othp = othp.id
-            JOIN 
+            LEFT JOIN
                 aserradero ON d.id_asrd = aserradero.id
-            JOIN 
+            LEFT JOIN
                 patios ON d.id_patio = patios.id
-            JOIN 
+            LEFT JOIN
                 enc_matprima ON d.id_matPrima = enc_matprima.id_enc
     
             WHERE 1 = 1`;

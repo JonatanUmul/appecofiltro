@@ -49,19 +49,19 @@ export const getDTHH = async(req, res)=>{
     
 FROM 
     dthh d
-JOIN 
+LEFT JOIN 
     othh ON d.id_OTHH = othh.id
-JOIN 
+LEFT JOIN 
     turno ON d.id_turno = turno.id
-JOIN 
+LEFT JOIN 
     aserradero ON d.id_aserradero = aserradero.id
-JOIN 
+LEFT JOIN 
     tipocernido ON d.id_tipCernido= tipocernido.id
-JOIN
+LEFT JOIN
 	ufmodelo on d.id_modelo= ufmodelo.id_mod
-JOIN
+LEFT JOIN
 	enc_maq on d.id_horno= enc_maq.id_maq
-JOIN
+LEFT JOIN
 	operarios on id_hornero = operarios.id
     
     where d.id_OTHH = ?`

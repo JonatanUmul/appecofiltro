@@ -30,6 +30,7 @@ const ConsultaDTP = ({  id }) => {
             <th scope="col">#</th>
             <th scope="col">Fecha de Impregnación</th>
             <th scope="col">OTIP</th>
+            <th scope="col">Tipo de Plata</th>
             <th scope="col">Modelo</th>
             <th scope="col">Código Inicio</th>
             <th scope="col">Código Final</th>
@@ -45,6 +46,7 @@ const ConsultaDTP = ({  id }) => {
               <td>{index + 1}</td>
               <td>{formatFecha(fila.fechaCreacion)}</td>
               <td>{fila.id_otip}</td>
+              <td>{fila.TipoPlata}</td>
               <td>{fila.modelo}</td>
               <td>{fila.codigoInicio}</td>
               <td>{fila.codigoFinal}</td>

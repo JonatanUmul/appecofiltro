@@ -38,11 +38,11 @@ export const getDTFM = async (req, res) => {
       dtfm d
       
   
-  JOIN 
+  LEFT JOIN
       otfm ON d.id_OTFM = otfm.id
-  JOIN 
+  LEFT JOIN
       enc_matprima ON d.id_matPrim = enc_matprima.id_enc
-  JOIN 
+  LEFT JOIN
       aserradero ON d.id_Aserradero = aserradero.id
 
 where otfm.id=?

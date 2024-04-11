@@ -65,11 +65,11 @@ export const getDMM2= async(req, res)=>{
     
     from dmm2 d
     
-    join est_maq on d.id_estadomaq = est_maq.id_est
-    join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id
-    join revisionmaquinaria on d.id_revision = revisionmaquinaria.id
-    join enc_prov on d.id_proveedor = enc_prov.id_prov
-    join operarios on d.id_responsable = operarios.id
+    left join est_maq on d.id_estadomaq = est_maq.id_est
+    left join tipomantenimiento on d.id_tipoMantenimiento = tipomantenimiento.id
+    left join revisionmaquinaria on d.id_revision = revisionmaquinaria.id
+    left join enc_prov on d.id_proveedor = enc_prov.id_prov
+    left join operarios on d.id_responsable = operarios.id
     where d.id_MM2=?;
     `
     const [rows]= await pool.query(consulta, [id])
