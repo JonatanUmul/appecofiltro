@@ -104,7 +104,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Turno de Horneado
           </label>
           <select className="form-select" id="id_turno" {...register("id_turno")}>
-            {Array.isArray(turno.rows)
+          <option>--</option>
+          {Array.isArray(turno.rows)
             && turno.rows.length>0 && turno.rows.map((turno) => (
               <option key={turno.id} value={turno.id}>
                 {turno.turno}
@@ -118,7 +119,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Aserradero
           </label>
           <select className="form-select" id="id_aserradero" {...register("id_aserradero")}>
-            {Array.isArray(aserradero.rows)
+          <option>--</option>  
+          {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
                 {aserradero.nombre_aserradero}
@@ -132,7 +134,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Tipo de Cernido
           </label>
           <select className="form-select" id="id_tipCernido" {...register("id_tipCernido")}>
-            {Array.isArray(tipoCernido.rows)
+          <option>--</option> 
+          {Array.isArray(tipoCernido.rows)
             && tipoCernido.rows.length>0 && tipoCernido.rows.map((tipoCernido) => (
               <option key={tipoCernido.id} value={tipoCernido.id}>
                 {tipoCernido.tipoCernido}
@@ -146,7 +149,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Modelo
           </label>
           <select className="form-select" id="id_modelo" {...register("id_modelo")}>
-            {Array.isArray(modelos.rows)
+          <option>--</option> 
+          {Array.isArray(modelos.rows)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
                 {modelo.nombre_modelo}
@@ -161,7 +165,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Horno
           </label>
           <select className="form-select" id="id_horno" {...register("id_horno")}>
-            {Array.isArray(hornos.rows)
+          <option>--</option> 
+          {Array.isArray(hornos.rows)
             && hornos.rows.length>0 && hornos.rows.map((horno) => (
               <option key={horno.id_maq} value={horno.id_maq}>
                 {horno.nombre_maq}
@@ -175,7 +180,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Hornero
           </label>
           <select className="form-select" id="id_hornero" {...register("id_hornero")}>
-            {Array.isArray(hornero.rows)
+          <option>--</option> 
+          {Array.isArray(hornero.rows)
             && hornero.rows.length>0 && hornero.rows.map((hornero) => (
               <option key={hornero.id} value={hornero.id}>
                 {hornero.Nombre}

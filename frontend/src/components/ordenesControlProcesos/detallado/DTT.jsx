@@ -105,7 +105,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
         id={`id_modelo`}
         {...register(`id_modelo`)}
       >
-        {Array.isArray(modeloUF.rows) &&
+      <option>--</option>  
+      {Array.isArray(modeloUF.rows) &&
           modeloUF.rows.length > 0 &&
           modeloUF.rows.map((modelo) => (
             <option key={modelo.id_mod} value={modelo.id_mod} >
@@ -126,7 +127,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
         id={`id_tunel`}
         {...register(`id_tunel`)}
       >
-        {Array.isArray(tunel.rows) &&
+      <option>--</option>  
+      {Array.isArray(tunel.rows) &&
           tunel.rows.length > 0 &&
           tunel.rows.map((tunel) => (
             <option key={tunel.id_maq} value={tunel.id_maq} >

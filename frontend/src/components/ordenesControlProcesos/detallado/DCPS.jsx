@@ -91,7 +91,8 @@ console.log('id des encabezado',id)
               Prensador
             </label>
             <select className="form-select" id="id_prensador" {...register("id_prensador")}>
-              {Array.isArray(prensador.rows)
+            <option>--</option>  
+            {Array.isArray(prensador.rows)
               && prensador.rows.length>0 && prensador.rows.map((prensador) => (
                 <option key={prensador.id} value={prensador.id}>
                   {prensador.Nombre}
@@ -104,7 +105,8 @@ console.log('id des encabezado',id)
               Molde
             </label>
             <select className="form-select" id="id_molde" {...register("id_molde")}>
-              {Array.isArray(maq.rows)
+            <option>--</option> 
+            {Array.isArray(maq.rows)
               && maq.rows.length>0 && maq.rows.map((molde) => (
                 <option key={molde.id_maq} value={molde.id_maq}>
                   {molde.nombre_maq}
@@ -118,7 +120,8 @@ console.log('id des encabezado',id)
               Modelo
             </label>
             <select className="form-select" id="id_modelo" {...register("id_modelo")}>
-              {Array.isArray(modeloUF.rows)
+            <option>--</option>  
+            {Array.isArray(modeloUF.rows)
               && modeloUF.rows.length>0 && modeloUF.rows.map((modelo) => (
                 <option key={modelo.id_mod} value={modelo.id_mod}>
                   {modelo.nombre_modelo}

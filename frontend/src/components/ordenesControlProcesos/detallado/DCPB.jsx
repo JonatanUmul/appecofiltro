@@ -94,7 +94,8 @@ console.log('modulos',modulos)
             Modelo
           </label>
           <select className="form-select" id="id_modelo" {...register("id_modelo")}>
-            {Array.isArray(modeloUF.rows)
+          <option>--</option> 
+          {Array.isArray(modeloUF.rows)
             && modeloUF.rows.length>0 && modeloUF.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
                 {modelo.nombre_modelo}
@@ -107,7 +108,8 @@ console.log('modulos',modulos)
             Pulidor
           </label>
           <select className="form-select" id="id_pulidor" {...register("id_pulidor")}>
-            {Array.isArray(pulidor.rows)
+          <option>--</option>          
+          {Array.isArray(pulidor.rows)
             && pulidor.rows.length>0 && pulidor.rows.map((pulidor) => (
               <option key={pulidor.id} value={pulidor.id}>
                 {pulidor.Nombre}
@@ -120,7 +122,8 @@ console.log('modulos',modulos)
             Molde
           </label>
           <select className="form-select" id="id_prensa" {...register("id_prensa")}>
-            {Array.isArray(maq.rows)
+          <option>--</option>  
+          {Array.isArray(maq.rows)
             && maq.rows.length>0 && maq.rows.map((molde) => (
               <option key={molde.id_maq} value={molde.id_maq}>
                 {molde.nombre_maq}
@@ -134,7 +137,8 @@ console.log('modulos',modulos)
             Modulo
           </label>
           <select className="form-select" id="id_modulo" {...register("id_modulo")}>
-            {Array.isArray(modulos.rows)
+          <option>--</option>
+          {Array.isArray(modulos.rows)
             && modulos.rows.length>0 && modulos.rows.map((modulo) => (
               <option key={modulo.id} value={modulo.id}>
                 {modulo.modulo}
@@ -156,6 +160,7 @@ console.log('modulos',modulos)
 
 <h5>Calificación:</h5>
     {/* Itera sobre el array de calificaciones y muestra las opciones de radio */}
+   
     {Array.isArray(calificacion.rows)&& calificacion.rows.length>0 && calificacion.rows.map((calificacion) => (
       <div key={calificacion.id} className="form-check">
         <input

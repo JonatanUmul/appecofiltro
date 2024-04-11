@@ -104,7 +104,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         id={`id_modelo`}
         {...register(`id_modelo`)}
       >
-        {Array.isArray(modeloUF.rows) &&
+      <option>--</option> 
+      {Array.isArray(modeloUF.rows) &&
           modeloUF.rows.length > 0 &&
           modeloUF.rows.map((modelo) => (
             <option key={modelo.id_mod} value={modelo.id_mod} >
@@ -124,7 +125,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         id={`id_turno`}
         {...register(`id_turno`)}
       >
-        {Array.isArray(turno.rows) &&
+      <option>--</option> 
+      {Array.isArray(turno.rows) &&
           turno.rows.length > 0 &&
           turno.rows.map((turno) => (
             <option key={turno.id} value={turno.id} >
@@ -143,7 +145,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         id={`id_horno`}
         {...register(`id_horno`)}
       >
-        {Array.isArray(maquina.rows) &&
+      <option>--</option> 
+      {Array.isArray(maquina.rows) &&
           maquina.rows.length > 0 &&
           maquina.rows.map((maquina) => (
             <option key={maquina.id_maq} value={maquina.id_maq} >
