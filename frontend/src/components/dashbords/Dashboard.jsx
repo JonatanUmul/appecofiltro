@@ -5,13 +5,10 @@ import './estilos.css'
 import Clima from './Clima';
 const Dashboard = () => {
   return (
-    <div className="dashboard-container">
-      <div style={{ marginRight: '20px', marginBottom: '20px' }}>
-        <DasAserrin />
-      </div>
-      <div className='xl'>
+    <div>
+      
         <PropsHornos />
-      </div>
+   
      
     </div>
   );
