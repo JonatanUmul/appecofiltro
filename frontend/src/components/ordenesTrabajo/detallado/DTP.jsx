@@ -12,7 +12,9 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [turno, setTurno] = useState([]);
   const [modelos, setModelos] = useState([]);
   const [tipoCernido, setTipoCernido] = useState([]);
-  const [error, setError]= useState('')
+  const [cernidoDetalle, setCernidoDetalle] = useState([]);
+  const [error, setError]= useState('');
+  const [formula2, setFormula2]=useState(false)
 
   useEffect(() => {
     Promise.all([
@@ -20,13 +22,15 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/ModelosUF`),
       axios.get(`${URL}/TipoCernido`),
+      axios.get(`${URL}/CernidoDetalle`)
     
     ])
-      .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, TipoCernidoResponse]) => {
+      .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, TipoCernidoResponse, CernidodetalleResponse]) => {
         setTurno(TurnosResponse.data);
         setAserradero(AserraderoResponse.data);
         setModelos(ModelosufResponse.data);
         setTipoCernido(TipoCernidoResponse.data);
+        setCernidoDetalle(CernidodetalleResponse.data)
      
       })
       .catch((error) => {
@@ -42,6 +46,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         fecha_real:fecha_creacion,
         id_turno: formData.id_turno,
         id_tipoCernido: formData.id_tipoCernido,
+        id_cernidodetalle: formData.id_cernidodetalle,
         id_Aserradero: formData.id_Aserradero,
         id_ufmodelo: formData.id_ufmodelo,
         producido: formData.producido,
@@ -49,9 +54,11 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         codigoFinal: formData.codigoFinal,
         librasBarro: formData.librasBarro,
         librasAserrin: formData.librasAserrin,
-        observacion: formData.observacion
-        
-       
+        observacion: formData.observacion,
+        id_Aserradero2:formData.id_Aserradero2,
+        librasAserrin2:formData.librasAserrin2,
+        id_tipoCernido2:formData.id_tipoCernido2,
+        id_cernidodetalle2: formData.id_cernidodetalle2
 
       });Swal.fire({
         icon: 'success',
@@ -69,7 +76,13 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
     }
   };
 
-console.log('datos props',encabezado, EncName, fecha_creacion,id)
+  const llamar=()=>{
+    setFormula2(true);
+
+  }
+
+
+
   return (
     <div className="mt-4">
       <h4 style={{ textAlign: 'center', color: 'gray' }}>Producción</h4>
@@ -151,6 +164,21 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             ))}
           </select>
         </div>
+        <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+            Detalle Cernido
+        </label>
+        <select className="form-select" id="id_cernidodetalle" {...register("id_cernidodetalle")} required>
+        <option>--</option> 
+        
+        {Array.isArray(cernidoDetalle.rows)
+          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
+            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
+              {cernidoDetalle.detalle}
+            </option>
+          ))}
+        </select>
+      </div>
        
    
         
@@ -186,12 +214,80 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           </label>
           <input type="text" className="form-control" id="librasAserrin" {...register("librasAserrin")} required />
         </div>
+      
+
+        {formula2 ? (
+
+
+         
+    <div className="col-md-12">
+    <div className="row">
+    <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+              <strong>Aserradero 2</strong>
+          </label>
+          <select className="form-select" id="id_Aserradero2" {...register("id_Aserradero2")} required>
+          <option>--</option> 
+          
+          {Array.isArray(aserradero.rows)
+            && aserradero.rows.length>0 && aserradero.rows.map((aserradero) =>  (
+              <option key={aserradero.id} value={aserradero.id}>
+                {aserradero.nombre_aserradero}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="col-md-6">
-              <label htmlFor="detalle" className="form-label">Observaciòn:</label>
-              <textarea className="form-control" id="observacion" rows="3" {...register('observacion')} ></textarea>
-            </div>
-        <div className="col-12">
-          <label style={{ color: 'red' }}>{error}</label>
+          <label htmlFor="aserradero" className="form-label">
+          <strong>Tipo de Cernido</strong>
+          </label>
+          <select className="form-select" id="id_tipoCernido2" {...register("id_tipoCernido2")} required> 
+          <option>--</option>
+          {Array.isArray(tipoCernido.rows)
+            && tipoCernido.rows.length>0 && tipoCernido.rows.map((tipoCernido) => (
+              <option key={tipoCernido.id} value={tipoCernido.id}>
+                {tipoCernido.tipoCernido}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+            <strong>Detalle Cernido 2</strong>
+        </label>
+        <select className="form-select" id="id_cernidodetalle2" {...register("id_cernidodetalle2")} required>
+        <option>--</option> 
+        
+        {Array.isArray(cernidoDetalle.rows)
+          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
+            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
+              {cernidoDetalle.detalle}
+            </option>
+          ))}
+        </select>
+      </div>
+    <div className="col-md-6">
+    <label htmlFor="esquinaID" className="form-label">
+      <strong>Libras de Aserrin 2 </strong>
+    </label>
+    <input type="text" className="form-control" id="librasAserrin2" {...register("librasAserrin2")} required />
+  </div>
+    </div>
+    </div>
+    
+
+         
+        ):false}
+        <div className="col-md-6">
+        <label htmlFor="detalle" className="form-label">Observaciòn:</label>
+        <textarea className="form-control" id="observacion" rows="3" {...register('observacion')} ></textarea>
+      </div>
+  <div className="col-12">
+    <label style={{ color: 'red' }}>{error}</label>
+  </div>
+        <div className="col-4">
+        <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
+
         </div>
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>

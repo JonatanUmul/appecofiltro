@@ -53,7 +53,7 @@ const maquinaria=modalTitle;
   return (
     <div className="mt-4 text-center">
     <div className="container">
-      holaaaaa
+
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
         <div className="col-md-7 mx-auto mb-3"> {/* Añadimos la clase mx-auto */}
           

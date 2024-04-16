@@ -9,6 +9,8 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
   const [aserradero, setAserradero] = useState([]);
   const [matPrima, setMatPrima] = useState([]);
+  const [formula2, setFormula2]=useState(false);
+  const [cernidoDetalle, setCernidoDetalle] = useState([]);
   
  
 
@@ -16,11 +18,13 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/MateriaPrima`),
+      axios.get(`${URL}/CernidoDetalle`)
     
     ])
-      .then(([AserraderoResponse, MatPrimResponse]) => {
+      .then(([AserraderoResponse, MatPrimResponse, CernidodetalleResponse]) => {
         setAserradero(AserraderoResponse.data);
-        setMatPrima(MatPrimResponse.data)
+        setMatPrima(MatPrimResponse.data);
+        setCernidoDetalle(CernidodetalleResponse.data)
     
       })
       .catch((error) => {
@@ -33,10 +37,16 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
       const response = await axios.post(`${URL}/DTFM`, {
         id_OTFM: id.toString(),
         id_Aserradero: formData.id_Aserradero,
+        id_cernidodetalle:formData.id_cernidodetalle,
         cantidad: formData.cantidad,
         peso: formData.peso,
         humedad: formData.humedad,
-        id_matPrim: formData.id_matPrim
+        id_matPrim: formData.id_matPrim,
+
+        id_Aserradero2: formData.id_Aserradero2,
+        peso2: formData.peso2,
+        humedad2: formData.humedad2,
+        id_cernidodetalle2:formData.id_cernidodetalle2
        
       });  // Mostrar SweetAlert de éxito
       Swal.fire({
@@ -54,10 +64,16 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
       console.error("Error al enviar los datos:", error);
     }
   };
-console.log('datos props',encabezado, EncName, fecha_creacion,id)
+
+  const llamar=()=>{
+    setFormula2(true);
+  }
+
+ 
+  
   return (
     <div className="mt-4">
-      <h4 style={{ textAlign: 'center', color: 'gray' }}>Formulación {id}</h4>
+      <h4 style={{ textAlign: 'center', color: 'gray' }}>Formulación </h4>
       <div className="card">
         <div className="card-body">
           <label htmlFor="materiaPrima" className="form-label">
@@ -74,8 +90,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
 {/*  iniico de fomrulario*/}
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
-
-      <div className="col-md-6">
+           <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Materia Prima
           </label>
@@ -103,6 +118,21 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             ))}
           </select>
         </div>
+        <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+            Detalle Cernido
+        </label>
+        <select className="form-select" id="id_cernidodetalle" {...register("id_cernidodetalle")} required>
+        <option>--</option> 
+        
+        {Array.isArray(cernidoDetalle.rows)
+          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
+            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
+              {cernidoDetalle.detalle}
+            </option>
+          ))}
+        </select>
+      </div>
        
         <div className="col-md-6">
           <label htmlFor="esquinaSI" className="form-label">
@@ -122,9 +152,70 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           </label>
           <input type="text" className="form-control" id="humedad" {...register("humedad")} required />
         </div>  
+
+        {formula2 ? (
+          <div className="row mt-3"> 
+    <div className="col-md-12">
+    <div className="row">
+          <h5>Formula 2</h5>
+          <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Aserradero
+          </label>
+          <select className="form-select" id="id_Aserradero2" {...register("id_Aserradero2")}>
+          <option>--</option> 
+          {Array.isArray(aserradero.rows)
+            && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
+              <option key={aserradero.id} value={aserradero.id}>
+                {aserradero.nombre_aserradero}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+            Detalle Cernido
+        </label>
+        <select className="form-select" id="id_cernidodetalle2" {...register("id_cernidodetalle2")} required>
+        <option>--</option> 
+        
+        {Array.isArray(cernidoDetalle.rows)
+          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
+            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
+              {cernidoDetalle.detalle}
+            </option>
+          ))}
+        </select>
+      </div>
+
+            <div className="col-md-6">
+              <label htmlFor="esquinaSD" className="form-label">
+                Peso
+              </label>
+              <input type="text" className="form-control" id="peso2" {...register("peso2")} required />
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="centro" className="form-label">
+                Humedad
+              </label>
+              <input type="text" className="form-control" id="humedad2" {...register("humedad2")} required />
+            </div>  
+          </div>
+          </div>
+          </div>
+
+        ) :false}
+        
+        
+        
         <div className="col-12">
+        <div className="col-4">
+        <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
+        </div>
           <button type="submit" className="btn btn-primary">Guardar</button>
         </div>
+        
       </form>
     </div>
   );

@@ -15,7 +15,7 @@ const ConsultaCKTA = ({ id }) => {
         setError("Error al obtener los datos: " + error.message);
       });
   }, [id]); 
-  
+  console.log('id recibido', id)
 
   return (
     <div className=" mt-4">

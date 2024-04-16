@@ -17,8 +17,8 @@ const ConsultaCKTA = ({ id }) => {
         console.log(error)
       });
   }, []); 
-  
-console.log(fila)
+  console.log('id recibido',id)
+
   return (
     <div className=" mt-4">
       {error && <div className="alert alert-danger">Error: {error}</div>}
