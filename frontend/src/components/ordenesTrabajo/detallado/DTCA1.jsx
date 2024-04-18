@@ -1,19 +1,35 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 const TomarFoto = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [facingMode, setFacingMode] = useState('environment'); // 'user' para la cámara frontal, 'environment' para la trasera
 
-  // Función para iniciar la cámara y tomar la foto
-  const tomarFoto = async () => {
+  // Función para alternar entre la cámara delantera y trasera
+  const alternarCamara = () => {
+    setFacingMode(prevMode => (prevMode === 'user' ? 'environment' : 'user'));
+  };
+
+  // Función para iniciar la cámara
+  const iniciarCamara = async () => {
     try {
       // Acceder a la cámara del dispositivo
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: facingMode // Usar la cámara delantera o trasera según facingMode
+        }
+      });
+      // Mostrar la vista previa de la cámara
       videoRef.current.srcObject = stream;
     } catch (error) {
       console.error('Error al acceder a la cámara:', error);
     }
   };
+
+  // Llamar a la función para iniciar la cámara cuando el componente se monte
+  useEffect(() => {
+    iniciarCamara();
+  }, [facingMode]); // Volver a iniciar la cámara cuando cambie el modo de cámara
 
   // Función para capturar la imagen
   const capturarImagen = () => {
@@ -31,10 +47,10 @@ const TomarFoto = () => {
   return (
     <div>
       {/* Elemento de video para mostrar la vista previa de la cámara */}
-      <video ref={videoRef} autoPlay muted style={{ display: 'none' }}></video>
+      <video ref={videoRef} autoPlay></video>
 
-      {/* Botón para iniciar la cámara */}
-      <button onClick={tomarFoto}>Iniciar cámara</button>
+      {/* Botón para alternar entre la cámara delantera y trasera */}
+      <button onClick={alternarCamara}>Alternar cámara</button>
 
       {/* Botón para capturar la imagen */}
       <button onClick={capturarImagen}>Tomar foto</button>
