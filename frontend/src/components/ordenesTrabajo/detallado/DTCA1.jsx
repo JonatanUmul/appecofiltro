@@ -1,64 +1,134 @@
-import React, { useRef, useState, useEffect } from 'react';
 
-const TomarFoto = () => {
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-  const [facingMode, setFacingMode] = useState('environment'); // 'user' para la cámara frontal, 'environment' para la trasera
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import Swal from 'sweetalert2'; // Importar SweetAlert
+import { formatFecha } from "../../utilidades/FormatearFecta";
+const URL = process.env.REACT_APP_URL
 
-  // Función para alternar entre la cámara delantera y trasera
-  const alternarCamara = () => {
-    setFacingMode(prevMode => (prevMode === 'user' ? 'environment' : 'user'));
-  };
+const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
+  const { handleSubmit, register } = useForm();
+  const [aserradero, setAserradero] = useState([]);
+  const [tipCernido, setTipCernido] = useState([]);
+  const [matPrim, setMatPrim]= useState([])
 
-  // Función para iniciar la cámara
-  const iniciarCamara = async () => {
-    try {
-      // Acceder a la cámara del dispositivo
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: facingMode // Usar la cámara delantera o trasera según facingMode
-        }
+  useEffect(() => {
+    Promise.all([
+      axios.get(`${URL}/Aserradero`),
+      axios.get(`${URL}/TipoCernido`),
+      axios.get(`${URL}/MateriaPrima`)
+    ])
+      .then(([AserraderoResponse, TIpCernidoResponse, MatprimaResponse]) => {
+        setAserradero(AserraderoResponse.data);
+        setTipCernido(TIpCernidoResponse.data);
+        setMatPrim(MatprimaResponse.data)
+      })
+      .catch((error) => {
+        console.log("Error al obtener los datos:", error);
       });
-      // Mostrar la vista previa de la cámara
-      videoRef.current.srcObject = stream;
+  }, []);
+
+  const onSubmit = async (formData) => {
+    try {
+      const response = await axios.post(`${URL}/DTCA1`, {
+        id_OTCA1: id.toString(),
+        id_aserradero: formData.id_asrd,
+        id_MP: formData.id_MP,
+        id_tipoCernido: formData.tipCernido,
+        CantidadInicial: formData.cantidad_inicial,
+        CantidadFinal: formData.cantidad_final,
+      });
+      console.log("Respuesta del servidor:", response.data);
+
+      // Mostrar SweetAlert de éxito
+      Swal.fire({
+        icon: 'success',
+        title: 'Guardado exitosamente',
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      // Redirigir a la página de TablaOT después de 1.5 segundos
+      setTimeout(() => {
+        window.location.href = "/Home/TablaOT";
+      }, 1500);
     } catch (error) {
-      console.error('Error al acceder a la cámara:', error);
+      console.error("Error al enviar los datos:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Error al enviar los datos!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+        timer: 900
+      });
     }
   };
 
-  // Llamar a la función para iniciar la cámara cuando el componente se monte
-  useEffect(() => {
-    iniciarCamara();
-  }, [facingMode]); // Volver a iniciar la cámara cuando cambie el modo de cámara
-
-  // Función para capturar la imagen
-  const capturarImagen = () => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-
-    // Establecer el tamaño del canvas para que coincida con el tamaño del video
-    canvas.width = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
-
-    // Dibujar el video en el canvas
-    context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-  };
-
   return (
-    <div>
-      {/* Elemento de video para mostrar la vista previa de la cámara */}
-      <video ref={videoRef} autoPlay></video>
-
-      {/* Botón para alternar entre la cámara delantera y trasera */}
-      <button onClick={alternarCamara}>Alternar cámara</button>
-
-      {/* Botón para capturar la imagen */}
-      <button onClick={capturarImagen}>Tomar foto</button>
-
-      {/* Canvas para mostrar la imagen capturada */}
-      <canvas ref={canvasRef}></canvas>
+    <div className="mt-4">
+      <h4 style={{ textAlign: 'center', color: 'gray' }}>Cernido 1</h4>
+      <div className="card">
+        <div className="card-body">
+          <label htmlFor="materiaPrima" className="form-label">
+            Orden
+          </label>
+          <p id="materiaPrima" className="form-control-static">{encabezado} - {EncName}</p>
+         
+          <label htmlFor="fecha" className="form-label">
+            Fecha de Creación
+          </label>
+          <p id="fecha" className="form-control-static">{formatFecha(fecha_creacion)}</p>
+        </div>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
+      <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Materia Prima
+          </label>
+          <select className="form-select" id="id_MP" {...register("id_MP")}>
+          <option>--</option>
+            {Array.isArray(matPrim.rows)
+            && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
+              <option key={matPrim.id_enc} value={matPrim.id_enc}>
+                {matPrim.nom_matPrima}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Aserradero
+          </label>
+          <select className="form-select" id="id_asrd" {...register("id_asrd")}>
+          <option>--</option>  
+          {Array.isArray(aserradero.rows)
+            && aserradero.rows.length>0 && aserradero.rows.map((aserrado) => (
+              <option key={aserrado.id} value={aserrado.id}>
+                {aserrado.nombre_aserradero}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+       
+        <div className="col-md-6">
+          <label htmlFor="esquinaII" className="form-label">
+            Cantidad Inicial
+          </label>
+          <input type="number" className="form-control" id="cantidad_inicial" {...register("cantidad_inicial")} required />
+        </div>
+        <div className="col-md-6">
+          <label htmlFor="esquinaID" className="form-label">
+           Cantidad Final
+          </label>
+          <input type="number" className="form-control" id="cantidad_final" {...register("cantidad_final")} required />
+        </div>
+        <div className="col-12">
+          <button type="submit" className="btn btn-primary">Guardar</button>
+        </div>
+      </form>
     </div>
   );
 };
 
-export default TomarFoto;
+export default DTCMP;
