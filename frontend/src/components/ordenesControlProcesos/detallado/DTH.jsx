@@ -9,7 +9,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
   const [modeloUF, setModeloUf] = useState([]);
   const [maquina, setMaquina]= useState([]);
   const [turno, setTurno]= useState([])
-
+  const [btn, setBtn]= useState(false)
   const maquinaria="Horno"; 
 
   useEffect(() => {
@@ -36,6 +36,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         id_cth: id.toString(),
         fecha_real: fecha_creacion,
         id_modelo: formData.id_modelo,
+        id_modelo2:formData.id_modelo2,
         id_horno: formData.id_horno,
         id_turno: formData.id_turno,
         id_creador:'',
@@ -64,6 +65,11 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
   };
 
 
+  function onclick(){
+    setBtn(true)
+  }
+    
+  
 
   
 
@@ -97,6 +103,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
     <div className="col-sm-3">
       <label htmlFor={`modelo`} className="form-label">
         Modelo
+        <strong> <a  onClick={onclick}><i class="bi bi-clipboard-plus"></i></a></strong>
+        
       </label>
       <select
         className="form-select"
@@ -114,6 +122,33 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
           ))}
       </select>
     </div>
+
+    {btn?(
+      <div className="col-sm-3 ">
+      <label htmlFor={`modelo`} className="form-label">
+        Modelo 2
+        <strong> <a  onClick={onclick}><i class="bi bi-clipboard-plus"></i></a></strong>
+      </label>
+      <select
+        className="form-select"
+        style={{ backgroundColor: 'rgba(192, 192, 192, 0.5)' }} // Gris suave con opacidad reducida
+        name={`id_modelo2`}
+        id={`id_modelo2`}
+        {...register(`id_modelo2`)}
+      >
+        <option>--</option>  
+        {Array.isArray(modeloUF.rows) &&
+            modeloUF.rows.length > 0 &&
+            modeloUF.rows.map((modelo) => (
+              <option key={modelo.id_mod} value={modelo.id_mod} >
+                {modelo.nombre_modelo}
+              </option>
+            ))}
+      </select>
+    </div>
+    
+
+    ):false}
 
     <div className="col-sm-3">
       <label htmlFor={`turno`} className="form-label">
