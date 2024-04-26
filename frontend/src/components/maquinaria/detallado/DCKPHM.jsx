@@ -8,17 +8,17 @@ const URL = process.env.REACT_APP_URL;
 const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [respuestas, setRespuestas] = useState([]);
-  const [errors, setError]= useState('')
-
-
+  const [errors, setError]= useState('');
+  const [grupo, setGrupo]= useState([])
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/respuestas`),
+      axios.get(`${URL}/GrupodeTrabajo`),
 
     ])
-      .then(([RespuestasResponse]) => {
+      .then(([RespuestasResponse, grupoResponse]) => {
         setRespuestas(RespuestasResponse.data)
-      
+        setGrupo(grupoResponse.data)
       }
       
       )
@@ -31,6 +31,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     try {
       const response = await axios.post(`${URL}/DCKPHM`, {
         id_CKPHM: id.toString(),
+         id_grupoProduccion:formData.id_grupoProduccion,
         id_GrupoAnteriorCompletoSatisfactoriamenteLimpiezaGeneral: formData.id_GrupoAnteriorCompletoSatisfactoriamenteLimpiezaGeneral,
         id_AccionamientoCorrectoMotorBomba: formData.id_AccionamientoCorrectoMotorBomba,
         id_NivelDeAceiteEnTanqueHidraulicoCorrecto: formData.id_NivelDeAceiteEnTanqueHidraulicoCorrecto,
@@ -91,7 +92,21 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       </label>
       <p id="fecha" className="form-control-static" style={{ marginBottom: "0" }}>{formatFecha(fecha_creacion)}</p>
     </div>
-
+    <div className="mt-2">
+    <strong>
+      <label htmlFor="aserradero" className="form-label">
+        Grupo de Producción
+      </label>
+      <select className="form-select" id="id_grupoProduccion" {...register("id_grupoProduccion")} required>
+        <option value="">-- Selecciona un grupo --</option>
+        {Array.isArray(grupo.rows) && grupo.rows.length > 0 && grupo.rows.map((grupo) => (
+          <option key={grupo.id} value={grupo.id} required>
+            {grupo.grupos}
+          </option>
+        ))}
+      </select>
+    </strong>
+  </div>
 </div>
 
 </div>
@@ -104,6 +119,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
         <input
+        required
           className="form-check-input"  
           type="radio"
           name="calificacionLimpieza"
@@ -131,6 +147,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="calificacionTornillos"
@@ -154,6 +171,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_NivelDeAceiteEnTanqueHidraulicoCorrecto"
@@ -178,6 +196,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_MangueraHidraulicaEstaEnBuenEstadoSinFugasAceite"
@@ -202,6 +221,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_FuncionamientoCorrectamenteCilindroHidraulicoParaSubirBajar"
@@ -226,6 +246,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_EstructuraPrensaEncuentraSinFisuras"
@@ -250,6 +271,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_EstructuraDeMoldesEncuentraSinFisurasDefectos"
@@ -274,6 +296,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_LimpiezaLubricacionBarrasBujesEquipoAnterior"
@@ -300,6 +323,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_IntegridadBujesBarrasPrincipalesOptimas"

@@ -12,25 +12,34 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [operario, setOperario] = useState([]);
   const [modelo, setModelo] = useState([]);
   const [turno, setTurno] = useState([]);
-  const id_area = 4;
-
+  const [hornos, setTHornos] = useState([]);
   
+  const id_area = 4;
+  const id_area2 = 9;
+
+
+
+  const maquinaria="Horno";
+  // console.log('operario',operario)
   useEffect(() => {
     Promise.all([
-      axios.get(`${URL}/Operarios/${id_area}`),
+      axios.get(`${URL}/Operarios/${id_area}/${id_area2}`),
       axios.get(`${URL}/ModelosUF`),
+      axios.get(`${URL}/maquinaria/${maquinaria}`),
       axios.get(`${URL}/Turnos`),
     ])
-      .then(([OperariosResponse, ufModeloResponse, turnoResponse]) => {
+      .then(([OperariosResponse, ufModeloResponse,HornosResponse, turnoResponse]) => {
         setOperario(OperariosResponse.data);
+ 
         setModelo(ufModeloResponse.data);
+        setTHornos(HornosResponse.data);
         setTurno(turnoResponse.data);
       })
       .catch((error) => {
         console.log("Error al obtener los datos:", error);
       });
   }, []);
-
+console.log(operario)
   const onSubmit = async (formData) => {
     try {
       await axios.post(`${URL}/DTCC`, {
@@ -40,13 +49,16 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
         codigoInicio: formData.codigoInicio,
         codigoFin: formData.codigoFin,
         id_operarioCC: formData.id_operarioCC,
+        id_auditor:formData.id_auditor,
         modelo: formData.modelo,
+        id_horno: formData.id_horno,
         turnoCC: formData.turnoCC,
         fechaHorneado: formData.fechaHorneado,
         turnoHorneado: formData.turnoHorneado,
         aprobados: formData.aprobados,
         altos: formData.altos,
         bajos: formData.bajos,
+        mermas_hornos:formData.mermas_hornos,
         rajadosCC: formData.rajadosCC,
         crudoCC: formData.crudoCC,
         quemados: formData.quemados,
@@ -67,7 +79,9 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
       console.error("Error al enviar los datos:", error);
     }
   };
-console.log('datos props',encabezado, EncName, fecha_creacion,id)
+
+ 
+
   return (
     <div className="mt-4">
       <h4 style={{ textAlign: 'center', color: 'gray' }}>Control de Calidad</h4>
@@ -110,15 +124,32 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           </label>
           <select className="form-select" id="id_operarioCC" {...register("id_operarioCC")}>
           <option>--</option>
-            {Array.isArray(operario.rows)
-            && operario.rows.length>0 && operario.rows.map((operario) => (
-              <option key={operario.id} value={operario.id}>
-                {operario.Nombre}
-              </option>
-            ))}
-          </select>
+          {operario.rows && Array.isArray(operario.rows) && operario.rows.filter(operario => operario.id_area === 4 ).map((operario) => (
+            <option key={operario.id} value={operario.id}>
+              {operario.Nombre}
+            </option>
+          ))}
+        </select>
         </div>
+
         <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+          Auditor de Procesos
+        </label>
+        <select className="form-select" id="id_auditor" {...register("id_auditor")}>
+          <option>--</option>
+          {operario.rows && Array.isArray(operario.rows) && operario.rows.filter(operario =>  operario.id_area === 9).map((operario) => (
+            <option key={operario.id} value={operario.id}>
+              {operario.Nombre}
+            </option>
+          ))}
+        </select>
+      </div>
+      
+
+          
+      
+          <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Modelo
           </label>
@@ -132,6 +163,21 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             ))}
           </select>
         </div>
+
+        <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+            Horno
+        </label>
+        <select className="form-select" id="id_horno" {...register("id_horno")}>
+        <option>--</option> 
+        {Array.isArray(hornos.rows)
+          && hornos.rows.length>0 && hornos.rows.map((horno) => (
+            <option key={horno.id_maq} value={horno.id_maq}>
+              {horno.nombre_maq}
+            </option>
+          ))}
+        </select>
+      </div>
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Turno de CC
@@ -190,6 +236,12 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <input type="number" className="form-control" id="bajos" {...register("bajos")} required />
         </div>
         <div className="col-md-6">
+          <label htmlFor="mermasHornos" className="form-label">
+            Mermas de hornos
+          </label>
+          <input type="number" className="form-control" id="mermas_hornos" {...register("mermas_hornos")} required />
+        </div>
+        <div className="col-md-6">
           <label htmlFor="esquinaII" className="form-label">
             Rajados de C.c
           </label>
@@ -213,6 +265,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
       </label>
       <input type="number" className="form-control" id="ahumados" {...register("ahumados")} required />
     </div>
+  
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>
         </div>

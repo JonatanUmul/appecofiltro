@@ -4,7 +4,9 @@ import ROTHP from './ROTHP'
 import ROTSA from './ROTSA'
 import ROTCA1 from './ROTCA1'
 import ROTCA2 from './ROTCA2'
-
+import ROTPV from './ROTPV'
+import ROTFM from './ROTFM'
+import ROTP from './ROTP'
 
 
 const BotonOT = () => {
@@ -43,7 +45,13 @@ const BotonOT = () => {
         return <ROTCA1/> 
       case '4':
         return <ROTCA2/>
-       
+      case '5':
+        return <ROTPV/>
+      case '6':
+        return <ROTFM/>
+        case '7':
+          return <ROTP/>
+         
      
 
       default:
@@ -67,7 +75,7 @@ const BotonOT = () => {
         Crear
       </button>
       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Tanque de Agua 2.0')}>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Reporte Humedad en Patios')}>
           1. Reporte Humedad en Patios 
         </a>
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '2', 'Extrusora 2.0')}>
@@ -80,23 +88,14 @@ const BotonOT = () => {
           4. Reporte Cernido 2
         </a>
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Prensa Hidraulica 2.0')}>
-          5. Prensa Hidraulica 2.0
+          5. Pulverizado
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Prensa Hidraulica Mini')}>
-          6. Prensa Hidraulica Mini
-        </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Mezcladora Mini')}>
-          7. Mezcladora Mini
-        </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '8', 'Mezcladora 2.0')}>
-          8. Mezcladora 2.0
-        </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '9', 'Tanque de Agua Mini')}>
-          9. Tanque de Agua Mini
-        </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Prensa Hidraulica Manual')}>
-          10. Prensa Hidraulica Manual
-        </a>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Prensa Hidraulica 2.0')}>
+        6. Formulación
+      </a>
+      <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Producciòn')}>
+      7. Producciòn
+    </a>
 
     
 

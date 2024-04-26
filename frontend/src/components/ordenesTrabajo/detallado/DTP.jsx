@@ -11,8 +11,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [aserradero, setAserradero] = useState([]);
   const [turno, setTurno] = useState([]);
   const [modelos, setModelos] = useState([]);
-  const [tipoCernido, setTipoCernido] = useState([]);
   const [cernidoDetalle, setCernidoDetalle] = useState([]);
+  const [grupodetrabajo, setGrupodetrabajo] = useState([]);
   const [error, setError]= useState('');
   const [formula2, setFormula2]=useState(false)
 
@@ -21,17 +21,15 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       axios.get(`${URL}/Turnos`),
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/ModelosUF`),
-      axios.get(`${URL}/TipoCernido`),
-      axios.get(`${URL}/CernidoDetalle`)
-    
+      axios.get(`${URL}/CernidoDetalle`),
+      axios.get(`${URL}/GrupodeTrabajo`)
     ])
-      .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, TipoCernidoResponse, CernidodetalleResponse]) => {
+      .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, CernidodetalleResponse, GrupodeTrabajoResponse]) => {
         setTurno(TurnosResponse.data);
         setAserradero(AserraderoResponse.data);
         setModelos(ModelosufResponse.data);
-        setTipoCernido(TipoCernidoResponse.data);
-        setCernidoDetalle(CernidodetalleResponse.data)
-     
+        setCernidoDetalle(CernidodetalleResponse.data);
+        setGrupodetrabajo(GrupodeTrabajoResponse.data)
       })
       .catch((error) => {
         setError("Error al obtener los datos", error);
@@ -44,8 +42,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       {
         id_OTP: id.toString(),
         fecha_real:fecha_creacion,
+        id_grupoproduccion:formData.id_grupoproduccion,
         id_turno: formData.id_turno,
-        id_tipoCernido: formData.id_tipoCernido,
         id_cernidodetalle: formData.id_cernidodetalle,
         id_Aserradero: formData.id_Aserradero,
         id_ufmodelo: formData.id_ufmodelo,
@@ -57,7 +55,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         observacion: formData.observacion,
         id_Aserradero2:formData.id_Aserradero2,
         librasAserrin2:formData.librasAserrin2,
-        id_tipoCernido2:formData.id_tipoCernido2,
         id_cernidodetalle2: formData.id_cernidodetalle2
 
       });Swal.fire({
@@ -80,7 +77,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
     setFormula2(true);
 
   }
-
 
 
   return (
@@ -150,20 +146,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
           </select>
         </div>
 
-        <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-              Tipo de Cernido
-          </label>
-          <select className="form-select" id="id_tipoCernido" {...register("id_tipoCernido")} required> 
-          <option>--</option>
-          {Array.isArray(tipoCernido.rows)
-            && tipoCernido.rows.length>0 && tipoCernido.rows.map((tipoCernido) => (
-              <option key={tipoCernido.id} value={tipoCernido.id}>
-                {tipoCernido.tipoCernido}
-              </option>
-            ))}
-          </select>
-        </div>
+       
         <div className="col-md-6">
         <label htmlFor="aserradero" className="form-label">
             Detalle Cernido
@@ -179,6 +162,22 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
           ))}
         </select>
       </div>
+
+      <div className="col-md-6">
+      <label htmlFor="aserradero" className="form-label">
+          Grupo de Producción
+      </label>
+      <select className="form-select" id="id_grupoproduccion" {...register("id_grupoproduccion")} required>
+      <option>--</option> 
+      
+      {Array.isArray(grupodetrabajo.rows)
+        && grupodetrabajo.rows.length>0 && grupodetrabajo.rows.map((grupodetrabajo) => (
+          <option key={grupodetrabajo.id} value={grupodetrabajo.id}>
+            {grupodetrabajo.grupos}
+          </option>
+        ))}
+      </select>
+    </div>
        
    
         
@@ -237,20 +236,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
             ))}
           </select>
         </div>
-        <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-          <strong>Tipo de Cernido</strong>
-          </label>
-          <select className="form-select" id="id_tipoCernido2" {...register("id_tipoCernido2")} required> 
-          <option>--</option>
-          {Array.isArray(tipoCernido.rows)
-            && tipoCernido.rows.length>0 && tipoCernido.rows.map((tipoCernido) => (
-              <option key={tipoCernido.id} value={tipoCernido.id}>
-                {tipoCernido.tipoCernido}
-              </option>
-            ))}
-          </select>
-        </div>
+     
         <div className="col-md-6">
         <label htmlFor="aserradero" className="form-label">
             <strong>Detalle Cernido 2</strong>

@@ -12,10 +12,11 @@
     const [modeloUF, setModeloUf] = useState([]);
 
     const id_area=2;
+    const id_area2=9;
     const maquinaria = 'Prensa';
     useEffect(() => {
       Promise.all([
-        axios.get(`${URL}/Operarios/${id_area}`),
+        axios.get(`${URL}/Operarios/${id_area || 'null'}/${id_area2 || 'null'}`),
         axios.get(`${URL}/maquinaria/${maquinaria}`),
         axios.get(`${URL}/calificacion`),
         axios.get(`${URL}/ModelosUF`),
@@ -40,6 +41,7 @@
           id_DCPS: id.toString(),
           codigo: formData.codigo,
           id_prensador: formData.id_prensador,
+          id_auditor: formData.id_auditor,
           id_prensa: formData.id_molde,
           id_calificacion: formData.id_calificacion,
           id_mod: formData.id_modelo
@@ -91,15 +93,30 @@ console.log('id des encabezado',id)
               Prensador
             </label>
             <select className="form-select" id="id_prensador" {...register("id_prensador")}>
-            <option>--</option>  
-            {Array.isArray(prensador.rows)
-              && prensador.rows.length>0 && prensador.rows.map((prensador) => (
-                <option key={prensador.id} value={prensador.id}>
-                  {prensador.Nombre}
-                </option>
-              ))}
-            </select>
+           
+            <option>--</option>
+            {prensador.rows && Array.isArray(prensador.rows) && prensador.rows.filter(prensador =>  prensador.id_area === 2).map((prensador) => (
+              <option key={prensador.id} value={prensador.id}>
+                {prensador.Nombre}
+              </option>
+            ))}
+          </select>
           </div>
+
+          <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Auditor
+          </label>
+          <select className="form-select" id="id_auditor" {...register("id_auditor")}>
+         
+          <option>--</option>
+          {prensador.rows && Array.isArray(prensador.rows) && prensador.rows.filter(prensador =>  prensador.id_area === 9).map((prensador) => (
+            <option key={prensador.id} value={prensador.id}>
+              {prensador.Nombre}
+            </option>
+          ))}
+        </select>
+        </div>
           <div className="col-md-6">
             <label htmlFor="aserradero" className="form-label">
               Molde
@@ -129,27 +146,31 @@ console.log('id des encabezado',id)
               ))}
             </select>
           </div>
-          
-          <div className="form-check form-check-inline mt-5">
-
-  <h5>Calificación:</h5>
-      {/* Itera sobre el array de calificaciones y muestra las opciones de radio */}
-      {Array.isArray(calificacion.rows)&& calificacion.rows.length>0 && calificacion.rows.map((calificacion) => (
-        <div key={calificacion.id} className="form-check">
-          <input
-            className="form-check-input"
-            type="radio"
-            name='calificacion'
-            id={`checkbox-calificacion-${calificacion.id}`}
-            value={calificacion.id}
-            {...register("id_calificacion")}
-          />
-          <label className="form-check-label" htmlFor={`calificacion-${calificacion.id}`}>
-            {calificacion.calificacion}
-          </label>
+          <div>
+          <h5>Calificación:</h5>
+          <div style={{ display: "flex", flexDirection: 'column', alignItems: 'flex-start' }} className="form-check form-check-inline mt-2 responsive">
+            {/* Itera sobre el array de calificaciones y muestra las opciones de radio */}
+            {Array.isArray(calificacion.rows) && calificacion.rows.length > 0 && calificacion.rows.map((calificacion) => (
+              <div key={calificacion.id} className="form-check mb-2">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="calificacion"
+                  id={`checkbox-calificacion-${calificacion.id}`}
+                  value={calificacion.id}
+                  {...register("id_calificacion")}
+                />
+                <label className="form-check-label ml-2" htmlFor={`calificacion-${calificacion.id}`}>
+                <strong>  {calificacion.calificacion}</strong>
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
+        
+        
+        
+        
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>
         </div>

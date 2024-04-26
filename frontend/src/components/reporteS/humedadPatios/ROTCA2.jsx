@@ -10,8 +10,8 @@
       const [datos, setDatos] = useState([]);
       const [aserradero, setAserradero] = useState([]);
       const [materiaPrim, setMatPrim] = useState([]);
-      const [fecha_creacion_inicio, setFecha] = useState('');
-      const [fecha_creacion_fin, setFecha2] = useState('');
+      const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
+      const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [id_aserradero, setIdAserradero] = useState('');
   
 
@@ -25,18 +25,18 @@
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DTCA2/${fecha_creacion_inicio || 'null'}/DTCA2/${fecha_creacion_fin || 'null'}/${id_aserradero || 'null'}`;
+        const url = `${URL}/DTCA2/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_aserradero || 'null'}`;
 
         axios.get(url)
           .then((response) => {
             setDatos(response.data);
-            console.log('datos consulta', response.data);
+           
           })
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
       }, [fecha_creacion_inicio, fecha_creacion_fin, id_aserradero]);
-console.log('datos', datos)
+console.log('datos cernido 2', datos)
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
@@ -116,6 +116,14 @@ console.log('datos', datos)
             
                 </tr>
               ))}
+              <tr>
+          <td colSpan="4"><strong>Total:</strong></td>
+          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_inicial), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cernido_fino), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cernido_grueso), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.merma), 0)}</strong></td>
+
+</tr>
             </tbody>
           </table>
         </div>

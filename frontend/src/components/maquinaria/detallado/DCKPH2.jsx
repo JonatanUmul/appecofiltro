@@ -9,16 +9,16 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [respuestas, setRespuestas] = useState([]);
   const [errors, setError]= useState('')
-
-
+  const [grupo, setGrupo]= useState([])
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/respuestas`),
+      axios.get(`${URL}/GrupodeTrabajo`),
 
     ])
-      .then(([RespuestasResponse]) => {
+      .then(([RespuestasResponse, grupoResponse]) => {
         setRespuestas(RespuestasResponse.data)
-      
+        setGrupo(grupoResponse.data)
       }
       
       )
@@ -31,6 +31,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     try {
       const response = await axios.post(`${URL}/DCKPH2`, {
     id_CKPH2:id.toString(),
+    id_grupoProduccion:formData.id_grupoProduccion,
     id_verificadoCorrectoAccionamientoDebomba:formData.id_verificadoCorrectoAccionamientoDebomba,
 	  id_sensorInfrarrojaLimpio:formData.id_sensorInfrarrojaLimpio,
     id_SecompruebaSensorBarreraInfrarrojaFuncionaCorrectamente:formData.id_SecompruebaSensorBarreraInfrarrojaFuncionaCorrectamente,
@@ -59,11 +60,17 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       setTimeout(() => {
         window.location.href = "/Home/TablaMaq";
       }, 1500);
-    } catch (error) {
-      setError('Uno o varios datos estan vacios')
+    }  catch (error) {
+      // Mostrar el mensaje de error del servidor
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        // Si no hay un mensaje de error específico, mostrar un mensaje genérico
+        setError('Error al enviar los datos al servidor.');
+      }
       console.error("Error al enviar los datos:", error);
     }
-  };
+};
 
  
 
@@ -88,7 +95,21 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     </div>
 
 </div>
-
+<div className="mt-2">
+    <strong>
+      <label htmlFor="aserradero" className="form-label">
+        Grupo de Producción
+      </label>
+      <select className="form-select" id="id_grupoProduccion" {...register("id_grupoProduccion")} required>
+        <option value="">-- Selecciona un grupo --</option>
+        {Array.isArray(grupo.rows) && grupo.rows.length > 0 && grupo.rows.map((grupo) => (
+          <option key={grupo.id} value={grupo.id} required>
+            {grupo.grupos}
+          </option>
+        ))}
+      </select>
+    </strong>
+  </div>
 </div>
 
 <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
@@ -99,7 +120,9 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
         <input
-          className="form-check-input"  
+        required
+          className="form-check-input
+          required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_verificadoCorrectoAccionamientoDebomba${respuesta.id}`}
@@ -114,7 +137,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="Observación" {...register("observacion1")}  />
+    <input
+     type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="Observación" {...register("observacion1")}  />
 
 </div>
 
@@ -125,7 +149,9 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
-            className="form-check-input"
+          required
+            className="form-check-input
+            required"
             type="radio"
             name="calificacionTornillos"
             id={`id_sensorInfrarrojaLimpio-${respuesta.id}`}
@@ -138,7 +164,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         </div>
       ))}
     </div>
-    <input type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion2")}  />
+    <input
+     type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion2")}  />
   </div>
 
 
@@ -149,7 +176,9 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
-            className="form-check-input"
+          required
+            className="form-check-input
+            required"
             type="radio"
             name="calificacionTornillos"
             id={`id_SecompruebaSensorBarreraInfrarrojaFuncionaCorrectamente-${respuesta.id}`}
@@ -162,7 +191,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         </div>
       ))}
     </div>
-    <input type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion3")}  />
+    <input
+     type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion3")}  />
   </div>
 
   <div className="form-group" >
@@ -172,7 +202,9 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
-            className="form-check-input"
+          required
+            className="form-check-input
+            required"
             type="radio"
             name="id_mangueraHidráulicaEstaEnBuenEstadoSinFugasAceite"
             id={`id_mangueraHidráulicaEstaEnBuenEstadoSinFugasAceite-${respuesta.id}`}
@@ -186,7 +218,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       ))}
     </div>
     
-    <input type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion4")}  />
+    <input
+     type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion4")}  />
   </div>
 
   <div className="form-group" >
@@ -196,7 +229,9 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
-            className="form-check-input"
+          required
+            className="form-check-input
+            required"
             type="radio"
             name="id_integridadDeLosBujesYBarrasPrincipalesEstaBuenEstadoSinDaños"
             id={`id_integridadDeLosBujesYBarrasPrincipalesEstaBuenEstadoSinDaños-${respuesta.id}`}
@@ -210,7 +245,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       ))}
     </div>
     
-    <input type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion5")}  />
+    <input
+     type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion5")}  />
   </div>
 
   <div className="form-group" >
@@ -220,7 +256,9 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
-            className="form-check-input"
+          required
+            className="form-check-input
+            required"
             type="radio"
             name="id_accionamientoCorrectoSelenoideLlenado"
             id={`id_elGrupoAnteriorCompletoSatisfactoriamenteLimpiezaGenera-${respuesta.id}`}
@@ -234,7 +272,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       ))}
     </div>
     
-    <input type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion6")}  />
+    <input
+     type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion6")}  />
   </div>
 
   <p style={{ color: errors ? 'red' : 'inherit' }}>{errors}</p>

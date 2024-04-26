@@ -3,7 +3,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 const URL = process.env.REACT_APP_URL;
 
-const ConsultaCKTA = ({ id }) => {
+const ConsultaCKEXT = ({ id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
 
@@ -45,19 +45,34 @@ const ConsultaCKTA = ({ id }) => {
             <p className="card-text small text-muted">
               <strong>5. Limpieza Interna y externa del Equipo:</strong> {registro.limpiezaInternaExternaEquipo}
             </p>
-            {registro.observacion1.trim() !== "" && (
+
+            
+            {registro.observacion1 && registro.observacion1.trim() !== "" && (
               <p className="card-text small text-muted">
                 <strong>Observación 1:</strong> {registro.observacion1}
               </p>
             )}
-            {registro.observacion2.trim() !== "" && (
+           
+            {registro.observacion2 && registro.observacion2.trim() !== "" && (
               <p className="card-text small text-muted">
                 <strong>Observación 2:</strong> {registro.observacion2}
               </p>
             )}
-            {registro.observacion3.trim() !== "" && (
+            {registro.observacion3 && registro.observacion3.trim() !== "" && (
               <p className="card-text small text-muted">
                 <strong>Observación 3:</strong> {registro.observacion3}
+              </p>
+            )}
+            {registro.observacion4 && registro.observacion4.trim() !== "" && (
+       
+              <p className="card-text small text-muted">
+                <strong>Observación 4:</strong> {registro.observacion4}
+              </p>
+            )}
+            {registro.observacion5 && registro.observacion5.trim() !== "" && (
+          
+              <p className="card-text small text-muted">
+                <strong>Observación 5:</strong> {registro.observacion5}
               </p>
             )}
           </div>
@@ -67,4 +82,4 @@ const ConsultaCKTA = ({ id }) => {
   )
 }
 
-export default ConsultaCKTA;
+export default ConsultaCKEXT;

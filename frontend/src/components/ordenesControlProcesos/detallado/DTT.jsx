@@ -8,6 +8,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
   const { handleSubmit, register } = useForm();
   const [modeloUF, setModeloUf] = useState([]);
   const [tunel, setTunel]= useState([]);
+  const [estadouf, setEstadoUF]= useState([]);
+  const [btn, setBtn]= useState(false)
 
   const maquinaria="Tunel"; 
 
@@ -15,10 +17,12 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
     Promise.all([
       axios.get(`${URL}/ModelosUF`),
       axios.get(`${URL}/maquinaria/${maquinaria}`),
+      axios.get(`${URL}/Estadouf`),
     ])
-      .then(([ModelosResponse, TunelResponse]) => {
+      .then(([ModelosResponse, TunelResponse, EstadoUFResponse]) => {
         setModeloUf(ModelosResponse.data);
         setTunel(TunelResponse.data);
+        setEstadoUF(EstadoUFResponse.data)
       })
       .catch((error) => {
         console.log("Error al obtener los datos:", error);
@@ -33,6 +37,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
         id_CTT: id.toString(),
         id_modelo: formData.id_modelo,
         id_tunel: formData.id_tunel,
+        id_estadouf:formData.id_estadouf,
+        id_modelo2:formData.id_modelo2,
         cabezaDerecha1: formData.cabezaDerecha1,
         pieDerecho1:formData.pieDerecho1,
         cabezaDerecha2: formData.cabezaDerecha2,
@@ -59,6 +65,10 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
   };
 
 
+function onclick(){
+  setBtn(true)
+}
+  
 
   
 
@@ -94,29 +104,82 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
         <div>
        
-        <div className="row text-center" >
-    <div className="col-sm-3">
+        <div className="row text-center"  >
+
+
+        <div className="col-sm-3" style={{ alignItems: "center" }}>
+        <label htmlFor={`modelo`} className="form-label">
+          Modelo    
+         <strong> <a  onClick={onclick}><i class="bi bi-clipboard-plus"></i></a></strong>
+           
+        </label>
+        <select
+          className="form-select"
+          name={`id_modelo`}
+          id={`id_modelo`}
+          {...register(`id_modelo`)}
+        >
+          <option>--</option>
+          {Array.isArray(modeloUF.rows) &&
+            modeloUF.rows.length > 0 &&
+            modeloUF.rows.map((modelo) => (
+              <option key={modelo.id_mod} value={modelo.id_mod}>
+                {modelo.nombre_modelo}
+              </option>
+            ))}
+        </select>
+      </div>
+      
+    
+    {btn?(
+      <div className="col-sm-3 ">
       <label htmlFor={`modelo`} className="form-label">
-        Modelo
+        Modelo 2
       </label>
       <select
         className="form-select"
-        name={`id_modelo`}
-        id={`id_modelo`}
-        {...register(`id_modelo`)}
+        style={{ backgroundColor: 'rgba(192, 192, 192, 0.5)' }} // Gris suave con opacidad reducida
+        name={`id_modelo2`}
+        id={`id_modelo2`}
+        {...register(`id_modelo2`)}
       >
-      <option>--</option>  
-      {Array.isArray(modeloUF.rows) &&
-          modeloUF.rows.length > 0 &&
-          modeloUF.rows.map((modelo) => (
-            <option key={modelo.id_mod} value={modelo.id_mod} >
-              {modelo.nombre_modelo}
-            </option>
-          ))}
+        <option>--</option>  
+        {Array.isArray(modeloUF.rows) &&
+            modeloUF.rows.length > 0 &&
+            modeloUF.rows.map((modelo) => (
+              <option key={modelo.id_mod} value={modelo.id_mod} >
+                {modelo.nombre_modelo}
+              </option>
+            ))}
       </select>
-
-      
     </div>
+    
+
+    ):false}
+
+
+
+    <div className="col-sm-3">
+    <label htmlFor={`id_estadouf`} className="form-label">
+      Estado UF
+    </label>
+    <select
+      className="form-select"
+      name={`id_estadouf`}
+      id={`id_estadouf`}
+      {...register(`id_estadouf`)}
+    >
+    <option>--</option>  
+    {Array.isArray(estadouf.rows) &&
+      estadouf.rows.length > 0 &&
+      estadouf.rows.map((estadouf) => (
+          <option key={estadouf.id} value={estadouf.id} >
+            {estadouf.estado}
+          </option>
+        ))}
+    </select>
+  </div>
+
     <div className="col-sm-3">
       <label htmlFor={`tunel`} className="form-label">
         Tunel

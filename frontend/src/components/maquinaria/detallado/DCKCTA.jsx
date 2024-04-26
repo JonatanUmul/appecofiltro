@@ -8,16 +8,16 @@ const URL = process.env.REACT_APP_URL;
 const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [respuestas, setRespuestas] = useState([]);
-  const [errors, setError]= useState('')
-
+  const [errors, setError]= useState('');
+  const [grupo, setGrupo]= useState([])
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/respuestas`),
-
+      axios.get(`${URL}/GrupodeTrabajo`),
     ])
-      .then(([RespuestasResponse]) => {
+      .then(([RespuestasResponse, grupoResponse]) => {
         setRespuestas(RespuestasResponse.data)
-      
+        setGrupo(grupoResponse.data)
       }
       
       )
@@ -30,6 +30,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     try {
       const response = await axios.post(`${URL}/DCKCTA`, {
         id_CKCTA: id.toString(),
+        id_grupoProduccion:formData.id_grupoProduccion,
         id_verificarCableDeCorteEnBuenEstado: formData.id_verificarCableDeCorteEnBuenEstado,
         id_lubricarGuiasDelCortador: formData.id_lubricarGuiasDelCortador,
         id_limpiezaGeneralDeCorrederasGuiasCortador: formData.id_limpiezaGeneralDeCorrederasGuiasCortador,
@@ -51,10 +52,16 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         window.location.href = "/Home/TablaMaq";
       }, 1500);
     } catch (error) {
-      setError('Uno o varios datos estan vacios')
+      // Mostrar el mensaje de error del servidor
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        // Si no hay un mensaje de error específico, mostrar un mensaje genérico
+        setError('Error al enviar los datos al servidor.');
+      }
       console.error("Error al enviar los datos:", error);
     }
-  };
+};
 
 
  
@@ -77,6 +84,22 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       <p id="fecha" className="form-control-static" style={{ marginBottom: "0" }}>{formatFecha(fecha_creacion)}</p>
     </div>
 
+    <div className="mt-2">
+    <strong>
+      <label htmlFor="aserradero" className="form-label">
+        Grupo de Producción
+      </label>
+      <select className="form-select" id="id_grupoProduccion" {...register("id_grupoProduccion")} required>
+        <option value="">-- Selecciona un grupo --</option>
+        {Array.isArray(grupo.rows) && grupo.rows.length > 0 && grupo.rows.map((grupo) => (
+          <option key={grupo.id} value={grupo.id} required>
+            {grupo.grupos}
+          </option>
+        ))}
+      </select>
+    </strong>
+  </div>
+ 
 </div>
 
 </div>
@@ -95,6 +118,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
           id={`id_verificarCableDeCorteEnBuenEstado${respuesta.id}`}
           value={respuesta.id}
           {...register("id_verificarCableDeCorteEnBuenEstado")}
+          required
         />
         <label className="form-check-label" htmlFor={`id_verificarCableDeCorteEnBuenEstado${respuesta.id}`}>
           {respuesta.respuesta}
@@ -122,6 +146,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
             id={`id_lubricarGuiasDelCortador-${respuesta.id}`}
             value={respuesta.id}
             {...register("id_lubricarGuiasDelCortador")}
+            required
           />  
           <label className="form-check-label" htmlFor={`id_lubricarGuiasDelCortador-${respuesta.id}`}>
             {respuesta.respuesta}
@@ -145,6 +170,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
             id={`id_limpiezaGeneralDeCorrederasGuiasCortador-${respuesta.id}`}
             value={respuesta.id}
             {...register("id_limpiezaGeneralDeCorrederasGuiasCortador")}
+            required
           />
           <label className="form-check-label" htmlFor={`checkbox-calificacion-tornillos-${respuesta.id}`}>
             {respuesta.respuesta}

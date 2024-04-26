@@ -8,22 +8,19 @@
 
     const ROTHP = () => {
       const [datos, setDatos] = useState([]);
-      const [aserradero, setAserradero] = useState([]);
-      const [materiaPrim, setMatPrim] = useState([]);
-      const [fecha_creacion, setFecha] = useState('');
-      const [id_aserradero, setIdAserradero] = useState('');
-  
+      const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
+      const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
 
       const limpiarInputs = () => {
         setFecha('');
-        setIdAserradero('');
+        setFecha2('');
     
       };
       
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DTCA1/${fecha_creacion || 'null'}/${id_aserradero || 'null'}`;
+        const url = `${URL}/DTPV/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
 
         axios.get(url)
           .then((response) => {
@@ -33,42 +30,21 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion, id_aserradero]);
+      }, [fecha_creacion_inicio, fecha_creacion_fin]);
 
-      // Realizar las solicitudes para obtener datos
-      useEffect(() => {
-        axios.all([
-          axios.get(`${URL}/Aserradero`),
-          axios.get(`${URL}/MateriaPrima`),
-       
-        ])
-        .then(axios.spread((aserraderoResponse, materiaPrimResponse, ) => {
-          setAserradero(aserraderoResponse.data);
-          setMatPrim(materiaPrimResponse.data);
-        
-        }))
-        .catch((error) => {
-          console.error('Error al obtener los datos:', error);
-        });
-      }, []);
+     
 
       return (
         <div className="row mb-3">
         <div className="row mb-3">
-      <div className="col-md-3">
-        <label htmlFor="fecha" className="form-label">Fecha:</label>
-        <input className="form-control" type="date" value={fecha_creacion} onChange={(e) => setFecha(e.target.value)} />
+        <div className="col-md-3">
+        <label htmlFor="fecha" className="form-label">Fecha 1 </label>
+        <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />
       </div>
       <div className="col-md-3">
-        <label htmlFor="aserradero" className="form-label">Aserradero:</label>
-        <select className="form-select" name="id_aserradero" value={id_aserradero} onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">Seleccione un aserradero</option>
-          {Array.isArray(aserradero.rows) && aserradero.rows.map((item) => (
-            <option key={item.id} value={item.id}>{item.nombre_aserradero}</option>
-          ))}
-        </select>
+        <label htmlFor="fecha" className="form-label">Fecha 2</label>
+        <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha(e.target.value)} />
       </div>
-   
       <div className="col-md-3 d-flex align-items-end">
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
@@ -86,11 +62,9 @@
                 <th scope="col">#</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Hora</th>
-                <th scope="col">Aserradero</th>
-                
-                <th scope="col">Cantidad Inicial</th>
-                <th scope="col">Cantidad Final</th>
-                <th scope="col">Merma</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Humedad</th>
+           
 
               </tr>
             </thead>
@@ -100,14 +74,17 @@
                   <th scope="row">{index + 1}</th>
                   <td>{formatFecha(fila.fecha_creacion) }</td>
                   <td>{fila.hora_creacion}</td>
-                  <td>{fila.aserradero}</td>
+                  <td>{fila.cantidad}</td>
                   
-                  <td>{fila.CantidadInicial}</td>
-                  <td>{fila.CantidadFinal}</td>
-                  <td>{fila.merma}</td>
-            
+                  <td>{fila.humedad}</td>
+               
                 </tr>
               ))}
+              <tr >
+          <td colSpan="3"><strong>Total:</strong></td>
+          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad), 0)}</strong></td>
+          <td><strong>{(datos.reduce((total, fila) => total + parseFloat(fila.humedad), 0) / datos.length).toFixed(1)}%</strong></td>
+          </tr>
             </tbody>
           </table>
         </div>

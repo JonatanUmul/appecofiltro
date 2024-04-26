@@ -9,7 +9,23 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [respuestas, setRespuestas] = useState([]);
   const [errors, setError]= useState('')
+  const [grupo, setGrupo]= useState([])
+  useEffect(() => {
+    Promise.all([
+      axios.get(`${URL}/respuestas`),
+      axios.get(`${URL}/GrupodeTrabajo`),
 
+    ])
+      .then(([RespuestasResponse, grupoResponse]) => {
+        setRespuestas(RespuestasResponse.data)
+        setGrupo(grupoResponse.data)
+      }
+      
+      )
+      .catch((error) => {
+        console.log("Error al obtener los datos:", error);
+      });
+  }, []);
 
 
   useEffect(() => {
@@ -34,6 +50,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     try {
       const response = await axios.post(`${URL}/DCKMM`, {
         id_CKMM: id.toString(),
+        id_grupoProduccion:formData.id_grupoProduccion,
     id_limpiezaGeneral: formData.id_limpiezaGeneral,
     id_AccionamientoCorrectoTornillos: formData.id_AccionamientoCorrectoTornillos,
     id_AccionamientoCorrectoCompuertaPolvos: formData.id_AccionamientoCorrectoCompuertaPolvos,
@@ -62,6 +79,13 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         window.location.href = "/Home/TablaMaq";
       }, 1500);
     } catch (error) {
+      // Mostrar el mensaje de error del servidor
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        // Si no hay un mensaje de error específico, mostrar un mensaje genérico
+        setError('Error al enviar los datos al servidor.');
+      }
       console.error("Error al enviar los datos:", error);
     }
   };
@@ -89,6 +113,22 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
 
 </div>
 
+<div className="mt-2">
+    <strong>
+      <label htmlFor="aserradero" className="form-label">
+        Grupo de Producción
+      </label>
+      <select className="form-select" id="id_grupoProduccion" {...register("id_grupoProduccion")} required>
+        <option value="">-- Selecciona un grupo --</option>
+        {Array.isArray(grupo.rows) && grupo.rows.length > 0 && grupo.rows.map((grupo) => (
+          <option key={grupo.id} value={grupo.id} required>
+            {grupo.grupos}
+          </option>
+        ))}
+      </select>
+    </strong>
+  </div>
+
 </div>
 
 <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
@@ -98,8 +138,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {/* Itera sobre el array de respuestas y muestra las opciones de radio */}
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
-        <input
-          className="form-check-input"  
+        <input required
+          className="form-check-input required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_limpiezaGeneral${respuesta.id}`}
@@ -114,7 +154,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="Observación" {...register("observacion1")}  />
+    <input  type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="Observación" {...register("observacion1")}  />
 
 </div>
 
@@ -124,8 +164,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {/* Itera sobre el array de respuestas y muestra las opciones de radio */}
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
-        <input
-          className="form-check-input"  
+        <input required
+          className="form-check-input required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_AccionamientoCorrectoTornillos${respuesta.id}`}
@@ -140,9 +180,9 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion2")}  />
+    <input  type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion2")}  />
 
-</  div>
+</div>
 
 <div className="form-group mt-3">
   <label htmlFor="limpiezaGeneral">3. Accionamiento correcto de compuerta de polvos  :</label>
@@ -150,8 +190,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {/* Itera sobre el array de respuestas y muestra las opciones de radio */}
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
-        <input
-          className="form-check-input"  
+        <input required
+          className="form-check-input required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_AccionamientoCorrectoCompuertaPolvos${respuesta.id}`}
@@ -166,7 +206,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion3")}  />
+    <input  type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion3")}  />
 
 </div>
 
@@ -176,8 +216,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {/* Itera sobre el array de respuestas y muestra las opciones de radio */}
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
-        <input
-          className="form-check-input"  
+        <input required
+          className="form-check-input required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_VerificarAjusteCorrectoTornillosChumaceras${respuesta.id}`}
@@ -192,7 +232,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion4")}  />
+    <input  type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion4")}  />
 
 </div>
 
@@ -202,8 +242,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {/* Itera sobre el array de respuestas y muestra las opciones de radio */}
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
-        <input
-          className="form-check-input"  
+        <input required
+          className="form-check-input required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_VerificarVisualmenteEstadoPaletasTornilloSeco${respuesta.id}`}
@@ -218,7 +258,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion5")}  />
+    <input  type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion5")}  />
 
 </div>
 
@@ -228,8 +268,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {/* Itera sobre el array de respuestas y muestra las opciones de radio */}
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
-        <input
-          className="form-check-input"  
+        <input required
+          className="form-check-input required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_VerificarTornillosGuardasDeSeguridad${respuesta.id}`}
@@ -244,7 +284,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion6")}  />
+    <input  type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion6")}  />
 
 </div>
 
@@ -254,8 +294,8 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {/* Itera sobre el array de respuestas y muestra las opciones de radio */}
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
-        <input
-          className="form-check-input"  
+        <input required
+          className="form-check-input required"  
           type="radio"
           name="calificacionLimpieza"
           id={`id_LubricaciónYLimpiezaExcesosGrasa${respuesta.id}`}
@@ -270,7 +310,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion7")}  />
+    <input  type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="observación" {...register("observacion7")}  />
 
 </div>
 

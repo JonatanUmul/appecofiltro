@@ -10,8 +10,8 @@
       const [datos, setDatos] = useState([]);
       const [aserradero, setAserradero] = useState([]);
       const [materiaPrim, setMatPrim] = useState([]);
-      const [fecha_creacion_inicio, setFecha] = useState('');
-      const [fecha_creacion_fin, setFecha2] = useState('');
+      const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
+      const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [id_aserradero, setIdAserradero] = useState('');
   
 
@@ -114,6 +114,12 @@ console.log('datos', datos)
             
                 </tr>
               ))}
+              <tr>
+          <td colSpan="4"><strong>Total:</strong></td>
+          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.CantidadInicial), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.CantidadFinal), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.merma), 0)}</strong></td>
+ </tr>
             </tbody>
           </table>
         </div>

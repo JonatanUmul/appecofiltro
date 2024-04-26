@@ -47,9 +47,9 @@ const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
               <td>{formatFecha(fila.fecha_creacion)}</td>
               <td>{fila.id_otfm}</td>
               <td>{fila.descripcion_matprima}</td>
-              <td>{fila.aserradero}</td>
+              <td>{fila.aserradero}/{fila.aserradero2}</td>
               <td>{fila.cantidad}</td>
-              <td>{fila.peso} Lb</td>
+              <td>{fila.peso}/{fila.peso2}</td>
               <td>{fila.humedad}%</td>
               
             </tr>

@@ -10,10 +10,12 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [aserradero, setAserradero] = useState([]);
   const [turno, setTurno] = useState([]);
   const [modelos, setModelos] = useState([]);
-  const [tipoCernido, setTipoCernido] = useState([]);
   const [hornos, setTHornos] = useState([]);
   const [hornero, setHornero] = useState([]);
-  const [error, setError]= useState('')
+  const [error, setError]= useState('');
+  const [formula2, setFormula2]=useState(false);
+  const [cernidoDetalle, setCernidoDetalle] = useState([]);
+  
 
   const maquinaria="Horno"; 
   const id_area=3;
@@ -23,15 +25,15 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         axios.get(`${URL}/Turnos`),
         axios.get(`${URL}/Aserradero`),
         axios.get(`${URL}/ModelosUF`),
-        axios.get(`${URL}/TipoCernido`),
+        axios.get(`${URL}/CernidoDetalle`),
         axios.get(`${URL}/maquinaria/${maquinaria}`),
         axios.get(`${URL}/Operarios/${id_area}`)
       ])
-        .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, TipoCernidoResponse, HornosResponse, OperariosResponse]) => {
+        .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, CernidodetalleResponse, HornosResponse, OperariosResponse]) => {
           setTurno(TurnosResponse.data);
           setAserradero(AserraderoResponse.data);
           setModelos(ModelosufResponse.data); 
-          setTipoCernido(TipoCernidoResponse.data);
+          setCernidoDetalle(CernidodetalleResponse.data);
           setTHornos(HornosResponse.data);
           setHornero(OperariosResponse.data);
         })
@@ -51,7 +53,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         id_OTHH: id.toString(),
         id_turno:formData.id_turno,
         id_aserradero: formData.id_aserradero,
-        id_tipCernido: formData.id_tipCernido,
+        id_cernidodetalle: formData.id_cernidodetalle,
         id_modelo: formData.id_modelo,
         id_horno: formData.id_horno,
         id_hornero: formData.id_hornero,
@@ -60,7 +62,11 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         codigoInicio:formData.codigoInicio,
         codigoFin:formData.codigoFin,
         librasBarro:formData.librasBarro,
-        librasAserrin:formData.librasAserrin
+        librasAserrin:formData.librasAserrin,
+        librasAserrin2:formData.librasAserrin2,
+        id_aserradero2:formData.id_aserradero2,
+        id_cernidodetalle2: formData.id_cernidodetalle2
+       
 
       });
       Swal.fire({
@@ -78,8 +84,9 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
       setError("Error al enviar los datos:", error);
     }
   };
-console.log('selccionaste',hornero)
-console.log('datos props',encabezado, EncName, fecha_creacion,id)
+  const llamar=()=>{
+    setFormula2(true);
+  }
   return (
     <div className="mt-4">
       <h4 style={{ textAlign: 'center', color: 'gray' }}>Hornos</h4>
@@ -130,19 +137,20 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
         </div>
 
         <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-              Tipo de Cernido
-          </label>
-          <select className="form-select" id="id_tipCernido" {...register("id_tipCernido")}>
-          <option>--</option> 
-          {Array.isArray(tipoCernido.rows)
-            && tipoCernido.rows.length>0 && tipoCernido.rows.map((tipoCernido) => (
-              <option key={tipoCernido.id} value={tipoCernido.id}>
-                {tipoCernido.tipoCernido}
-              </option>
-            ))}
-          </select>
-        </div>
+        <label htmlFor="aserradero" className="form-label">
+            Detalle Cernido
+        </label>
+        <select className="form-select" id="id_cernidodetalle" {...register("id_cernidodetalle")} required>
+        <option>--</option> 
+        
+        {Array.isArray(cernidoDetalle.rows)
+          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
+            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
+              {cernidoDetalle.detalle}
+            </option>
+          ))}
+        </select>
+      </div>
    
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
@@ -232,7 +240,62 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
         <div className="col-12">
           <label style={{ color: 'red' }}>{error}</label>
         </div>
+
+
+        
+        {formula2 ? (
+          <div className="row mt-3"> 
+    <div className="col-md-12">
+    <div className="row">
+          <h5>Formula 2</h5>
+          <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Aserradero 2
+          </label>
+          <select className="form-select" id="id_aserradero2" {...register("id_aserradero2")}>
+          <option>--</option> 
+          {Array.isArray(aserradero.rows)
+            && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
+              <option key={aserradero.id} value={aserradero.id}>
+                {aserradero.nombre_aserradero}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+            Detalle Cernido
+        </label>
+        <select className="form-select" id="id_cernidodetalle2" {...register("id_cernidodetalle2")} required>
+        <option>--</option> 
+        
+        {Array.isArray(cernidoDetalle.rows)
+          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
+            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
+              {cernidoDetalle.detalle}
+            </option>
+          ))}
+        </select>
+      </div>
+
+            <div className="col-md-6">
+              <label htmlFor="esquinaSD" className="form-label">
+                Libras de Aserrin 2
+              </label>
+              <input type="text" className="form-control" id="librasAserrin2" {...register("librasAserrin2")} required />
+            </div>
+            
+          </div>
+          </div>
+          </div>
+
+        ) :false}
+        
         <div className="col-12">
+        <div className="col-4">
+        <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
+        </div>
           <button type="submit" className="btn btn-primary">Guardar</button>
         </div>
       </form>

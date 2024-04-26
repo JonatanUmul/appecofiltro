@@ -9,16 +9,16 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [respuestas, setRespuestas] = useState([]);
   const [errors, setError]= useState('')
-
-
+  const [grupo, setGrupo]= useState([])
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/respuestas`),
+      axios.get(`${URL}/GrupodeTrabajo`),
 
     ])
-      .then(([RespuestasResponse]) => {
+      .then(([RespuestasResponse, grupoResponse]) => {
         setRespuestas(RespuestasResponse.data)
-      
+        setGrupo(grupoResponse.data)
       }
       
       )
@@ -26,11 +26,11 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         console.log("Error al obtener los datos:", error);
       });
   }, []);
-
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post(`${URL}/DCKTA`, {
         id_CKTA: id.toString(),
+        id_grupoProduccion:formData.id_grupoProduccion,
         id_visorFuncionandoNivelDeAguaVisible: formData.id_visorFuncionandoNivelDeAguaVisible,
         id_accionamientoCorrectoSelenoideAlimentacion: formData.id_accionamientoCorrectoSelenoideAlimentacion,
         id_accionamientoCorrectoSelenoideLlenado: formData.id_accionamientoCorrectoSelenoideLlenado,
@@ -80,7 +80,21 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     </div>
 
 </div>
-
+<div className="mt-2">
+<strong>
+  <label htmlFor="aserradero" className="form-label">
+    Grupo de Producción
+  </label>
+  <select className="form-select" id="id_grupoProduccion" {...register("id_grupoProduccion")} required>
+    <option value="">-- Selecciona un grupo --</option>
+    {Array.isArray(grupo.rows) && grupo.rows.length > 0 && grupo.rows.map((grupo) => (
+      <option key={grupo.id} value={grupo.id} required>
+        {grupo.grupos}
+      </option>
+    ))}
+  </select>
+</strong>
+</div>
 </div>
 
 <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
@@ -91,6 +105,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
       <div key={respuesta.id} className="form-check">
         <input
+        required
           className="form-check-input"  
           type="radio"
           name="calificacionLimpieza"
@@ -118,6 +133,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="calificacionTornillos"
@@ -141,6 +157,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
       {Array.isArray(respuestas.rows) && respuestas.rows.length > 0 && respuestas.rows.map((respuesta) => (
         <div key={respuesta.id} className="form-check">
           <input
+          required
             className="form-check-input"
             type="radio"
             name="id_accionamientoCorrectoSelenoideLlenado"

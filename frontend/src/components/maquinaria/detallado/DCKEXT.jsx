@@ -8,18 +8,21 @@ const URL = process.env.REACT_APP_URL;
 const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
   const [respuestas, setRespuestas] = useState([]);
-  const [errors, setError]= useState('')
+  const [errors, setError]= useState('');
+  const [grupo, setGrupo]= useState([]);
+
 
 
 
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/respuestas`),
+      axios.get(`${URL}/GrupodeTrabajo`),
 
     ])
-      .then(([RespuestasResponse]) => {
+      .then(([RespuestasResponse, grupoResponse]) => {
         setRespuestas(RespuestasResponse.data)
-      
+        setGrupo(grupoResponse.data)
       }
       
       )
@@ -57,11 +60,16 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         window.location.href = "/Home/TablaMaq";
       }, 1500);
     } catch (error) {
-      setError('Uno o varios datos estan vacios')
-
+      // Mostrar el mensaje de error del servidor
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        // Si no hay un mensaje de error específico, mostrar un mensaje genérico
+        setError('Error al enviar los datos al servidor.');
+      }
       console.error("Error al enviar los datos:", error);
     }
-  };
+};
 
 
  
@@ -85,6 +93,21 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
     </div>
 
 </div>
+<div className="mt-2">
+<strong>
+  <label htmlFor="aserradero" className="form-label">
+    Grupo de Producción
+  </label>
+  <select className="form-select" id="id_grupoProduccion" {...register("id_grupoProduccion")} required>
+    <option value="">-- Selecciona un grupo --</option>
+    {Array.isArray(grupo.rows) && grupo.rows.length > 0 && grupo.rows.map((grupo) => (
+      <option key={grupo.id} value={grupo.id} required>
+        {grupo.grupos}
+      </option>
+    ))}
+  </select>
+</strong>
+</div>
 
 </div>
 
@@ -101,9 +124,11 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
           name="calificacionLimpieza"
           id={`id_limpiezaBazucaDeSalida${respuesta.id}`}
           value={respuesta.id}
+        
           {...register("id_limpiezaBazucaDeSalida")}
+          required
         />
-        <label className="form-check-label" htmlFor={`id_limpiezaBazucaDeSalida${respuesta.id}`}>
+        <label className="form-check-label" htmlFor={`id_limpiezaBazucaDeSalida${respuesta.id}` }>
           {respuesta.respuesta}
         </label>
       </div>
@@ -111,7 +136,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </div>
   
 
-    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="Observación" {...register("observacion1")}  />
+    <input type="text" className="form-control mt-2" id="observacionLimpieza" placeholder="Observación" />
 
 </div>
 
@@ -129,6 +154,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
             id={`id_lubricarChumacerasAlFinalTurno-${respuesta.id}`}
             value={respuesta.id}
             {...register("id_lubricarChumacerasAlFinalTurno")}
+            required
           />  
           <label className="form-check-label" htmlFor={`id_lubricarChumacerasAlFinalTurno-${respuesta.id}`}>
             {respuesta.respuesta}
@@ -136,7 +162,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         </div>
       ))}
     </div>
-    <input type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación" {...register("observacion2")}  />
+    <input type="text" className="form-control mt-2" id="observacionTornillos" placeholder="Observación"  />
   </div>
 
   <div className="form-group" >
@@ -152,6 +178,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
             id={`id_AccionamientoCorrectoMotor-${respuesta.id}`}
             value={respuesta.id}
             {...register("id_AccionamientoCorrectoMotor")}
+            required
           />
           <label className="form-check-label" htmlFor={`checkbox-calificacion-tornillos-${respuesta.id}`}>
             {respuesta.respuesta}
@@ -177,6 +204,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
             id={`id_verificarTornillosGuardasDeSeguridad-${respuesta.id}`}
             value={respuesta.id}
             {...register("id_verificarTornillosGuardasDeSeguridad")}
+            required
           />
           <label className="form-check-label" htmlFor={`checkbox-calificacion-tornillos-${respuesta.id}`}>
             {respuesta.respuesta}
@@ -201,6 +229,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
             id={`id_limpiezaInternaExternaEquipo-${respuesta.id}`}
             value={respuesta.id}
             {...register("id_limpiezaInternaExternaEquipo")}
+            required
           />
           <label className="form-check-label" htmlFor={`checkbox-calificacion-tornillos-${respuesta.id}`}>
             {respuesta.respuesta}

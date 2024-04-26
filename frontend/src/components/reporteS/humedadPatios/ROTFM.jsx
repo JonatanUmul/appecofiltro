@@ -9,24 +9,22 @@
     const ROTHP = () => {
       const [datos, setDatos] = useState([]);
       const [aserradero, setAserradero] = useState([]);
-      const [materiaPrim, setMatPrim] = useState([]);
-      const [patios, setPatios] = useState([]);
       const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [id_asrdSMP, setIdAserradero] = useState('');
-      const [id_patio, setIdPatio] = useState('');
+      
 
       const limpiarInputs = () => {
         setFecha('');
         setFecha2('');
         setIdAserradero('');
-        setIdPatio(''); 
+        
       };
 
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DASERRIN/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_asrdSMP || 'null'}/${id_patio || 'null'}`;
+        const url = `${URL}/DTFM/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_asrdSMP || 'null'}`;
 
         
         axios.get(url)
@@ -37,29 +35,29 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion_inicio, fecha_creacion_fin,  id_asrdSMP, id_patio]);
+      }, [fecha_creacion_inicio, fecha_creacion_fin,  id_asrdSMP]);
 console.log(datos)
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
           axios.get(`${URL}/Aserradero`),
-          axios.get(`${URL}/MateriaPrima`),
-          axios.get(`${URL}/Patios`)
+          axios.get(`${URL}/MateriaPrima`)
+      
         ])
-        .then(axios.spread((aserraderoResponse, materiaPrimResponse, patiosResponse) => {
+        .then(axios.spread((aserraderoResponse) => {
           setAserradero(aserraderoResponse.data);
-          setMatPrim(materiaPrimResponse.data);
-          setPatios(patiosResponse.data);
+      
+      
         }))
         .catch((error) => {
           console.error('Error al obtener los datos:', error);
         });
       }, []);
 
-      return (
+      return ( 
       
         <div className="row mb-3">
-         <p style={{textAlign: 'center'}}>Secado De Aserrín</p>
+         <p style={{textAlign: 'center'}}>Formulaciòn</p>
 
         <div className="row mb-3">
         <div className="col-md-3">
@@ -79,15 +77,7 @@ console.log(datos)
           ))}
         </select>
       </div>
-      <div className="col-md-3">
-        <label htmlFor="patio" className="form-label">Patio:</label>
-        <select className="form-select" name="id_patio" value={id_patio} onChange={(e) => setIdPatio(e.target.value)}>
-          <option value="">Seleccione un patio</option>
-          {Array.isArray(patios.rows) && patios.rows.map((item) => (
-            <option key={item.id} value={item.id}>{item.nombrePatio}</option>
-          ))}
-        </select>
-      </div>
+      
       <div className="col-md-3 d-flex align-items-end">
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
@@ -105,13 +95,14 @@ console.log(datos)
                 <th scope="col">#</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Hora</th>
-                <th scope="col">Patio</th>
-                <th scope="col">Aserradero</th>
                 
-                <th scope="col">Cantidad Inicial</th>
-                <th scope="col">Cantidad Final</th>
-                <th scope="col">Merma</th>
-
+                <th scope="col">Peso</th>
+                <th scope="col">Peso Total</th>
+                
+                <th scope="col">Humedad</th>
+            
+                <th scope="col">Aserradero</th>
+                <th scope="col">Cantidad</th>
               </tr>
             </thead>
             <tbody>
@@ -120,21 +111,20 @@ console.log(datos)
                   <th scope="row">{index + 1}</th>
                   <td>{formatFecha(fila.fecha_creacion) }</td>
                   <td>{fila.hora_creacion}</td>
-                  <td>{fila.patio}</td>
-                  <td>{fila.aserradero}</td>
                   
-                  <td>{fila.cantidad_inicial}</td>
-                  <td>{fila.cantidad_final}</td>
-                  <td>{fila.merma}</td>
+                  <td>{fila.peso}/{fila.peso2}</td>
+                  <td>{fila.pesototal}</td>
+                  <td>{fila.humedad}%</td>
+                  <td>{fila.aserradero}/{fila.aserradero2}</td>
+                  <td>{fila.cantidad}</td>
+                 
             
                 </tr>
               ))}
 
 <tr style={{color:'blue'}}>
-          <td colSpan="5"><strong>Total:</strong></td>
-          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_inicial), 0)}</strong></td>
-<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_final), 0)}</strong></td>
-<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.merma), 0)}</strong></td>
+          <td colSpan="7"><strong>Total:</strong></td>
+         <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad), 0)}</strong></td>
  </tr>
             </tbody>
           </table>
