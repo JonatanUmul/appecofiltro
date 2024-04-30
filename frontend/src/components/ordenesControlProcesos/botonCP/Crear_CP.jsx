@@ -6,6 +6,7 @@ import DRM from '../detallado/DRM'
 import DTT from '../detallado/DTT'
 import DTH from '../detallado/DTH'
 import DCPCD from '../detallado/DCPCD'
+import DCFMP from '../detallado/DCFMP'
 import LogoEco from '../../utilidades/LogoEco'
 
 
@@ -40,8 +41,10 @@ console.log('propr recibios', encabezado, id)
           return <DTH  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
       case 'cpcd':
             return <DCPCD encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
-            
-  
+      case 'cfmp':
+              return <DCFMP encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
+              
+    
       default:
         return <p>Formulario no encontrado</p>;
     }
