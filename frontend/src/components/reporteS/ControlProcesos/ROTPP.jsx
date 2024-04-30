@@ -5,26 +5,30 @@
     import ExcelROTHP from './Excel/ExcelRothp'
 
     const URL = process.env.REACT_APP_URL
-
-    const ROTHP = () => {
+    const ROTP = () => {
       const [datos, setDatos] = useState([]);
-      const [aserradero, setAserradero] = useState([]);
+      const [aserraderos, setAserradero] = useState([]);
       const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
-      const [id_asrdSMP, setIdAserradero] = useState('');
-      
+      const [id_aserradero, setIdAserradero] = useState('');
+      const [modeloUF, setModelos] = useState([]);
+      const [UFmodelo, setmodelosUF] = useState('');
+      const [grupoProduccion, setGrupodetrabajo] = useState([]);
+      const [grupoP, setGrupoP]=useState('')
 
+console.log('Datos', id_aserradero,UFmodelo,grupoP)
       const limpiarInputs = () => {
         setFecha('');
         setFecha2('');
-        setIdAserradero('');
-        
+        setAserradero([]);
+        setModelos([]);
+        setGrupodetrabajo([])
       };
 
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DTFM/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_asrdSMP || 'null'}`;
+        const url = `${URL}/DTP/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_aserradero || 'null'}/${UFmodelo || 'null'}/${grupoP || 'null'}`;
 
         
         axios.get(url)
@@ -35,19 +39,20 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion_inicio, fecha_creacion_fin,  id_asrdSMP]);
-console.log(datos)
+      }, [fecha_creacion_inicio, fecha_creacion_fin,  id_aserradero, modeloUF, grupoProduccion]);
+
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
           axios.get(`${URL}/Aserradero`),
-          axios.get(`${URL}/MateriaPrima`)
+          axios.get(`${URL}/ModelosUF`),
+          axios.get(`${URL}/GrupodeTrabajo`)
       
         ])
-        .then(axios.spread((aserraderoResponse) => {
+        .then(axios.spread((aserraderoResponse, ModelosufResponse, GrupodeTrabajoResponse) => {
           setAserradero(aserraderoResponse.data);
-      
-      
+          setModelos(ModelosufResponse.data)
+          setGrupodetrabajo(GrupodeTrabajoResponse.data)
         }))
         .catch((error) => {
           console.error('Error al obtener los datos:', error);
@@ -69,11 +74,29 @@ console.log(datos)
         <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
       </div>
       <div className="col-md-3">
-        <label htmlFor="aserradero" className="form-label">Aserradero:</label>
-        <select className="form-select" name="id_aserradero" value={id_asrdSMP} onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">Seleccione un aserradero</option>
-          {Array.isArray(aserradero.rows) && aserradero.rows.map((item) => (
-            <option key={item.id} value={item.id}>{item.nombre_aserradero}</option>
+        <label htmlFor="aserraderos" className="form-label">Aserradero:</label>
+        <select className="form-select" name="id_asrdSMP" value={aserraderos}  onChange={(e) => setIdAserradero(e.target.value)}>
+          <option value="">--</option>
+          {Array.isArray(aserraderos.rows) && aserraderos.rows.map((aserraderos) => (
+            <option key={aserraderos.id} value={aserraderos.id}>{aserraderos.nombre_aserradero}</option>
+          ))}
+        </select>
+      </div>
+      <div className="col-md-3">
+        <label htmlFor="modelo" className="form-label">Modelo:</label>
+        <select className="form-select" value={modeloUF}  onChange={(e) => setmodelosUF(e.target.value)}>
+          <option value="">--</option>
+          {Array.isArray(modeloUF.rows) && modeloUF.rows.map((item) => (
+            <option key={item.id_mod} value={item.id_mod}>{item.nombre_modelo}</option>
+          ))}
+        </select>
+      </div>
+      <div className="col-md-3">
+        <label htmlFor="aserradero" className="form-label">Grupo de Producciòn:</label>
+        <select className="form-select" name="grupoP" value={grupoP}  onChange={(e) => setGrupoP(e.target.value)}>
+          <option value="">--</option>
+          {Array.isArray(grupoProduccion.rows) && grupoProduccion.rows.map((item) => (
+            <option key={item.id} value={item.id}>{item.grupos}</option>
           ))}
         </select>
       </div>
@@ -132,4 +155,4 @@ console.log(datos)
       );
     }
 
-    export default ROTHP;
+    export default ROTP;

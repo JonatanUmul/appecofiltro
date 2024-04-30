@@ -7,7 +7,7 @@ import ConsultaDCPS from '../consutas/ConsultaDCPS'
 import ConsultaDRM from '../consutas/ConsultaDRM'
 import ConsultaDTT from '../consutas/ConsultaDTT'
 import ConsultaDTH from '../consutas/ConsultaDTH'
-
+import ConsultaDCPCD from '../consutas/ConsultaDCPCD'
 const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   const [modalVisible, setModalVisible] = useState(false); 
 
@@ -44,7 +44,10 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
       case 'cth':
           return <ConsultaDTH id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
     
-
+          case 'cpcd':
+            return <ConsultaDCPCD id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
+      
+  
       default:
         return <p>Formulario no encontrado</p>;
     }
@@ -60,7 +63,7 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   };
 
   return (
-    <>
+    <div>
       {/* Botón para abrir el modal */}
       <a type="button"  onClick={handleClick}>
       <i class="bi bi-arrow-bar-right"></i>
@@ -76,7 +79,7 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
           {/* Puedes agregar botones de acción necesarios */}
         </ModalFooter>
       </Modal>
-    </>
+    </div>
   );
 }
 

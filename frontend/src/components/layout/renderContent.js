@@ -11,7 +11,8 @@ import Dashboard from '../dashbords/Dashboard';
 import TablaCP from '../ordenesControlProcesos/TablaCP'
 import TablaMaq from '../maquinaria/TablaMaq'
 import TableMantenimientoMaq from '../mantenimientosMaq/TablaMantenimientosMaq'
-import TablaReportesOT from '../reporteS/humedadPatios/TablaReportesOT'
+import TablaReportesOT from '../reporteS/ControlProcesos/TablaReportesOT'
+import TablaControlProcesosOT from '../reporteS/AreasReportes/TablaControlProcesosOT'
 
 
 export const renderContent = (pathname) => {
@@ -65,6 +66,8 @@ export const renderContent = (pathname) => {
 
                   case "/Home/TablaReportesOT":
                 return <TablaReportesOT />;
+                case "/Home/TablaControlProcesosOT":
+                  return <TablaControlProcesosOT />;
                   
      
       default:

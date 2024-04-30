@@ -24,7 +24,8 @@ import TablaCP from './components/ordenesControlProcesos/TablaCP'
 import TableMantenimientoMaq from './components/mantenimientosMaq/TablaMantenimientosMaq'
 import TablaMaq from './components/maquinaria/TablaMaq'
 import Buttn from './components/ordenesTrabajo/botonOT/BotonOT'
-import TablaReportesOT from './components/reporteS/humedadPatios/TablaReportesOT'
+import TablaReportesOT from './components/reporteS/ControlProcesos/TablaReportesOT'
+import TablaControlProcesosOT from './components/reporteS/AreasReportes/TablaControlProcesosOT.jsx'
 
 
  
@@ -71,6 +72,7 @@ function App() {
           <Route path="/Home/TablaMaq" element={<TablaMaq />} />
           <Route path="/Home/Buttn" element={<Buttn />} />
           <Route path="/Home/TablaReportesOT" element={<TablaReportesOT />} />
+          <Route path="/Home/TablaControlProcesosOT" element={<TablaReportesOT />} />
 
 
           

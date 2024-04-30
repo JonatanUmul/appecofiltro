@@ -35,7 +35,8 @@ const CTT = () => {
       setDatos({
         // id_creador,
         codigoInicio: formData.codigoInicio,
-        codigoFinal:formData.codigoFinal
+        codigoFinal:formData.codigoFinal,
+        cantidad:formData.cantidad
     });
    
     
@@ -71,6 +72,13 @@ const CTT = () => {
           Codigo Final
         </label>
         <input type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
+
+      </div>
+      <div className="mb-3">
+        <label htmlFor="estados" className="form-label">
+          Cantidad
+        </label>
+        <input type="number" className="form-control" id="cantidad" {...register("cantidad")} required />
 
       </div>
       <div className="d-grid gap-2">

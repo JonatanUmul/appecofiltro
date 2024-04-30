@@ -5,7 +5,9 @@ import CPS from '../encabezados/CPS';
 import CPI from '../encabezados/CPB';
 import CRM from '../encabezados/CRM';
 import CTT from '../encabezados/CTT';
-import CTH from '../encabezados/CTH'
+import CTH from '../encabezados/CTH';
+import  CPCD from '../encabezados/CPCD';
+import CFMP from '../encabezados/CFMP'
 
 
 const BotonOT = () => {
@@ -48,7 +50,11 @@ const BotonOT = () => {
           return <CTT />;
       case '5':
             return <CTH />;
-        
+      case '6':
+             return <CPCD />;
+     case '7':
+            return <CFMP />;
+           
 
     
       default:
@@ -99,8 +105,12 @@ const BotonOT = () => {
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Temperatura Hornos')}>
           5. Temperatura Hornos
         </a>
-      
-    
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Calidad Crudos Diaria')}>
+        6. Calidad Crudos Diaria
+      </a>  
+      <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Control Producciòn Formulaciòn')}>
+        7. Control Formulacion Producciòn
+      </a>  
 
         {/* Agrega más elementos del menú desplegable aquí */}
       </div>

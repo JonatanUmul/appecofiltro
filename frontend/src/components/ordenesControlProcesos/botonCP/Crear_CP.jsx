@@ -5,6 +5,7 @@ import DCPS from '../detallado/DCPS'
 import DRM from '../detallado/DRM'
 import DTT from '../detallado/DTT'
 import DTH from '../detallado/DTH'
+import DCPCD from '../detallado/DCPCD'
 import LogoEco from '../../utilidades/LogoEco'
 
 
@@ -37,7 +38,9 @@ console.log('propr recibios', encabezado, id)
         return <DTT  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
       case 'cth':
           return <DTH  encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
-        
+      case 'cpcd':
+            return <DCPCD encabezado={encabezado} EncName={EncName}fecha_creacion={fecha_creacion} id={id} codigoInicio={codigoInicio} codigoFinal= {codigoFinal} />
+            
   
       default:
         return <p>Formulario no encontrado</p>;
@@ -54,7 +57,7 @@ console.log('propr recibios', encabezado, id)
   };
 
   return (
-    <>
+    <div>
       {/* Botón para abrir el modal */}
       <button type="button" className="btn btn-success bt-sm" style={{width: '60px', fontSize: '0.8rem', padding: '0.2rem 0.4rem'}} onClick={handleClick}>
         OT
@@ -70,7 +73,7 @@ console.log('propr recibios', encabezado, id)
           {/* Puedes agregar botones de acción necesarios */}
         </ModalFooter>
       </Modal>
-    </>
+    </div>
   );
 }
 

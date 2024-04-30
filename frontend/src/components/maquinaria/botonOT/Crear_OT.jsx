@@ -69,8 +69,8 @@ console.log('propr recibios', encabezado, id)
   };
 
   return (
-    <>
-      {/* Botón para abrir el modal */}
+    <div>
+  
       <button type="button" className="btn btn-success btn-sm" style={{ width: '60px' }} onClick={handleClick}>
   OT
 </button>
@@ -88,7 +88,7 @@ console.log('propr recibios', encabezado, id)
           {/* Puedes agregar botones de acción necesarios */}
         </ModalFooter>
       </Modal>
-    </>
+    </div>
   );
 }
 

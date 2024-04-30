@@ -8,24 +8,20 @@
 
     const ROTHP = () => {
       const [datos, setDatos] = useState([]);
-      const [aserradero, setAserradero] = useState([]);
       const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
-      const [id_asrdSMP, setIdAserradero] = useState('');
-      const [modelos, setModelos] = useState([]);
       
-
       const limpiarInputs = () => {
         setFecha('');
         setFecha2('');
-        setIdAserradero('');
+
         
       };
 
       // Solicitud GET desde React
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DTFM/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_asrdSMP || 'null'}`;
+        const url = `${URL}/DTFM/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
 
         
         axios.get(url)
@@ -36,25 +32,9 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion_inicio, fecha_creacion_fin,  id_asrdSMP]);
+      }, [fecha_creacion_inicio, fecha_creacion_fin]);
 console.log(datos)
-      // Realizar las solicitudes para obtener datos
-      useEffect(() => {
-        axios.all([
-          axios.get(`${URL}/Aserradero`),
-          axios.get(`${URL}/MateriaPrima`),
-          axios.get(`${URL}/ModelosUF`),
-      
-        ])
-        .then(axios.spread((aserraderoResponse, ModelosufResponse) => {
-          setAserradero(aserraderoResponse.data);
-          setModelos(ModelosufResponse.data)
-      
-        }))
-        .catch((error) => {
-          console.error('Error al obtener los datos:', error);
-        });
-      }, []);
+
 
       return ( 
       
@@ -70,24 +50,7 @@ console.log(datos)
         <label htmlFor="fecha" className="form-label">Fecha 2</label>
         <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
       </div>
-      <div className="col-md-3">
-        <label htmlFor="aserradero" className="form-label">Aserradero:</label>
-        <select className="form-select" name="id_aserradero" value={id_asrdSMP} onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">Seleccione un aserradero</option>
-          {Array.isArray(aserradero.rows) && aserradero.rows.map((item) => (
-            <option key={item.id} value={item.id}>{item.nombre_aserradero}</option>
-          ))}
-        </select>
-      </div>
-      <div className="col-md-3">
-        <label htmlFor="aserradero" className="form-label">Modelo:</label>
-        <select className="form-select" name="modelos" value={modelos} onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">--</option>
-          {Array.isArray(modelos.rows) && modelos.rows.map((item) => (
-            <option key={item.id_mod} value={item.id_mod}>{item.nombre_modelo}</option>
-          ))}
-        </select>
-      </div>
+   
       
       <div className="col-md-3 d-flex align-items-end">
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>

@@ -1,7 +1,7 @@
 // SideMenu.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FileDoneOutlined, FundProjectionScreenOutlined, SettingOutlined, SnippetsOutlined } from '@ant-design/icons';
+import { FileDoneOutlined, FundProjectionScreenOutlined, SettingOutlined, SnippetsOutlined, BarChartOutlined, FileExclamationOutlined } from '@ant-design/icons';
 import { Layout, Menu} from 'antd'; // Importa Popover
 const { Sider } = Layout;
 
@@ -14,7 +14,10 @@ const SideMenu = () => {
       <div className="demo-logo-vertical" />
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="1" icon={<FundProjectionScreenOutlined />}><Link to="/Home/Dashboard" style={{ textDecoration: 'none'}}>Dashboard</Link></Menu.Item>
-        <Menu.Item key="13" icon={<FileDoneOutlined />}><Link to="/Home/TablaReportesOT" style={{ textDecoration: 'none'}}>Reportes</Link></Menu.Item>
+        <Menu.SubMenu key="sub2" icon={<FileExclamationOutlined />} title="Reportes">
+        <Menu.Item key="13" icon={<BarChartOutlined />}><Link to="/Home/TablaReportesOT" style={{ textDecoration: 'none'}}>Reportes OT</Link></Menu.Item>
+        <Menu.Item key="4" icon={<BarChartOutlined />}><Link to="/Home/TablaControlProcesosOT" style={{ textDecoration: 'none'}}>Procesos</Link></Menu.Item>
+        </Menu.SubMenu>
         <Menu.Item key="2" icon={<FileDoneOutlined />}><Link to="/Home/TablaOT" style={{ textDecoration: 'none'}}>Ordenes de Trabajo</Link></Menu.Item>
         <Menu.Item key="3" icon={<SnippetsOutlined />}><Link to="/Home/TablaCP" style={{ textDecoration: 'none'}}>Control de Procesos</Link></Menu.Item>
         <Menu.SubMenu key="sub" icon={<SettingOutlined />} title="Maquinaria">
