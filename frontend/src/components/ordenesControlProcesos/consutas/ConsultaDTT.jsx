@@ -6,7 +6,7 @@ const URL = process.env.REACT_APP_URL;
 const ConsultaDTT = ({ id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
-
+console.log(fila)
   useEffect(() => {
     axios.get(`${URL}/DTT/${id}`)
       .then((response) => {
@@ -29,6 +29,7 @@ const ConsultaDTT = ({ id }) => {
       <th scope="col">#</th>
             <th scope="col">Fecha de Producción</th>
             <th scope="col">Hora</th>
+           
             <th scope="col">CTT</th>
             <th scope="col">Modelo</th>
             <th scope="col">Tunel</th>
@@ -49,8 +50,9 @@ const ConsultaDTT = ({ id }) => {
           <td>{index + 1}</td>
           <td className="text-wrap">{formatFecha(fila.fecha_creacion)}</td>
           <td>{fila.hora_creacion}</td>
+          
           <td>{fila.id_ctt}</td>
-          <td>{fila.modelo}</td>
+          <td>{fila.modelo}/{fila.modelo2}</td>
           <td>{fila.tunel}</td>
           <td>{fila.cabezaDerecha1}°</td>
           <td>{fila.pieDerecho1}°</td>
