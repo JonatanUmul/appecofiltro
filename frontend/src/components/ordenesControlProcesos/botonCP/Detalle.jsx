@@ -8,6 +8,7 @@ import ConsultaDRM from '../consutas/ConsultaDRM'
 import ConsultaDTT from '../consutas/ConsultaDTT'
 import ConsultaDTH from '../consutas/ConsultaDTH'
 import ConsultaDCPCD from '../consutas/ConsultaDCPCD'
+import ConsultaDCFMP from '../consutas/ConsultaDCFMP'
 const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   const [modalVisible, setModalVisible] = useState(false); 
 
@@ -43,11 +44,13 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
       
       case 'cth':
           return <ConsultaDTH id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-    
-          case 'cpcd':
+
+     case 'cpcd':
             return <ConsultaDCPCD id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
       
-  
+      case 'cfmp':
+              return <ConsultaDCFMP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
+        
       default:
         return <p>Formulario no encontrado</p>;
     }

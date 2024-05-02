@@ -13,7 +13,10 @@
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [modeloUF, setModeloUf] = useState([]);
       const [pulidor, setPulidor] = useState([]);
-  
+
+      const [id_pulidor, setOpulidor]= useState('');
+      const [ufmodelo, setUfmodelo]= useState('')
+      console.log('Datos a ingresar',id_pulidor, ufmodelo)
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
@@ -34,7 +37,7 @@
 
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DCPB/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${pulidor || 'null'}`;
+        const url = `${URL}/DCPB/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${ufmodelo || 'null'}/${id_pulidor || 'null'}`;
 
         axios.get(url)
           .then((response) => {
@@ -48,7 +51,8 @@
 console.log('Datos12',datos)
       
       const limpiarInputs = () => {
-        setModeloUf('');
+        setOpulidor('');
+        setUfmodelo('');
         setFecha('');
         setFecha2('')
         
@@ -68,8 +72,8 @@ console.log('Datos12',datos)
       <label htmlFor="aserradero" className="form-label">
         Modelo
       </label>
-      <select className="form-select" id="id_modelo" onChange={(e) => setModeloUf(e.target.value)}>
-      <option>--</option> 
+      <select className="form-select" id="id_modelo" value={ufmodelo} onChange={(e) => setUfmodelo(e.target.value)}>
+      <option value="" disabled selected>Seleccione...</option>
       {Array.isArray(modeloUF.rows)
         && modeloUF.rows.length>0 && modeloUF.rows.map((modelo) => (
           <option key={modelo.id_mod} value={modelo.id_mod}>
@@ -82,8 +86,8 @@ console.log('Datos12',datos)
     <label htmlFor="aserradero" className="form-label">
       Pulidor
     </label>
-    <select className="form-select" id="id_pulidor" onChange={(e) => setPulidor(e.target.value)}>
-    <option>--</option>          
+    <select className="form-select" id="id_pulidor" value={id_pulidor} onChange={(e) => setOpulidor(e.target.value)}>
+    <option value="" disabled selected>Seleccione...</option>          
     {Array.isArray(pulidor.rows)
       && pulidor.rows.length>0 && pulidor.rows.map((pulidor) => (
         <option key={pulidor.id} value={pulidor.id}>

@@ -8,7 +8,7 @@ const ConsultaDTT = ({  id }) => {
   const [fila, setFila] = useState([]);
 
   useEffect(() => {
-    axios.get(`${URL}/DTH/${id}`)
+    axios.get(`${URL}/DCPFM/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
         console.log(response.data.data)
@@ -27,38 +27,33 @@ const ConsultaDTT = ({  id }) => {
     <thead>
       <tr>
       <th scope="col">#</th>
-            <th scope="col">Fecha de Horneado</th>
+            <th scope="col">Fecha de Producción</th>
             <th scope="col">Hora</th>
-            <th scope="col">CTH</th>
-            <th scope="col">Modelo</th>
-            <th scope="col">Horno</th>
-            <th scope="col">Turno</th>
-            <th scope="col">Cabeza Izquierda</th>
-            <th scope="col">Centro Izquierdo</th>
-            <th scope="col">Pie Izquierdo</th>
-            <th scope="col">Cabeza Derecha</th>
-            <th scope="col">Centro Derecha</th>
-            <th scope="col">Pie Derecho</th>
-            <th scope="col">Promedio</th>
+            <th scope="col">Orden</th>
+            <th scope="col">Barro Lb</th>
+            <th scope="col">Aserrin LB</th>
+            <th scope="col">Humedad Barro</th>
+            <th scope="col">Humedad Aserrín</th>
+            <th scope="col">Aserradero</th>
+            <th scope="col">Turno de Producción</th>
+            <th scope="col">Formulador</th>
+        
       </tr>
     </thead>
     <tbody>
       {Array.isArray(fila) && fila.length > 0 && fila.map((fila, index) => (
         <tr key={index}>
           <td>{index + 1}</td>
-          <td className="text-wrap">{formatFecha(fila.fecha_creacion)}</td>
+          <td className="text-wrap">{formatFecha(fila.fecha_produccion)}</td>
           <td>{fila.hora_creacion}</td>
-          <td>{fila.id_cth}</td>
-          <td>{fila.modelo}</td>
-          <td>{fila.horno}</td>
-          <td>{fila.turnos}</td>
-          <td>{fila.tempCabezaIZ}°</td>
-          <td>{fila.tempCentroIZ}°</td>
-          <td>{fila.tempPieIZ}°</td>
-          <td>{fila.tempCabezaDR}°</td>
-          <td>{fila.tempCentroDR}°</td>
-          <td>{fila.tempPieDR}°</td>
-          <td style={{ color: 'red' }}><strong>{fila.promedio}°</strong></td>
+          <td>{fila.id_cfmp}</td>
+          <td>{fila.barroLB}</td>
+          <td>{fila.aserrinLB}</td>
+          <td>{fila.humedadBarro}</td>
+          <td>{fila.humedadAserrin}</td>
+          <td>{fila.aserradero}</td>
+          <td>{fila.turnoProduccion}</td>
+          <td>{fila.formulador}</td>
           
 
         

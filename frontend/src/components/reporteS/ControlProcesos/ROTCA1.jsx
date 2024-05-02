@@ -68,7 +68,7 @@ console.log('datos', datos)
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Aserradero:</label>
         <select className="form-select" name="id_aserradero" value={id_aserradero} onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">Seleccione un aserradero</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows) && aserradero.rows.map((item) => (
             <option key={item.id} value={item.id}>{item.nombre_aserradero}</option>
           ))}
