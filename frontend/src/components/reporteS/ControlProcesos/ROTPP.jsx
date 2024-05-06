@@ -76,7 +76,7 @@ console.log('Datos', id_aserradero,UFmodelo,grupoP)
       <div className="col-md-3">
         <label htmlFor="aserraderos" className="form-label">Aserradero:</label>
         <select className="form-select" name="id_asrdSMP" value={aserraderos}  onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">--</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserraderos.rows) && aserraderos.rows.map((aserraderos) => (
             <option key={aserraderos.id} value={aserraderos.id}>{aserraderos.nombre_aserradero}</option>
           ))}
@@ -85,7 +85,7 @@ console.log('Datos', id_aserradero,UFmodelo,grupoP)
       <div className="col-md-3">
         <label htmlFor="modelo" className="form-label">Modelo:</label>
         <select className="form-select" value={modeloUF}  onChange={(e) => setmodelosUF(e.target.value)}>
-          <option value="">--</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(modeloUF.rows) && modeloUF.rows.map((item) => (
             <option key={item.id_mod} value={item.id_mod}>{item.nombre_modelo}</option>
           ))}
@@ -94,7 +94,7 @@ console.log('Datos', id_aserradero,UFmodelo,grupoP)
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Grupo de Producciòn:</label>
         <select className="form-select" name="grupoP" value={grupoP}  onChange={(e) => setGrupoP(e.target.value)}>
-          <option value="">--</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(grupoProduccion.rows) && grupoProduccion.rows.map((item) => (
             <option key={item.id} value={item.id}>{item.grupos}</option>
           ))}

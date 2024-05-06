@@ -87,7 +87,7 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
           <div className="col-md-6">
             <label htmlFor="id_turno" className="form-label">Turno</label>
             <select className="form-select" id="id_turno" {...register("id_turno")}>
-              <option>--</option>
+            <option value="" disabled selected>Seleccione...</option>
               {Array.isArray(turno.rows) && turno.rows.map((turno) => (
                 <option key={turno.id} value={turno.id}>{turno.turno}</option>
               ))}
@@ -97,7 +97,7 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
           <div className="col-md-6">
             <label htmlFor="id_mod" className="form-label">Modelo UF</label>
             <select className="form-select" id="id_mod" {...register("id_mod")} required>
-              <option>--</option>
+            <option value="" disabled selected>Seleccione...</option>
               {Array.isArray(modeloUF.rows) && modeloUF.rows.map((modeloUF) => (
                 <option key={modeloUF.id_mod} value={modeloUF.id_mod}>{modeloUF.nombre_modelo}</option>
               ))}

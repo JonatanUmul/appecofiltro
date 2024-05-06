@@ -7,6 +7,7 @@ import ROTCA2 from './ROTCA2'
 import ROTPV from './ROTPV'
 import ROTFM from './ROTFM'
 import ROTP from './ROTP'
+import ROTHH from './encabezados/ROTHH'
 import ReporteGeneralDiario from '../ReporteGeneralDiario';
 
 
@@ -52,7 +53,8 @@ const BotonOT = () => {
         return <ROTFM/>
         case '7':
           return <ROTP/>
-         
+        case '8':
+          return <ROTHH/>
      
 
       default:
@@ -97,6 +99,9 @@ const BotonOT = () => {
       <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Producciòn')}>
       7. Producciòn
     </a>
+    <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Horneados')}>
+    7. Horneados
+  </a>
 
     
 

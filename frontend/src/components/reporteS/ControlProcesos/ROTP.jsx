@@ -14,15 +14,18 @@
       const [id_ufmodelo, setmodelosUF] = useState('');
       const [grupoProduccion, setGrupodetrabajo] = useState([]);
       const [id_grupoproduccion, setGrupoP]=useState('')
-
+      const [turno, setTurno] = useState([]);
+      const [turn, setTurn]=useState('')
       useEffect(() => {
         axios.all([
           axios.get(`${URL}/ModelosUF`),
-          axios.get(`${URL}/GrupodeTrabajo`)
+          axios.get(`${URL}/GrupodeTrabajo`),
+          axios.get(`${URL}/Turnos`),
         ])
-        .then(axios.spread((ModelosufResponse, GrupodeTrabajoResponse) => {
+        .then(axios.spread((ModelosufResponse, GrupodeTrabajoResponse, TurnosResponse) => {
           setModelos(ModelosufResponse.data)
           setGrupodetrabajo(GrupodeTrabajoResponse.data)
+          setTurno(TurnosResponse.data);
         }))
         .catch((error) => {
           console.error('Error al obtener los datos:', error);
@@ -58,7 +61,7 @@
       <div className="col-md-3">
       <label htmlFor="modelo"  className="form-label">Modelo:</label>
       <select className="form-select" name="UFmodelo" value={id_ufmodelo}  onChange={(e) => setmodelosUF(e.target.value)}>
-        <option value="">--</option>
+      <option value="" disabled selected>Seleccione...</option>
         {Array.isArray(modeloUF.rows) && modeloUF.rows.map((item) => (
           <option key={item.id_mod} value={item.id_mod}>{item.nombre_modelo}</option>
         ))}
@@ -67,7 +70,7 @@
     <div className="col-md-3">
     <label htmlFor="gurpoProduccion" className="form-label">Grupo de Producciòn:</label>
     <select className="form-select" name="grupoP" value={id_grupoproduccion}  onChange={(e) => setGrupoP(e.target.value)}>
-      <option value="">--</option>
+    <option value="" disabled selected>Seleccione...</option>
       {Array.isArray(grupoProduccion.rows) && grupoProduccion.rows.map((item) => (
         <option key={item.id} value={item.id}>{item.grupos}</option>
       ))}
@@ -76,6 +79,23 @@
       <div className="col-md-3 d-flex align-items-end">
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
+
+      
+      <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+              Turno de Producción
+          </label>
+          <select className="form-select" id="id_turno" value={turn} onChange={(e) => setTurn(e.target.value)}>
+          <option>--</option>
+          {Array.isArray(turno.rows)
+            && turno.rows.length>0 && turno.rows.map((turno) => (
+              <option key={turno.id} value={turno.id}>
+                {turno.turno}
+              </option>
+            ))}
+          </select>
+        </div>
+
       <div className="col-md-3 d-flex align-items-end">
       <PdfROTHP datos={datos}/>
       <ExcelROTHP datos={datos}/>

@@ -94,7 +94,7 @@ console.log('id des encabezado',id)
             </label>
             <select className="form-select" id="id_prensador" {...register("id_prensador")}>
            
-            <option>--</option>
+            <option value="" disabled selected>Seleccione...</option>
             {prensador.rows && Array.isArray(prensador.rows) && prensador.rows.filter(prensador =>  prensador.id_area === 2).map((prensador) => (
               <option key={prensador.id} value={prensador.id}>
                 {prensador.Nombre}
@@ -109,7 +109,7 @@ console.log('id des encabezado',id)
           </label>
           <select className="form-select" id="id_auditor" {...register("id_auditor")}>
          
-          <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
           {prensador.rows && Array.isArray(prensador.rows) && prensador.rows.filter(prensador =>  prensador.id_area === 9).map((prensador) => (
             <option key={prensador.id} value={prensador.id}>
               {prensador.Nombre}
@@ -122,7 +122,7 @@ console.log('id des encabezado',id)
               Molde
             </label>
             <select className="form-select" id="id_molde" {...register("id_molde")}>
-            <option>--</option> 
+            <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(maq.rows)
               && maq.rows.length>0 && maq.rows.map((molde) => (
                 <option key={molde.id_maq} value={molde.id_maq}>
@@ -137,7 +137,7 @@ console.log('id des encabezado',id)
               Modelo
             </label>
             <select className="form-select" id="id_modelo" {...register("id_modelo")}>
-            <option>--</option>  
+            <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(modeloUF.rows)
               && modeloUF.rows.length>0 && modeloUF.rows.map((modelo) => (
                 <option key={modelo.id_mod} value={modelo.id_mod}>

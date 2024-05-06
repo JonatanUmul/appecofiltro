@@ -80,7 +80,7 @@ console.log(matPrim)
       <div className="col-md-3">
         <label htmlFor="Materia Prima" className="form-label">Materia Prima:</label>
         <select className="form-select" name="id_enc" value={id_enc} onChange={(e) => setIDEnc(e.target.value)}>
-          <option value="">Materia Prima</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(matPrim.rows) && matPrim.rows.map((item) => (
             <option key={item.id_enc} value={item.id_enc}>{item.nom_matPrima}</option>
           ))}
@@ -89,7 +89,7 @@ console.log(matPrim)
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Aserradero:</label>
         <select className="form-select" name="id_aserradero" value={id_asrd} onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">Seleccione un aserradero</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows) && aserradero.rows.map((item) => (
             <option key={item.id} value={item.id}>{item.nombre_aserradero}</option>
           ))}
@@ -98,7 +98,7 @@ console.log(matPrim)
       <div className="col-md-3">
         <label htmlFor="patio" className="form-label">Patio:</label>
         <select className="form-select" name="id_patio" value={id_patio} onChange={(e) => setIdPatio(e.target.value)}>
-          <option value="">Seleccione un patio</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(patios.rows) && patios.rows.map((item) => (
             <option key={item.id} value={item.id}>{item.nombrePatio}</option>
           ))}

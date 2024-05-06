@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ROTPB from './ROTPB'
-
+import ROTPS from './ROTPS'
+import ROTT from './encabezados/ROTT'
+import ROTH from './encabezados/ROTH'
 
 
 
@@ -35,7 +37,13 @@ const BotonOT = () => {
     
       case '1':
         return <ROTPB/>
-      
+      case '2':
+          return <ROTPS/>
+      case '3':
+          return <ROTT/>
+      case '4':
+            return <ROTH/>
+           
          
      
 
@@ -63,7 +71,16 @@ const BotonOT = () => {
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Pulida Base')}>
           1. Pulida Base
         </a>
-    
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '2', 'Pulida Superior')}>
+        2. Pulida Superior
+      </a>
+      <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '3', 'Temperatura Tunel')}>
+        3. Temperatura Tunel
+      </a>
+      <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Temperatura Hornos')}>
+        4. Temperatura Hornos
+      </a>
+  
     
 
         {/* Agrega más elementos del menú desplegable aquí */}

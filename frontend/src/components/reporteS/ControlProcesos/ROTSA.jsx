@@ -73,7 +73,7 @@ console.log(datos)
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Aserradero:</label>
         <select className="form-select" name="id_aserradero" value={id_asrdSMP} onChange={(e) => setIdAserradero(e.target.value)}>
-          <option value="">Seleccione un aserradero</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows) && aserradero.rows.map((item) => (
             <option key={item.id} value={item.id}>{item.nombre_aserradero}</option>
           ))}
@@ -82,7 +82,7 @@ console.log(datos)
       <div className="col-md-3">
         <label htmlFor="patio" className="form-label">Patio:</label>
         <select className="form-select" name="id_patio" value={id_patio} onChange={(e) => setIdPatio(e.target.value)}>
-          <option value="">Seleccione un patio</option>
+        <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(patios.rows) && patios.rows.map((item) => (
             <option key={item.id} value={item.id}>{item.nombrePatio}</option>
           ))}

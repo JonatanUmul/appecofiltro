@@ -6,28 +6,30 @@
     const URL = process.env.REACT_APP_URL
 
 
-    const id_area=7;
+    const id_area=2;
     const ROTHP = () => {
       const [datos, setDatos] = useState([]);
       const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [modeloUF, setModeloUf] = useState([]);
       const [pulidor, setPulidor] = useState([]);
-
-      const [id_pulidor, setOpulidor]= useState('');
+      const [turno, setTurno]= useState([])
+      const [turnoProd, setTurnoProd]= useState ('')
+      const [id_prensador, setOpulidor]= useState('');
       const [ufmodelo, setUfmodelo]= useState('')
-      console.log('Pulidor: ',id_pulidor, 'modelo', ufmodelo)
+      console.log(datos)
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
         axios.all([
           axios.get(`${URL}/ModelosUF`),
           axios.get(`${URL}/Operarios/${id_area}`),
+          axios.get(`${URL}/Turnos`)
         
         ])
-        .then(axios.spread((modeloufReponse, PulidorResponse) => {
+        .then(axios.spread((modeloufReponse, PulidorResponse, TurnosResponse) => {
           setModeloUf(modeloufReponse.data);
           setPulidor(PulidorResponse.data)
-        
+          setTurno(TurnosResponse.data)
         }))
         .catch((error) => {
           console.error('Error al obtener los datos:', error);
@@ -37,7 +39,7 @@
 
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-        const url = `${URL}/DCPB/${fecha_creacion_inicio  || 'null'}/${fecha_creacion_fin  || 'null'}/${ufmodelo  || 'null'}/${id_pulidor  || 'null'}`;
+        const url = `${URL}/DCPS/${fecha_creacion_inicio  || 'null'}/${fecha_creacion_fin  || 'null'}/${ufmodelo  || 'null'}/${id_prensador  || 'null'}/${turnoProd  || 'null'}`;
 
         axios.get(url)
           .then((response) => {
@@ -47,14 +49,15 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [fecha_creacion_inicio, fecha_creacion_fin, ufmodelo, id_pulidor]);
-console.log('Datos12',datos)
+      }, [fecha_creacion_inicio, fecha_creacion_fin, ufmodelo, id_prensador]);
+console.log('dps',datos)
       
       const limpiarInputs = () => {
         setOpulidor('');
         setUfmodelo('');
         setFecha('');
         setFecha2('')
+        setTurnoProd('')
         
       };
       return (
@@ -68,6 +71,26 @@ console.log('Datos12',datos)
         <label htmlFor="fecha" className="form-label">Fecha 2</label>
         <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
       </div>
+      <div className="col-sm-3">
+      <label htmlFor={`turno`} className="form-label">
+        Turno
+      </label>
+      <select
+        className="form-select"
+        name={`id_turno`}
+        id={`id_turno`}
+        value={turnoProd} onChange={(e) => setTurnoProd(e.target.value)}
+      >
+      <option value="" disabled selected>Seleccione...</option>
+      {Array.isArray(turno.rows) &&
+          turno.rows.length > 0 &&
+          turno.rows.map((turno) => (
+            <option key={turno.id} value={turno.id} >
+              {turno.turno}
+            </option>
+          ))}
+      </select>
+    </div>
       <div className="col-md-6">
       <label htmlFor="aserradero" className="form-label">
         Modelo
@@ -86,7 +109,7 @@ console.log('Datos12',datos)
     <label htmlFor="aserradero" className="form-label">
       Pulidor
     </label>
-    <select className="form-select" id="id_pulidor" value={id_pulidor} onChange={(e) => setOpulidor(e.target.value)}>
+    <select className="form-select" id="id_pulidor" value={id_prensador} onChange={(e) => setOpulidor(e.target.value)}>
     <option value="" disabled selected>Seleccione...</option>          
     {Array.isArray(pulidor.rows)
       && pulidor.rows.length>0 && pulidor.rows.map((pulidor) => (
@@ -115,9 +138,13 @@ console.log('Datos12',datos)
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Pulidor</th>
-                <th scope="col">Pulido</th>
+                <th scope="col">Hora Producción</th>
+                <th scope="col">Prensador</th>
+                <th scope="col">Prensa</th>
+                <th scope="col">Modelo</th>
                 <th scope="col">Calificación</th>
+                <th scope="col">Auditor</th>
+                
           
               </tr>
             </thead>
@@ -125,10 +152,13 @@ console.log('Datos12',datos)
               {Array.isArray(datos) && datos.map((fila, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{formatFecha(fila.fecha_creacion) }</td>
-                  <td>{fila.pulidor}</td>
-                  <td>{fila.pulido}</td>
+                  <td>{formatFecha(fila.fecha_produccion) }</td>
+                  <td>{fila.hora_produccion}</td>
+                  <td>{fila.prensador}</td>
+                  <td>{fila.prensa}</td>
+                  <td>{fila.modeloUF}</td>
                   <td>{fila.calificacion}</td>
+                  <td>{fila.auditor}</td>
                   
                 </tr>
               ))}

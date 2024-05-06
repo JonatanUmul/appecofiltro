@@ -169,7 +169,7 @@ function onclick(){
       id={`id_estadouf`}
       {...register(`id_estadouf`)}
     >
-    <option>--</option>  
+    <option value="" disabled selected>Seleccione...</option>
     {Array.isArray(estadouf.rows) &&
       estadouf.rows.length > 0 &&
       estadouf.rows.map((estadouf) => (
@@ -190,7 +190,7 @@ function onclick(){
         id={`id_tunel`}
         {...register(`id_tunel`)}
       >
-      <option>--</option>  
+      <option value="" disabled selected>Seleccione...</option>
       {Array.isArray(tunel.rows) &&
           tunel.rows.length > 0 &&
           tunel.rows.map((tunel) => (

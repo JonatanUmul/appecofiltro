@@ -119,6 +119,7 @@ const DRM = ({ encabezado, EncName, fecha_creacion, id }) => {
         {Array.isArray(modeloUF.rows) &&
           modeloUF.rows.length > 0 &&
           modeloUF.rows.map((modelo) => (
+            
             <option key={modelo.id_mod} value={modelo.id_mod} >
               {modelo.nombre_modelo}
             </option>
