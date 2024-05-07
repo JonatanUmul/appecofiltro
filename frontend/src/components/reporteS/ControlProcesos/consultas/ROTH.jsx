@@ -56,27 +56,27 @@ console.log(datos)
     </div>
   </div>
   <div className="row mb-3">
-    <div className="col-md-6">
-    <strong >
-    <div className="card shadow-sm bg-light" >
-      <div className="datos card-body">
-        <h5 className="card-title">Datos:</h5>
-        <ul className="list-group list-group-horizontal" >
-          <li className="list-group-item" >Código Inicio: {codigoInicio}</li>
-          <li className="list-group-item" >Código Fin: {codigoFinal}</li>
-          <li className="list-group-item" >Modelo: {modelo}</li>
-          <li className="list-group-item" >Horneado: {hornedo}</li>
-          <li className="list-group-item" >Turno: {turnoHorneado}</li>
-          <li className="list-group-item" >Mermas Crudas: {MCrudas}</li>
-          <li className="list-group-item" >Hornero: {hornero}</li>
-          
-        </ul>
+  <div className="col-md-6">
+    <strong>
+      <div className=" shadow-sm bg-light">
+        <div className="datos card-body">
+          <h5 className="card-title">Datos:</h5>
+          <ul className="list-group list-group-horizontal" >
+            <li className="list-group-item">Código Inicio: {codigoInicio}</li>
+            <li className="list-group-item">Código Fin: {codigoFinal}</li>
+            <li className="list-group-item">Modelo: {modelo}</li>
+            <li className="list-group-item">Horneado: {hornedo}</li>
+            <li className="list-group-item">Turno: {turnoHorneado}</li>
+            <li className="list-group-item">Mermas Crudas: {MCrudas}</li>
+            <li className="list-group-item">Hornero: {hornero}</li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </strong>
-
-    </div>    
+    </strong>
   </div>
+</div>
+
+
   <div className="row">
     <div className="col-md-12">
       <div className="table-responsive">

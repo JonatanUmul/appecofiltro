@@ -1,7 +1,4 @@
-.datos{
-    list-style: none;
-    padding: auto;
-    display: flex;
-    flex-direction: row;
+
+.list-group-item{
+    font-size: 12px;
 }
-  
