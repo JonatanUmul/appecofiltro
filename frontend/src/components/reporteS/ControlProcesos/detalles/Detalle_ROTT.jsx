@@ -1,16 +1,36 @@
 
 import React, {  useState } from 'react'
-
+import './CssdetalleOTT.css'
 import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 
 import ROTT from '../consultas/ROTT'
 import ROTH from '../consultas/ROTH'
 
-const Detalle = ({  id, nombretabla,codigoInicio,codigoFinal,cantidad }) => {
-
+const Detalle = ({  
+  id,
+  id_horno,
+  nombretabla,
+  codigoInicio,
+  codigoFinal,
+  cantidad,
+  fechaHorneado,
+  turnoHorneado,
+  turnoHorn,
+  id_turno,
+  hornedo,
+  MCrudas,
+  LBarro,
+  LBaserrin,
+  aserradero,
+  tipCernido,
+  modelo,
+  id_modelo,
+  hornn,
+  hornero }) => {
+ 
   const [modalVisible, setModalVisible] = useState(false); 
 
-
+console.log('verificacndo fecha',turnoHorn)
 
   // Función para abrir el modal cuando se hace clic en el botón
   const handleOpenModal = () => {
@@ -29,8 +49,28 @@ const Detalle = ({  id, nombretabla,codigoInicio,codigoFinal,cantidad }) => {
     switch (nombretabla) {
       case 'ctt':
         return <ROTT id={id}  nombretabla={nombretabla} codigoInicio={codigoInicio} codigoFinal={codigoFinal} cantidad={cantidad}  />
-      case 'cth':
-          return <ROTH id={id}  nombretabla={nombretabla}/>
+      case 'cthh':
+          return <ROTH 
+  id={id} 
+  nombretabla={nombretabla}
+  codigoInicio={codigoInicio}
+  codigoFinal={codigoFinal}
+  id_horno={id_horno}
+  cantidad={cantidad}
+  fechaHorneado={fechaHorneado}
+  turnoHorneado={turnoHorneado}
+  turnoHorn={turnoHorn}
+  id_turno={id_turno}
+  hornedo={hornedo}
+  MCrudas={MCrudas}
+  LBarro={LBarro}
+  LBaserrin={LBaserrin}
+  aserradero={aserradero}
+  tipCernido={tipCernido}
+  modelo={modelo}
+  id_modelo={id_modelo}
+  hornn={hornn}
+  hornero={hornero} />
           
      
       default:
@@ -48,16 +88,20 @@ const Detalle = ({  id, nombretabla,codigoInicio,codigoFinal,cantidad }) => {
   };
 
   return (
-    <div >
-    <a type="button" onClick={handleClick}>
-      <i className="bi bi-arrow-bar-right"></i>
-    </a>
-    <Modal isOpen={modalVisible} toggle={handleCloseModal} style={{ width: '100%', maxWidth: '100%', height: '100%', maxHeight: '100%' }}>
-      <ModalHeader toggle={handleCloseModal}>{nombretabla}</ModalHeader>
-      <ModalBody>{renderSelectedForm()}</ModalBody>
-      <ModalFooter></ModalFooter>
-    </Modal>
+    
+    <div className="container-fluid">
+    <div className="d-flex justify-content-center align-items-center">
+  <a type="button" onClick={handleClick}>
+    <i className="bi bi-arrow-bar-right"></i>
+  </a>
+  <Modal isOpen={modalVisible} toggle={handleCloseModal} className="responsive-modal">
+    <ModalHeader toggle={handleCloseModal}>{nombretabla}</ModalHeader>
+    <ModalBody>{renderSelectedForm()}</ModalBody>
+    <ModalFooter></ModalFooter>
+  </Modal>
   </div>
+</div>
+
   
   );
 }

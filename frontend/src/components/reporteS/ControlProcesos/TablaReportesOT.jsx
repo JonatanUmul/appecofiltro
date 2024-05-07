@@ -99,7 +99,7 @@ const BotonOT = () => {
       <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Producciòn')}>
       7. Producciòn
     </a>
-    <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Horneados')}>
+    <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '8', 'Horneados')}>
     7. Horneados
   </a>
 

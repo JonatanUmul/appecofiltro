@@ -18,7 +18,7 @@ const ExcelROTHP = ({ datos }) => {
 
   return (
     <div>
-      <button className="btn" onClick={generarExcel}><i class="bi bi-file-earmark-excel-fill"></i></button>
+      <button className="btn" onClick={generarExcel}><i className="bi bi-file-earmark-excel-fill"></i></button>
     </div>
   );
 };

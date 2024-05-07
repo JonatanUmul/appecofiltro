@@ -43,9 +43,6 @@ const BotonOT = () => {
           return <ROTT/>
       case '4':
             return <ROTH/>
-           
-         
-     
 
       default:
         return null;
