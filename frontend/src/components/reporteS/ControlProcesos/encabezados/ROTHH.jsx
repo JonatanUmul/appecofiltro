@@ -3,7 +3,8 @@ import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
 import PdfROTHP from '../pdfECO/PdfROTHP.jsx';
 import ExcelROTHP from '../Excel/ExcelRothp.jsx';
-import Detalle from '../detalles/Detalle_ROTT.jsx';
+import Detalle from '../detalles/RedireccionDetalle_ROTT.jsx';
+import DetalleCC from '../detalles/RedireccionDetalleCC.jsx'
 const URL = process.env.REACT_APP_URL;
 
 const ROTHP = () => {
@@ -26,7 +27,7 @@ const [horno, sethorno]=useState('')
         console.error('Error al obtener los datos:', error);
       });
   }, [fecha_creacion_inicio, fecha_creacion_fin, modeloUF, turn,horno]);
-console.log('datos', datos)
+console.log('datos aqui', datos)
   return (
     
     <div className="row mb-3">
@@ -50,7 +51,7 @@ console.log('datos', datos)
       <thead className="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col"></th>
+          <th scope="col">Temperatura</th>
           <th scope="col">Fecha Horneado</th>
           <th scope="col">Turno</th>
           <th scope="col">C.Inicio</th>
@@ -63,6 +64,7 @@ console.log('datos', datos)
           <th scope="col">T. Cernido</th>
           <th scope="col">Modelo</th>
           <th scope="col">Horno</th>
+          <th scope="col">%Aprobado</th>
           <th scope="col">Hornero</th>
         </tr>
       </thead>
@@ -70,7 +72,7 @@ console.log('datos', datos)
         {Array.isArray(datos) && datos.map((fila, index) => (
           <tr key={index}>
             <th scope="row">{index + 1}</th>
-            <th>
+            <th style={{ width: "0%" }}>
               <Detalle
                 nombretabla={fila.tabla}
                 fechaHorneado={fila.fecha_creacion}
@@ -88,7 +90,7 @@ console.log('datos', datos)
                 modelo={fila.ufmodelo}
                 id_modelo={fila.id_modelo}
                 hornn={fila.enc_maq}
-                id_horno={fila.id_horno}
+                id_horno={fila.numeroHorno}
                 hornero={fila.operarios}
                
               />
@@ -105,9 +107,23 @@ console.log('datos', datos)
             <td>{fila.tipocernido}</td>
             <td>{fila.ufmodelo}</td>
             <td>{fila.enc_maq}</td>
+            
+           <td class="text-muted">{fila.porcentaje}% 
+           <DetalleCC
+           fechaHorneado={fila.fecha_creacion}
+           nombretabla={fila.tabla}
+           turnoHorneado= {fila.turno}
+           id_turno={fila.id_turno}
+           id_modelo={fila.id_modelo}
+           id_horno={fila.numeroHorno}
+           />
+           </td>
+     
             <td>{fila.operarios}</td>
           </tr>
         ))}
+
+
       </tbody>
     </table>
   </div>

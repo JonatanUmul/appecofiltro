@@ -58,8 +58,6 @@ console.log('verificacndo fecha',turnoHorn)
   id_horno={id_horno}
   cantidad={cantidad}
   fechaHorneado={fechaHorneado}
-  turnoHorneado={turnoHorneado}
-  turnoHorn={turnoHorn}
   id_turno={id_turno}
   hornedo={hornedo}
   MCrudas={MCrudas}

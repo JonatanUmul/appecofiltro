@@ -16,7 +16,7 @@ const ROTHP = ({ turnoHorn,id_modelo,id_turno, nombretabla,id_horno,codigoInicio
   const [turn, setTurnoProd] = useState(id_turno)
   const [horno, setHornos] = useState(id_horno);
 
-console.log('fecha horneado', turnoHorn)
+console.log('fecha horneado', id_horno)
   // Realizar las solicitudes para obtener datos
  
   useEffect(() => {

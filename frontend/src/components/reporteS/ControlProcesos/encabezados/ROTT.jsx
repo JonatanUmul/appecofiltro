@@ -3,7 +3,7 @@ import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
 import PdfROTHP from '../pdfECO/PdfROTHP';
 import ExcelROTHP from '../Excel/ExcelRothp';
-import Detalle from '../detalles/Detalle_ROTT.jsx';
+import Detalle from '../detalles/RedireccionDetalle_ROTT.jsx';
 const URL = process.env.REACT_APP_URL;
 
 const ROTHP = () => {
@@ -47,7 +47,7 @@ const ROTHP = () => {
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col"></th>
+            <th scope="col">Detalle</th>
             <th scope="col">Fecha Creación</th>
             <th scope="col">Turno</th>
             <th scope="col">Código de Inicio</th>
