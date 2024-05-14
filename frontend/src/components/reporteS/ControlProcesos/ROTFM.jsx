@@ -56,7 +56,7 @@ console.log(datos)
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
       <div className="col-md-3 d-flex align-items-end">
-      <PdfROTHP datos={datos}/>
+    
       <ExcelROTHP datos={datos}/>
       </div>
 
@@ -77,6 +77,7 @@ console.log(datos)
             
                 <th scope="col">Aserradero</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col">Modelo</th>
               </tr>
             </thead>
             <tbody>
@@ -91,6 +92,7 @@ console.log(datos)
                   <td>{fila.humedad}%</td>
                   <td>{fila.aserradero}/{fila.aserradero2}</td>
                   <td>{fila.cantidad}</td>
+                  <td>{fila.modelo}</td>
                  
             
                 </tr>

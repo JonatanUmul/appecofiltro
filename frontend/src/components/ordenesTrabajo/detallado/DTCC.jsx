@@ -123,7 +123,7 @@ console.log(operario)
             Responsable de CC
           </label>
           <select className="form-select" id="id_operarioCC" {...register("id_operarioCC")}>
-          <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
           {operario.rows && Array.isArray(operario.rows) && operario.rows.filter(operario => operario.id_area === 4 ).map((operario) => (
             <option key={operario.id} value={operario.id}>
               {operario.Nombre}
@@ -137,7 +137,7 @@ console.log(operario)
           Auditor de Procesos
         </label>
         <select className="form-select" id="id_auditor" {...register("id_auditor")}>
-          <option>--</option>
+        <option value="" disabled selected>Seleccione...</option>
           {operario.rows && Array.isArray(operario.rows) && operario.rows.filter(operario =>  operario.id_area === 9).map((operario) => (
             <option key={operario.id} value={operario.id}>
               {operario.Nombre}
@@ -154,7 +154,7 @@ console.log(operario)
             Modelo
           </label>
           <select className="form-select" id="modelo" {...register("modelo")}>
-          <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(modelo.rows)
             && modelo.rows.length>0 && modelo.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
@@ -169,7 +169,7 @@ console.log(operario)
             Horno
         </label>
         <select className="form-select" id="id_horno" {...register("id_horno")}>
-        <option>--</option> 
+        <option value="" disabled selected>Seleccione...</option>
         {Array.isArray(hornos.rows)
           && hornos.rows.length>0 && hornos.rows.map((horno) => (
             <option key={horno.id_maq} value={horno.id_maq}>
@@ -183,7 +183,7 @@ console.log(operario)
             Turno de CC
           </label>
           <select className="form-select" id="turnoCC" {...register("turnoCC")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(turno.rows)
             && turno.rows.length>0 && turno.rows.map((turno) => (
               <option key={turno.id} value={turno.id}>
@@ -205,7 +205,7 @@ console.log(operario)
             Turno de Horneado
           </label>
           <select className="form-select" id="turnoHorneado" {...register("turnoHorneado")}>
-          <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(turno.rows)
             && turno.rows.length>0 && turno.rows.map((turno) => (
               <option key={modelo.id} value={turno.id}>

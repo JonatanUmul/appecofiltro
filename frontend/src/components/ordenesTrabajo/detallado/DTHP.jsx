@@ -78,7 +78,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Materia Prima
           </label>
           <select className="form-select" id="id_matPrima" {...register("id_matPrima")}>
-            <option> --</option>
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
               <option key={matPrim.id_enc} value={matPrim.id_enc}>
@@ -92,7 +92,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Aserradero
           </label>
           <select className="form-select" id="id_asrd" {...register("id_asrd")}>
-           <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
@@ -106,7 +106,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Patio
           </label>
           <select className="form-select" id="id_patio" {...register("id_patio")}>
-           <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
               <option key={patio.id} value={patio.id}>
                 {patio.nombrePatio}

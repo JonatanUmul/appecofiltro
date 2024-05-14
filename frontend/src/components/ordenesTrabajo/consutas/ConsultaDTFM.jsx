@@ -36,6 +36,7 @@ const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
             <th scope="col">Cantidad</th>
             <th scope="col">Peso</th>
             <th scope="col">Humedad</th>
+            <th scope="col">Modelo</th>
          
            
           </tr>
@@ -51,6 +52,7 @@ const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
               <td>{fila.cantidad}</td>
               <td>{fila.peso}/{fila.peso2}</td>
               <td>{fila.humedad}%</td>
+              <td>{fila.modelo}</td>
               
             </tr>
           ))}

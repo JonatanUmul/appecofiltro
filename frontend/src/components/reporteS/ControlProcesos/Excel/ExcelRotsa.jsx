@@ -1,15 +1,13 @@
 import React from 'react';
 import * as XLSX from 'xlsx'; // Importar todas las exportaciones de xlsx
 
-const ExcelROTHP = ({ datos,patio, fechaSecado, cantidad_inicial, cantidad_final, merma }) => {
+const ExcelROTHP = ({ datos,fechaSecado}) => {
   const generarExcel = () => {
     // Crear una nueva hoja de cálculo de Excel
     const wb = XLSX.utils.book_new();
 
     // Agregar los encabezados a los datos
     const dataWithHeaders = [
-     
-      { "Fecha de Secado": fechaSecado, "Patio": patio, "Cantidad Inicial": cantidad_inicial, "Cantidad Final": cantidad_final, "Merma": merma },
       ...datos
     ];
 
@@ -17,10 +15,10 @@ const ExcelROTHP = ({ datos,patio, fechaSecado, cantidad_inicial, cantidad_final
     const ws = XLSX.utils.json_to_sheet(dataWithHeaders);
 
     // Agregar la hoja a la hoja de cálculo de Excel
-    XLSX.utils.book_append_sheet(wb, ws, 'ROTHP');
+    XLSX.utils.book_append_sheet(wb, ws, 'ROTSA');
 
     // Guardar el archivo Excel
-    const fileName = `Humedad En patios ${fechaSecado}.xlsx`;
+    const fileName = `Secado de Aserrin ${fechaSecado}.xlsx`;
     XLSX.writeFile(wb, fileName);
   };
 

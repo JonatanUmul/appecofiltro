@@ -105,7 +105,7 @@ console.log('Datos', id_aserradero,UFmodelo,grupoP)
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
       <div className="col-md-3 d-flex align-items-end">
-      <PdfROTHP datos={datos}/>
+  
       <ExcelROTHP datos={datos}/>
       </div>
 

@@ -14,6 +14,7 @@ const ROTHP = () => {
 const [modeloUF, setModeloUF]=useState('')
 const [turn, setMturn]=useState('')
 const [horno, sethorno]=useState('')
+const [porcentaje, setPorcentaje]=useState(0)
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
     const url = `${URL}/DTHH/${fecha_creacion_inicio ? fecha_creacion_inicio : 'null'}/${fecha_creacion_fin ? fecha_creacion_fin : 'null'}/${modeloUF ? modeloUF : 'null'}/${turn ? turn : 'null'}/${horno ? horno : 'null'}`;
@@ -27,7 +28,8 @@ const [horno, sethorno]=useState('')
         console.error('Error al obtener los datos:', error);
       });
   }, [fecha_creacion_inicio, fecha_creacion_fin, modeloUF, turn,horno]);
-console.log('datos aqui', datos)
+
+console.log('porcentage',porcentaje );
   return (
     
     <div className="row mb-3">
@@ -108,7 +110,7 @@ console.log('datos aqui', datos)
             <td>{fila.ufmodelo}</td>
             <td>{fila.enc_maq}</td>
             
-           <td class="text-muted">{fila.porcentaje}% 
+           <td class="text-muted" value={porcentaje} onChange={(e)=>setPorcentaje(e.target.value)}>{fila.porcentaje}%  
            <DetalleCC
            fechaHorneado={fila.fecha_creacion}
            nombretabla={fila.tabla}

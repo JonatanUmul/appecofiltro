@@ -29,7 +29,7 @@ const ConsultaDTT = ({  id }) => {
       <th scope="col">#</th>
             <th scope="col">Fecha de Producción</th>
             <th scope="col">Hora</th>
-            <th scope="col">Orden</th>
+            <th scope="col">Modelo</th>
             <th scope="col">Barro Lb</th>
             <th scope="col">Aserrin LB</th>
             <th scope="col">Humedad Barro</th>
@@ -46,7 +46,7 @@ const ConsultaDTT = ({  id }) => {
           <td>{index + 1}</td>
           <td className="text-wrap">{formatFecha(fila.fecha_produccion)}</td>
           <td>{fila.hora_creacion}</td>
-          <td>{fila.id_cfmp}</td>
+          <td>{fila.modelo}</td>
           <td>{fila.barroLB}</td>
           <td>{fila.aserrinLB}</td>
           <td>{fila.humedadBarro}</td>

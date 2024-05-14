@@ -43,6 +43,12 @@ const EstadoProc = ({ id, encabezado }) => {
         break;
       case 'cth':
         setCambiarRuta('cth');
+        break; 
+      case 'cpcd':
+       setCambiarRuta('cpcd');
+        break;
+      case 'cfmp':
+       setCambiarRuta('cfmp');
         break;
      
     }

@@ -72,7 +72,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           </label>
           <div class="form-group">
           <select class="form-control" name="" id="id_MP" {...register('id_MP')}>
-            <option value="selecciona">Selecciona una opción</option>
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(matPrim.rows)&& matPrim.rows.length>0&& matPrim.rows.map((Primas)=>(
               
               <option key={Primas.id_enc}value={Primas.id_enc}>{Primas.nom_matPrima}</option>

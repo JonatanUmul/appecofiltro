@@ -16,6 +16,8 @@
       const [id_grupoproduccion, setGrupoP]=useState('')
       const [turno, setTurno] = useState([]);
       const [turn, setTurn]=useState('')
+      const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
+      const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       useEffect(() => {
         axios.all([
           axios.get(`${URL}/ModelosUF`),
@@ -36,13 +38,16 @@
       const limpiarInputs = () => {
        
         setmodelosUF('');
-        setGrupoP('')
+        setGrupoP('');
+        setFecha(formatFecha(new Date()))
+        setFecha2(formatFecha(new Date()))
       };
    
       useEffect(() => {
         // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
 
-       const url=`${URL}/DTP/${id_ufmodelo }/${id_grupoproduccion }`;
+       const url=`${URL}/DTP/${fecha_creacion_inicio|| 'null'}/${fecha_creacion_fin|| 'null'}/${id_ufmodelo || 'null'}/${id_grupoproduccion||'null'}`;
+
 
         axios.get(url).then((response) => {
             setDatos(response.data);
@@ -51,13 +56,34 @@
           .catch((error) => {
             console.error('Error al obtener los datos:', error);
           });
-      }, [ id_ufmodelo, id_grupoproduccion]);
+      }, [ id_ufmodelo, id_grupoproduccion, fecha_creacion_inicio,fecha_creacion_fin]);
 
   
       return (
         <div className="row mb-3">
         <div className="row mb-3">
-      
+        <div className="col-md-3">
+        <label htmlFor="fecha" className="form-label">Fecha 1</label>
+        <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />
+      </div>
+      <div className="col-md-3">
+        <label htmlFor="fecha" className="form-label">Fecha 2</label>
+        <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
+      </div>
+      <div className="col-md-6">
+      <label htmlFor="aserradero" className="form-label">
+          Turno de Producción
+      </label>
+      <select className="form-select" id="id_turno" value={turn} onChange={(e) => setTurn(e.target.value)}>
+      <option>--</option>
+      {Array.isArray(turno.rows)
+        && turno.rows.length>0 && turno.rows.map((turno) => (
+          <option key={turno.id} value={turno.id}>
+            {turno.turno}
+          </option>
+        ))}
+      </select>
+    </div>
       <div className="col-md-3">
       <label htmlFor="modelo"  className="form-label">Modelo:</label>
       <select className="form-select" name="UFmodelo" value={id_ufmodelo}  onChange={(e) => setmodelosUF(e.target.value)}>
@@ -81,23 +107,10 @@
       </div>
 
       
-      <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-              Turno de Producción
-          </label>
-          <select className="form-select" id="id_turno" value={turn} onChange={(e) => setTurn(e.target.value)}>
-          <option>--</option>
-          {Array.isArray(turno.rows)
-            && turno.rows.length>0 && turno.rows.map((turno) => (
-              <option key={turno.id} value={turno.id}>
-                {turno.turno}
-              </option>
-            ))}
-          </select>
-        </div>
+    
 
       <div className="col-md-3 d-flex align-items-end">
-      <PdfROTHP datos={datos}/>
+     
       <ExcelROTHP datos={datos}/>
       </div>
 
@@ -109,10 +122,14 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Hora</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Humedad</th>
-           
+                <th scope="col">Turno</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Producido</th>
+                <th scope="col">Grupo Prod.</th>
+                <th scope="col">C.Inicio</th>
+                <th scope="col">C.Fin</th>
+                <th scope="col">Formula</th>      
+                <th scope="col">Aserradero</th>     
 
               </tr>
             </thead>
@@ -120,15 +137,26 @@
               {Array.isArray(datos) && datos.map((fila, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
-                  <td>{formatFecha(fila.fecha_creacion) }</td>
-                  <td>{fila.hora_creacion}</td>
-                  <td>{fila.cantidad}</td>
+                  <td>{formatFecha(fila.fecha_real) }</td>
+                  <td>{fila.nombre_turno}</td>
+                  <td>{fila.nombre_ufmodelo}</td>
+                  <td>{fila.producido}</td>
+                  <td>{fila.grupoProd}</td>
+                  <td>{fila.codigoInicio}</td>
+                  <td>{fila.codigoFinal}</td>
+                  <td>{fila.pesototal}</td>
+                  <td>{fila.aserradero1}/{fila.aserradero2}</td>
+                 
                   
-                  <td>{fila.humedad}</td>
+                  
                
                 </tr>
               ))}
-          
+              <tr>
+              <td colSpan="4"><strong>Total:</strong></td>
+              <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.producido), 0)}</strong></td>
+    
+     </tr>
             </tbody>
           </table>
         </div>

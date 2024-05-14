@@ -118,7 +118,7 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
             Materia Prima
           </label>
           <select className="form-select" id="id_MP" {...register("id_MP")}>
-          <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
               <option key={matPrim.id_enc} value={matPrim.id_enc}>
@@ -132,7 +132,7 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
             Aserradero
           </label>
           <select className="form-select" id="id_asrd" {...register("id_asrd")}>
-          <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserrado) => (
               <option key={aserrado.id} value={aserrado.id}>

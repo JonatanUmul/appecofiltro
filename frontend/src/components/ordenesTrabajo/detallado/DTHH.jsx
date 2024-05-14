@@ -111,7 +111,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
               Turno de Horneado
           </label>
           <select className="form-select" id="id_turno" {...register("id_turno")}>
-          <option>--</option>
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(turno.rows)
             && turno.rows.length>0 && turno.rows.map((turno) => (
               <option key={turno.id} value={turno.id}>
@@ -126,7 +126,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
               Aserradero
           </label>
           <select className="form-select" id="id_aserradero" {...register("id_aserradero")}>
-          <option>--</option>  
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
@@ -141,7 +141,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
             Detalle Cernido
         </label>
         <select className="form-select" id="id_cernidodetalle" {...register("id_cernidodetalle")} required>
-        <option>--</option> 
+        <option value="" disabled selected>Seleccione...</option>
         
         {Array.isArray(cernidoDetalle.rows)
           && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
@@ -157,7 +157,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
               Modelo
           </label>
           <select className="form-select" id="id_modelo" {...register("id_modelo")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(modelos.rows)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
@@ -173,7 +173,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
               Horno
           </label>
           <select className="form-select" id="id_horno" {...register("id_horno")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(hornos.rows)
             && hornos.rows.length>0 && hornos.rows.map((horno) => (
               <option key={horno.id_maq} value={horno.id_maq}>
@@ -188,7 +188,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
               Hornero
           </label>
           <select className="form-select" id="id_hornero" {...register("id_hornero")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(hornero.rows)
             && hornero.rows.length>0 && hornero.rows.map((hornero) => (
               <option key={hornero.id} value={hornero.id}>
@@ -253,7 +253,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
             Aserradero 2
           </label>
           <select className="form-select" id="id_aserradero2" {...register("id_aserradero2")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
@@ -268,7 +268,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
             Detalle Cernido
         </label>
         <select className="form-select" id="id_cernidodetalle2" {...register("id_cernidodetalle2")} required>
-        <option>--</option> 
+        <option value="" disabled selected>Seleccione...</option>
         
         {Array.isArray(cernidoDetalle.rows)
           && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (

@@ -11,7 +11,7 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [aserradero, setAserradero] = useState([]);
   const [formulador, setPrensador] = useState([]);
   const [error, setError]=useState('');
-
+  const [modelos, setModelos] = useState([]);
   const id_area=2;
   const id_area2=9;
 
@@ -20,11 +20,13 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/Turnos`),
       axios.get(`${URL}/Operarios/${id_area || 'null'}/${id_area2 || 'null'}`),
+      axios.get(`${URL}/ModelosUF`),
     ])
-      .then(([AserraderoResponse, TurnosResponse, operarioResponse]) => {
+      .then(([AserraderoResponse, TurnosResponse, operarioResponse, ModelosufResponse]) => {
         setTurno(TurnosResponse.data)
         setAserradero(AserraderoResponse.data)
         setPrensador(operarioResponse.data)
+        setModelos(ModelosufResponse.data);
       })
       .catch((error) => {
         setError(error.json)
@@ -43,7 +45,8 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
         barroLB: formData.barroLB,
         aserrinLB:formData.aserrinLB,
         humedadBarro: formData.humedadBarro,
-        humedadAserrin: formData.humedadAserrin
+        humedadAserrin: formData.humedadAserrin,
+        id_ufmodelo:formData.id_ufmodelo
      
       });
       // Mostrar SweetAlert de éxito
@@ -62,6 +65,7 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
       console.error("Error al enviar los datos:", error);
     }
   };
+
 
   return (
     <div className="mt-4">
@@ -89,6 +93,22 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
               ))}
             </select>
           </div>
+
+          <div className="col-md-6">
+          <label htmlFor="modelo" className="form-label">
+              Modelo
+          </label>
+          <select className="form-select" id="id_ufmodelo" {...register("id_ufmodelo")} required>
+          <option value="" disabled selected>Seleccione...</option>
+          {Array.isArray(modelos.rows)
+            && modelos.rows.length>0 && modelos.rows.map((modelo) => (
+              <option key={modelo.id_mod} value={modelo.id_mod}>
+                {modelo.nombre_modelo}
+              </option>
+            ))}
+          </select>
+        </div>
+
           <div className="col-md-6">
           <label htmlFor="id_aserradero" className="form-label">Aserradero</label>
           <select className="form-select" id="id_aserradero" {...register("id_aserradero")} required>

@@ -85,7 +85,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Modelo
           </label>
           <select className="form-select" id="id_modelo" {...register("id_modelo")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(modelos.rows)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
               <option key={modelo.id_mod} value={modelo.id_mod}>
@@ -99,7 +99,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
               Tipo de Plata
           </label>
           <select className="form-select" id="TipoPlata" {...register("TipoPlata")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(plata.rows)
             && plata.rows.length>0 && plata.rows.map((plata) => (
               <option key={plata.id} value={plata.id}>

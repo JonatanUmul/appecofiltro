@@ -15,7 +15,7 @@ const ROTHP = ({ id_horno, fechaHorneado, id_turno, id_modelo }) => {
   const [turnoHorno, setTurnohorno] = useState(id_turno);
   const [horno, setHorno] = useState(id_horno);
   const [modelo, setModelo] = useState(id_modelo);
-
+const [porcentaje, setPorcentaje]=useState(0)
   useEffect(() => {
     const url = `${URL}/DTCC/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${turnoHorno || 'null'}/${horno || 'null'}/${modelo || 'null'}`;
 
@@ -23,13 +23,14 @@ const ROTHP = ({ id_horno, fechaHorneado, id_turno, id_modelo }) => {
       .then((response) => {
         setDatos(response.data.data);
         console.log('datos consulta', response.data);
+        setPorcentaje(response.data.data.porcentaje)
       })
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
       });
   }, [fecha_creacion_inicio, fecha_creacion_fin, turnoHorno, horno, modelo]);
 
-  console.log('datos de C.c', datos);
+  console.log('porcentage',porcentaje );
 
   return (
   
@@ -68,7 +69,7 @@ const ROTHP = ({ id_horno, fechaHorneado, id_turno, id_modelo }) => {
             <li><strong>Crudos:</strong> {fila.crudoCC}</li>
             <li><strong>Quemados:</strong> {fila.quemados}</li>
             <li><strong>Ahumados:</strong> {fila.ahumados}</li>
-            <li><strong>%Aprobados:</strong> {fila.porcentaje}%</li>
+            <li ><strong>%Aprobados:</strong> {fila.porcentaje}%</li>
            
             </ul>
           </div>

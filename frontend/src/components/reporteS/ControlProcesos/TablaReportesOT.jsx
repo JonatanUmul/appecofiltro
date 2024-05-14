@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import ROTHP from './ROTHP'
-import ROTSA from './ROTSA'
+import ROTSA from '../ControlProcesos/encabezados/ROTSA'
 import ROTCA1 from './ROTCA1'
 import ROTCA2 from './ROTCA2'
 import ROTPV from './ROTPV'

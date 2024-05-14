@@ -11,20 +11,21 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [matPrima, setMatPrima] = useState([]);
   const [formula2, setFormula2]=useState(false);
   const [cernidoDetalle, setCernidoDetalle] = useState([]);
-  
+  const [modelos, setModelos] = useState([]);
  
 
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/MateriaPrima`),
-      axios.get(`${URL}/CernidoDetalle`)
-    
+      axios.get(`${URL}/CernidoDetalle`),
+      axios.get(`${URL}/ModelosUF`),
     ])
-      .then(([AserraderoResponse, MatPrimResponse, CernidodetalleResponse]) => {
+      .then(([AserraderoResponse, MatPrimResponse, CernidodetalleResponse, ModelosufResponse]) => {
         setAserradero(AserraderoResponse.data);
         setMatPrima(MatPrimResponse.data);
-        setCernidoDetalle(CernidodetalleResponse.data)
+        setCernidoDetalle(CernidodetalleResponse.data);
+        setModelos(ModelosufResponse.data);
     
       })
       .catch((error) => {
@@ -42,12 +43,11 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
         peso: formData.peso,
         humedad: formData.humedad,
         id_matPrim: formData.id_matPrim,
-
         id_Aserradero2: formData.id_Aserradero2,
         peso2: formData.peso2,
         humedad2: formData.humedad2,
-        id_cernidodetalle2:formData.id_cernidodetalle2
-       
+        id_cernidodetalle2:formData.id_cernidodetalle2,
+        id_modelo: formData.id_modelo,
       });  // Mostrar SweetAlert de éxito
       Swal.fire({
        icon: 'success',
@@ -95,7 +95,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
             Materia Prima
           </label>
           <select className="form-select" id="id_matPrim" {...register("id_matPrim")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(matPrima.rows)
             && matPrima.rows.length>0 && matPrima.rows.map((matPrima) => (
               <option key={matPrima.id_enc} value={matPrima.id_enc}>
@@ -109,7 +109,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
             Aserradero
           </label>
           <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
@@ -123,7 +123,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
             Detalle Cernido
         </label>
         <select className="form-select" id="id_cernidodetalle" {...register("id_cernidodetalle")} required>
-        <option>--</option> 
+        <option value="" disabled selected>Seleccione...</option>
         
         {Array.isArray(cernidoDetalle.rows)
           && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
@@ -133,6 +133,21 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
           ))}
         </select>
       </div>
+
+      <div className="col-md-6">
+      <label htmlFor="aserradero" className="form-label">
+          Modelo
+      </label>
+      <select className="form-select" id="id_modelo" {...register("id_modelo")} required>
+      <option value="" disabled selected>Seleccione...</option>
+      {Array.isArray(modelos.rows)
+        && modelos.rows.length>0 && modelos.rows.map((modelo) => (
+          <option key={modelo.id_mod} value={modelo.id_mod}>
+            {modelo.nombre_modelo}
+          </option>
+        ))}
+      </select>
+    </div>
        
         <div className="col-md-6">
           <label htmlFor="esquinaSI" className="form-label">
@@ -163,7 +178,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
             Aserradero
           </label>
           <select className="form-select" id="id_Aserradero2" {...register("id_Aserradero2")}>
-          <option>--</option> 
+          <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
               <option key={aserradero.id} value={aserradero.id}>
@@ -178,7 +193,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
             Detalle Cernido
         </label>
         <select className="form-select" id="id_cernidodetalle2" {...register("id_cernidodetalle2")} required>
-        <option>--</option> 
+        <option value="" disabled selected>Seleccione...</option>
         
         {Array.isArray(cernidoDetalle.rows)
           && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (

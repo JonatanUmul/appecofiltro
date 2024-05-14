@@ -1,9 +1,8 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios'
-    import { formatFecha } from "../../utilidades/FormatearFecta";
-    import PdfROTHP from './pdfECO/PdfROTHP'
-    import ExcelROTHP from './Excel/ExcelRothp'
-
+    import { formatFecha } from "../../../utilidades/FormatearFecta.js";
+    import ExcelRotsa from '../Excel/ExcelRotsa.jsx'
+import Detalle from '../detalles/RedireccionDetalleROTHP'
     const URL = process.env.REACT_APP_URL
 
     const ROTHP = () => {
@@ -92,8 +91,9 @@ console.log(datos)
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
       <div className="col-md-3 d-flex align-items-end">
-      <PdfROTHP datos={datos}/>
-      <ExcelROTHP datos={datos}/>
+
+      <ExcelRotsa datos={datos}
+      fechaSecado={datos.fecha_creacion}/>
       </div>
 
 
@@ -103,6 +103,7 @@ console.log(datos)
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">Detalle</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Hora</th>
                 <th scope="col">Patio</th>
@@ -118,6 +119,18 @@ console.log(datos)
               {Array.isArray(datos) && datos.map((fila, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
+                  
+                 <th> <Detalle
+                 nombretabla={fila.tabla}
+                 fechaSecado={formatFecha(fila.fecha_creacion)}
+                 id_patio={fila.id_patio}
+                 patio={fila.patio}
+
+                 cantidad_inicial={fila.cantidad_inicial}
+                 cantidad_final={fila.cantidad_final}
+                 merma={fila.merma}
+                 /></th> 
+                
                   <td>{formatFecha(fila.fecha_creacion) }</td>
                   <td>{fila.hora_creacion}</td>
                   <td>{fila.patio}</td>
@@ -131,7 +144,7 @@ console.log(datos)
               ))}
 
 <tr style={{color:'blue'}}>
-          <td colSpan="5"><strong>Total:</strong></td>
+          <td colSpan="6"><strong>Total:</strong></td>
           <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_inicial), 0)}</strong></td>
 <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_final), 0)}</strong></td>
 <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.merma), 0)}</strong></td>

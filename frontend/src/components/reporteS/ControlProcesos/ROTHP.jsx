@@ -1,8 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios'
-    import { formatFecha } from "../../utilidades/FormatearFecta";
-    import PdfROTHP from './pdfECO/PdfROTHP'
-    import ExcelROTHP from './Excel/ExcelRothp'
+    import { formatFecha } from '../../utilidades/FormatearFecta';
+    import ExcelROTHP from './Excel/ExcelRothp.jsx'
     const URL = process.env.REACT_APP_URL
 
 
@@ -66,6 +65,7 @@ console.log(matPrim)
         setIdAserradero('');
         setIdPatio(''); 
       };
+      console.log('datos',datos)
       return (
         <div className="row mb-3">
         <div className="row mb-3">
@@ -108,7 +108,7 @@ console.log(matPrim)
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
       <div className="col-md-3 d-flex align-items-end">
-      <PdfROTHP datos={datos}/>
+      
       <ExcelROTHP datos={datos}/>
       </div>
 
