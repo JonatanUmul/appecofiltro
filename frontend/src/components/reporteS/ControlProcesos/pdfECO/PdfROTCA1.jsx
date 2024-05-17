@@ -91,7 +91,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom:20,
   },
-
+  tableHeader: {
+   
+    textAlign: 'center',
+    fontSize: 8,
+    flexDirection: 'row',
+    backgroundColor: '#ccc',
+    fontWeight: 'bold',
+  },
   tableRow: {
     flexDirection: 'row',
     borderBottomWidth: 0.5,
@@ -106,16 +113,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     padding: 3,
     flex: 1,
-    flexDirection: 'row',
-  },
-  tableHeader: {
-
-
-    textAlign: 'center',
-    fontSize: 8,
-    flexDirection: 'row',
-    backgroundColor: '#ccc',
-    fontWeight: 'bold',
   },
   text: {
     marginLeft: 2,
@@ -133,7 +130,7 @@ textAlign:'center',
 
   },
   datodFirmas:{
-    marginTop:'10%',
+    marginTop:'5%',
     flexDirection:'row'
   
   },
@@ -159,7 +156,7 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
 
       <View style={[styles.titleContainer, { flex: 4 }]}>
         <Text style={[styles.title]}>GESTIÓN DE CALIDAD</Text>
-        <Text style={[styles.title]}>CONTROL DE HUMEDAD DE SECADO EN MATERIAS PRIMAS</Text>
+        <Text style={[styles.title]}>CONTROL CERNIDO DE ASERRIN 1</Text>
       </View>
 
       <View style={[styles.titleContainer, { flex: 1 }]}>
@@ -169,40 +166,33 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
       </View>
 
       <View style={[styles.titleContainer, { flex: 1 }]}>
-        <Text style={[styles.title]}>PRO-FOR-004</Text>
+        <Text style={[styles.title]}>PRO-FOR</Text>
         <Text style={[styles.title]}>3</Text>
         <Text style={[styles.title]}>15/03/24</Text>
       </View>
     </View>
 
+   
 
     <View style={styles.table}>
       <View style={styles.tableHeader}>
         <Text style={styles.tableCell}>Fecha</Text>
-        <Text style={styles.tableCell}>Turno</Text>
-        <Text style={styles.tableCell}>C. Inicio</Text>
-        <Text style={styles.tableCell}>C. Fin</Text>
-        <Text style={styles.tableCell}>Producido</Text>
-        <Text style={styles.tableCell}>Lb Barro</Text>
-        <Text style={styles.tableCell}>Lb Aserrìn</Text>
-        <Text style={styles.tableCell}>Cantidad de Formulas</Text>
-        <Text style={styles.tableCell}>Grupo Producciòn</Text>
-        <Text style={styles.tableCell}>Firma</Text>
+        <Text style={styles.tableCell}>Aserradero</Text>
+        <Text style={styles.tableCell}>Cantidad Inicial</Text>
+        <Text style={styles.tableCell}>Cantidad Final</Text>
+        <Text style={styles.tableCell}>Merma</Text>
+       
+  
       </View>
       {datos.map((fila, index) => (
         <View key={index} style={styles.tableRow}>
-          <Text style={styles.tableCell}>{formatFecha(fila.fecha_real)}</Text>
-          <Text style={styles.tableCell}>{fila.nombre_turno}</Text>
-          <Text style={styles.tableCell}>{fila.codigoInicio}</Text>
-          <Text style={styles.tableCell}>{fila.codigoFinal}</Text>
-          <Text style={styles.tableCell}>{fila.producido}</Text>
-          <Text style={styles.tableCell}>{fila.librasBarro}</Text>
-          <Text style={styles.tableCell}>{fila.librasAserrin}</Text>
-          <Text style={styles.tableCell}>{fila.formulas}</Text>
-          <Text style={styles.tableCell}>{fila.grupoProd}</Text>
-          <Text style={styles.tableCell}></Text>
+          <Text style={styles.tableCell}>{formatFecha(fila.fecha_creacion)}</Text>
+          <Text style={styles.tableCell}>{fila.aserradero}</Text>
+          <Text style={styles.tableCell}>{fila.CantidadInicial}</Text>
+          <Text style={styles.tableCell}>{fila.CantidadFinal}</Text>
+          <Text style={styles.tableCell}>{fila.merma}</Text>
          
-        
+                  
         </View>
       ))}
     </View>
@@ -211,29 +201,22 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
     <View style={[styles.cardHeader]}>
     <Text style={styles.cardTitle}>COMENTARIOS</Text>
     </View>
-    {datos.map((fila) => (
     <View style={styles.cardBody}>
       
-      <Text style={styles.cardText}>{fila.observacion}</Text>
+      <Text style={styles.cardText}></Text>
     </View>
-    ))}
   </View>
     
 
     <View style={[styles.datodFirmas, { justifyContent: 'center' }]}>
       <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'center', flexDirection: 'column' }]}>
         <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}>___________________________</Text>
-        <Text style={styles.firmas}>F. Encargado Auditor Dìa</Text>
+        <Text style={styles.firmas}>F. Encargado de Secado</Text>
       </View>
       <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'start', flexDirection: 'column' }]}>
         <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}> ___________________________</Text>
-        <Text style={styles.firmas}>F.  Encargado Auditor Noche</Text>
+        <Text style={styles.firmas}>F. Jefe de Producción</Text>
       </View>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'center', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}>___________________________</Text>
-        <Text style={styles.firmas}>F. Jefe Auditores</Text>
-      </View>
-      
     </View>
   </Page>
 </Document>

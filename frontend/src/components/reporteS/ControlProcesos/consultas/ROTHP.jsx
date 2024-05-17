@@ -13,8 +13,8 @@
       const [aserradero, setAserradero] = useState('');
       const [matPrim, setMatPrim] = useState('');
 
-      const [fecha_creacion_inicio, setFecha] = useState(formatFecha(fechaSecado));
-      const [fecha_creacion_fin, setFecha2] = useState(formatFecha(fechaSecado));
+      const [fecha_creacion_inicio, setFecha] = useState(fechaSecado);
+      const [fecha_creacion_fin, setFecha2] = useState(fechaSecado);
       const [id_asrd, setIdAserradero] = useState('');
       const [id_enc, setIDEnc] = useState('');
       const [idpatio, setIdPatio] = useState(id_patio);

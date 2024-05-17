@@ -2,6 +2,7 @@
     import axios from 'axios'
     import { formatFecha } from "../../../utilidades/FormatearFecta.js";
     import ExcelRotsa from '../Excel/ExcelRotsa.jsx'
+    import PdfROTSA from '../pdfECO/PdfROTSA.jsx'
 import Detalle from '../detalles/RedireccionDetalleROTHP'
     const URL = process.env.REACT_APP_URL
 
@@ -16,8 +17,8 @@ import Detalle from '../detalles/RedireccionDetalleROTHP'
       const [id_patio, setIdPatio] = useState('');
 
       const limpiarInputs = () => {
-        setFecha('');
-        setFecha2('');
+        setFecha(formatFecha(new Date()));
+        setFecha2(formatFecha(new Date()));
         setIdAserradero('');
         setIdPatio(''); 
       };
@@ -94,8 +95,9 @@ console.log(datos)
 
       <ExcelRotsa datos={datos}
       fechaSecado={datos.fecha_creacion}/>
+      <PdfROTSA datos={datos}/>
       </div>
-
+    
 
     </div>
 

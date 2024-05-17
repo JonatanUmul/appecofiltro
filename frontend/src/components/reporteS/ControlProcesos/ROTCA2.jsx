@@ -1,8 +1,8 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios'
     import { formatFecha } from "../../utilidades/FormatearFecta";
-    import PdfROTHP from './pdfECO/PdfROTHP'
-    import ExcelROTHP from './Excel/ExcelRothp'
+    import PdfROTCA2 from './pdfECO/PdfROTCA2.jsx'
+    import ExcelRoca2 from './Excel/ExcelRoca2.jsx'
     const URL = process.env.REACT_APP_URL
 
 
@@ -80,7 +80,8 @@ console.log('datos cernido 2', datos)
       </div>
       <div className="col-md-3 d-flex align-items-end">
    
-      <ExcelROTHP datos={datos}/>
+      <ExcelRoca2 datos={datos}/>
+      <PdfROTCA2 datos={datos}/>
       </div>
 
 
