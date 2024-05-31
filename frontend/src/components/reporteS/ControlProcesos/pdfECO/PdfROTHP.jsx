@@ -3,17 +3,22 @@ import { PDFViewer, Document, Page, Text, View, StyleSheet, Image } from '@react
 import { formatFecha } from '../../../utilidades/FormatearFecta';
 import { Modal, ModalBody, Button } from 'reactstrap';
 
-// Estilos para el PDF
 const styles = StyleSheet.create({
+  container: {
+    marginVertical: -1,
+    flexDirection: 'row',
+    textAlign: 'center',
+    borderRadius:5
+  },
   card: {
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
     marginBottom: 20,
+    marginTop: 30,
   },
   cardHeader: {
     backgroundColor: '#ccc',
-    
     color: 'black',
     padding: 8,
     borderTopLeftRadius: 5,
@@ -26,224 +31,211 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 8,
-    textAlign:'center'
-
+    textAlign: 'center',
   },
   cardText: {
     fontSize: 12,
     marginBottom: 10,
   },
-  container: {
-    marginVertical:0,
-    flexDirection: 'row',
-    borderBottomColor: 'black',
-    borderBottomWidth: 0.5,
-    borderWidth: 0,
-    marginBottom:0,
-    marginLeft:0,
-    marginTop:0,
-    textAlign:'center'
+  titleContainer: {
+    marginVertical: -2,
+    textAlign: 'center',
+    flex: 1,
+    marginHorizontal: 0,
+    marginLeft: 2,
   },
-
   title: {
-    padding: 8, 
-    // marginVertical:0,
+    padding: 8,
+    marginVertical: -1,
+    marginHorizontal: -1,
     fontSize: 10,
     fontWeight: 'bold',
     textAlign: 'center',
     width: '100%',
-    borderWidth: 0.5,
+    borderWidth: 1,
     flex: 1,
-    padding: 8,
-    marginBottom:0,
-    marginTop:-0.5,
-    marginLeft:-0.5,
-    marginRight:1
-
   },
+  section: {
 
+    padding: 8,
+    fontSize: 10,
+    borderWidth: 0.1,
+  marginBottom:1,
+    borderBottom:0.5,
+borderTop:0.5,
+borderLeft:0.5,
+borderRight:0.5,
+marginBottom:30
+  },
   sectionColumn: {
     flexDirection: 'column',
   },
   sectionHeader: {
-    flex:2,
-    padding:3,
     maxHeight: '100%',
-    // marginHorizontal: 0,
-    borderWidth: 0.5,
-    // flexDirection: 'column',
+borderBottom:0.4,
+borderTop:0.4,
+borderLeft:0.4,
+borderRight:0.4,
+    marginBottom:1.7,
+    flexDirection: 'column',
     fontWeight: 'bold',
-    // borderBottomColor: 'black',
-    // borderBottomWidth: 0.5,
     fontSize: 8,
-    marginBottom:0,
-    marginTop:-0.2,
-    marginLeft:-0.2,
-    marginRight:0
+
+
   },
   page: {
-    marginTop:20,
     flexDirection: 'column',
-    padding: 40,
+    padding: 20,
   },
   table: {
     width: '100%',
     marginTop: 10,
-    marginBottom:20,
-  },
-
-  tableRow: {
-    flexDirection: 'row',
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'black',
-    borderWidth: 0.2,
-  },
-  tableCell: {
-    fontSize: 8,
-    borderColor: 'black',
-    borderWidth: 0.2,
-    textAlign: 'center',
-    borderStyle: 'solid',
-    padding: 3,
-    flex: 1,
-    flexDirection: 'row',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
   },
   tableHeader: {
-
-
     textAlign: 'center',
     fontSize: 8,
     flexDirection: 'row',
     backgroundColor: '#ccc',
     fontWeight: 'bold',
   },
+  tableRow: {
+    flexDirection: 'row',
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'black',
+  },
+  tableCell: {
+    marginBottom:0,
+    fontSize: 8,
+    textAlign: 'center',
+    borderWidth: 0.3,
+    borderBottom:0.3,
+    borderTop:0.3,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    padding: 3,
+    flex: 1,
+  },
   text: {
     marginLeft: 2,
-    textAlign:'center'
   },
   logo: {
-    marginHorizontal: 0
+    marginHorizontal: -1,
   },
   firmas: {
-marginLeft:15,
-textAlign:'center',
     fontSize: 8,
-textAlign:'center',
-    marginTop: 8,
-
-  },
-  datodFirmas:{
-    marginTop:'10%',
-    flexDirection:'row'
-  
+    flexDirection: 'row',
+    justifyContent: 'start',
+    marginTop: 5,
+    marginLeft: 20,
   },
   lineas: {
     fontSize: 8,
-    textAlign:'center',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: -5,
-    marginRight: 50 // Ajuste para evitar que las líneas se superpongan
+    marginRight: 5,
+  },
+  headd:{
+    width: '100%',
+    marginTop: 10,
+   
   }
 });
 
-const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
-  
+const MyDocument = ({ datos }) => (
   <Document>
-  <Page style={styles.page}>
-    <View style={[styles.container, { textAlign: 'center' }]}>
-      <View style={[styles.titleContainer, { flex: 0.7 }]}>
-        <Image source="/images/LoogoEco.png" style={[styles.logo, styles.section, styles.title]} />
-      </View>
-
-      <View style={[styles.titleContainer, { flex: 4 }]}>
-        <Text style={[styles.title]}>GESTIÓN DE CALIDAD</Text>
-        <Text style={[styles.title]}>CONTROL DE HUMEDAD DE SECADO EN MATERIAS PRIMAS</Text>
-      </View>
-
-      <View style={[styles.titleContainer, { flex: 1 }]}>
-        <Text style={[styles.title,{justifyContent:'ce'}]}>CODIGO:</Text>
-        <Text style={[styles.title]}>VERSIÓN:</Text>
-        <Text style={[styles.title]}>EMISION:</Text>
-      </View>
-
-      <View style={[styles.titleContainer, { flex: 1 }]}>
-        <Text style={[styles.title]}>PRO-FOR-004</Text>
-        <Text style={[styles.title]}>3</Text>
-        <Text style={[styles.title]}>15/03/24</Text>
-      </View>
-    </View>
-
-
-    <View style={styles.table}>
-      <View style={styles.tableHeader}>
-        <Text style={styles.tableCell}>Fecha</Text>
-        <Text style={styles.tableCell}>Turno</Text>
-        <Text style={styles.tableCell}>C. Inicio</Text>
-        <Text style={styles.tableCell}>C. Fin</Text>
-        <Text style={styles.tableCell}>Producido</Text>
-        <Text style={styles.tableCell}>Lb Barro</Text>
-        <Text style={styles.tableCell}>Lb Aserrìn</Text>
-        <Text style={styles.tableCell}>Cantidad de Formulas</Text>
-        <Text style={styles.tableCell}>Grupo Producciòn</Text>
-        <Text style={styles.tableCell}>Firma</Text>
-      </View>
-      {datos.map((fila, index) => (
-        <View key={index} style={styles.tableRow}>
-          <Text style={styles.tableCell}>{formatFecha(fila.fecha_real)}</Text>
-          <Text style={styles.tableCell}>{fila.nombre_turno}</Text>
-          <Text style={styles.tableCell}>{fila.codigoInicio}</Text>
-          <Text style={styles.tableCell}>{fila.codigoFinal}</Text>
-          <Text style={styles.tableCell}>{fila.producido}</Text>
-          <Text style={styles.tableCell}>{fila.librasBarro}</Text>
-          <Text style={styles.tableCell}>{fila.librasAserrin}</Text>
-          <Text style={styles.tableCell}>{fila.formulas}</Text>
-          <Text style={styles.tableCell}>{fila.grupoProd}</Text>
-          <Text style={styles.tableCell}></Text>
-         
-        
+    <Page style={styles.page}>
+      <View style={styles.container}>
+        <View style={[styles.titleContainer, { flex: 0.5, justifyContent: 'center' }]}>
+          <Image source="/images/LoogoEco.png" style={styles.logo} />
         </View>
-      ))}
-    </View>
+        <View style={[styles.titleContainer, { flex: 4 }]}>
+          <Text style={[styles.section, styles.title]}>GESTIÓN DE CALIDAD</Text>
+          <Text style={[styles.section, styles.title]}>CONTROL DE HUMEDAD DE SECADO EN MATERIAS PRIMAS</Text>
+        </View>
+        <View style={[styles.titleContainer, { flex: 1 }]}>
+          <Text style={[styles.section, styles.title]}>CODIGO:</Text>
+          <Text style={[styles.section, styles.title]}>VERSIÓN:</Text>
+          <Text style={[styles.section, styles.title]}>EMISION:</Text>
+        </View>
+        <View style={[styles.titleContainer, { flex: 1 }]}>
+          <Text style={[styles.section, styles.title, { textAlign: 'justify' }]}>PRO-FOR-004</Text>
+          <Text style={[styles.section, styles.title, { textAlign: 'justify' }]}>3</Text>
+          <Text style={[styles.section, styles.title, { textAlign: 'justify' }]}>15/03/24</Text>
+        </View>
+      </View>
 
-    <View style={styles.card}>
-    <View style={[styles.cardHeader]}>
-    <Text style={styles.cardTitle}>COMENTARIOS</Text>
-    </View>
-    {datos.map((fila) => (
-    <View style={styles.cardBody}>
+      <View style={ styles.headd}>
+        <View style={styles.container}>
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3,     borderTopLeftRadius:5, }]}>MATERIA PRIMA:</Text>
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].materiaPrima}</Text>
       
-      <Text style={styles.cardText}>{fila.observacion}</Text>
-    </View>
-    ))}
-  </View>
-    
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>FECHA:</Text>
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>
+            {formatFecha(datos[0].fecha_creacion)}
+          </Text>
+        </View>
 
-    <View style={[styles.datodFirmas, { justifyContent: 'center' }]}>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'center', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}>___________________________</Text>
-        <Text style={styles.firmas}>F. Encargado Auditor Dìa</Text>
+        <View style={styles.container}>
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Patio:</Text>
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].patio}</Text>
+        </View>
+        <View style={styles.container}>
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 ,     borderBottomLeftRadius:5,}]}>Hora Tendido: {datos[0].hora_creacion}</Text>
+          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Hora Recolección: {datos[datos.length - 1].hora_creacion}</Text>
+          <Text style={[styles.sectionHeader, { flex: 1, padding:0, borderBottomRightRadius:5 }]}>Cantidad Recolectada</Text>
+        </View>
       </View>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'start', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}> ___________________________</Text>
-        <Text style={styles.firmas}>F.  Encargado Auditor Noche</Text>
+
+      <View style={styles.table}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableCell}>Hora</Text>
+          <Text style={styles.tableCell}>Aserradero</Text>
+          <Text style={styles.tableCell}>Centro</Text>
+          <Text style={styles.tableCell}>Esquina Inferior Derecha</Text>
+          <Text style={styles.tableCell}>Esquina Inferior Izquierda</Text>
+          <Text style={styles.tableCell}>Esquina Superior Derecha</Text>
+          <Text style={styles.tableCell}>Esquina Superior Izquierda</Text>
+        </View>
+        {datos.map((fila, index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}>{fila.hora_creacion}</Text>
+            <Text style={styles.tableCell}>{fila.aserradero}</Text>
+            <Text style={styles.tableCell}>{fila.esquinaCentro}</Text>
+            <Text style={styles.tableCell}>{fila.esquinaInfDR}</Text>
+            <Text style={styles.tableCell}>{fila.esquinaInfIZ}</Text>
+            <Text style={styles.tableCell}>{fila.esquinaSupDA}</Text>
+            <Text style={styles.tableCell}>{fila.esquinaSupIZ}</Text>
+          </View>
+        ))}
       </View>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'center', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}>___________________________</Text>
-        <Text style={styles.firmas}>F. Jefe Auditores</Text>
+
+      <View style={styles.card}>
+        <View style={styles.cardHeader}>
+          <Text style={styles.cardTitle}>COMENTARIOS</Text>
+        </View>
+        <View style={styles.cardBody}>
+          <Text style={styles.cardText}></Text>
+        </View>
       </View>
-      
-    </View>
-  </Page>
-</Document>
-  
+
+      <View style={styles.firmas}>
+        <Text style={styles.lineas}> __________________________ </Text>
+        <Text style={styles.lineas}> __________________________ </Text>
+      </View>
+      <View style={styles.firmas}>
+        <Text style={styles.firmas}>Encargado de Secado</Text>
+        <Text style={styles.firmas}>Jefe de Producción</Text>
+      </View>
+    </Page>
+  </Document>
 );
 
-const PdfROTHP = ({ datos,  patio, fechaSecado, cantidad_final}) => {
-
-
-  console.log('datos123', patio, fechaSecado, cantidad_final)
+const PdfROTHP = ({ datos }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePDFViewer = () => {
@@ -251,16 +243,12 @@ const PdfROTHP = ({ datos,  patio, fechaSecado, cantidad_final}) => {
   };
 
   return (
-    
     <div>
       <button className="btn" onClick={togglePDFViewer}><i className="bi bi-file-earmark-pdf"></i></button>
-      <Modal isOpen={isOpen} toggle={togglePDFViewer} size="xl">
-        <div style={{ position: 'absolute', top: '10px', right: '20px', zIndex: 1 }}>
-          <Button close className="btn-close" onClick={togglePDFViewer} style={{ color: 'black', fontSize: '24px' }} />
-        </div>
-        <ModalBody style={{ margin: 0, padding: 0 }}>
-          <PDFViewer width="100%" height="700">
-            <MyDocument datos={datos} patio={patio} fechaSecado={fechaSecado} cantidad_final={cantidad_final}  />
+      <Modal isOpen={isOpen} toggle={togglePDFViewer} size="lg">
+        <ModalBody>
+          <PDFViewer style={{ width: '100%', height: '80vh' }}>
+            <MyDocument datos={datos} />
           </PDFViewer>
         </ModalBody>
       </Modal>

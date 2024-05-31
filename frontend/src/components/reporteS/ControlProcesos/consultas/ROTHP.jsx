@@ -63,7 +63,7 @@ console.log('FEcha Humedad patios',fechaSecado,idpatio)
                   <li className="list-group-item">C. Inicial: {cantidad_inicial}</li>
                   <li className="list-group-item">C. Final: {cantidad_final}</li>
                   <li className="list-group-item">Merma: {merma}</li>
-         
+        
                 </ul>
                 <div className="col-md-3 d-flex align-items-center justify-content-center">
                 <ExcelROTHP 
@@ -92,7 +92,7 @@ console.log('FEcha Humedad patios',fechaSecado,idpatio)
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Fecha</th>
+                <th scope="col">Fecha1</th>
                 <th scope="col">Hora</th>
                 <th scope="col">Materia Prima</th>
                 <th scope="col">Patio</th>

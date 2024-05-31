@@ -59,7 +59,7 @@ console.log(datos)
       return (
       
         <div className="row mb-3">
-         <p style={{textAlign: 'center'}}>Secado De Aserrín</p>
+         <p style={{textAlign: 'center'}}>Secado De Aserrín1</p>
 
         <div className="row mb-3">
         <div className="col-md-3">

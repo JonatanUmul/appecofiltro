@@ -84,16 +84,16 @@ const BotonOT = () => {
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '2', 'Extrusora 2.0')}>
           2. Reporte Secado de ASerrín
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '3', 'Cortador Automático')}>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '3', 'Cernido 1')}>
           3. Reporte Cernido 1  
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Banda Trasnportadora 2.0')}>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Cernido 2')}>
           4. Reporte Cernido 2
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Prensa Hidraulica 2.0')}>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Pulverizado')}>
           5. Pulverizado
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Prensa Hidraulica 2.0')}>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Formulación')}>
         6. Formulación
       </a>
       <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Producciòn')}>
