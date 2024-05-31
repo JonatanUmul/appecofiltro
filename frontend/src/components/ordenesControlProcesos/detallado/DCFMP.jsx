@@ -14,7 +14,7 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [modelos, setModelos] = useState([]);
   const id_area=2;
   const id_area2=9;
-
+  const [formula2, setFormula2]=useState(false)
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
@@ -41,9 +41,11 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
         id_cfmp: id.toString(),
         id_turno: formData.id_turno,
         id_aserradero: formData.id_aserradero,
+        id_aserradero2:formData.id_aserradero2,
         id_formulador:formData.id_formulador,
         barroLB: formData.barroLB,
         aserrinLB:formData.aserrinLB,
+        aserrinLB2:formData.aserrinLB2,
         humedadBarro: formData.humedadBarro,
         humedadAserrin: formData.humedadAserrin,
         id_ufmodelo:formData.id_ufmodelo
@@ -65,6 +67,11 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
       console.error("Error al enviar los datos:", error);
     }
   };
+  const llamar=()=>{
+    setFormula2(true);
+
+  }
+
 
 
   return (
@@ -145,6 +152,8 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
             <label htmlFor="aserrinLB" className="form-label">Aserrin LB</label>
             <input className="form-control" type="text" id="aserrinLB" {...register('aserrinLB')} required/>
           </div>
+
+
           <div className="col-md-6">
           <label htmlFor="aserrinLB" className="form-label">Humedad Barro</label>
           <input className="form-control" type="text" id="aserrinLB" {...register('humedadBarro')} required/>
@@ -154,10 +163,35 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
           <input className="form-control" type="text" id="aserrinLB" {...register('humedadAserrin')} required/>
         </div>
           </div>
+          {formula2 ?(
+            <div className="col-md-12" >
+            <p style={{textAlign:'center'}}>Mix</p>
+            <div className="row">
+            <div className="col-md-6">
+            <label htmlFor="id_aserradero" className="form-label">Aserradero</label>
+            <select  style={{ backgroundColor: 'rgba(192, 192, 192, 0.5)' }}  className="form-select" id="id_aserradero2" {...register("id_aserradero2")} required>
+            <option value="" disabled selected>Seleccione...</option>
+              {Array.isArray(aserradero.rows) && aserradero.rows.map((aserradero) => (
+                <option key={aserradero.id} value={aserradero.id}>{aserradero.nombre_aserradero}</option>
+              ))}
+            </select>
+          </div>
+  
+            <div className="col-md-6">
+            
+                      <label htmlFor="aserrinLB" className="form-label">Aserrin LB</label>
+                      <input  style={{ backgroundColor: 'rgba(192, 192, 192, 0.5)' }}  className="form-control" type="text" id="aserrinLB2" {...register('aserrinLB2')} required/>
+                    </div>
+                    </div>
+                    </div>
+          ):false}
           <p>{error}</p>
     
         
-
+          <div className="col-4">
+          <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
+  
+          </div>
           <div className="col-12">
             <button type="submit" className="btn btn-primary">Guardar</button>
           </div>
