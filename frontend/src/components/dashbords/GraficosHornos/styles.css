@@ -1,0 +1,19 @@
+/* styles.css */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .small-label {
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+  
+  .small-select {
+    height: 24px;
+    font-size: 10px;
+    padding: 2px 4px;
+    width: 100px;
+  }
+  

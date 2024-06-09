@@ -14,7 +14,7 @@ const Horno4 = () => {
   const [HornoSelect, setTHornos] = useState([]);
   const [horno, setHornoSelect] = useState(4);
   const [error, setError] = useState('');
-  console.log(horno);
+  console.log('Horno4:',datos);
 
   useEffect(() => {
     const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno || 'null'}`;
@@ -29,7 +29,7 @@ const Horno4 = () => {
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
       });
-  }, [modeloUF, turn, fecha_creacion_inicio, fecha_creacion_fin, ]);
+  }, [modeloUF, turn, fecha_creacion_inicio, fecha_creacion_fin, horno ]);
 
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Horno4 = () => {
     const lineData = [];
 
     datos.forEach((dato) => {
-      const date = new Date(dato.tiempo_transcurrido);
+      const date = new Date(dato.fecha_real);
       category.push([date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-'));
       const b = parseFloat(dato.promedio);
       barData.push(b);

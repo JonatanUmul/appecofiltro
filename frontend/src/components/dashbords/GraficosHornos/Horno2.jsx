@@ -5,7 +5,7 @@ import { formatFecha } from '../../utilidades/FormatearFecta.js';
 
 const URL = process.env.REACT_APP_URL;
 
-const Horno2 = () => {
+const Horno3 = () => {
   const [datos, setDatos] = useState([]);
   const [fecha_creacion_inicio, setFechaCreacionInicio] = useState(formatFecha(new Date()));
   const [fecha_creacion_fin, setFechaCreacionFin] = useState(formatFecha(new Date()));
@@ -14,10 +14,10 @@ const Horno2 = () => {
   const [HornoSelect, setTHornos] = useState([]);
   const [horno, setHornoSelect] = useState(2);
   const [error, setError] = useState('');
-  console.log(horno);
 
   useEffect(() => {
     const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno || 'null'}`;
+    console.log('Fetching data from URL:', url);
 
     axios.get(url)
       .then((response) => {
@@ -28,9 +28,9 @@ const Horno2 = () => {
       })
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
+        setError('Error al obtener los datos');
       });
-  }, [modeloUF, turn, fecha_creacion_inicio, fecha_creacion_fin]);
-
+  }, [modeloUF, turn, fecha_creacion_inicio, fecha_creacion_fin, horno]);
 
   useEffect(() => {
     if (datos.length === 0) return;
@@ -43,7 +43,7 @@ const Horno2 = () => {
     const lineData = [];
 
     datos.forEach((dato) => {
-      const date = new Date(dato.tiempo_transcurrido);
+      const date = new Date(dato.fecha_real);
       category.push([date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-'));
       const b = parseFloat(dato.promedio);
       barData.push(b);
@@ -122,10 +122,11 @@ const Horno2 = () => {
 
   return (
     <div>
-      h2
+      <h3>Horno {horno}</h3>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <div id="chart2" style={{ width: '100%', height: 400 }}></div>
     </div>
   );
 };
 
-export default Horno2;
+export default Horno3;

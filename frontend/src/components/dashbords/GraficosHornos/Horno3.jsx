@@ -14,10 +14,10 @@ const Horno3 = () => {
   const [HornoSelect, setTHornos] = useState([]);
   const [horno, setHornoSelect] = useState(3);
   const [error, setError] = useState('');
-  console.log(horno);
 
   useEffect(() => {
     const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno || 'null'}`;
+    console.log('Fetching data from URL:', url);
 
     axios.get(url)
       .then((response) => {
@@ -28,9 +28,9 @@ const Horno3 = () => {
       })
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
+        setError('Error al obtener los datos');
       });
-  }, [modeloUF, turn, fecha_creacion_inicio, fecha_creacion_fin, ]);
-
+  }, [modeloUF, turn, fecha_creacion_inicio, fecha_creacion_fin, horno]);
 
   useEffect(() => {
     if (datos.length === 0) return;
@@ -43,7 +43,7 @@ const Horno3 = () => {
     const lineData = [];
 
     datos.forEach((dato) => {
-      const date = new Date(dato.tiempo_transcurrido);
+      const date = new Date(dato.fecha_real);
       category.push([date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-'));
       const b = parseFloat(dato.promedio);
       barData.push(b);
@@ -122,8 +122,9 @@ const Horno3 = () => {
 
   return (
     <div>
-    h3
-      <div id="chart2" style={{ width: '50%', height: 100 }}></div>
+      <h3>Horno {horno}</h3>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <div id="chart2" style={{ width: '100%', height: 400 }}></div>
     </div>
   );
 };
