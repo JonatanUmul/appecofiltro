@@ -1,8 +1,11 @@
-/* styles.css */
-.container {
+.filtros-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  
+  .filtro-item {
+    margin: 5px;
   }
   
   .small-label {

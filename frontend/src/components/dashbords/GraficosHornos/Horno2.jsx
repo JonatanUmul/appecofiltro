@@ -43,11 +43,11 @@ const Horno3 = () => {
     const lineData = [];
 
     datos.forEach((dato) => {
-      const date = new Date(dato.fecha_real);
+      const date = new Date(dato.tempCabezaDR,dato.tempCabezaIZ,dato.tempCentroDR,dato.tempCentroIZ,dato.tempCentroIZ,dato.tempPieDR, dato.tempPieIZ);
       category.push([date.getFullYear(), date.getMonth() + 1, date.getDate()].join('-'));
-      const b = parseFloat(dato.promedio);
+      const b = parseFloat(dato.tempCabezaDR,dato.tempCabezaIZ,dato.tempCentroDR,dato.tempCentroIZ,dato.tempCentroIZ,dato.tempPieDR, dato.tempPieIZ);
       barData.push(b);
-      lineData.push(dato.promedio);
+      lineData.push(dato.tempCabezaDR,dato.tempCabezaIZ,dato.tempCentroDR,dato.tempCentroIZ,dato.tempCentroIZ,dato.tempPieDR, dato.tempPieIZ);
     });
 
     const option = {
