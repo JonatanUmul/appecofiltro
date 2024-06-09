@@ -1,12 +1,17 @@
 import React from 'react';
-import Hornos from './Hornos';
-import './estilos.css'; // Asegúrate de que este archivo CSS existe
+import Horno1 from './GraficosHornos/Horno1';
+import Horno2 from './GraficosHornos/Horno2';
+import Horno3 from './GraficosHornos/Horno3';
+import Horno4 from './GraficosHornos/Horno4';
+import './estilos.css';
 
 const Dashboard = () => {
   return (
-    <div>
-     
-      <Hornos />
+    <div className="dashboard">
+      <Horno1 />
+      <Horno2 />
+      <Horno3 />
+      <Horno4 />
     </div>
   );
 };
