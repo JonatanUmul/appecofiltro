@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import axios from 'axios';
 import './styles.css';
-import { Button } from 'reactstrap';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -11,13 +10,15 @@ const TempTunel = ({ filtros1 }) => {
   const [datos, setDatos] = useState([]);
   const chartRef = useRef(null);
   let myChart = useRef(null);
-
+console.log('Seleccionar datos en humedades',datos)
   useEffect(() => {
     let isMounted = true;
 
     const fetchData = async () => {
       try {
-        const url = `${URL}/DTT/${'null'}/${'null'}/${'null'}/${'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
+        const url = `${URL}/DTHP/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${'null'}/${ 'null'}/${ 'null'}`;
+
+        // const url = `${URL}/DTT/${'null'}/${'null'}/${'null'}/${'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
         const response = await axios.get(url);
         if (isMounted) {
           const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
@@ -149,10 +150,9 @@ const TempTunel = ({ filtros1 }) => {
 
   return (
     <div>
-    <p className="title" style={{marginTop:1}}>Tunel</p>
-      
-      <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
-    </div>
+    <p className="title">Humedad En Patios</p>
+    <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
+  </div>
   );
 };
 

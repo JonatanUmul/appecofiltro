@@ -7,8 +7,7 @@ import './styles.css';
 
 const URL = process.env.REACT_APP_URL;
 
-const HornosChart = ({filtros1}) => {
-  
+const HornosChart = ({ filtros1 }) => {
   const [datos, setDatos] = useState([]);
   const [filtros, setFiltros] = useState({
     fecha_creacion_inicio: formatFecha(new Date()),
@@ -16,17 +15,23 @@ const HornosChart = ({filtros1}) => {
     turn: '',
     horno: 1,
   });
+
+  const [modeloUF, setmodeloUF] = useState('');
+
   const [error, setError] = useState('');
   const chartRef = useRef(null);
-console.log('datos que vienen en filtro',filtros)
+console.log('datos que vienen en filtro',modeloUF)
+
 useEffect(() => {
   setFiltros(filtros1);
+  setmodeloUF(filtros1.id_ufmodelo);
 }, [filtros1]);
-
+console.log('Uf MOdelo',modeloUF)
   const fetchData = async () => {
     try {
       const { fecha_creacion_inicio,fecha_creacion_fin, turn, horno } = filtros;
-      const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/null/${turn || 'null'}/${horno || 'null'}`;
+
+      const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno || 'null'}`;
       const response = await axios.get(url);
       const datosOrdenados = response.data.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
       setDatos(datosOrdenados);
@@ -114,6 +119,7 @@ useEffect(() => {
           },
           data: barData
         }
+        
       ]
     };
 
@@ -149,7 +155,8 @@ useEffect(() => {
 
   return (
     <div>
-    Horno
+    <p className="title">Hornos</p>
+    
       <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
     </div>
   );
