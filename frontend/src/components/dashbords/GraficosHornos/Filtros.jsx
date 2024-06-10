@@ -12,7 +12,8 @@ const Filtros = ({ onChange }) => {
   const [horno, setHorno] = useState(1);
   const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
   const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
-console.log('DAtos horno',turnos,hornos)
+console.log('DAtos del filtro', fecha_creacion_inicio,fecha_creacion_fin)
+
   useEffect(() => {
     const maquinaria = "Horno";
     Promise.all([

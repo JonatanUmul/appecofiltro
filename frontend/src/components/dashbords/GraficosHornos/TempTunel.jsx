@@ -1,59 +1,48 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import axios from 'axios';
-import { formatFecha } from '../../utilidades/FormatearFecta.js';
+// import { formatFecha } from '../../utilidades/FormatearFecta.js';
 import './styles.css';
 
 const URL = process.env.REACT_APP_URL;
 
-const TempTunel = ({filtros1}) => {
-const fechaInicio = filtros1.fecha_creacion_inicio;
-const fechaFin = filtros1.fecha_creacion_fin;
-const horno = filtros1.horno;
-const turno = filtros1.turn;
+const TempTunel = ({ filtros1 }) => {
+  const fecha_creacion_inicio = filtros1.fecha_creacion_inicio;
+  const fecha_creacion_fin = filtros1.fecha_creacion_fin;
+  const horno = filtros1.horno;
+  const turno = filtros1.turn;
+  const id ='';
+  const ufmodelo='';
+  const turnoProd='';
+  const tunelNum=''
 
- console.log('datos de temp',fechaInicio,fechaFin,horno,turno)
+  console.log('datos de temp', fecha_creacion_inicio, fecha_creacion_fin, horno, turno);
   const [datos, setDatos] = useState([]);
-  const [fecha_creacion_inicio, setfecha_creacion_inicio]=useState(formatFecha(fechaInicio))
-  const [fecha_creacion_fin, setfecha_creacion_fin]=useState(formatFecha(fechaFin))
-  const [turnoProd, setturnoProd]=useState('')
- const [tunelNum, settunelNum]=useState('')
- const [ ufmodelo, setufmodelo]=useState('')
- const [id, setid]= useState('')
   const [error, setError] = useState('');
   const chartRef = useRef(null);
-  console.log('Esperando datos de Tunel',datos)
- 
-
-  const fetchData = async () => {
-    try {
-      const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
-      const response = await axios.get(url);
-      const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
-      setDatos(datosOrdenados);
-    } catch (error) {
-      console.error('Error al obtener los datos:', error);
-      setError('Error al obtener los datos');
-    }
-  };
-  
-  // const fetchData = async () => {
-  //   try {
-  //     const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
-  //     const response = await axios.get(url);
-  //     const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
-  //     setDatos(datosOrdenados);
-  //   } catch (error) {
-  //     console.error('Error al obtener los datos:', error);
-  //     setError('Error al obtener los datos');
-  //   }
-  // };
-  
 
   useEffect(() => {
-    fetchData();
-  },[]);
+    let isMounted = true;
 
+    const fetchData = async () => {
+      try {
+        const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
+        const response = await axios.get(url);
+        if (isMounted) {
+          const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
+          setDatos(datosOrdenados);
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [URL, fecha_creacion_inicio, fecha_creacion_fin]);
 
   useEffect(() => {
     const chartDom = chartRef.current;
@@ -160,11 +149,9 @@ const turno = filtros1.turn;
     };
   }, [datos]);
 
-
-
   return (
     <div>
-    Tunel
+      Tunel
       <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
     </div>
   );

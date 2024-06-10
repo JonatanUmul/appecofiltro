@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Horno1 from './GraficosHornos/Horno1';
-
 import TempTunel from './GraficosHornos/TempTunel';
 import './estilos.css';
 import Filtros from './GraficosHornos/Filtros';
@@ -18,28 +17,26 @@ const Dashboard = () => {
     setFiltros(newFiltros);
   };
 
+  console.log('Verificando datos en Dashboard', filtros);
+
   return (
     <div className="row">
-    <div className="row">
-    <div className="col-4 mb-3">
-      <Filtros onChange={handleFiltrosChange} />
-    </div>
-    </div>
-    <div className="col-4 mb-5">
-      <div style={{ marginLeft: '20px' }}>
-        <Horno1 filtros1={filtros} />
+      <div className="row">
+        <div className="col-4 mb-3">
+          <Filtros onChange={handleFiltrosChange} />
+        </div>
+      </div>
+      <div className="col-4 mb-5">
+        <div style={{ marginLeft: '20px' }}>
+          <Horno1 filtros1={filtros} />
+        </div>
+      </div>
+      <div className="col-4 mb-5">
+        <div style={{ marginBottom: '20px' }}>
+          <TempTunel filtros1={filtros} />
+        </div>
       </div>
     </div>
-    <div className="col-4 mb-5">
-      <div style={{ marginBottom: '20px' }}>
-        <TempTunel filtros1={filtros} />
-      </div>
-    </div>
-  </div>
-  
-  
-
-  
   );
 };
 
