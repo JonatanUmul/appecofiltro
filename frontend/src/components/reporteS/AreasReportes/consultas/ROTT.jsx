@@ -9,15 +9,15 @@ const maquinaria = "Tunel";
 
 const ROTHP = ({ id, nombretabla, codigoInicio, codigoFinal, cantidad }) => {
   const [datos, setDatos] = useState([]);
-  const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
-  const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
+  const [fecha_creacion_inicio, setFecha] = useState('');
+  const [fecha_creacion_fin, setFecha2] = useState('');
   const [modeloUF, setModeloUf] = useState([]);
   const [turno, setTurno] = useState([])
   const [turnoProd, setTurnoProd] = useState('')
   const [ufmodelo, setUfmodelo] = useState('')
   const [tunel, setTunel] = useState([]);
   const [tunelNum, setTunelNUm] = useState('')
-
+console.log('datos en dtt', id, nombretabla, codigoInicio, codigoFinal, cantidad)
   // Realizar las solicitudes para obtener datos
   useEffect(() => {
     axios.all([
@@ -37,7 +37,8 @@ const ROTHP = ({ id, nombretabla, codigoInicio, codigoFinal, cantidad }) => {
 
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-    const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}`;
+    const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
+    // const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
 
     axios.get(url)
       .then((response) => {

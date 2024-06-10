@@ -4,41 +4,55 @@ import axios from 'axios';
 import { formatFecha } from '../../utilidades/FormatearFecta.js';
 import './styles.css';
 
-
 const URL = process.env.REACT_APP_URL;
 
-const HornosChart = ({filtros1}) => {
-  
+const TempTunel = ({filtros1}) => {
+const fechaInicio = filtros1.fecha_creacion_inicio;
+const fechaFin = filtros1.fecha_creacion_fin;
+const horno = filtros1.horno;
+const turno = filtros1.turn;
+
+ console.log('datos de temp',fechaInicio,fechaFin,horno,turno)
   const [datos, setDatos] = useState([]);
-  const [filtros, setFiltros] = useState({
-    fecha_creacion_inicio: formatFecha(new Date()),
-    fecha_creacion_fin: formatFecha(new Date()),
-    turn: 1,
-    horno: 1,
-  });
+  const [fecha_creacion_inicio, setfecha_creacion_inicio]=useState(formatFecha(fechaInicio))
+  const [fecha_creacion_fin, setfecha_creacion_fin]=useState(formatFecha(fechaFin))
+  const [turnoProd, setturnoProd]=useState('')
+ const [tunelNum, settunelNum]=useState('')
+ const [ ufmodelo, setufmodelo]=useState('')
+ const [id, setid]= useState('')
   const [error, setError] = useState('');
   const chartRef = useRef(null);
-console.log('datos que vienen en filtro',filtros)
-useEffect(() => {
-  setFiltros(filtros1);
-}, [filtros1]);
+  console.log('Esperando datos de Tunel',datos)
+ 
 
   const fetchData = async () => {
     try {
-      const { fecha_creacion_inicio,fecha_creacion_fin, turn, horno } = filtros;
-      const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/null/${turn || 'null'}/${horno || 'null'}`;
+     const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
       const response = await axios.get(url);
-      const datosOrdenados = response.data.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
+      const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
       setDatos(datosOrdenados);
     } catch (error) {
       console.error('Error al obtener los datos:', error);
       setError('Error al obtener los datos');
     }
   };
+  // const fetchData = async () => {
+  //   try {
+  //     const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
+  //     const response = await axios.get(url);
+  //     const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
+  //     setDatos(datosOrdenados);
+  //   } catch (error) {
+  //     console.error('Error al obtener los datos:', error);
+  //     setError('Error al obtener los datos');
+  //   }
+  // };
+  
 
   useEffect(() => {
     fetchData();
-  }, [filtros]);
+  },[]);
+
 
   useEffect(() => {
     const chartDom = chartRef.current;
@@ -145,7 +159,7 @@ useEffect(() => {
     };
   }, [datos]);
 
- 
+
 
   return (
     <div>
@@ -154,4 +168,4 @@ useEffect(() => {
   );
 };
 
-export default HornosChart;
+export default TempTunel;
