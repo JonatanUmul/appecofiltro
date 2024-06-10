@@ -27,7 +27,7 @@ const turno = filtros1.turn;
 
   const fetchData = async () => {
     try {
-     const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
+      const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
       const response = await axios.get(url);
       const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));
       setDatos(datosOrdenados);
@@ -36,6 +36,7 @@ const turno = filtros1.turn;
       setError('Error al obtener los datos');
     }
   };
+  
   // const fetchData = async () => {
   //   try {
   //     const url = `${URL}/DTT/${id || 'null'}/${ufmodelo || 'null'}/${turnoProd || 'null'}/${tunelNum || 'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
@@ -163,6 +164,7 @@ const turno = filtros1.turn;
 
   return (
     <div>
+    Tunel
       <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
     </div>
   );

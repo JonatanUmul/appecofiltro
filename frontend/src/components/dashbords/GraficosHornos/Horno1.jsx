@@ -149,6 +149,7 @@ useEffect(() => {
 
   return (
     <div>
+    Horno
       <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
     </div>
   );
