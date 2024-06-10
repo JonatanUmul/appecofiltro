@@ -6,7 +6,7 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 const URL = process.env.REACT_APP_URL;
 
 const Filtros = ({ onChange }) => {
-  const [turn, setTurn] = useState(1);
+  const [turn, setTurn] = useState('');
   const [turnos, setTurnos] = useState([]);
   const [hornos, setHornos] = useState([]);
   const [horno, setHorno] = useState(1);

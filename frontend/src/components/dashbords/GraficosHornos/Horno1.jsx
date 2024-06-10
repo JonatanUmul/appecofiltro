@@ -13,7 +13,7 @@ const HornosChart = ({filtros1}) => {
   const [filtros, setFiltros] = useState({
     fecha_creacion_inicio: formatFecha(new Date()),
     fecha_creacion_fin: formatFecha(new Date()),
-    turn: 1,
+    turn: '',
     horno: 1,
   });
   const [error, setError] = useState('');
