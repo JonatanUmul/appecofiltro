@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Horno1 from './GraficosHornos/Horno1';
+
 import TempTunel from './GraficosHornos/TempTunel';
 import './estilos.css';
 import Filtros from './GraficosHornos/Filtros';
@@ -19,8 +20,10 @@ const Dashboard = () => {
 
   return (
     <div className="row">
-    <div className="col-4 mb-5">
+    <div className="row">
+    <div className="col-4 mb-3">
       <Filtros onChange={handleFiltrosChange} />
+    </div>
     </div>
     <div className="col-4 mb-5">
       <div style={{ marginLeft: '20px' }}>
