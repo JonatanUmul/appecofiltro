@@ -5,6 +5,10 @@ import './estilos.css';
 import Filtros from './GraficosHornos/Filtros';
 import { formatFecha } from "../utilidades/FormatearFecta";
 import HumedadMP from './GraficosHornos/HumedadMP';
+import CardsProduccion from './GraficosHornos/cardsInformativos/CardsProduccion';
+import CardsHornos from './GraficosHornos/cardsInformativos/CardsHornos';
+import CardsSecadoMP from './GraficosHornos/cardsInformativos/CardsSecadoMP';
+
 
 const Dashboard = () => {
   const [filtros, setFiltros] = useState({
@@ -22,11 +26,26 @@ const Dashboard = () => {
 
   return (
     <div className="row">
-   
+    <div className="col-4 mb-3">
+    <Filtros onChange={handleFiltrosChange} />
+  </div>
+  <div className=" mt-4">
+  <div className="row custom-row">
+    <div className="col custom-col ">
+      <CardsProduccion />
+    </div>
+    <div className="col custom-col">
+      <CardsHornos />
+    </div>
+    <div className="col custom-col">
+    <CardsSecadoMP />
+   </div>
+  </div>
+</div>
+
+    <div className="row">
       <div className="row">
-        <div className="col-4 mb-3">
-          <Filtros onChange={handleFiltrosChange} />
-        </div>
+      
       </div>
       <div className="col-4 mb-5">
       <div style={{ marginBottom: '20px' }}>
@@ -43,6 +62,7 @@ const Dashboard = () => {
           <TempTunel filtros1={filtros} />
         </div>
       </div>
+    </div>
     </div>
   );
 };
