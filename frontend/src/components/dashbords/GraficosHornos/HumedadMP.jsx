@@ -112,7 +112,17 @@ console.log('Seleccionar datos en humedades',datos)
             },
             data: barData
           }
-        ]
+        ],
+        graphic: {
+          type: 'text',
+          left: 'center',
+          top: '8%',  // Adjusted to move the text away from the top border
+          style: {
+            text: `Humedad Patios`,
+            font: '14px Microsoft YaHei',
+            fill: '#fff',
+          },
+        },
       };
 
       myChart.current.setOption(option);
@@ -150,7 +160,7 @@ console.log('Seleccionar datos en humedades',datos)
 
   return (
     <div>
-    <p className="title">Humedad En Patios</p>
+   
     <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
   </div>
   );

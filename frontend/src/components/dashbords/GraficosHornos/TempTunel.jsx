@@ -85,7 +85,7 @@ const TempTunel = ({ filtros1 }) => {
         },
         series: [
           {
-            name: 'line',
+            // name: 'line',
             type: 'line',
             smooth: true,
             showAllSymbol: true,
@@ -98,6 +98,8 @@ const TempTunel = ({ filtros1 }) => {
               formatter: '{@[0]}'
             }
           },
+          
+
           {
             name: 'bar',
             type: 'bar',
@@ -111,7 +113,18 @@ const TempTunel = ({ filtros1 }) => {
             },
             data: barData
           }
-        ]
+          
+        ],
+        graphic: {
+          type: 'text',
+          left: 'center',
+          top: '8%',  // Adjusted to move the text away from the top border
+          style: {
+            text: `Tunel`,
+            font: '14px Microsoft YaHei',
+            fill: '#fff',
+          },
+        },
       };
 
       myChart.current.setOption(option);
@@ -149,7 +162,6 @@ const TempTunel = ({ filtros1 }) => {
 
   return (
     <div>
-    <p className="title" style={{marginTop:1}}>Tunel</p>
       
       <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
     </div>

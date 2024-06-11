@@ -4,7 +4,6 @@ import axios from 'axios';
 import { formatFecha } from '../../utilidades/FormatearFecta.js';
 import './styles.css';
 
-
 const URL = process.env.REACT_APP_URL;
 
 const HornosChart = ({ filtros1 }) => {
@@ -20,16 +19,18 @@ const HornosChart = ({ filtros1 }) => {
 
   const [error, setError] = useState('');
   const chartRef = useRef(null);
-console.log('datos que vienen en filtro',modeloUF)
+  console.log('datos Hornos', datos);
 
-useEffect(() => {
-  setFiltros(filtros1);
-  setmodeloUF(filtros1.id_ufmodelo);
-}, [filtros1]);
-console.log('Uf MOdelo',modeloUF)
+  useEffect(() => {
+    setFiltros(filtros1);
+    setmodeloUF(filtros1.id_ufmodelo);
+  }, [filtros1]);
+
+  console.log('Uf MOdelo', modeloUF);
+
   const fetchData = async () => {
     try {
-      const { fecha_creacion_inicio,fecha_creacion_fin, turn, horno } = filtros;
+      const { fecha_creacion_inicio, fecha_creacion_fin, turn, horno } = filtros;
 
       const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno || 'null'}`;
       const response = await axios.get(url);
@@ -63,6 +64,7 @@ console.log('Uf MOdelo',modeloUF)
 
     const option = {
       backgroundColor: '#0f375f',
+      label: 'Hornos',
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -119,8 +121,17 @@ console.log('Uf MOdelo',modeloUF)
           },
           data: barData
         }
-        
-      ]
+      ],
+      graphic: {
+        type: 'text',
+        left: 'center',
+        top: '8%',
+        style: {
+          text: `Horno`,
+          font: ' 14px Microsoft YaHei',
+          fill: '#fff'
+        }
+      }
     };
 
     myChart.setOption(option);
@@ -149,14 +160,10 @@ console.log('Uf MOdelo',modeloUF)
         myChart.dispose();
       }
     };
-  }, [datos]);
-
- 
+  }, [datos, filtros.horno]);
 
   return (
     <div>
-    <p className="title">Hornos</p>
-    
       <div id="chart" ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
     </div>
   );
