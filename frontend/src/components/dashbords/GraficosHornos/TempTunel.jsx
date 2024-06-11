@@ -85,7 +85,7 @@ const TempTunel = ({ filtros1 }) => {
         },
         series: [
           {
-            // name: 'line',
+            name: 'line',
             type: 'line',
             smooth: true,
             showAllSymbol: true,

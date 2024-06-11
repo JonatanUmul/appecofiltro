@@ -32,13 +32,13 @@ const Dashboard = () => {
   <div className=" mt-4">
   <div className="row custom-row">
     <div className="col custom-col ">
-      <CardsProduccion />
+      <CardsProduccion filtros2={filtros} />
     </div>
     <div className="col custom-col">
-      <CardsHornos />
+      <CardsHornos filtros1={filtros} />
     </div>
     <div className="col custom-col">
-    <CardsSecadoMP />
+    <CardsSecadoMP  filtros1={filtros} />
    </div>
   </div>
 </div>
