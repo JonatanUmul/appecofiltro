@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './styles.css';
+// import './styles.css';
 import { formatFecha } from "../../utilidades/FormatearFecta";
 
 const URL = process.env.REACT_APP_URL;
