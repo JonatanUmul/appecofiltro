@@ -5,6 +5,17 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Login.css';
 const URL = process.env.REACT_APP_URL;
 
+
+function parseJwt(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+}
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +36,7 @@ const Login = () => {
       if(response.data.token) { // Verificar si hay un token en la respuesta
         localStorage.setItem('token', response.data.token);
         navigate('/Home/Dashboard');
+        console.log('token en el front', parseJwt(response.data.token))
       } else {
         setErrorlogin('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
         setUsername('');

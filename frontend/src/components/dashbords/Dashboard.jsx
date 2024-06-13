@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   return (
     <div className="row">
-    <div >
+    <div className="col-10 mb-3">
     <Filtros onChange={handleFiltrosChange} />
   </div>
   <div className=" mt-4">

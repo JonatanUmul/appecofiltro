@@ -10,7 +10,6 @@ const TempTunel = ({ filtros1 }) => {
   const [datos, setDatos] = useState([]);
   const chartRef = useRef(null);
   let myChart = useRef(null);
-console.log('Seleccionar datos en humedades',datos)
   useEffect(() => {
     let isMounted = true;
 

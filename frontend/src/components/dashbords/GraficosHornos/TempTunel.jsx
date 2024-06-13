@@ -7,17 +7,31 @@ import { Button } from 'reactstrap';
 const URL = process.env.REACT_APP_URL;
 
 const TempTunel = ({ filtros1 }) => {
-  const { fecha_creacion_inicio, fecha_creacion_fin, horno, turno } = filtros1;
+  const { fecha_creacion_inicio, fecha_creacion_fin, horno, turn } = filtros1;
   const [datos, setDatos] = useState([]);
+  const [turnoProd, setTurno]=useState()
   const chartRef = useRef(null);
   let myChart = useRef(null);
+console.log('Selccion turno',turn)
+
+useEffect(() => {
+  if (turn === 1) {
+    setTurno('Día');
+  } else {
+    setTurno('Noche');
+  }
+}, [turn]);
+  
+
+
+  console.log('turno convertido a texto',turnoProd)
 
   useEffect(() => {
     let isMounted = true;
 
     const fetchData = async () => {
       try {
-        const url = `${URL}/DTT/${'null'}/${'null'}/${'null'}/${'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
+        const url = `${URL}/DTT/${'null'}/${'null'}/${turnoProd|| 'null'}/${'null'}/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
         const response = await axios.get(url);
         if (isMounted) {
           const datosOrdenados = response.data.sort((a, b) => new Date(a.fecha_real) - new Date(b.fecha_real));

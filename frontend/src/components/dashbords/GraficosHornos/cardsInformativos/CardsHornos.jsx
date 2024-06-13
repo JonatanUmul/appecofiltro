@@ -16,14 +16,17 @@ const CardsInformacion = ({ filtros1 = {} }) => {
   const [fecha_creacion_inicio, setFecha] = useState('');
   const [fecha_creacion_fin, setFecha2] = useState('');
 const[horno ,sethorno]=useState(filtros1.horno);
-  console.log('datos del filtro ', filtros1);
-console.log('datos Horneados', datos)
-  useEffect(() => {
-    setFecha(filtros1.fecha_creacion_inicio ? filtros1.fecha_creacion_inicio : formatFecha(new Date()));
-    setFecha2(filtros1.fecha_creacion_fin ? filtros1.fecha_creacion_fin : formatFecha(new Date()));
+
+useEffect(() => {
+    setFecha(filtros1.fecha_creacion_inicio );
+    setFecha2(filtros1.fecha_creacion_fin );
   }, [filtros1]);
 
-  console.log(fecha_creacion_fin, fecha_creacion_inicio, horno);
+
+  // useEffect(() => {
+  //   setFecha(filtros1.fecha_creacion_inicio ? filtros1.fecha_creacion_inicio : formatFecha(new Date()));
+  //   setFecha2(filtros1.fecha_creacion_fin ? filtros1.fecha_creacion_fin : formatFecha(new Date()));
+  // }, [filtros1]);
 
   useEffect(() => {
   
@@ -46,7 +49,6 @@ console.log('datos Horneados', datos)
       .reduce((acc, curr) => acc + (curr.horneado || 0), 0);
   };
 
-  console.log('Datos Horneados', datos);
 
   const horneadoDia = totalProducido('Día');
   const horneadoNoche = totalProducido('Noche');
@@ -68,7 +70,7 @@ console.log('datos Horneados', datos)
               </div>
             </div>
           ) : (
-            <div className="text-center" style={{ fontSize: '1rem' }}>Cargando datos...</div>
+            <div className="text-center" style={{ fontSize: '1rem' }}>Sin Datos...</div>
           )}
         </div>
       </div>

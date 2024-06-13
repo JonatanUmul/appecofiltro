@@ -21,7 +21,6 @@ const CardsInformacion = ({ filtros2 = {} }) => {
     setFecha2(filtros2.fecha_creacion_fin ? filtros2.fecha_creacion_fin : formatFecha(new Date()));
   }, [filtros2]);
 
-  console.log(fecha_creacion_fin, fecha_creacion_inicio);
 
   useEffect(() => {
     axios.all([
@@ -46,7 +45,7 @@ const CardsInformacion = ({ filtros2 = {} }) => {
       axios.get(url)
         .then((response) => {
           setDatos(response.data);
-          console.log('datos consulta', response.data);
+          // console.log('datos consulta', response.data);
         })
         .catch((error) => {
           console.error('Error al obtener los datos:', error);
@@ -80,7 +79,7 @@ const CardsInformacion = ({ filtros2 = {} }) => {
               </div>
             </div>
           ) : (
-            <div className="text-center" style={{ fontSize: '1rem' }}>Cargando datos...</div>
+            <div className="text-center" style={{ fontSize: '1rem' }}>Sin datos...</div>
           )}
         </div>
       </div>

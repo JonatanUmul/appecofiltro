@@ -8,29 +8,23 @@ const URL = process.env.REACT_APP_URL;
 
 const HornosChart = ({ filtros1 }) => {
   const [datos, setDatos] = useState([]);
-  const [filtros, setFiltros] = useState({
-    fecha_creacion_inicio: formatFecha(new Date()),
-    fecha_creacion_fin: formatFecha(new Date()),
-    turn: '',
-    horno: 1,
-  });
-
-  const [modeloUF, setmodeloUF] = useState('');
+  // const [filtros, setFiltros] = useState({
+  //   fecha_creacion_inicio: '',
+  //   fecha_creacion_fin: '',
+  //   turn: '',
+  //   horno: '',
+  // });
+  const { fecha_creacion_inicio, fecha_creacion_fin, horno, turn, id_ufmodelo } = filtros1;
+const turn0=turn;
+  const modeloUF=id_ufmodelo
 
   const [error, setError] = useState('');
   const chartRef = useRef(null);
-  console.log('datos Hornos', datos);
 
-  useEffect(() => {
-    setFiltros(filtros1);
-    setmodeloUF(filtros1.id_ufmodelo);
-  }, [filtros1]);
 
-  console.log('Uf MOdelo', modeloUF);
-
+console.log('datos de turno',turn)
   const fetchData = async () => {
     try {
-      const { fecha_creacion_inicio, fecha_creacion_fin, turn, horno } = filtros;
 
       const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno || 'null'}`;
       const response = await axios.get(url);
@@ -41,10 +35,9 @@ const HornosChart = ({ filtros1 }) => {
       setError('Error al obtener los datos');
     }
   };
-
   useEffect(() => {
-    fetchData();
-  }, [filtros]);
+  fetchData()
+  }, [filtros1])
 
   useEffect(() => {
     const chartDom = chartRef.current;
@@ -160,7 +153,7 @@ const HornosChart = ({ filtros1 }) => {
         myChart.dispose();
       }
     };
-  }, [datos, filtros.horno]);
+  }, [datos, horno]);
 
   return (
     <div>
