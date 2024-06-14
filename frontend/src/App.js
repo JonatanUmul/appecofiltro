@@ -27,16 +27,24 @@ import Buttn from './components/ordenesTrabajo/botonOT/BotonOT'
 import TablaReportesOT from './components/reporteS/ControlProcesos/TablaReportesOT'
 import TablaControlProcesosOT from './components/reporteS/AreasReportes/TablaControlProcesosOT.jsx'
 import ProtectedRoute from './components/ProtectedRoute.js'
+import { AbilityProvider } from './components/AbilityContext.js';
 
- 
+
+
+   
+    
+
+
 
 function App() {
   return (
+    <AbilityProvider>
     <Router>
       <Routes>
         
       <Route  path="/" element={<Login />} />
       <Route element={<ProtectedRoute />}>
+      
       <Route path="/Home"   element={<Layout />}>
         
 
@@ -79,10 +87,12 @@ function App() {
           
 
           </Route>
+         
           </Route>
           
       </Routes>
     </Router>
+    </AbilityProvider>
   );
 }
 

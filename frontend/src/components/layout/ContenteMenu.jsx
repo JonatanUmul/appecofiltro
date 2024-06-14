@@ -1,6 +1,6 @@
 
 // ContentMenu.js
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Breadcrumb, Layout } from "antd";
 import { useLocation } from "react-router-dom";
 import { renderContent } from "./renderContent";
@@ -11,12 +11,19 @@ const { Content } = Layout;
 
 const ContentMenu = () => {
   const location = useLocation();
+  const [nombreUser, setNombreUser]=useState('')
+
+  useEffect(() => {
+    setNombreUser(localStorage.getItem('nombre')) 
+  }, [])
+  
+
 
   return (
     <Content style={{ margin: "0 16px" }}>
      <Breadcrumb style={{ margin: "16px 0" }} separator=">">
   <Breadcrumb.Item>User</Breadcrumb.Item>
-  <Breadcrumb.Item></Breadcrumb.Item>
+  <Breadcrumb.Item>{nombreUser}</Breadcrumb.Item>
 </Breadcrumb>
       <div
         style={{

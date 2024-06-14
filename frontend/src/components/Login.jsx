@@ -3,8 +3,8 @@ import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Login.css';
-const URL = process.env.REACT_APP_URL;
 
+const URL = process.env.REACT_APP_URL;
 
 function parseJwt(token) {
   const base64Url = token.split('.')[1];
@@ -27,16 +27,23 @@ const Login = () => {
 
     try {
       const response = await Axios.post(`${URL}/Loginroutes`, {
-        username: username, 
-        password: password
+        username,
+        password
       });
 
-      console.log('Respuesta del servidor:', response.data);
+      if (response.data.token) { // Verificar si hay un token en la respuesta
+        const token = response.data.token;
+        localStorage.setItem('token', token);
 
-      if(response.data.token) { // Verificar si hay un token en la respuesta
-        localStorage.setItem('token', response.data.token);
+        const decodedToken = parseJwt(token);
+        const userRoleId = decodedToken.id_rol;
+        localStorage.setItem('id_rol', userRoleId);
+
+        const nombre= decodedToken.nombre;
+        localStorage.setItem('nombre', nombre)
+
         navigate('/Home/Dashboard');
-        console.log('token en el front', parseJwt(response.data.token))
+        console.log('ID Rol:', userRoleId);
       } else {
         setErrorlogin('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
         setUsername('');
@@ -56,20 +63,20 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="login-form">
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <img
-                src={'/images/E.eco.png'} 
+                src={'/images/E.eco.png'}
                 alt="Logo"
                 style={{ width: '150px', padding: '15px', marginRight: '10px' }}
               />
             </div>
             <div className="form-group-input">
               <label htmlFor="username"><UserOutlined /> Usuario</label>
-              <input type="text" className="form-control" name="username" id="username" value={username}  onChange={(e)=>setUsername(e.target.value)} required/>
+              <input type="text" className="form-control" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
             </div>
             <div className="form-group-input">
               <label htmlFor="password"><LockOutlined /> Contraseña</label>
-              <input type="password" className="form-control" name="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
+              <input type="password" className="form-control" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
-            {errorlogin && <p>{errorlogin}</p>}
+            {errorlogin && <p className="error-message">{errorlogin}</p>}
 
             <button type="submit" className="btn btn-primary btn-block">Iniciar Sesión</button>
           </form>
