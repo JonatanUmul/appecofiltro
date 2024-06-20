@@ -1,58 +1,59 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { FcCamera } from "react-icons/fc";
 
-const CameraComponent = () => {
+const CamaraDTM = () => {
     const videoRef = useRef(null);
-    const canvasRef = useRef(null);
-    const [photo, setPhoto] = useState(null);
+    const fotoRef = useRef(null);
+    const [foto, setFoto] = useState(null);
 
-    const startCamera = async () => {
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                videoRef.current.srcObject = stream;
-                videoRef.current.play();
-            } catch (error) {
-                console.error("Error accessing the camera: ", error);
-                alert("Error accessing the camera: " + error.message);
+    const verCamara = () => {
+        navigator.mediaDevices.getUserMedia({
+            video: { width: 1920, height: 1080 }
+        }).then(stream => {
+            let miVideo = videoRef.current;
+            if (miVideo) {
+                miVideo.srcObject = stream;
+                miVideo.play();
             }
-        } else {
-            alert("getUserMedia not supported on your browser!");
+        }).catch(err => {
+            console.log(err);
+        });
+    };
+
+    const tomarFoto = () => {
+        const video = videoRef.current;
+        const fotoCanvas = fotoRef.current;
+        if (video && fotoCanvas) {
+            const context = fotoCanvas.getContext('2d');
+            fotoCanvas.width = video.videoWidth;
+            fotoCanvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, fotoCanvas.width, fotoCanvas.height);
+            const imageDataUrl = fotoCanvas.toDataURL('image/png');
+            setFoto(imageDataUrl);
         }
     };
 
-    const takePhoto = () => {
-        const context = canvasRef.current.getContext('2d');
-        context.drawImage(videoRef.current, 0, 0, 640, 480);
-        const dataUrl = canvasRef.current.toDataURL('image/png');
-        setPhoto(dataUrl);
-    };
-
-    const uploadPhoto = async () => {
-        const response = await fetch('/upload', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ image: photo }),
-        });
-        const result = await response.json();
-        alert(result.message);
-    };
+    useEffect(() => {
+        verCamara();
+    }, [videoRef]);
 
     return (
         <div>
-            <video ref={videoRef} width="640" height="480" autoPlay></video>
-            <button onClick={startCamera}>Start Camera</button>
-            <button onClick={takePhoto}>Snap Photo</button>
-            <canvas ref={canvasRef} width="640" height="480" style={{ display: 'none' }}></canvas>
-            {photo && (
+            <div>
+                <video ref={videoRef}></video>
+                <button onClick={tomarFoto}>
+                    <FcCamera className='Button' type='button' />
+                </button>
+            </div>
+            {foto && (
                 <div>
-                    <img src={photo} alt="Snapshot" />
-                    <button onClick={uploadPhoto}>Upload Photo</button>
+                    <h2>Foto tomada:</h2>
+                    <img src={foto} alt="Foto tomada" />
                 </div>
             )}
+            <canvas ref={fotoRef} style={{ display: 'none' }}></canvas>
         </div>
     );
 };
 
-export default CameraComponent;
+export default CamaraDTM;
