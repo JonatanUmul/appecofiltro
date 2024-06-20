@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-// import './user.css'
-const URL = import.meta.ECO_URL_BE;
+import Firma from '../../ComponenteCamara/Firma';
+import './Usr.css'; // Archivo CSS para estilos personalizados
+const URL = process.env.REACT_APP_URL;
 
 const Usr = () => {
   const { handleSubmit, register } = useForm();
   const [roles, setRoles] = useState([]);
-  const [estados, setEstados] = useState([]);
-  const [datos, setDatos] = useState({
-    username: "",
-    name: "",
-    mail: "",
-    phoneNumber: "",
-    contraseña: "",
-    phone: "",
-    rol: "",
-    estado: "",
-  });
-  
-  
+  const [firma, setFirma] = useState('');
+const[operario, setOperario]=useState(null)
+  const handleFirma = (firmaData) => {
+    setFirma(firmaData);
+  };
+console.log(operario)
   useEffect(() => {
+ 
     Promise.all([
-      axios.get(`${URL}/EstadosProc`),
       axios.get(`${URL}/Rolrouter`),
+      axios.get(`${URL}/Operarios`)
     ])
-      .then(([estadosResponse, rolesResponse]) => {
-        setEstados(estadosResponse.data);
+      .then(([rolesResponse, Operarios]) => {
         setRoles(rolesResponse.data);
-        console.log("Datos de Estadosroutes:", estadosResponse.data);
+        setOperario(Operarios.data)
         console.log("Datos de Rolrouter:", rolesResponse.data);
       })
       .catch((error) => {
@@ -37,39 +31,23 @@ const Usr = () => {
   }, []);
 
   const onSubmit = async (formData) => {
-    // formData.preventDefault();
     try {
-      // Actualizar el estado 'datos' con los valores del formulario
-      setDatos("username", formData.username);
-      setDatos("name", formData.name);
-      setDatos("mail", formData.mail);
-      setDatos("phone", formData.phone);
-      setDatos("password", formData.password);
-      setDatos("rol", formData.rol);
-      setDatos("estado", formData.estado);
+      formData.firmaUsr = firma;
 
-      // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
         `${URL}/UsuariosR`,
         formData
       );
       console.log("Respuesta del servidor:", response.data);
-      // Aquí podrías agregar lógica adicional, como mostrar un mensaje de éxito al usuario, por ejemplo
       window.location.href = "/Home/TablaUser";
     } catch (error) {
       console.error("Error al enviar los datos:", error);
-      // Aquí podrías manejar el error, mostrar un mensaje al usuario, etc.
     }
   };
 
-
-  // console.log(estados);
   return (
     <div className="mt-1">
       <div className="">
-        {/* <h2 className="titulo card-title text-center mb-4">
-          Crear nuevo usuario
-        </h2> */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
@@ -84,16 +62,23 @@ const Usr = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">
+            <label htmlFor="rol" className="form-label">
               Nombre
             </label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              {...register("name")}
-              required
-            />
+            <select
+              className="select form-select"
+              id="rol"
+              {...register("rol")}
+            >
+              <option value="" disabled selected>Seleccione...</option>
+              {Array.isArray(roles.rows) &&
+                operario.rows.length > 0 &&
+                operario.rows.map((nombre) => (
+                  <option key={nombre.id} value={nombre.id}>
+                    {nombre.Nombre}
+                  </option>
+                ))}
+            </select>
           </div>
           <div className="mb-3">
             <label htmlFor="mail" className="form-label">
@@ -132,33 +117,15 @@ const Usr = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="estados" className="form-label">
-              Estado
-            </label>
-            <select
-  className="select form-select"
-  id="estados"
-  {...register("estado")} // Cambiado de "rol" a "estado"
->
-{Array.isArray(estados.rows) &&
-                estados.rows.length > 0 &&
-                estados.rows.map((estado) => (
-                  <option key={estado.id_est} value={estado.id_est}>
-                    {estado.estado}
-                  </option>
-                ))}
-</select>
-          </div>
-          <div className="mb-3">
             <label htmlFor="rol" className="form-label">
               Rol
             </label>
-        
             <select
               className="select form-select"
               id="rol"
               {...register("rol")}
             >
+              <option value="" disabled selected>Seleccione...</option>
               {Array.isArray(roles.rows) &&
                 roles.rows.length > 0 &&
                 roles.rows.map((rol) => (
@@ -168,11 +135,13 @@ const Usr = () => {
                 ))}
             </select>
           </div>
+          <Firma 
+          
+            id='firmaUsr'
+            {...register("firmaUsr")}
+            handleFirma={handleFirma} /> {/* Pasar la función handleFirma como prop */}
           <div className="d-flex justify-content-between">
-            <button type="submit" className="btn btn-primary">
-              Guardar
-            </button>
-           
+            <button type="submit" className="btn btn-primary">Guardar</button>
           </div>
         </form>
       </div>

@@ -47,7 +47,6 @@ const TablaUsuarios = () => {
                     <th scope="col">#</th>
                     <th scope="col">Usuario</th>
                     <th scope="col">Nombre de usuario</th>
-                    <th scope="col">Contraseña</th>
                     <th scope="col">Correo electrónico</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Rol</th>
@@ -59,9 +58,8 @@ const TablaUsuarios = () => {
                 {datos.map((usuario, index) => (
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{usuario.nombre_usuario}</td>
+                        <td>{usuario.username}</td>
                         <td>{usuario.nombre}</td>
-                        <td>{usuario.contraseña}</td>
                         <td>{usuario.correo}</td>
                         <td>{usuario.telefono}</td>
                         <td>{usuario.id_rol}</td>

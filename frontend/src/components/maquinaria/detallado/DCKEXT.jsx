@@ -4,7 +4,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estilosFormatos.css'
 import Swal from 'sweetalert2'; // Importar SweetAlert
-import CameraComponent from "../../ComponenteCamara/CamaraDTM";
+// import CameraComponent from "../../ComponenteCamara/CamaraDTM";
 const URL = process.env.REACT_APP_URL;
 const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
@@ -109,7 +109,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   </select>
 </strong>
 </div>
-<CameraComponent/>
+
 </div>
 
 <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
