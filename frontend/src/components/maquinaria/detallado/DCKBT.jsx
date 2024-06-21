@@ -11,6 +11,11 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const [respuestas, setRespuestas] = useState([]);
   const [errors, setError]= useState('')
   const [grupo, setGrupo]= useState([])
+  const [id_creador, setid_creador] = useState('');
+  
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/respuestas`),
@@ -36,11 +41,12 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         id_limpiezaBandaYRodillos: formData.id_limpiezaBandaYRodillos,
         id_lubricacionChumaceras: formData.id_lubricacionChumaceras,
         id_accionamientoCorrectoDeMotor: formData.id_accionamientoCorrectoDeMotor,
-        id_creador:"8",
+        id_creador:id_creador,
    
         observacion1: formData.observacion1,
         observacion2: formData.observacion2,
         observacion3: formData.observacion3,
+       
         
       });// Mostrar SweetAlert de éxito
       Swal.fire({

@@ -9,7 +9,12 @@
     const [maquina, setMaquina] = useState([]);
     
     const maquinaria=modalTitle;
-
+    const [id_creador, setid_creador] = useState('');
+  
+    useEffect(()=>{
+      setid_creador(localStorage.getItem('id_creador'))
+    })
+        
     useEffect(() => {
       Promise.all([
       
@@ -43,7 +48,7 @@
           `${URL}/MEXT`,
             { 
               id_maq : id_maq,
-              id_creador:8
+              id_creador: id_creador
             }
             
           

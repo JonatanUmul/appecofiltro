@@ -7,7 +7,11 @@ const URL = process.env.REACT_APP_URL;
 const CKTA = ({enviarId, modalTitle}) => {
   const { handleSubmit, register } = useForm();
   const [maquina, setMaquina] = useState([]);
+  const [id_creador, setid_creador] = useState('');
   
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
 
 const maquinaria=modalTitle; 
   useEffect(() => {
@@ -37,7 +41,7 @@ const maquinaria=modalTitle;
       const response = await axios.post(`${URL}/MTA`,
         { 
           id_maq : id_maq,
-          id_creador:8
+          id_creador: id_creador
         }
       );
       window.location.href = "/Home/TableMantenimientoMaq";

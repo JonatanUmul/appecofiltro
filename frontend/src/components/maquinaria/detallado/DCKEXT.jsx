@@ -11,7 +11,11 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const [respuestas, setRespuestas] = useState([]);
   const [errors, setError]= useState('');
   const [grupo, setGrupo]= useState([]);
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
 
 
 
@@ -47,7 +51,7 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
         observacion3: formData.observacion3,
         observacion4: formData.observacion4,
         observacion5: formData.observacion5,
-    
+        id_creador:id_creador
         
       }); Swal.fire({
         icon: 'success',

@@ -7,7 +7,12 @@ const URL = process.env.REACT_APP_URL;
 const CKBT = ({enviarId, modalTitle}) => {
   const { handleSubmit, register } = useForm();
   const [maquina, setMaquina] = useState([]);
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
 
 
 const maquinaria=modalTitle; 
@@ -38,9 +43,9 @@ const maquinaria=modalTitle;
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
         `${URL}/MBT`,
-        { 
+        { id_creador: id_creador,
           id_maq : id_maq,
-          id_creador:8
+          
         }
       );
       window.location.href = "/Home/TableMantenimientoMaq";

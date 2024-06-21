@@ -13,7 +13,11 @@ const DCKBT= ({ encabezado, EncName, fecha_creacion, id }) => {
   const [proveedores, setProveedores]= useState([]);
   const [responsable, setResponsable]= useState([]);
   const [errors, setError]= useState('')
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
 const id_area=8
   useEffect(() => {
     Promise.all([
@@ -44,7 +48,7 @@ const id_area=8
         id_proveedor:formData.id_proveedor ,
         id_responsable:formData.id_responsable ,
         detalle:formData.detalle ,
-        creador:8
+        creador:id_creador
     
         
       });   Swal.fire({

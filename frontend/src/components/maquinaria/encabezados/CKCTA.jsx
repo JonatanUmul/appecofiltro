@@ -6,7 +6,11 @@ const URL = process.env.REACT_APP_URL;
 const CKCTA = ({enviarId, modalTitle}) => {
   const { handleSubmit, register } = useForm();
   const [maquina, setMaquina] = useState([]);
-
+  const [id_creador, setid_creador] = useState('');
+  
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
   
 
 
@@ -38,7 +42,8 @@ const maquinaria=modalTitle;
       const response = await axios.post(
         `${URL}/CKCTA`,
        
-        {id_maq : id_maq }
+        {id_creador,
+          id_maq : id_maq }
       );
       window.location.href = "/Home/TablaMaq";
       console.log("Respuesta del servidor:", response.data);
