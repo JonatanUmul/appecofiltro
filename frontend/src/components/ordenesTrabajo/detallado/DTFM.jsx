@@ -12,7 +12,11 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [formula2, setFormula2]=useState(false);
   const [cernidoDetalle, setCernidoDetalle] = useState([]);
   const [modelos, setModelos] = useState([]);
- 
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
 
   useEffect(() => {
     Promise.all([
@@ -48,6 +52,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
         humedad2: formData.humedad2,
         id_cernidodetalle2:formData.id_cernidodetalle2,
         id_modelo: formData.id_modelo,
+        id_creador:id_creador
       });  // Mostrar SweetAlert de éxito
       Swal.fire({
        icon: 'success',

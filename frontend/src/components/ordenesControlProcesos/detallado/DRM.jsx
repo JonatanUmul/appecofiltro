@@ -10,7 +10,11 @@ const DRM = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [modeloUF, setModeloUf] = useState([]);
   const [formData, setFormData] = useState([]);
   // const id_area = 2;
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/tipoMermas`),
@@ -31,7 +35,8 @@ const DRM = ({ encabezado, EncName, fecha_creacion, id }) => {
       const formattedData = (formdata) => ({
         codigo: formdata.codigo,
         id_modelo: formdata.id_modelo,
-        id_motivo: formdata.id_motivo
+        id_motivo: formdata.id_motivo,
+        id_creador:id_creador
       });
       console.log("Datos formateados:", formattedData);
       // Enviamos los datos formateados al servidor

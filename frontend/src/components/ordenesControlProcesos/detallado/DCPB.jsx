@@ -11,6 +11,11 @@ const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
   const [calificacion, setCalificaciones] = useState([]);
   const [modeloUF, setModeloUf] = useState([]);
   const [modulos, setModulos]= useState([])
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
 
   const id_area=7;
   const maquinaria = 'Prensa';
@@ -47,7 +52,8 @@ const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
         id_modulo: formData.id_modulo,
         pulido: formData.pulido,
         id_calificacion: formData.id_calificacion,
-        fechaProduccion:formatFecha( formData.fechaProduccion)
+        fechaProduccion:formatFecha( formData.fechaProduccion),
+        id_creador:id_creador
         
         
       

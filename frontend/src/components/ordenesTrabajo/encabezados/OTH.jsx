@@ -7,11 +7,12 @@ const URL = process.env.REACT_APP_URL
 const FormEHP = () => {
   const { handleSubmit, register } = useForm();
   const [mtp, setMtp] = useState([]);
-  const [datos, setDatos] = useState({
-    id_MP: "",
-    id_creador: "",
-  });
+  const [id_creador, setid_creador] = useState(null);
   
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
   
   useEffect(() => {
     Promise.all([
@@ -27,17 +28,14 @@ const FormEHP = () => {
   }, []);
  
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async () => {
     // formData.preventDefault();
     try {
       // Actualizar el estado 'datos' con los valores del formulario
-      setDatos("id_enc", formData.id_enc);
-      setDatos("id_creador", formData.id_creador);
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        `${URL}/OTSA`,
-        formData
+        `${URL}/OTSA`,{id_creador},
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);

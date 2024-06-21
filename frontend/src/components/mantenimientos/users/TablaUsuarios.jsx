@@ -9,6 +9,8 @@ const URL = process.env.REACT_APP_URL;
 const TablaUsuarios = () => {
     const [datos, setDatos] = useState([]);
     const [modal, setModal] = useState(false)
+const [verFirma, setVerFirma]=useState(true)
+
 
     useEffect(() => {
         const URLS = `${URL}/UsuariosR`;
@@ -25,6 +27,10 @@ const TablaUsuarios = () => {
     //     window.location.href = '/User';
     // }
     const toggleModal = () => setModal(!modal);
+
+    const verFirm=()=>{
+        setVerFirma(false)
+    }
     return (
         <div >
     
@@ -41,7 +47,7 @@ const TablaUsuarios = () => {
                 </ModalFooter>
             </Modal>
     <div style={{ overflowX: 'auto' }}>
-        <table className="table">
+        <table className="table" style={{textAlign:'center'}}>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -50,7 +56,7 @@ const TablaUsuarios = () => {
                     <th scope="col">Correo electrónico</th>
                     <th scope="col">Teléfono</th>
                     <th scope="col">Rol</th>
-                    <th scope="col">Fecha de Creación</th>
+                    <th scope="col">Firma</th>
                     {/* Agrega más encabezados según tus datos */}
                 </tr>
             </thead>
@@ -62,8 +68,13 @@ const TablaUsuarios = () => {
                         <td>{usuario.nombre}</td>
                         <td>{usuario.correo}</td>
                         <td>{usuario.telefono}</td>
-                        <td>{usuario.id_rol}</td>
-                        <td>{usuario.fecha_creacion}</td>
+                        <td>{usuario.rol}</td>
+                        
+                        <td>
+                       
+                        {verFirma ?(<button onClick={verFirm} className='btn btn-primary'>Firma</button>): ( <a onClick={(verFirm)=>{setVerFirma(true)}}><img src={usuario.firmaUsr}></img></a>)}
+
+                        </td>
                         {/* Agrega más celdas según tus datos */}
                     </tr>
                 ))}

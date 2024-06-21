@@ -8,7 +8,13 @@ const URL = process.env.REACT_APP_URL
 const DTPV = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
  const [matPrim, setMatPrim]=useState([])
-
+ const [id_creador, setid_creador] = useState('');
+  
+ useEffect(()=>{
+   setid_creador(localStorage.getItem('id_creador'))
+ })
+     
+ 
 useEffect(() => {
   try {
     const url=`${URL}/MateriaPrima`
@@ -28,8 +34,8 @@ console.log(matPrim)
         id_OTPV: id.toString(),
         cantidad: formData.cantidad,
         humedad: formData.humedad,
-        id_MP: formData.id_MP
-        
+        id_MP: formData.id_MP,
+        id_creador:id_creador
        
       });Swal.fire({
         icon: 'success',

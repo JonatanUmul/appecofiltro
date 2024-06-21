@@ -5,18 +5,21 @@ const URL = process.env.REACT_APP_URL
 
 const FormEHP = () => {
   const { handleSubmit, register } = useForm();
- 
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
   
 
 
-  const onSubmit = async (formData) => {
-    // formData.preventDefault();
+  const onSubmit = async () => {
     try {
   
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
         `${URL}/OTIP`,
-        {id_creador:""}
+        {id_creador}
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);

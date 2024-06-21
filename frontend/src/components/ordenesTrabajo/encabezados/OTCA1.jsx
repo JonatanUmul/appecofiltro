@@ -7,18 +7,18 @@ const URL = process.env.REACT_APP_URL
 const OTCMP = () => {
   const { handleSubmit, register } = useForm();
   const [mtp, setMtp] = useState([]);
-  const [datos, setDatos] = useState({
-    id_creador: "",
-  });
+  const [id_creador, setid_creador] = useState('');
   
-
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
     
 
   const onSubmit = async () => {
     // formData.preventDefault();
     try {
      const response = await axios.post(
-        `${URL}/OTCA1`,{id_creador:''}
+        `${URL}/OTCA1`,{id_creador}
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);

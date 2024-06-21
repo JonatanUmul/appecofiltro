@@ -6,10 +6,12 @@ const URL = process.env.REACT_APP_URL;
 
 const FormEHP = () => {
   const { handleSubmit, register } = useForm();
-
-  const id_creador=';'
-
+  const [id_creador, setid_creador] = useState('');
   
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
   
 
 

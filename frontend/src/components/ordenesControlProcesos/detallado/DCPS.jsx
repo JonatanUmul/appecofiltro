@@ -10,7 +10,11 @@
     const [maq, setTMaquinaria] = useState([]);
     const [calificacion, setCalificaciones] = useState([]);
     const [modeloUF, setModeloUf] = useState([]);
-
+    const [id_creador, setid_creador] = useState('');
+  
+    useEffect(()=>{
+      setid_creador(localStorage.getItem('id_creador'))
+    })
     const id_area=2;
     const id_area2=9;
     const maquinaria = 'Prensa';
@@ -44,8 +48,8 @@
           id_auditor: formData.id_auditor,
           id_prensa: formData.id_molde,
           id_calificacion: formData.id_calificacion,
-          id_mod: formData.id_modelo
-        
+          id_mod: formData.id_modelo,
+          id_creador:id_creador
         }); Swal.fire({
           icon: 'success',
           title: 'Guardado exitosamente',

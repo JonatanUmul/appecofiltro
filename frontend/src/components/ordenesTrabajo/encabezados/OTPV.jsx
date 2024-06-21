@@ -7,7 +7,11 @@ const URL = process.env.REACT_APP_URL
 const OTPV = () => {
   const { handleSubmit, register } = useForm();
   const [mtp, setMtp] = useState([]);
- 
+  const [id_creador, setid_creador] = useState('');
+  
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
   
   
   useEffect(() => {
@@ -35,7 +39,7 @@ const OTPV = () => {
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
         `${URL}/OTPV`,{
-          id_creador:8
+          id_creador
         }
       );
       window.location.href = "/Home/TablaOT";

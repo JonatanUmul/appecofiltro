@@ -11,7 +11,11 @@ const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [aserradero, setAserradero] = useState([]);
   const [tipCernido, setTipCernido] = useState([]);
   const [matPrim, setMatPrim]= useState([])
-
+  const [id_creador, setid_creador] = useState('');
+  
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
@@ -37,6 +41,7 @@ const DTCMP = ({ encabezado, EncName, fecha_creacion, id }) => {
         id_tipoCernido: formData.tipCernido,
         CantidadInicial: formData.cantidad_inicial,
         CantidadFinal: formData.cantidad_final,
+        id_creador:id_creador
       });
       console.log("Respuesta del servidor:", response.data);
 

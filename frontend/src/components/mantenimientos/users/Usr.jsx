@@ -67,8 +67,8 @@ console.log(operario)
             </label>
             <select
               className="select form-select"
-              id="rol"
-              {...register("rol")}
+              id="nombre"
+              {...register("nombre")}
             >
               <option value="" disabled selected>Seleccione...</option>
               {Array.isArray(roles.rows) &&

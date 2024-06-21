@@ -15,7 +15,13 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [grupodetrabajo, setGrupodetrabajo] = useState([]);
   const [error, setError]= useState('');
   const [formula2, setFormula2]=useState(false)
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
+  
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Turnos`),
@@ -55,8 +61,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         observacion: formData.observacion,
         id_Aserradero2:formData.id_Aserradero2,
         librasAserrin2:formData.librasAserrin2,
-        id_cernidodetalle2: formData.id_cernidodetalle2
-
+        id_cernidodetalle2: formData.id_cernidodetalle2,
+id_creador:id_creador
       });Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',

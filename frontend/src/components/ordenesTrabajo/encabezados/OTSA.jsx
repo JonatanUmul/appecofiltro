@@ -7,11 +7,12 @@ const URL = process.env.REACT_APP_URL
 const FormEHP = () => {
   const { handleSubmit, register } = useForm();
 
-  const [datos, setDatos] = useState({
-
-    id_creador: "",
-  });
+  const [id_creador, setid_creador] = useState('');
   
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
+    
   
   
 
@@ -22,7 +23,7 @@ const FormEHP = () => {
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        `${URL}/OTSA`,{id_creador:8}
+        `${URL}/OTSA`,{id_creador}
         
       );
       window.location.href = "/Home/TablaOT";

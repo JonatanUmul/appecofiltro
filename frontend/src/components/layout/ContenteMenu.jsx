@@ -12,11 +12,14 @@ const { Content } = Layout;
 const ContentMenu = () => {
   const location = useLocation();
   const [nombreUser, setNombreUser]=useState('')
-
+const [id_creador, setCreador]=useState('')
   useEffect(() => {
+    setCreador(localStorage.getItem('id_creador'))
     setNombreUser(localStorage.getItem('nombre')) 
   }, [])
+  console.log('dato capturado', nombreUser, id_creador)
   
+
 
 
   return (

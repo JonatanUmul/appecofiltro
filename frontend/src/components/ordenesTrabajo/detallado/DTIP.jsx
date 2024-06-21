@@ -11,7 +11,12 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [modelos, setModelos] = useState([]);
   const [plata, setPlata]=useState([])
   const [error, setError]= useState('')
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
   const insumo='Plata' 
   useEffect(() => {
     Promise.all([
@@ -40,7 +45,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         codigoFinal: formData.codigoFinal,
         impregnados: formData.impregnados,
         mermas: formData.mermas,
-        id_creadot:''
+        id_creador:id_creador
       });Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',

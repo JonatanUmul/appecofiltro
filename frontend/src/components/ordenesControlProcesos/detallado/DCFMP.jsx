@@ -15,6 +15,13 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
   const id_area=2;
   const id_area2=9;
   const [formula2, setFormula2]=useState(false)
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+
+
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/Aserradero`),
@@ -48,7 +55,8 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
         aserrinLB2:formData.aserrinLB2,
         humedadBarro: formData.humedadBarro,
         humedadAserrin: formData.humedadAserrin,
-        id_ufmodelo:formData.id_ufmodelo
+        id_ufmodelo:formData.id_ufmodelo,
+        id_creador:id_creador
      
       });
       // Mostrar SweetAlert de éxito

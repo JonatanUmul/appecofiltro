@@ -15,7 +15,11 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [error, setError]= useState('');
   const [formula2, setFormula2]=useState(false);
   const [cernidoDetalle, setCernidoDetalle] = useState([]);
+  const [id_creador, setid_creador] = useState('');
   
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
 
   const maquinaria="Horno"; 
   const id_area=3;
@@ -65,8 +69,8 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         librasAserrin:formData.librasAserrin,
         librasAserrin2:formData.librasAserrin2,
         id_aserradero2:formData.id_aserradero2,
-        id_cernidodetalle2: formData.id_cernidodetalle2
-       
+        id_cernidodetalle2: formData.id_cernidodetalle2,
+        id_creador:id_creador
 
       });
       Swal.fire({

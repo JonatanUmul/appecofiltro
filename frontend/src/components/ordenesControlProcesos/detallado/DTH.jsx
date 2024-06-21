@@ -11,7 +11,11 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
   const [turno, setTurno]= useState([])
   const [btn, setBtn]= useState(false)
   const maquinaria="Horno"; 
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/ModelosUF`),
@@ -46,7 +50,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         tempCabezaDR: formData.tempCabezaDR,
         tempCentroDR: formData.tempCentroDR,
         tempPieDR: formData.tempPieDR,
-        
+        id_creador:id_creador
       });
       Swal.fire({
         icon: 'success',

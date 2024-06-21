@@ -6,6 +6,7 @@ const URL = process.env.REACT_APP_URL;
 const CTT = () => {
   const { handleSubmit, register } = useForm();
   const [mtp, setMtp] = useState([]);
+
   const [datos, setDatos] = useState({
     id_enc: "",
     id_creador: "",
@@ -13,6 +14,11 @@ const CTT = () => {
     codigoFinal:""
   });
   
+
+  const [id_creador, setid_creador] = useState('');
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
   
   useEffect(() => {
     Promise.all([
@@ -33,7 +39,7 @@ const CTT = () => {
     try {
       // Actualizar el estado 'datos' con los valores del formulario
       setDatos({
-        // id_creador,
+      
         codigoInicio: formData.codigoInicio,
         codigoFinal:formData.codigoFinal,
         cantidad:formData.cantidad
@@ -42,7 +48,7 @@ const CTT = () => {
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        `${URL}/CTT`,formData
+        `${URL}/CTT`,{id_creador},formData
       );
       window.location.href = "/Home/TablaCP";
       console.log("Respuesta del servidor:", response.data);

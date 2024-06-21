@@ -6,7 +6,11 @@ const URL = process.env.REACT_APP_URL
 
 const FormEHP = () => {
   const { handleSubmit, register } = useForm();
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
   
   const onSubmit = async (formData) => {
     // formData.preventDefault();
@@ -15,7 +19,7 @@ const FormEHP = () => {
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
         `${URL}/OTHP`,
-        {id_creador:8}
+        {id_creador}
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);
@@ -34,6 +38,7 @@ const FormEHP = () => {
   <div className="container">
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
       <div className="d-grid gap-2">
+      
         <button type="submit" className="btn btn-primary">
           Crear
         </button>

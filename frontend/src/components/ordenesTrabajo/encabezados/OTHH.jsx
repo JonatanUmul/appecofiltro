@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
@@ -6,23 +6,22 @@ const URL = process.env.REACT_APP_URL
 
 const OTHH = () => {
   const { handleSubmit, register } = useForm();
-  const [datos, setDatos] = useState({
-    id_creador: "",
-  });
+  const [id_creador, setid_creador] = useState('');
   
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
   
 
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async () => {
     // formData.preventDefault();
     try {
-      // Actualizar el estado 'datos' con los valores del formulario
-      setDatos("id_creador", formData.id_creador);
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
         `${URL}/OTHH`,
-        formData
+        {id_creador}
       );
       window.location.href = "/Home/TablaOT";
       console.log("Respuesta del servidor:", response.data);

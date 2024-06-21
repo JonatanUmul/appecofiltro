@@ -10,7 +10,12 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [aserradero, setAserradero] = useState([]);
   const [patio, setPatio] = useState([]);
   const [matPrim, setMatPrim]= useState([]);
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
  
   useEffect(() => {
     Promise.all([
@@ -37,7 +42,7 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
         id_patio: formData.id_patio,
         cantidad_inicial: formData.cantidad_inicial,
         cantidad_final: formData.cantidad_final,
-       
+        id_creador:id_creador
       });Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',
@@ -78,7 +83,7 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
           </label>
           <select className="form-select" id="id_MP" {...register("id_MP")}>
           <option value="" disabled selected>Seleccione...</option>
-          <option>Materia Prima</option>
+        
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
               <option key={matPrim.id_enc} value={matPrim.id_enc}>

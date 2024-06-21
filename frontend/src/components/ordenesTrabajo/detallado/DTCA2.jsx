@@ -23,6 +23,12 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
   const [aserradero, setAserradero] = useState([]);
   const [tipCernido, setTipCernido] = useState([]);
   const [matPrim, setMatPrim]= useState([])
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
 
   useEffect(() => {
     Promise.all([
@@ -52,7 +58,7 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
         cantidad_inicial: formData.cantidad_inicial,
         cernido_fino: formData.cernido_fino,
         cernido_grueso: formData.cernido_grueso,
-        
+        id_creador:id_creador
        
       });
       console.log(formData.cantidad_inicial)

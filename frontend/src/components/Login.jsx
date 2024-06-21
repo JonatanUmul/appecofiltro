@@ -42,6 +42,9 @@ const Login = () => {
         const nombre= decodedToken.nombre;
         localStorage.setItem('nombre', nombre)
 
+        const id_creador= decodedToken.id_creador;
+        localStorage.setItem('id_creador', id_creador)
+
         navigate('/Home/Dashboard');
         console.log('ID Rol:', userRoleId);
       } else {

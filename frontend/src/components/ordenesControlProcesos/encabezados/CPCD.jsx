@@ -6,12 +6,14 @@ const URL = process.env.REACT_APP_URL;
 
 const FormEHP = () => {
   const { handleSubmit, register } = useForm();
-const id_creador='0'
+  const [id_creador, setid_creador] = useState('');
   
-  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
 
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async () => {
     // formData.preventDefault();
     try {
 

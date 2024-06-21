@@ -13,7 +13,12 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [modelo, setModelo] = useState([]);
   const [turno, setTurno] = useState([]);
   const [hornos, setTHornos] = useState([]);
+  const [id_creador, setid_creador] = useState('');
   
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
+      
   const id_area = 4;
   const id_area2 = 9;
 
@@ -63,7 +68,7 @@ console.log(operario)
         crudoCC: formData.crudoCC,
         quemados: formData.quemados,
         ahumados: formData.ahumados,
-        
+        id_creador:id_creador
        
       });
       Swal.fire({

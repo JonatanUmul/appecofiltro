@@ -12,6 +12,11 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
   const [btn, setBtn]= useState(false)
 
   const maquinaria="Tunel"; 
+  const [id_creador, setid_creador] = useState('');
+  
+useEffect(()=>{
+  setid_creador(localStorage.getItem('id_creador'))
+})
 
   useEffect(() => {
     Promise.all([
@@ -46,7 +51,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
         cabezaDerecha3: formData.cabezaDerecha3,
         pieIzquierdo1: formData.pieIzquierdo1,
         cabezaizquierda1: formData.cabezaizquierda1,
-        pieIzquierdo2: formData.pieIzquierdo2
+        pieIzquierdo2: formData.pieIzquierdo2,
+        id_creador:id_creador
       });
       Swal.fire({
         icon: 'success',

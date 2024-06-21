@@ -11,7 +11,11 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [turno, setTurno] = useState([]);
   const [maq, setTMaquinaria] = useState([]);
   const [modeloUF, setModeloUf] = useState([]);
-
+  const [id_creador, setid_creador] = useState('');
+  
+  useEffect(()=>{
+    setid_creador(localStorage.getItem('id_creador'))
+  })
   const maquinaria = 'Prensa';
   useEffect(() => {
     Promise.all([
@@ -46,6 +50,7 @@ const DCPB = ({ encabezado, EncName, fecha_creacion, id }) => {
         grosor1: formData.grosor1,
         grosor2: formData.grosor2,
         grosorFondo: formData.grosorFondo,
+        id_creador:id_creador
      
       });
       // Mostrar SweetAlert de éxito
