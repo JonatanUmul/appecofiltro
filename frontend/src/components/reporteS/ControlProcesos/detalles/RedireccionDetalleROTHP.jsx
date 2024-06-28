@@ -6,8 +6,7 @@ import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 import ROTHP from '../consultas/ROTHP'
 
 
-const Detalle = ({patio,nombretabla, fechaSecado, id_patio, cantidad_inicial, cantidad_final, merma }) => {
- console.log( 'datos props1', nombretabla, fechaSecado, id_patio)
+const Detalle = ({patio,nombretabla, fechaSecado, id_patio, cantidad_inicial, cantidad_final, merma, FirmaJefe, NombreJefe }) => {
   const [modalVisible, setModalVisible] = useState(false); 
 
 console.log('nombre tabla',patio)
@@ -36,7 +35,8 @@ console.log('nombre tabla',patio)
     cantidad_final={cantidad_final}
      merma={merma}
      patio={patio}
-
+     FirmaJefe={FirmaJefe}
+     NombreJefe={NombreJefe}
   />
           
      

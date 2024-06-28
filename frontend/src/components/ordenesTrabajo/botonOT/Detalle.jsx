@@ -61,7 +61,7 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
       case 'otip':
               return <ConsultaDTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
   
-      case 'otcc':
+      case 'dthh':
             return <ConsultaDTCC id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
             
     

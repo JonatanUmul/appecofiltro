@@ -8,13 +8,13 @@ const styles = StyleSheet.create({
     marginVertical: -1,
     flexDirection: 'row',
     textAlign: 'center',
-    borderRadius:5
+    borderRadius: 5,
   },
   card: {
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
-    marginBottom: 20,
+    marginBottom: 70,
     marginTop: 30,
   },
   cardHeader: {
@@ -38,54 +38,50 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   titleContainer: {
+    justifyContent:'center',
     marginVertical: -2,
     textAlign: 'center',
+    position:'relative',
     flex: 1,
     marginHorizontal: 0,
     marginLeft: 2,
+    // border:'1px'
   },
   title: {
-    padding: 8,
-    marginVertical: -1,
-    marginHorizontal: -1,
+    // padding: 8,
+    // marginVertical: -1,
+    // marginHorizontal: -1,
     fontSize: 10,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     textAlign: 'center',
     width: '100%',
-    borderWidth: 1,
+
+    borderWidth: 0.5,
     flex: 1,
   },
   section: {
-
-    padding: 8,
-    fontSize: 10,
-    borderWidth: 0.1,
-  marginBottom:1,
-    borderBottom:0.5,
-borderTop:0.5,
-borderLeft:0.5,
-borderRight:0.5,
-marginBottom:30
+   textAlign:'center',
+   justifyContent:'center'
+    
   },
   sectionColumn: {
     flexDirection: 'column',
   },
   sectionHeader: {
     maxHeight: '100%',
-borderBottom:0.4,
-borderTop:0.4,
-borderLeft:0.4,
-borderRight:0.4,
-    marginBottom:1.7,
+    borderBottom: 0.4,
+    borderTop: 0.4,
+    borderLeft: 0.4,
+    borderRight: 0.4,
+    marginBottom: 1.7,
     flexDirection: 'column',
     fontWeight: 'bold',
     fontSize: 8,
-
-
   },
   page: {
     flexDirection: 'column',
     padding: 20,
+    marginTop:30
   },
   table: {
     width: '100%',
@@ -107,12 +103,12 @@ borderRight:0.4,
     borderBottomColor: 'black',
   },
   tableCell: {
-    marginBottom:0,
+    marginBottom: 0,
     fontSize: 8,
     textAlign: 'center',
     borderWidth: 0.3,
-    borderBottom:0.3,
-    borderTop:0.3,
+    borderBottom: 0.3,
+    borderTop: 0.3,
     borderStyle: 'solid',
     borderColor: 'black',
     padding: 3,
@@ -123,13 +119,25 @@ borderRight:0.4,
   },
   logo: {
     marginHorizontal: -1,
+    border:0.5
   },
   firmas: {
     fontSize: 8,
     flexDirection: 'row',
-    justifyContent: 'start',
+    justifyContent:'space-around',
     marginTop: 5,
     marginLeft: 20,
+    textAlign:'right',
+    alignItems:'center'
+    
+  },
+  FirmasIMG:{
+    width:'15%',
+    height:'100%',
+    borderBottom:'1px solid black',
+    justifyContent:'space-between',
+    flexDirection:'row',
+   resizeMode: 'contain',
   },
   lineas: {
     fontSize: 8,
@@ -138,70 +146,84 @@ borderRight:0.4,
     justifyContent: 'center',
     marginBottom: -5,
     marginRight: 5,
+    textAlign:'center'
   },
-  headd:{
+  headd: {
     width: '100%',
     marginTop: 10,
-   
-  }
+  },
+  firmasText:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+
+    fontSize:10,
+    
+
+  },
+  
+
 });
 
-const MyDocument = ({ datos }) => (
+const MyDocument = ({ datos, FirmaJefe, NombreJefe}) => {
+  const Firma=datos[datos.length-1].firma
+  console.log('Nombre Jefe', NombreJefe)
+  return(
   <Document>
-    <Page style={styles.page}>
-      <View style={styles.container}>
-        <View style={[styles.titleContainer, { flex: 0.5, justifyContent: 'center' }]}>
-          <Image source="/images/LoogoEco.png" style={styles.logo} />
-        </View>
-        <View style={[styles.titleContainer, { flex: 4 }]}>
-          <Text style={[styles.section, styles.title]}>GESTIÓN DE CALIDAD</Text>
-          <Text style={[styles.section, styles.title]}>CONTROL DE HUMEDAD DE SECADO EN MATERIAS PRIMAS</Text>
-        </View>
-        <View style={[styles.titleContainer, { flex: 1 }]}>
-          <Text style={[styles.section, styles.title]}>CODIGO:</Text>
-          <Text style={[styles.section, styles.title]}>VERSIÓN:</Text>
-          <Text style={[styles.section, styles.title]}>EMISION:</Text>
-        </View>
-        <View style={[styles.titleContainer, { flex: 1 }]}>
-          <Text style={[styles.section, styles.title, { textAlign: 'justify' }]}>PRO-FOR-004</Text>
-          <Text style={[styles.section, styles.title, { textAlign: 'justify' }]}>3</Text>
-          <Text style={[styles.section, styles.title, { textAlign: 'justify' }]}>15/03/24</Text>
-        </View>
-      </View>
-
-      <View style={ styles.headd}>
-        <View style={styles.container}>
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3,     borderTopLeftRadius:5, }]}>MATERIA PRIMA:</Text>
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].materiaPrima}</Text>
-      
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>FECHA:</Text>
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>
-            {formatFecha(datos[0].fecha_creacion)}
-          </Text>
+   
+      <Page style={styles.page} >
+        <View style={[styles.container,{justifyContent: 'center', textAlign:'center'}]}>
+          <View style={[styles.titleContainer, { flex: 0.5, justifyContent: 'center' }]}>
+            <Image source={{ uri: "/images/LoogoEco.png" }} style={styles.logo } />
+          </View>
+          <View style={[styles.titleContainer, { flex: 4,alignItems:'center', justifyContent:'center' }]}>
+            <Text style={[styles.Header, styles.title,{textAlign:'center'}]}>GESTIÓN DE CALIDAD</Text>
+            <Text style={[styles.Header, styles.title,{textAlign:'center'}]}>CONTROL DE HUMEDAD DE SECADO EN MATERIAS PRIMAS</Text>
+          </View>
+          <View style={[styles.titleContainer, { flex: 1 ,alignItems:'center', justifyContent:'center'}]}>
+            <Text style={[styles.Header, styles.title,{textAlign:'center',alignItems:'center', justifyContent:'center'}]}>CÓDIGO:</Text>
+            <Text style={[styles.Header, styles.title,{textAlign:'center' ,alignItems:'center', justifyContent:'center'}]}>VERSIÓN:</Text>
+            <Text style={[styles.Header, styles.title,{textAlign:'center',alignItems:'center', justifyContent:'center'}]}>EMISIÓN:</Text>
+          </View>
+          <View style={[styles.titleContainer, { flex: 1,alignItems:'center', justifyContent:'center' }]}>
+            <Text style={[styles.Header, styles.title, { textAlign: 'center',alignItems:'center', justifyContent:'center' }]}>PRO-FOR-004</Text>
+            <Text style={[styles.Header, styles.title, { textAlign: 'center',alignItems:'center', justifyContent:'center' }]}>3</Text>
+            <Text style={[styles.Header, styles.title, { textAlign: 'center',alignItems:'center', justifyContent:'center' }]}>15/03/24</Text>
+          </View>
         </View>
 
-        <View style={styles.container}>
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Patio:</Text>
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].patio}</Text>
-        </View>
-        <View style={styles.container}>
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 ,     borderBottomLeftRadius:5,}]}>Hora Tendido: {datos[0].hora_creacion}</Text>
-          <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Hora Recolección: {datos[datos.length - 1].hora_creacion}</Text>
-          <Text style={[styles.sectionHeader, { flex: 1, padding:0, borderBottomRightRadius:5 }]}>Cantidad Recolectada</Text>
-        </View>
-      </View>
+        <View style={styles.headd}>
+          <View style={styles.container}>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderTopLeftRadius: 5 }]}>MATERIA PRIMA:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].materiaPrima}</Text>
 
-      <View style={styles.table}>
-        <View style={styles.tableHeader}>
-          <Text style={styles.tableCell}>Hora</Text>
-          <Text style={styles.tableCell}>Aserradero</Text>
-          <Text style={styles.tableCell}>Centro</Text>
-          <Text style={styles.tableCell}>Esquina Inferior Derecha</Text>
-          <Text style={styles.tableCell}>Esquina Inferior Izquierda</Text>
-          <Text style={styles.tableCell}>Esquina Superior Derecha</Text>
-          <Text style={styles.tableCell}>Esquina Superior Izquierda</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>FECHA:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>
+              {formatFecha(datos[0].fecha_creacion)}
+            </Text>
+          </View>
+
+          <View style={styles.container}>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Patio:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].patio}</Text>
+          </View>
+          <View style={styles.container}>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderBottomLeftRadius: 5 }]}>Hora Tendido: {datos[0].hora_creacion}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Hora Recolección: {datos[datos.length - 1].hora_creacion}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 0, borderBottomRightRadius: 5 }]}>Cantidad Recolectada</Text>
+          </View>
         </View>
-        {datos.map((fila, index) => (
+
+        <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableCell}>Hora</Text>
+            <Text style={styles.tableCell}>Aserradero</Text>
+            <Text style={styles.tableCell}>Centro</Text>
+            <Text style={styles.tableCell}>Esquina Inferior Derecha</Text>
+            <Text style={styles.tableCell}>Esquina Inferior Izquierda</Text>
+            <Text style={styles.tableCell}>Esquina Superior Derecha</Text>
+            <Text style={styles.tableCell}>Esquina Superior Izquierda</Text>
+          </View>
+          {datos.map((fila, index) => (
           <View key={index} style={styles.tableRow}>
             <Text style={styles.tableCell}>{fila.hora_creacion}</Text>
             <Text style={styles.tableCell}>{fila.aserradero}</Text>
@@ -211,32 +233,39 @@ const MyDocument = ({ datos }) => (
             <Text style={styles.tableCell}>{fila.esquinaSupDA}</Text>
             <Text style={styles.tableCell}>{fila.esquinaSupIZ}</Text>
           </View>
-        ))}
-      </View>
-
-      <View style={styles.card}>
-        <View style={styles.cardHeader}>
-          <Text style={styles.cardTitle}>COMENTARIOS</Text>
+          ))}
         </View>
-        <View style={styles.cardBody}>
-          <Text style={styles.cardText}></Text>
-        </View>
-      </View>
 
-      <View style={styles.firmas}>
-        <Text style={styles.lineas}> __________________________ </Text>
-        <Text style={styles.lineas}> __________________________ </Text>
-      </View>
-      <View style={styles.firmas}>
-        <Text style={styles.firmas}>Encargado de Secado</Text>
-        <Text style={styles.firmas}>Jefe de Producción</Text>
-      </View>
-    </Page>
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Text style={styles.cardTitle}>COMENTARIOS</Text>
+          </View>
+          <View style={styles.cardBody}>
+           
+            <Text style={styles.cardText}></Text>
+          </View>
+        </View>
+
+        
+        <View style={styles.firmas}>                                                     
+       {Firma?(<Image style={[styles.FirmasIMG, { }]}  src={Firma}/>):(<Text style={styles.lineas}> __________________________ </Text>)} 
+       <Text>{NombreJefe}</Text>
+       {FirmaJefe?(<Image style={styles.FirmasIMG}  src={FirmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
+        </View>
+        <View style={[styles.firmasText,{}]}>
+          <Text style={[styles.firmasText, {marginRight:'10%'}]}>Encargado de Secado</Text>
+          <Text style={[styles.firmasText, , {marginLeft:'15%'}]}>Jefe de Producción</Text>
+        </View>
+   
+      </Page>
+    
   </Document>
-);
+  )
+};
 
-const PdfROTHP = ({ datos }) => {
+const PdfROTHP = ({ datos, FirmaJefe, NombreJefe }) => {
   const [isOpen, setIsOpen] = useState(false);
+console.log('Firma Jefe', FirmaJefe)
 
   const togglePDFViewer = () => {
     setIsOpen(!isOpen);
@@ -248,7 +277,7 @@ const PdfROTHP = ({ datos }) => {
       <Modal isOpen={isOpen} toggle={togglePDFViewer} size="lg">
         <ModalBody>
           <PDFViewer style={{ width: '100%', height: '80vh' }}>
-            <MyDocument datos={datos} />
+            <MyDocument datos={datos} FirmaJefe={FirmaJefe} NombreJefe={NombreJefe} />
           </PDFViewer>
         </ModalBody>
       </Modal>

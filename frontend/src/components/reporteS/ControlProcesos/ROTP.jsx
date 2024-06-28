@@ -3,6 +3,8 @@
     import { formatFecha } from "../../utilidades/FormatearFecta";
     import PdfROTHP from './pdfECO/PdfROTHP'
     import ExcelROTHP from './Excel/ExcelRotP'
+    import { Divider } from 'antd';
+
     const URL = process.env.REACT_APP_URL
 
 
@@ -61,6 +63,8 @@
   
       return (
         <div className="row mb-3">
+        <Divider style={{ color: '#1d39c4'}}>Producción</Divider>
+
         <div className="row mb-3">
         <div className="col-md-3">
         <label htmlFor="fecha" className="form-label">Fecha 1</label>

@@ -3,6 +3,8 @@
     import { formatFecha } from "../../utilidades/FormatearFecta";
     import PdfROTPV from './pdfECO/PdfROTPV'
     import ExcelRotpv from './Excel/ExcelRotpv'
+    import { Divider } from 'antd';
+
     const URL = process.env.REACT_APP_URL
 
 
@@ -36,6 +38,8 @@
 
       return (
         <div className="row mb-3">
+        <Divider style={{ color: '#1d39c4'}}>Pulverizado</Divider>
+
         <div className="row mb-3">
         <div className="col-md-3">
         <label htmlFor="fecha" className="form-label">Fecha 1 </label>

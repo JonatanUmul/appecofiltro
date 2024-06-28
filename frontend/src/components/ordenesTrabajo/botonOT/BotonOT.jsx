@@ -59,8 +59,8 @@ const BotonOT = () => {
           return <OTHH />;
       case '9':
           return <OTIP />;
-      case '10':
-            return <OTCC />;
+      // case '10':
+      //       return <OTCC />;
         
             
       default:
@@ -120,10 +120,11 @@ const BotonOT = () => {
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '9', 'Orden de Trabajo - Impregnación')}>
           9.Impregnación
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Orden de Trabajo - Control de Calidad')}>
+      {/*  <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Orden de Trabajo - Control de Calidad')}>
           10.Control de Calidad
         </a>
-        {/* Agrega más elementos del menú desplegable aquí */}
+         */}
+     
       </div>
     </div>
   );

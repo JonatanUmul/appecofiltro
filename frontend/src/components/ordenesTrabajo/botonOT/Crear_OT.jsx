@@ -14,7 +14,7 @@ import DTIP from '../detallado/DTIP'
 import DTCC from '../detallado/DTCC'
 
 
-const CrearOT = ({ encabezado, id,EncName, fecha_creacion }) => {
+const CrearOT = ({ encabezado, id,EncName, fecha_creacion, codInicio,codFin }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
 
 console.log('propr recibios', encabezado, id)
@@ -62,8 +62,8 @@ console.log('propr recibios', encabezado, id)
       case 'otip':
             return <DTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
         
-      case 'otcc':
-            return <DTCC id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
+      case 'DTHH':
+            return <DTCC id={id} encabezado={encabezado} codInicio={codInicio} codFin={codFin} fecha_creacion={fecha_creacion}/>
         
   
       default:
@@ -83,7 +83,7 @@ console.log('propr recibios', encabezado, id)
   return (
     <div>
       {/* Botón para abrir el modal */}
-      <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center' }} onClick={handleClick}>
+      <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
         OT
       </button>
       {/* Modal */}

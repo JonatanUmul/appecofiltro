@@ -2,6 +2,8 @@
     import axios from 'axios'
     import { formatFecha } from '../../utilidades/FormatearFecta';
     import ExcelROTHP from './Excel/ExcelRothp.jsx'
+    import { Divider } from 'antd';
+
     const URL = process.env.REACT_APP_URL
 
 
@@ -68,6 +70,7 @@ console.log(matPrim)
       console.log('datos',datos)
       return (
         <div className="row mb-3">
+        <Divider style={{ color: '#1d39c4'}}>Humedad en Patios</Divider>
         <div className="row mb-3">
       <div className="col-md-3">
         <label htmlFor="fecha" className="form-label">Fecha 1</label>

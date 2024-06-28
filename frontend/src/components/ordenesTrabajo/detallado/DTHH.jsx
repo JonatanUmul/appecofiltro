@@ -70,7 +70,8 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         librasAserrin2:formData.librasAserrin2,
         id_aserradero2:formData.id_aserradero2,
         id_cernidodetalle2: formData.id_cernidodetalle2,
-        id_creador:id_creador
+        id_creador:id_creador,
+        id_est:2
 
       });
       Swal.fire({

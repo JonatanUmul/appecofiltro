@@ -54,7 +54,7 @@ const id_area=8
         id_proveedor:formData.id_proveedor ,
         id_responsable:formData.id_responsable ,
         detalle:formData.detalle ,
-        id_creador
+        creador:id_creador
     
         
       });Swal.fire({

@@ -6,6 +6,7 @@ import TablaEstProc from "../mantenimientos/Estados_Proc/TablaEstProc";
 import TabProvedores from '../mantenimientos/proveedores/TablaProv';
 import TablaMatPrima from '../mantenimientos/materiaPrima/TablaMatPrima';
 import TablaOT from '../ordenesTrabajo/TablaOT';
+import TablaControlC from '../ordenesTrabajo/TablaControlC';
 import Buttn from '../ordenesTrabajo/botonOT/BotonOT';
 import Dashboard from '../dashbords/Dashboard';
 import TablaCP from '../ordenesControlProcesos/TablaCP'
@@ -58,6 +59,9 @@ export const renderContent = (pathname) => {
           
               case "/Home/TablaOT":
                 return <TablaOT />;
+
+                case "/Home/TablaControlC":
+                  return <TablaControlC />;
                   
               case "/Home/TablaCP":
                 return <TablaCP />;

@@ -5,6 +5,7 @@ import PdfROTHP from '../pdfECO/PdfROTHP.jsx';
 import ExcelROTHP from '../Excel/ExcelRothp.jsx';
 import Detalle from '../detalles/RedireccionDetalle_ROTT.jsx';
 import DetalleCC from '../detalles/RedireccionDetalleCC.jsx'
+import { Divider } from 'antd';
 const URL = process.env.REACT_APP_URL;
 
 const ROTHP = () => {
@@ -15,9 +16,10 @@ const [modeloUF, setModeloUF]=useState('')
 const [turn, setMturn]=useState('')
 const [horno, sethorno]=useState('')
 const [porcentaje, setPorcentaje]=useState(0)
+const id_est=''
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-    const url = `${URL}/DTHH/${fecha_creacion_inicio ? fecha_creacion_inicio : 'null'}/${fecha_creacion_fin ? fecha_creacion_fin : 'null'}/${modeloUF ? modeloUF : 'null'}/${turn ? turn : 'null'}/${horno ? horno : 'null'}`;
+    const url = `${URL}/DTHH/${fecha_creacion_inicio ? fecha_creacion_inicio : 'null'}/${fecha_creacion_fin ? fecha_creacion_fin : 'null'}/${modeloUF ? modeloUF : 'null'}/${turn ? turn : 'null'}/${horno ? horno : 'null'}/${id_est ? id_est : 'null'}`;
 
     axios.get(url)
       .then((response) => {
@@ -33,6 +35,8 @@ console.log('porcentage',porcentaje );
   return (
     
     <div className="row mb-3">
+    <Divider style={{ color: '#1d39c4'}}>Horneados</Divider>
+
   <div className="row mb-3">
     <div className="col-md-3">
       <label htmlFor="fecha" className="form-label">Fecha 1</label>

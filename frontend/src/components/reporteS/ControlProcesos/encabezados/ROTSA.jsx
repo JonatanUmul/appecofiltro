@@ -4,6 +4,8 @@
     import ExcelRotsa from '../Excel/ExcelRotsa.jsx'
     import PdfROTSA from '../pdfECO/PdfROTSA.jsx'
 import Detalle from '../detalles/RedireccionDetalleROTHP'
+import { Divider } from 'antd';
+
     const URL = process.env.REACT_APP_URL
 
     const ROTHP = () => {
@@ -59,7 +61,7 @@ console.log(datos)
       return (
       
         <div className="row mb-3">
-         <p style={{textAlign: 'center'}}>Secado De Aserrín1</p>
+        <Divider style={{ color: '#1d39c4'}}>Secado de Aserrín</Divider>
 
         <div className="row mb-3">
         <div className="col-md-3">
@@ -131,13 +133,14 @@ console.log(datos)
                  cantidad_inicial={fila.cantidad_inicial}
                  cantidad_final={fila.cantidad_final}
                  merma={fila.merma}
+                 FirmaJefe={fila.firma}
+                 NombreJefe={fila.NombreJefe}
                  /></th> 
-                
+                <td>{fila.NombreJefe}</td>
                   <td>{formatFecha(fila.fecha_creacion) }</td>
                   <td>{fila.hora_creacion}</td>
                   <td>{fila.patio}</td>
                   <td>{fila.aserradero}</td>
-                  
                   <td>{fila.cantidad_inicial}</td>
                   <td>{fila.cantidad_final}</td>
                   <td>{fila.merma}</td>

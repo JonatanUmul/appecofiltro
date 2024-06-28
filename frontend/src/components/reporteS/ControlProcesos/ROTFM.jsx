@@ -3,6 +3,7 @@
     import { formatFecha } from "../../utilidades/FormatearFecta";
     import PdfROTFM from './pdfECO/PdfROTFM.jsx'
     import ExcelROTFM from './Excel/ExcelRofm.jsx'
+    import { Divider } from 'antd';
 
     const URL = process.env.REACT_APP_URL
 
@@ -39,7 +40,7 @@ console.log(datos)
       return ( 
       
         <div className="row mb-3">
-         <p style={{textAlign: 'center'}}>Formulaciòn</p>
+        <Divider style={{ color: '#1d39c4'}}>Formulación</Divider>
 
         <div className="row mb-3">
         <div className="col-md-3">

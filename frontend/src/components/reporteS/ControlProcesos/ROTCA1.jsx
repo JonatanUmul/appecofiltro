@@ -3,6 +3,7 @@
     import { formatFecha } from "../../utilidades/FormatearFecta";
     import PdfROTCA1 from './pdfECO/PdfROTCA1.jsx'
     import ExcelROTCA1 from './Excel/ExcelRoca1.jsx'
+    import { Divider } from 'antd';
 
     const URL = process.env.REACT_APP_URL
 
@@ -56,6 +57,8 @@ console.log('datos', datos)
 
       return (
         <div className="row mb-3">
+        <Divider style={{ color: '#1d39c4'}}>Cernido 1</Divider>
+
         <div className="row mb-3">
       <div className="col-md-3">
         <label htmlFor="fecha" className="form-label">Fecha 1 </label>

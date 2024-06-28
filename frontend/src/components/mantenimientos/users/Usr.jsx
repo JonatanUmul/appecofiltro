@@ -22,7 +22,7 @@ console.log(operario)
     ])
       .then(([rolesResponse, Operarios]) => {
         setRoles(rolesResponse.data);
-        setOperario(Operarios.data)
+        setOperario(Operarios.data.rows)
         console.log("Datos de Rolrouter:", rolesResponse.data);
       })
       .catch((error) => {
@@ -71,9 +71,7 @@ console.log(operario)
               {...register("nombre")}
             >
               <option value="" disabled selected>Seleccione...</option>
-              {Array.isArray(roles.rows) &&
-                operario.rows.length > 0 &&
-                operario.rows.map((nombre) => (
+              {operario && operario.map((nombre) => (
                   <option key={nombre.id} value={nombre.id}>
                     {nombre.Nombre}
                   </option>

@@ -5,21 +5,22 @@ import axios from "axios";
 import { formatFecha } from "../utilidades/FormatearFecta";
 import CrearOT from "./botonOT/Crear_OT";
 import Detalle from "./botonOT/Detalle";
-import '../maquinaria/TablaEstilos.css'
+import '../maquinaria/TablaEstilos.css';
 import { useAbility } from '../AbilityContext';
-const URL = process.env.REACT_APP_URL
+import ReactPaginate from 'react-paginate';
+import TablaControlC from './TablaControlC';
+import { Divider } from 'antd';
+const URL = process.env.REACT_APP_URL;
 
-
-// const ability = useAbility();
-// const [canManageAll, setCanManageAll] = useState(false);
-
-
-const TablaOT = ({OTDats}) => {
+const TablaOT = () => {
   const ability = useAbility();
-
   const [estOT, setEstot] = useState([]);
   const [error, setError] = useState("");
-console.log('Abiliti en tabla OT', ability)
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5;
+
+  console.log('Abiliti en tabla OT', ability);
+
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
@@ -33,107 +34,111 @@ console.log('Abiliti en tabla OT', ability)
     };
 
     obtenerDatos();
-  }, []); 
+  }, []);
 
   const selectForm = (id) => {
-    
+    // Aquí puedes manejar la selección del formulario
   };
 
   const handleClickButton = (id, encabezado) => {
-    // Aquí puedes trabajar con el id y el encabezado recibidos
     console.log("ID:", id);
     console.log("Encabezado:", encabezado);
-    // Luego puedes realizar la operación que necesites con estos datos
   };
 
   const puedeGestionar = ability.can('manage', 'all');
-  // const puedeGestionar = ability.can('manage', 'all');
   const puedeCrear = ability.can('create', 'OT');
   const puedeVerEstado = ability.can('view', 'Estado');
   console.log('Puede gestionar:', puedeGestionar);
 
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+  };
+
+  const offset = currentPage * itemsPerPage;
+  const currentPageData = estOT.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(estOT.length / itemsPerPage);
+
   return (
     <div>
-    <div className="mb-3">
-      <BotonOT />
-    </div>
-    <div style={{ overflowX: "auto" }}>
-      {error && <p>{error}</p>}
-      <table className="table text-center">
-        <thead>
-          <tr>
-            <th scope="col" style={{ width: "0%" }}></th>
-            <th scope="col" style={{ width: "1%" }}>
-              <i className="bi bi-calendar"></i>
-            </th>
-            <th scope="col" style={{ width: "1%" }}>
-              Orden
-            </th>
-            <th scope="col" style={{ width: "1%" }}>
-              Area
-            </th>
-            <th scope="col" style={{ width: "0%" }}>
-              Crear OT
-            </th>
-            <th scope="col" style={{ width: "0%" }}>
-              Estado
-            </th>
-            {/* 
-            <th scope="col" style={{ width: "0%" }}>
-              Eliminar
-            </th> 
-            */}
-          </tr>
-        </thead>
-        <tbody>
-          {estOT.map((OTDats, index) => (
-            <tr key={index} onClick={() => selectForm(OTDats.encabezado)}>
-              <th>
-                <Detalle
-                  encabezado={OTDats.encabezado}
-                  EncName={OTDats.EncName}
-                  fecha_creacion={OTDats.fecha_creacion}
-                  id={OTDats.id}
-                />
+      <Divider style={{ color: '#f5222d' }}>Ordenes de Trabajo</Divider>
+      <div className="mb-3">
+        <BotonOT />
+      </div>
+      <div style={{ overflowX: "auto" }} className="table-responsive-sm">
+        {error && <p>{error}</p>}
+        <table className="table text-center">
+          <thead>
+            <tr>
+              <th scope="col" style={{ width: "0%" }}></th>
+              <th scope="col" style={{ width: "1%" }}>
+                <i className="bi bi-calendar"></i>
               </th>
-              <td>{formatFecha(OTDats.fecha_creacion)}</td>
-              <td>{OTDats.encabezado}-{OTDats.id}</td>
-              <td>{OTDats.EncName}</td>
-             
-                <td>
-                <CrearOT
-                  encabezado={OTDats.encabezado}
-                  EncName={OTDats.EncName}
-                  fecha_creacion={OTDats.fecha_creacion}
-                  id={OTDats.id}
-                />
-              </td>
-                
-              
-            
-              <td>
-                <ButtnEst
-                  handleClickButton={handleClickButton}
-                  id={OTDats.id}
-                  encabezado={OTDats.encabezado}
-                />
-              </td>
-           
-              {/* 
-              <td>
-                <Eliminar
-                  encabezado={OTDats.encabezado}
-                  id={OTDats.id}
-                />
-              </td>
-              */}
+              <th scope="col" style={{ width: "1%" }}>
+                Orden
+              </th>
+              <th scope="col" style={{ width: "1%" }}>
+                Area
+              </th>
+              <th scope="col" style={{ width: "0%" }}>
+                Crear OT
+              </th>
+              <th scope="col" style={{ width: "0%" }}>
+                Estado
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentPageData.map((OTDats, index) => (
+              <tr key={index} onClick={() => selectForm(OTDats.encabezado)}>
+                <th>
+                  <Detalle
+                    encabezado={OTDats.encabezado}
+                    EncName={OTDats.EncName}
+                    fecha_creacion={OTDats.fecha_creacion}
+                    id={OTDats.id}
+                  />
+                </th>
+                <td>{formatFecha(OTDats.fecha_creacion)}</td>
+                <td>{OTDats.encabezado}-{OTDats.id}</td>
+                <td>{OTDats.EncName}</td>
+                <td>
+                  <CrearOT
+                    encabezado={OTDats.encabezado}
+                    EncName={OTDats.EncName}
+                    fecha_creacion={OTDats.fecha_creacion}
+                    id={OTDats.id}
+                  />
+                </td>
+                <td>
+                  <ButtnEst
+                    handleClickButton={handleClickButton}
+                    id={OTDats.id}
+                    encabezado={OTDats.encabezado}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <ReactPaginate
+          previousLabel={'Anterior'}
+          nextLabel={'Siguiente'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages pagination'}
+          activeClassName={'active'}
+        />
+      </div>
+      <Divider style={{ color: '#f5222d' }}>Horneados</Divider>
+      <TablaControlC />
     </div>
-  </div>
   );
 };
 
 export default TablaOT;
+

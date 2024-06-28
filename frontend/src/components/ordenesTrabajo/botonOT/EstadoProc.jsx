@@ -1,12 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const URL = process.env.REACT_APP_URL
+
+const URL = process.env.REACT_APP_URL;
 
 const EstadoProc = ({ id, encabezado }) => {
   const [estado, setEstado] = useState([]);
-  const [cambiarEst, setCambiarEst] = useState(""); // Estado para almacenar el estado seleccionado
+  const [cambiarEst, setCambiarEst] = useState("");
   const [cambiarRuta, setCambiarRuta] = useState('');
+
+  console.log('Datos recibidos (id, encabezado): ', id, encabezado, cambiarRuta);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,7 +16,7 @@ const EstadoProc = ({ id, encabezado }) => {
         const urls = `${URL}/EstadosProc`;
         const response = await axios.get(urls);
         setEstado(response.data);
-        console.log('datos: ', response.data);
+        console.log('Datos de estado: ', response.data);
       } catch (error) {
         console.log('No se obtuvieron datos', error);
       }
@@ -25,53 +27,66 @@ const EstadoProc = ({ id, encabezado }) => {
 
   // Manejar el cambio de opción
   const handleChange = (e) => {
-    setCambiarEst(e.target.value); // Actualizar el estado con el valor seleccionado
+    setCambiarEst(e.target.value);
   };
 
   // Definir la ruta basada en el encabezado seleccionado
   useEffect(() => {
+    console.log('Encabezado cambiado: ', encabezado);
+    let ruta = '';
     switch (encabezado) {
       case 'othp':
-        setCambiarRuta('othp');
+        ruta = 'othp';
         break;
       case 'otsa':
-        setCambiarRuta('otsa');
+        ruta = 'otsa';
         break;
       case 'otca1':
-        setCambiarRuta('otca1');
+        ruta = 'otca1';
         break;
       case 'otca2':
-        setCambiarRuta('otca2');
+        ruta = 'otca2';
         break;
       case 'otpv':
-        setCambiarRuta('otpv');
+        ruta = 'otpv';
         break;
       case 'otp':
-        setCambiarRuta('otp');
+        ruta = 'otp';
         break;
       case 'othh':
-        setCambiarRuta('othh');
+        ruta = 'othh';
         break;
       case 'otfm':
-        setCambiarRuta('otfm');
+        ruta = 'otfm';
         break;
       case 'otip':
-          setCambiarRuta('otip');
-          break; 
-          case 'otcc':
-          setCambiarRuta('otcc');
-          break;  
-      // default:
-      //   setCambiarRuta('ruta-por-defecto');
-      //   break;
+        ruta = 'otip';
+        break;
+      case 'otcc':
+        ruta = 'otcc';
+        break;
+      case 'DTHH':
+        ruta = 'dthh';
+        break;
+      default:
+        ruta = '';
+        break;  
     }
-  }, [encabezado]); // Ejecutar el efecto cuando el encabezado cambie 
+    console.log('Ruta establecida antes de actualizar el estado: ', ruta);
+    setCambiarRuta(ruta);
+  }, [encabezado]);
 
-  // Realizar la solicitud POST cuando se seleccione un estado
+  // Verificar cambios en cambiarRuta
+  useEffect(() => {
+    console.log('Ruta establecida después de actualizar el estado: ', cambiarRuta);
+  }, [cambiarRuta]);
+
+  // Realizar la solicitud PUT cuando se seleccione un estado
   useEffect(() => {
     const enviarEstado = async () => {
-      if (cambiarEst !== "") {
+      if (cambiarEst !== "" && cambiarRuta !== "") {
         try {
+          console.log('Enviando datos a la ruta:', cambiarRuta);
           const response = await axios.put(`${URL}/${cambiarRuta}`, { id_est: cambiarEst, id });
           console.log('Datos de la tabla:', response.data);
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
@@ -83,11 +98,7 @@ const EstadoProc = ({ id, encabezado }) => {
     };
 
     enviarEstado();
-  }, [cambiarEst, cambiarRuta]); // Ejecutar cuando cambiarEst o cambiarRuta cambien
-
-  console.log(id, encabezado);
-  console.log(cambiarRuta);
-  console.log(cambiarEst);
+  }, [cambiarEst, cambiarRuta]);
 
   return (  
     <div>
@@ -95,8 +106,8 @@ const EstadoProc = ({ id, encabezado }) => {
         name="estado"
         id="id_est"
         className="btn btn-sm btn-dark dropdown-toggle"
-        onChange={handleChange} // Agregar el evento onChange
-        value={cambiarEst} // Establecer el valor seleccionado
+        onChange={handleChange}
+        value={cambiarEst}
       >
         <option value="">Estado</option>
         {Array.isArray(estado.rows) &&
@@ -106,8 +117,6 @@ const EstadoProc = ({ id, encabezado }) => {
             </option>
           ))}
       </select>
-
-      
     </div>
   );
 };

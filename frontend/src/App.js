@@ -20,6 +20,7 @@ import TabProvedores from './components/mantenimientos/proveedores/TablaProv'
 import TablaMatPrima from './components/mantenimientos/materiaPrima/TablaMatPrima'
 import CrearMatPrima from './components/mantenimientos/materiaPrima/Form.CrearMatPrima'
 import TablaOT from './components/ordenesTrabajo/TablaOT'
+import TablaControlC from './components/ordenesTrabajo/TablaControlC.jsx'
 import TablaCP from './components/ordenesControlProcesos/TablaCP'
 import TableMantenimientoMaq from './components/mantenimientosMaq/TablaMantenimientosMaq'
 import TablaMaq from './components/maquinaria/TablaMaq'
@@ -77,6 +78,7 @@ function App() {
 
           {/*Tabla OT*/}
           <Route path="/Home/TablaOT" element={<TablaOT />} />
+          <Route path="/Home/TablaControlC" element={<TablaControlC />} />
           <Route path="/Home/TablaCP" element={<TablaCP />} />
           <Route path="/Home/TablaMaq" element={<TablaMaq />} />
           <Route path="/Home/Buttn" element={<Buttn />} />

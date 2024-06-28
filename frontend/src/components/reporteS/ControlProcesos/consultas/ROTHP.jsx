@@ -8,7 +8,7 @@
     const URL = process.env.REACT_APP_URL
 
    
-    const ROTHP = ({patio,fechaSecado, id_patio,cantidad_inicial,cantidad_final, merma}) => {
+    const ROTHP = ({patio,fechaSecado, id_patio,cantidad_inicial,cantidad_final, merma, FirmaJefe, NombreJefe}) => {
       const [datos, setDatos] = useState([]);
       const [aserradero, setAserradero] = useState('');
       const [matPrim, setMatPrim] = useState('');
@@ -18,7 +18,6 @@
       const [id_asrd, setIdAserradero] = useState('');
       const [id_enc, setIDEnc] = useState('');
       const [idpatio, setIdPatio] = useState(id_patio);
-
       // const fechaActual = new Date();
       // const fechaformateada=formatFecha(fechaActual)
       // const formatearFecha = () => {
@@ -74,7 +73,7 @@ console.log('FEcha Humedad patios',fechaSecado,idpatio)
                 cantidad_final={cantidad_final}
                 merma={merma}
                  />
-                 <PdfROTHP datos={datos} patio={patio} fechaSecado={fechaSecado} cantidad_final={cantidad_final} />
+                 <PdfROTHP datos={datos} patio={patio} fechaSecado={fechaSecado} cantidad_final={cantidad_final} FirmaJefe={FirmaJefe} NombreJefe={NombreJefe} />
                
 
               </div>

@@ -13,3 +13,29 @@
 .table td {
   padding: 8px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.pagination li {
+  display: inline;
+  margin: 0 5px;
+}
+
+.pagination li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.pagination li.active a {
+  font-weight: bold;
+  color: #000;
+}
+
+.pagination li.disabled a {
+  color: #ccc;
+}

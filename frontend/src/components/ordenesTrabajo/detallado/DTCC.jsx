@@ -5,8 +5,8 @@ import Swal from 'sweetalert2';
 import { formatFecha } from "../../utilidades/FormatearFecta";
 
 
-const URL = process.env.REACT_APP_URL
-const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
+const URL = process.env.REACT_APP_URL 
+const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin}) => {
   const { handleSubmit, register } = useForm();
  
   const [operario, setOperario] = useState([]);
@@ -48,7 +48,7 @@ console.log(operario)
   const onSubmit = async (formData) => {
     try {
       await axios.post(`${URL}/DTCC`, {
-        id_OTCC: id.toString(),
+        id_dthh: id.toString(),
         fecha_real:fecha_creacion,
         horneados:formData.horneados,
         codigoInicio: formData.codigoInicio,
@@ -93,18 +93,18 @@ console.log(operario)
       <div className="card">
         <div className="card-body">
           <label htmlFor="materiaPrima" className="form-label">
-            Orden
+            Codigo Inicio
           </label>
-          <p id="materiaPrima" className="form-control-static">{encabezado} - {EncName}</p>
+          <p id="materiaPrima" className="form-control-static">{codInicio} - {codFin}</p>
           <label htmlFor="fecha" className="form-label">
-            Fecha de Creación
+            Fecha De Horneado
           </label>
           <p id="fecha" className="form-control-static">{formatFecha(fecha_creacion)}</p>
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
       
-      <div className="col-md-6">
+    {/* <div className="col-md-6">
       <label htmlFor="esquinaSI" className="form-label">
         Código Inicio
       </label>
@@ -123,6 +123,58 @@ console.log(operario)
       </label>
       <input type="text" className="form-control" id="horneados" {...register("horneados")} required />
     </div>
+
+    <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Modelo
+          </label>
+          <select className="form-select" id="modelo" {...register("modelo")}>
+          <option value="" disabled selected>Seleccione...</option>
+            {Array.isArray(modelo.rows)
+            && modelo.rows.length>0 && modelo.rows.map((modelo) => (
+              <option key={modelo.id_mod} value={modelo.id_mod}>
+                {modelo.nombre_modelo}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="col-md-6">
+        <label htmlFor="aserradero" className="form-label">
+            Horno
+        </label>
+        <select className="form-select" id="id_horno" {...register("id_horno")}>
+        <option value="" disabled selected>Seleccione...</option>
+        {Array.isArray(hornos.rows)
+          && hornos.rows.length>0 && hornos.rows.map((horno) => (
+            <option key={horno.id_maq} value={horno.id_maq}>
+              {horno.nombre_maq}
+            </option>
+          ))}
+        </select>
+      </div>
+        <div className="col-md-6">
+          <label htmlFor="esquinaSI" className="form-label">
+            Fecha Horneado
+          </label>
+          <input type="date" className="form-control" id="fechaHorneado" {...register("fechaHorneado")} required />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+            Turno de Horneado
+          </label>
+          <select className="form-select" id="turnoHorneado" {...register("turnoHorneado")}>
+          <option value="" disabled selected>Seleccione...</option>
+            {Array.isArray(turno.rows)
+            && turno.rows.length>0 && turno.rows.map((turno) => (
+              <option key={modelo.id} value={turno.id}>
+                {turno.turno}
+              </option>
+            ))}
+          </select>
+        </div>
+    */}  
       <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Responsable de CC
@@ -154,35 +206,7 @@ console.log(operario)
 
           
       
-          <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-            Modelo
-          </label>
-          <select className="form-select" id="modelo" {...register("modelo")}>
-          <option value="" disabled selected>Seleccione...</option>
-            {Array.isArray(modelo.rows)
-            && modelo.rows.length>0 && modelo.rows.map((modelo) => (
-              <option key={modelo.id_mod} value={modelo.id_mod}>
-                {modelo.nombre_modelo}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="col-md-6">
-        <label htmlFor="aserradero" className="form-label">
-            Horno
-        </label>
-        <select className="form-select" id="id_horno" {...register("id_horno")}>
-        <option value="" disabled selected>Seleccione...</option>
-        {Array.isArray(hornos.rows)
-          && hornos.rows.length>0 && hornos.rows.map((horno) => (
-            <option key={horno.id_maq} value={horno.id_maq}>
-              {horno.nombre_maq}
-            </option>
-          ))}
-        </select>
-      </div>
+          
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Turno de CC
@@ -198,27 +222,7 @@ console.log(operario)
           </select>
         </div>
 
-        <div className="col-md-6">
-          <label htmlFor="esquinaSI" className="form-label">
-            Fecha Horneado
-          </label>
-          <input type="date" className="form-control" id="fechaHorneado" {...register("fechaHorneado")} required />
-        </div>
-
-        <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-            Turno de Horneado
-          </label>
-          <select className="form-select" id="turnoHorneado" {...register("turnoHorneado")}>
-          <option value="" disabled selected>Seleccione...</option>
-            {Array.isArray(turno.rows)
-            && turno.rows.length>0 && turno.rows.map((turno) => (
-              <option key={modelo.id} value={turno.id}>
-                {turno.turno}
-              </option>
-            ))}
-          </select>
-        </div>
+      
         
        
      
