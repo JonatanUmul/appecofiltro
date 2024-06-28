@@ -78,6 +78,27 @@ console.log(operario)
                 ))}
             </select>
           </div>
+
+          <div className="mb-3">
+          <label htmlFor="rol" className="form-label">
+            Rols
+          </label>
+          <select
+            className="select form-select"
+            id="rol"
+            {...register("rol")}
+          >
+            <option value="" disabled selected>Seleccione...</option>
+            {Array.isArray(roles.rows) &&
+              roles.rows.length > 0 &&
+              roles.rows.map((rol) => (
+                <option key={rol.id_rol} value={rol.id_rol}>
+                  {rol.rol}
+                </option>
+              ))}
+          </select>
+        </div>
+
           <div className="mb-3">
             <label htmlFor="mail" className="form-label">
               Correo
