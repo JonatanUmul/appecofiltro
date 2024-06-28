@@ -51,7 +51,7 @@ console.log(operario)
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
-              Usuario
+            Username
             </label>
             <input
               type="text"
@@ -63,7 +63,7 @@ console.log(operario)
           </div>
           <div className="mb-3">
             <label htmlFor="rol" className="form-label">
-              Nombre
+              Name
             </label>
             <select
               className="select form-select"
