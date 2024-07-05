@@ -199,7 +199,7 @@ const MyDocument = ({ datos, FirmaJefe, NombreJefe}) => {
 
         <View style={styles.headd}>
           <View style={styles.container}>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderTopLeftRadius: 5 }]}>MATERIA PRIMA:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderTopLeftRadius: 5 }]}>Fecha de Horneado:</Text>
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].materiaPrima}</Text>
 
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>FECHA:</Text>
@@ -271,7 +271,7 @@ const MyDocument = ({ datos, FirmaJefe, NombreJefe}) => {
   )
 };
 
-const PdfROTHP = ({ datos, FirmaJefe, NombreJefe }) => {
+const PdfROTHP = ({ dats, FirmaJefe, NombreJefe }) => {
   const [isOpen, setIsOpen] = useState(false);
 console.log('Firma Jefe', FirmaJefe)
 
@@ -281,12 +281,12 @@ console.log('Firma Jefe', FirmaJefe)
 
   return (
     <div>
-    {datos.length>0 ?(<button className="btn" onClick={togglePDFViewer}><i className="bi bi-file-earmark-pdf"></i></button>):''}
+    {dats.length>0 ?(<button className="btn" onClick={togglePDFViewer}><i className="bi bi-file-earmark-pdf"></i></button>):''}
       
       <Modal isOpen={isOpen} toggle={togglePDFViewer} size="lg">
         <ModalBody>
           <PDFViewer style={{ width: '100%', height: '80vh' }}>
-            <MyDocument datos={datos} FirmaJefe={FirmaJefe} NombreJefe={NombreJefe} />
+            <MyDocument datos={dats} FirmaJefe={FirmaJefe} NombreJefe={NombreJefe} />
           </PDFViewer>
         </ModalBody>
       </Modal>

@@ -14,9 +14,10 @@ import DTIP from '../detallado/DTIP'
 import DTCC from '../detallado/DTCC'
 
 
+
 const CrearOT = ({ encabezado, id,EncName, fecha_creacion, codInicio,codFin }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
-
+  const [nombreRol, setNombrerol]=useState('')
 console.log('propr recibios', encabezado, id)
 
   // Función para abrir el modal cuando se hace clic en el botón
@@ -29,7 +30,9 @@ console.log('propr recibios', encabezado, id)
     setModalVisible(false);
   };
 
-
+  useEffect(()=>{setNombrerol( localStorage.getItem('rol'))},[])
+  console.log('RolName capturado',nombreRol)
+  
 
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
@@ -82,10 +85,12 @@ console.log('propr recibios', encabezado, id)
 
   return (
     <div>
-      {/* Botón para abrir el modal */}
-      <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
+   
+        <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
         OT
       </button>
+
+      
       {/* Modal */}
       <Modal isOpen={modalVisible} toggle={handleCloseModal} backdrop="static">
         <ModalHeader toggle={handleCloseModal}>

@@ -7,8 +7,11 @@ import ROTT from '../consultas/ROTT'
 import ROTH from '../consultas/ROTH'
 
 const Detalle = ({  
-  id,
+  id_modelo,
+  id_turno,
   id_horno,
+  datos,
+  id,
   nombretabla,
   codigoInicio,
   codigoFinal,
@@ -16,7 +19,6 @@ const Detalle = ({
   fechaHorneado,
   turnoHorneado,
   turnoHorn,
-  id_turno,
   hornedo,
   MCrudas,
   LBarro,
@@ -24,10 +26,10 @@ const Detalle = ({
   aserradero,
   tipCernido,
   modelo,
-  id_modelo,
   hornn,
   hornero }) => {
- 
+ console.log('datos en prueba' ,id_modelo,id_turno,id_horno)
+ console.log('datos de prueba', datos)
   const [modalVisible, setModalVisible] = useState(false); 
 
 console.log('verificacndo fecha',turnoHorn)
@@ -50,25 +52,7 @@ console.log('verificacndo fecha',turnoHorn)
       case 'ctt':
         return <ROTT id={id}  nombretabla={nombretabla} codigoInicio={codigoInicio} codigoFinal={codigoFinal} cantidad={cantidad}  />
       case 'cthh':
-          return <ROTH 
-  id={id} 
-  nombretabla={nombretabla}
-  codigoInicio={codigoInicio}
-  codigoFinal={codigoFinal}
-  id_horno={id_horno}
-  cantidad={cantidad}
-  fechaHorneado={fechaHorneado}
-  id_turno={id_turno}
-  hornedo={hornedo}
-  MCrudas={MCrudas}
-  LBarro={LBarro}
-  LBaserrin={LBaserrin}
-  aserradero={aserradero}
-  tipCernido={tipCernido}
-  modelo={modelo}
-  id_modelo={id_modelo}
-  hornn={hornn}
-  hornero={hornero} />
+          return <ROTH datos={datos}  id_modelo={id_modelo} id_turno={id_turno} id_horno={id_horno} />
           
      
       default:

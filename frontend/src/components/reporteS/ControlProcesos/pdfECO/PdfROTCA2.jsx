@@ -114,6 +114,15 @@ const styles = StyleSheet.create({
     padding: 3,
     flex: 1,
   },
+  tablefirma:{
+    borderColor: 'black',
+    borderWidth: 0.2,
+    textAlign: 'center',
+    borderStyle: 'solid',
+    padding: 3,
+    flex: 1,
+    height:'25'
+  },
   text: {
     marginLeft: 2,
     textAlign:'center'
@@ -122,12 +131,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 0
   },
   firmas: {
-marginLeft:15,
-textAlign:'center',
     fontSize: 8,
-textAlign:'center',
-    marginTop: 8,
-
+    flexDirection: 'row',
+    justifyContent:'space-around',
+    marginTop: 5,
+    marginLeft: 20,
+    textAlign:'right',
+    alignItems:'center'
+    
   },
   datodFirmas:{
     marginTop:'5%',
@@ -142,11 +153,33 @@ textAlign:'center',
     justifyContent: 'center',
     marginBottom: -5,
     marginRight: 50 // Ajuste para evitar que las líneas se superpongan
-  }
+  },
+  FirmasIMG:{
+    width:'15%',
+    height:'100%',
+    borderBottom:'1px solid black',
+    justifyContent:'space-between',
+    flexDirection:'row',
+   resizeMode: 'contain',
+  },
+  firmasText:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+
+    fontSize:10,
+    
+
+  },
 });
 
-const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
-  
+const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
+  const UltimaFirma=datos[datos.length-1]
+  const Firma= UltimaFirma?.JefeMateriaPrim || null
+const FirmaJefe=UltimaFirma?.FirmaJefeProdu || null
+    const nombreEncargado=UltimaFirma?.NombreCreador || null
+
+
+  return(
   <Document>
   <Page style={styles.page}>
     <View style={[styles.container, { textAlign: 'center' }]}>
@@ -182,7 +215,7 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
         <Text style={styles.tableCell}>Cernido Fino</Text>
         <Text style={styles.tableCell}>Cernido Grueso</Text>
         <Text style={styles.tableCell}>Merma</Text>
-  
+        <Text style={styles.tableCell}>Firma</Text>
       </View>
       {datos.map((fila, index) => (
         <View key={index} style={styles.tableRow}>
@@ -192,7 +225,8 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
           <Text style={styles.tableCell}>{fila.cernido_fino}</Text>
           <Text style={styles.tableCell}>{fila.cernido_grueso}</Text>
           <Text style={styles.tableCell}>{fila.merma}</Text>
-                  
+          <Image style={styles.tablefirma} src={fila.JefeMateriaPrim}></Image>
+      
         </View>
       ))}
     </View>
@@ -208,20 +242,22 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
   </View>
     
 
-    <View style={[styles.datodFirmas, { justifyContent: 'center' }]}>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'center', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}>___________________________</Text>
-        <Text style={styles.firmas}>F. Encargado de Secado</Text>
-      </View>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'start', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}> ___________________________</Text>
-        <Text style={styles.firmas}>F. Jefe de Producción</Text>
-      </View>
-    </View>
+  <View style={styles.firmas}>  
+                                                    
+  {Firma  ?(<Image style={[styles.FirmasIMG]}  src={Firma}></Image>):(<Text style={styles.lineas}> __________________________ </Text>)} 
+  <Text></Text>
+  {FirmaJefe ?(<Image style={styles.FirmasIMG}  src={FirmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
+  
+   </View>
+   <View style={[styles.firmasText,{}]}>
+     <Text style={[styles.firmasText,{}]}>Encargado de Secado</Text>
+     <Text style={[styles.firmasText,{}]}>Jefe de Producción</Text>
+   </View>
+
   </Page>
 </Document>
-  
-);
+    )
+    };
 
 const PdfROTHP = ({ datos,  patio, fechaSecado, cantidad_final}) => {
 

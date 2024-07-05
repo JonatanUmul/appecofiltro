@@ -114,6 +114,16 @@ const styles = StyleSheet.create({
     padding: 3,
     flex: 1,
   },
+  tablefirma:{
+    borderColor: 'black',
+    borderWidth: 0.2,
+    textAlign: 'center',
+    borderStyle: 'solid',
+    padding: 3,
+    flex: 1,
+    height:'30'
+  },
+
   text: {
     marginLeft: 2,
     textAlign:'center'
@@ -122,17 +132,27 @@ const styles = StyleSheet.create({
     marginHorizontal: 0
   },
   firmas: {
-marginLeft:15,
-textAlign:'center',
     fontSize: 8,
-textAlign:'center',
-    marginTop: 8,
-
+    flexDirection: 'row',
+    justifyContent:'space-around',
+    marginTop: 5,
+    marginLeft: 20,
+    textAlign:'right',
+    alignItems:'center'
+    
   },
   datodFirmas:{
     marginTop:'5%',
     flexDirection:'row'
   
+  },
+  FirmasIMG:{
+    width:'15%',
+    height:'100%',
+    borderBottom:'1px solid black',
+    justifyContent:'space-between',
+    flexDirection:'row',
+   resizeMode: 'contain',
   },
   lineas: {
     fontSize: 8,
@@ -142,12 +162,26 @@ textAlign:'center',
     justifyContent: 'center',
     marginBottom: -5,
     marginRight: 50 // Ajuste para evitar que las líneas se superpongan
-  }
+  },
+  firmasText:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+
+    fontSize:10,
+    
+
+  },
 });
 
-const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
+const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
+  const UltimaFirma=datos[datos.length-1]
+  const Firma= UltimaFirma?.firmaEncargado || null
+const FirmaJefe=UltimaFirma?.firmaJefe || null
+    const nombreEncargado=UltimaFirma?.NombreCreador || null
+
   
-  <Document>
+  return(
+    <Document>
   <Page style={styles.page}>
     <View style={[styles.container, { textAlign: 'center' }]}>
       <View style={[styles.titleContainer, { flex: 0.7 }]}>
@@ -181,6 +215,7 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
         <Text style={styles.tableCell}>Cantidad Inicial</Text>
         <Text style={styles.tableCell}>Cantidad Final</Text>
         <Text style={styles.tableCell}>Merma</Text>
+        <Text style={styles.tableCell}>Firma</Text>
        
   
       </View>
@@ -191,6 +226,7 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
           <Text style={styles.tableCell}>{fila.CantidadInicial}</Text>
           <Text style={styles.tableCell}>{fila.CantidadFinal}</Text>
           <Text style={styles.tableCell}>{fila.merma}</Text>
+          <Image style={styles.tablefirma} src={fila.firmaEncargado}></Image>
          
                   
         </View>
@@ -198,30 +234,35 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => (
     </View>
 
     <View style={styles.card}>
-    <View style={[styles.cardHeader]}>
+    {/*<View style={[styles.cardHeader]}>
     <Text style={styles.cardTitle}>COMENTARIOS</Text>
     </View>
+     
     <View style={styles.cardBody}>
       
       <Text style={styles.cardText}></Text>
     </View>
+    */}
   </View>
     
 
-    <View style={[styles.datodFirmas, { justifyContent: 'center' }]}>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'center', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}>___________________________</Text>
-        <Text style={styles.firmas}>F. Encargado de Secado</Text>
-      </View>
-      <View style={[styles.firmas, { textAlign: 'center', justifyContent: 'start', flexDirection: 'column' }]}>
-        <Text style={[styles.lineas, { textAlign: 'center', justifyContent: 'center' }]}> ___________________________</Text>
-        <Text style={styles.firmas}>F. Jefe de Producción</Text>
-      </View>
-    </View>
+  <View style={styles.firmas}>  
+                                                    
+  {Firma  ?(<Image style={[styles.FirmasIMG]}  src={Firma}></Image>):(<Text style={styles.lineas}> __________________________ </Text>)} 
+  <Text></Text>
+  {FirmaJefe ?(<Image style={styles.FirmasIMG}  src={FirmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
+  
+   </View>
+   <View style={[styles.firmasText,{}]}>
+     <Text style={[styles.firmasText,{}]}>Encargado de Secado</Text>
+     <Text style={[styles.firmasText,{}]}>Jefe de Producción</Text>
+   </View>
   </Page>
 </Document>
+  )
   
-);
+  
+};
 
 const PdfROTHP = ({ datos,  patio, fechaSecado, cantidad_final}) => {
 

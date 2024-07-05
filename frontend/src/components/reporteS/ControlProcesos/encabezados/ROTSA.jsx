@@ -17,7 +17,7 @@ import { Divider } from 'antd';
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [id_asrdSMP, setIdAserradero] = useState('');
       const [id_patio, setIdPatio] = useState('');
-
+console.log('datos en secado de aserrin', datos)
       const limpiarInputs = () => {
         setFecha(formatFecha(new Date()));
         setFecha2(formatFecha(new Date()));
@@ -116,6 +116,7 @@ console.log(datos)
                 <th scope="col">Cantidad Inicial</th>
                 <th scope="col">Cantidad Final</th>
                 <th scope="col">Merma</th>
+                
 
               </tr>
             </thead>
@@ -133,10 +134,9 @@ console.log(datos)
                  cantidad_inicial={fila.cantidad_inicial}
                  cantidad_final={fila.cantidad_final}
                  merma={fila.merma}
-                 FirmaJefe={fila.firma}
+                 FirmaJefe={fila.firmaJefe}
                  NombreJefe={fila.NombreJefe}
                  /></th> 
-                <td>{fila.NombreJefe}</td>
                   <td>{formatFecha(fila.fecha_creacion) }</td>
                   <td>{fila.hora_creacion}</td>
                   <td>{fila.patio}</td>

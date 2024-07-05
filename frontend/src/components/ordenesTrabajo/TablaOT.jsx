@@ -10,6 +10,7 @@ import { useAbility } from '../AbilityContext';
 import ReactPaginate from 'react-paginate';
 import TablaControlC from './TablaControlC';
 import { Divider } from 'antd';
+
 const URL = process.env.REACT_APP_URL;
 
 const TablaOT = () => {
@@ -18,15 +19,17 @@ const TablaOT = () => {
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
+  const [nombreRol, setNombrerol] = useState('');
 
-  console.log('Abiliti en tabla OT', ability);
+  useEffect(() => {
+    setNombrerol(localStorage.getItem('rol'));
+  }, []);
 
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
         const response = await axios.get(`${URL}/TablaOT`);
         setEstot(response.data);
-        console.log("ver aca ", response);
       } catch (error) {
         setError("No hay órdenes de trabajo activas en este momento.");
         console.error("Error al obtener los datos:", error);
@@ -45,10 +48,7 @@ const TablaOT = () => {
     console.log("Encabezado:", encabezado);
   };
 
-  const puedeGestionar = ability.can('manage', 'all');
-  const puedeCrear = ability.can('create', 'OT');
-  const puedeVerEstado = ability.can('view', 'Estado');
-  console.log('Puede gestionar:', puedeGestionar);
+  const puedeGestionar = ability.can('manage', 'BotonOT');
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
@@ -61,9 +61,11 @@ const TablaOT = () => {
   return (
     <div>
       <Divider style={{ color: '#f5222d' }}>Ordenes de Trabajo</Divider>
-      <div className="mb-3">
-        <BotonOT />
-      </div>
+        <div className="mb-3">
+          <BotonOT />
+        </div>
+  
+      
       <div style={{ overflowX: "auto" }} className="table-responsive-sm">
         {error && <p>{error}</p>}
         <table className="table text-center">
@@ -141,4 +143,3 @@ const TablaOT = () => {
 };
 
 export default TablaOT;
-

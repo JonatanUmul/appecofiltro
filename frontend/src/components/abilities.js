@@ -26,12 +26,17 @@ export default function defineAbilitiesFor(role) {
   console.log('Rol', role);
 
   switch (role) {
-    case 4:
+    case 1:
       can('manage', 'all'); // Permiso para gestionar todos los recursos
       break;
-    case 5:
-      can('read', 'all'); // Permiso solo para leer todos los recursos
-      can('create', 'all');
+      case 2:
+      can('read', 'all'); // Permiso para leer todos los recursos
+      break;
+      case 3:
+      can('manage', 'BotonOT'); // Permiso para gestionar todos los recursos
+      break;
+      case 7:
+      can('manage', 'CrearOT'); // Permiso para gestionar todos los recursos
       break;
     default:
       can('read', 'all'); // Permiso predeterminado de lectura

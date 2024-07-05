@@ -55,7 +55,6 @@ console.log('Abiliti en tabla OT', ability)
   // const puedeGestionar = ability.can('manage', 'all');
   const puedeCrear = ability.can('create', 'OT');
   const puedeVerEstado = ability.can('view', 'Estado');
-  console.log('Puede gestionar:', puedeGestionar);
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);

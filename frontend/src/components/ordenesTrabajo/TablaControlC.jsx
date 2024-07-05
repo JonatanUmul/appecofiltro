@@ -76,6 +76,9 @@ console.log('Abiliti en tabla OT', ability)
               <i className="bi bi-calendar"></i>
             </th>
             <th scope="col" style={{ width: "1%" }}>
+            id
+          </th>
+            <th scope="col" style={{ width: "1%" }}>
               Codigo Inicio
             </th>
             <th scope="col" style={{ width: "1%" }}>
@@ -116,6 +119,7 @@ console.log('Abiliti en tabla OT', ability)
                 />
               </th> 
               <td>{formatFecha(OTDats.fecha_creacion)}</td>
+              <td>{OTDats.id}</td>
               <td>{OTDats.codigoInicio}</td>
               <td>{OTDats.codigoInicio}</td>
               <td>{OTDats.horneado}</td>

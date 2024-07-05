@@ -66,7 +66,7 @@ console.log('datos', datos)
       </div>
       <div className="col-md-3">
         <label htmlFor="fecha" className="form-label">Fecha 2</label>
-        <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha(e.target.value)} />
+        <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
       </div>
       <div className="col-md-3">
         <label htmlFor="aserradero" className="form-label">Aserradero:</label>

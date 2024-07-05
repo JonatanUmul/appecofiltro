@@ -7,17 +7,21 @@ import { Card, li }from 'react-bootstrap';
 
 const URL = process.env.REACT_APP_URL;
 
-const ROTHP = ({ id_horno, fechaHorneado, id_turno, id_modelo }) => {
-  console.log('DATOS DESDE RDTC', id_horno, fechaHorneado, id_turno, id_modelo);
+const ROTHP = ({ dats }) => {
+  // console.log('DATOS DESDE RDTC', id_horno, fechaHorneado, id_turno, id_modelo);
   const [datos, setDatos] = useState([]);
-  const [fecha_creacion_inicio, setFecha] = useState(formatFecha(fechaHorneado));
-  const [fecha_creacion_fin, setFecha2] = useState(formatFecha(fechaHorneado));
-  const [turnoHorno, setTurnohorno] = useState(id_turno);
-  const [horno, setHorno] = useState(id_horno);
-  const [modelo, setModelo] = useState(id_modelo);
+  const [id_dthh]=useState(dats[0].id)
+   console.log(id_dthh)
+  // const [fecha_creacion_inicio, setFecha] = useState(formatFecha(fechaHorneado));
+  // const [fecha_creacion_fin, setFecha2] = useState(formatFecha(fechaHorneado));
+  // const [turnoHorno, setTurnohorno] = useState(id_turno);
+  // const [horno, setHorno] = useState(id_horno);
+  // const [modelo, setModelo] = useState(id_modelo);
 const [porcentaje, setPorcentaje]=useState(0)
+
   useEffect(() => {
-    const url = `${URL}/DTCC/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${turnoHorno || 'null'}/${horno || 'null'}/${modelo || 'null'}`;
+    
+    const url = `${URL}/DTCC/${ 'null'}/${ 'null'}/${ 'null'}/${ 'null'}/${ 'null'}/${id_dthh || 'null'}`;
 
     axios.get(url)
       .then((response) => {
@@ -28,7 +32,7 @@ const [porcentaje, setPorcentaje]=useState(0)
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
       });
-  }, [fecha_creacion_inicio, fecha_creacion_fin, turnoHorno, horno, modelo]);
+  }, []);
 
   console.log('porcentage',porcentaje );
 

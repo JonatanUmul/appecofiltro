@@ -12,9 +12,11 @@ import OTP from '../encabezados/OTP';
 import OTHH from '../encabezados/OTHH';
 import OTIP from '../encabezados/OTIP'
 import OTCC from '../encabezados/OTCC'
+// import { useAbility } from '../AbilityContext';
 
 
 const BotonOT = () => {
+  // const ability = useAbility();
   const [modal, setModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [modalTitle, setModalTitle] = useState('');
@@ -37,6 +39,8 @@ const BotonOT = () => {
     setModalTitle(title);
     toggleModal();
   };
+  // const puedeGestionar = ability.can('manage', 'BotonOT');
+
 
   // Función para renderizar el componente correspondiente al formulario seleccionado
   const renderSelectedForm = () => {
@@ -92,6 +96,7 @@ const BotonOT = () => {
       >
         Crear OT
       </button>
+ 
       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Orden de Trabajo - Humedad en Patio')}>
           1. Humedad en patios 

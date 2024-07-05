@@ -45,8 +45,10 @@ const Login = () => {
         const id_creador= decodedToken.id_creador;
         localStorage.setItem('id_creador', id_creador)
 
+        const rol= decodedToken.rol;
+        localStorage.setItem('rol', rol)
+
         navigate('/Home/Dashboard');
-        console.log('ID Rol:', userRoleId);
       } else {
         setErrorlogin('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
         setUsername('');

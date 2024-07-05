@@ -5,8 +5,7 @@ import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 
 import RDTCC from '../consultas/RDTCC'
 
-const Detalle = ({  id,fechaHorneado,nombretabla,id_turno,id_modelo,id_horno }) => {
- console.log( 'datos props',fechaHorneado,nombretabla,id_turno,id_modelo,id_horno)
+const Detalle = ({datos,nombretabla }) => {
   const [modalVisible, setModalVisible] = useState(false); 
 
 console.log('nombre tabla',nombretabla)
@@ -21,19 +20,14 @@ console.log('nombre tabla',nombretabla)
     setModalVisible(false);
   };
 
-
+console.log('datos',datos[0].id)
 
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (nombretabla) {
       case 'cthh':
           return <RDTCC 
-  id={id} 
-  nombretabla={nombretabla}
-  id_horno={id_horno}
-  fechaHorneado={fechaHorneado}
-  id_turno={id_turno}
-  id_modelo={id_modelo}
+          dats={datos}
 
   />
           
@@ -45,8 +39,6 @@ console.log('nombre tabla',nombretabla)
 
   // Definir una función de manejo de clics
   const handleClick = () => {
-    console.log(`Se ha seleccionado la orden de trabajo con ID: ${nombretabla}`);
-    console.log(`Se ha seleccionado la orden de trabajo con ID: ${id}`);
     // Aquí puedes realizar cualquier acción necesaria con el ID seleccionado
     // Por ejemplo, abrir el modal correspondiente
     handleOpenModal();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Horno1 from './GraficosHornos/Horno1';
 import TempTunel from './GraficosHornos/TempTunel';
 import './estilos.css';
@@ -21,6 +21,9 @@ const Dashboard = () => {
   const handleFiltrosChange = (newFiltros) => {
     setFiltros(newFiltros);
   };
+
+
+
 
   console.log('Verificando datos en Dashboard', filtros);
 

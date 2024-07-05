@@ -1,7 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios'
     import { formatFecha } from "../../utilidades/FormatearFecta";
-    import PdfROTHP from './pdfECO/PdfROTHP'
+    import PdfROTP from './pdfECO/PdfROTP'
     import ExcelROTHP from './Excel/ExcelRotP'
     import { Divider } from 'antd';
 
@@ -116,7 +116,7 @@
       <div className="col-md-3 d-flex align-items-end">
      
       <ExcelROTHP datos={datos}/>
-      <PdfROTHP datos={datos}/>
+      <PdfROTP datos={datos}/>
       </div>
 
 
@@ -133,9 +133,9 @@
                 <th scope="col">Grupo Prod.</th>
                 <th scope="col">C.Inicio</th>
                 <th scope="col">C.Fin</th>
-                <th scope="col">Formula</th>      
+                <th scope="col">Cantidades</th>   
                 <th scope="col">Aserradero</th>     
-
+                <th scope="col">Formula</th>   
               </tr>
             </thead>
             <tbody>
@@ -149,9 +149,9 @@
                   <td>{fila.grupoProd}</td>
                   <td>{fila.codigoInicio}</td>
                   <td>{fila.codigoFinal}</td>
-                  <td>{fila.pesototal}</td>
+                  <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
                   <td>{fila.aserradero1}/{fila.aserradero2}</td>
-                 
+                  <td>{fila.pesototal}</td>
                   
                   
                

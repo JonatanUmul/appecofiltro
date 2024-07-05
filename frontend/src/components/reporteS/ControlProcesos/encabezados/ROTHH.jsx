@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
-import PdfROTHP from '../pdfECO/PdfROTHP.jsx';
+import PdfROTHH from '../pdfECO/PdfROTHH.jsx';
 import ExcelROTHP from '../Excel/ExcelRothp.jsx';
 import Detalle from '../detalles/RedireccionDetalle_ROTT.jsx';
 import DetalleCC from '../detalles/RedireccionDetalleCC.jsx'
@@ -47,7 +47,7 @@ console.log('porcentage',porcentaje );
       <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
     </div>
     <div className="col-md-3 d-flex align-items-end">
-      <PdfROTHP datos={datos} />
+      <PdfROTHH datos={datos} />
       <ExcelROTHP datos={datos} />
     </div>
   </div>
@@ -80,52 +80,32 @@ console.log('porcentage',porcentaje );
             <th scope="row">{index + 1}</th>
             <th style={{ width: "0%" }}>
               <Detalle
-                nombretabla={fila.tabla}
-                fechaHorneado={fila.fecha_creacion}
-                turnoHorneado= {fila.turno}
-                id_turno={fila.id_turno}
-                turnoHorn={fila.id_turno}
-                codigoInicio={fila.codigoInicio}
-                codigoFinal= {fila.CodigoFin}
-                hornedo={fila.horneado}
-                MCrudas={fila.mermasCrudas}
-                LBarro={fila.librasBarro}
-                LBaserrin={fila.librasAserrin}
-                aserradero={fila.aserradero}
-                tipCernido={fila.tipocernido}
-                modelo={fila.ufmodelo}
-                id_modelo={fila.id_modelo}
-                hornn={fila.enc_maq}
-                id_horno={fila.numeroHorno}
-                hornero={fila.operarios}
-               
+              datos={datos}
+              nombretabla={fila.tabla}
+              
               />
             </th>
-            <td>{formatFecha(fila.fecha_creacion)}</td>
-            <td>{fila.turno}</td>
+            <td>{formatFecha(fila.fechaHorneado)}</td>
+            <td>{fila.turnoHorneado}</td>
             <td>{fila.codigoInicio}</td>
-            <td>{fila.CodigoFin}</td>
+            <td>{fila.codigoFin}</td>
             <td>{fila.horneado}</td>
             <td>{fila.mermasCrudas}</td>
             <td>{fila.librasBarro}</td>
-            <td>{fila.librasAserrin}</td>
-            <td>{fila.aserradero}</td>
-            <td>{fila.tipocernido}</td>
-            <td>{fila.ufmodelo}</td>
-            <td>{fila.enc_maq}</td>
+            <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
+            <td>{fila.aserradero}/{fila.aserradero1}</td>
+            <td>{fila.tipocernido1}/{fila.tipocernido2}</td>
+            <td>{fila.ModeloEco}</td>
+            <td>{fila.Horno}</td>
             
            <td class="text-muted" value={porcentaje} onChange={(e)=>setPorcentaje(e.target.value)}>{fila.porcentaje}%  
            <DetalleCC
-           fechaHorneado={fila.fecha_creacion}
+           datos={datos}
            nombretabla={fila.tabla}
-           turnoHorneado= {fila.turno}
-           id_turno={fila.id_turno}
-           id_modelo={fila.id_modelo}
-           id_horno={fila.numeroHorno}
            />
            </td>
      
-            <td>{fila.operarios}</td>
+            <td>{fila.Hornero}</td>
           </tr>
         ))}
 

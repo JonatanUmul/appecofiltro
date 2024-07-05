@@ -92,7 +92,7 @@ console.log(datos)
                   <td>{fila.hora_creacion}</td>
                   
                   <td>{fila.peso}/{fila.peso2}</td>
-                  <td>{fila.pesototal}</td>
+                  <td>{fila.pesoTotal}</td>
                   <td>{fila.humedad}%</td>
                   <td>{fila.aserradero}/{fila.aserradero2}</td>
                   <td>{fila.cantidad}</td>

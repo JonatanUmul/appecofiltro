@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import { formatFecha } from "../../../utilidades/FormatearFecta";
-import PdfROTHP from '../pdfECO/PdfROTHP'
+import PdfROTH from '../pdfECO/PdfROTH'
 import './estilosCss.css'
 import ExcelROTHP from '../Excel/ExcelRothp'
 const URL = process.env.REACT_APP_URL
 
 const maquinaria = "Horno";
 
-const ROTHP = ({ turnoHorn,id_modelo,id_turno, nombretabla,id_horno,codigoInicio,codigoFinal,fechaHorneado,turnoHorneado,hornedo,MCrudas,LBarro,LBaserrin,aserradero,tipCernido,modelo,hornn,hornero }) => {
-  const [datos, setDatos] = useState([]);
-  const [fecha_creacion_inicio, setFecha] = useState(formatFecha(fechaHorneado));
-  const [fecha_creacion_fin, setFecha2] = useState(formatFecha(fechaHorneado));
-  const [modeloUF, setModeloUf] = useState(id_modelo);
-  const [turn, setTurnoProd] = useState(id_turno)
-  const [horno, setHornos] = useState(id_horno);
-
-console.log('fecha horneado', id_horno)
-  // Realizar las solicitudes para obtener datos
+const ROTHP = ({ datos, id_modelo,id_turno,id_horno, }) => {
+  const [dats, setDats] = useState([]);
+  const [fecha_creacion_inicio, setFecha] = useState(formatFecha(datos[0].fechaHorneado));
+  const [fecha_creacion_fin, setFecha2] = useState(formatFecha(datos[0].fechaHorneado));
+  const [modeloUF, setModeloUf] = useState(datos[0].id_modelo);
+  const [turn, setTurnoProd] = useState(datos[0].id_turno)
+  const [horno, setHornos] = useState(datos[0].id_horno);
+console.log('datos seleccionados', fecha_creacion_fin,fecha_creacion_inicio,id_modelo,id_turno,id_horno)
+console.log('prueba de dats', datos[0].id_modelo) 
+// Realizar las solicitudes para obtener dats
  
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
@@ -25,16 +25,16 @@ console.log('fecha horneado', id_horno)
   
     axios.get(url)
       .then((response) => {
-        setDatos(response.data.data);
-        console.log('datos consulta', response.data);
+        setDats(response.data.data);
+        console.log('dats consulta', response.data);
       })
       .catch((error) => {
-        console.error('Error al obtener los datos:', error);
+        console.error('Error al obtener los dats:', error);
       });
   }, [ modeloUF, turn, horno, fecha_creacion_inicio,fecha_creacion_fin ]);
 
 
-console.log(datos)
+console.log(dats)
   return (
     
 
@@ -48,8 +48,8 @@ console.log(datos)
   
 
   <div className="col-md-3 d-flex align-items-center justify-content-center">
-  {/*<PdfROTHP datos={datos} />*/}
-  <ExcelROTHP datos={datos} />
+  <PdfROTH dats={dats} />
+  <ExcelROTHP datos={dats} />
 </div>
   
 
@@ -59,16 +59,17 @@ console.log(datos)
   <div className="col-md-6">
     <strong>
       <div className=" shadow-sm bg-light">
-        <div className="datos card-body">
-          <h5 className="card-title">Datos:</h5>
+        <div className="dats card-body">
+          <h5 className="card-title">Dats:</h5>
           <ul className="list-group list-group-horizontal" >
-            <li className="list-group-item">Código Inicio: {codigoInicio}</li>
-            <li className="list-group-item">Código Fin: {codigoFinal}</li>
-            <li className="list-group-item">Modelo: {modelo}</li>
-            <li className="list-group-item">Horneado: {hornedo}</li>
-            <li className="list-group-item">Turno: {turnoHorneado}</li>
-            <li className="list-group-item">Mermas Crudas: {MCrudas}</li>
-            <li className="list-group-item">Hornero: {hornero}</li>
+          <li className="list-group-item">Fecha Horneado: {formatFecha(datos[0].fechaHorneado)}</li>
+            <li className="list-group-item">Código Inicio: {datos[0].codigoInicio}/{datos[0].id}</li>
+            <li className="list-group-item">Código Fin: {datos[0].codigoFin}</li>
+            <li className="list-group-item">Modelo: {datos[0].ModeloEco}</li>
+            <li className="list-group-item">Horneado: {datos[0].horneado}</li>
+            <li className="list-group-item">Turno: {datos[0].turnoHorneado}</li>
+            <li className="list-group-item">Mermas Crudas: {datos[0].mermasCrudas}</li>
+            <li className="list-group-item">Hornero: {datos[0].Hornero}</li>
           </ul>
         </div>
       </div>
@@ -98,7 +99,7 @@ console.log(datos)
     </tr>
   </thead>
   <tbody>
-    {Array.isArray(datos) && datos.map((fila, index) => (
+    {Array.isArray(dats) && dats.map((fila, index) => (
       <tr key={index}>
         <th scope="row">{index + 1}</th>
         <td>{fila.hora_creacion}</td>
