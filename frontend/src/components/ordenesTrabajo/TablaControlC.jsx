@@ -118,7 +118,7 @@ console.log('Abiliti en tabla OT', ability)
                   id={OTDats.id}
                 />
               </th> 
-              <td>{formatFecha(OTDats.fecha_creacion)}</td>
+              <td>{formatFecha(OTDats.fechaHorneado)}</td>
               <td>{OTDats.id}</td>
               <td>{OTDats.codigoInicio}</td>
               <td>{OTDats.codigoInicio}</td>
