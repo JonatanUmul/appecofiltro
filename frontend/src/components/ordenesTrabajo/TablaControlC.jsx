@@ -123,9 +123,9 @@ console.log('Abiliti en tabla OT', ability)
               <td>{OTDats.codigoInicio}</td>
               <td>{OTDats.codigoInicio}</td>
               <td>{OTDats.horneado}</td>
-              <td>{OTDats.enc_maq}</td>
-              <td>{OTDats.operarios}</td>
-              <td>{OTDats.turno}</td>
+              <td>{OTDats.Horno}</td>
+              <td>{OTDats.Hornero}</td>
+              <td>{OTDats.turnoHorneado}</td>
              
                 <td>
                 <CrearOT
