@@ -8,14 +8,14 @@ const URL = process.env.REACT_APP_URL
 
 const maquinaria = "Horno";
 
-const ROTHP = ({ datos, id_modelo,id_turno,id_horno, }) => {
+const ROTHP = ({ datos }) => {
   const [dats, setDats] = useState([]);
   const [fecha_creacion_inicio, setFecha] = useState(formatFecha(datos[0].fechaHorneado));
   const [fecha_creacion_fin, setFecha2] = useState(formatFecha(datos[0].fechaHorneado));
   const [modeloUF, setModeloUf] = useState(datos[0].id_modelo);
   const [turn, setTurnoProd] = useState(datos[0].id_turno)
   const [horno, setHornos] = useState(datos[0].id_horno);
-console.log('datos seleccionados', fecha_creacion_fin,fecha_creacion_inicio,id_modelo,id_turno,id_horno)
+console.log('datos seleccionados', fecha_creacion_fin,fecha_creacion_inicio,modeloUF,turn,horno)
 console.log('prueba de dats', datos[0].id_modelo) 
 // Realizar las solicitudes para obtener dats
  
