@@ -111,11 +111,12 @@ console.log('Abiliti en tabla OT', ability)
         </thead>
         <tbody>
         { currentPageData.map((OTDats, index) => (
-            <tr key={index} onClick={() => selectForm(OTDats.encabezado)}>
+            <tr key={index} onClick={() => selectForm(OTDats.tabla)}>
              <th>
                 <Detalle
-                  encabezado={OTDats.encabezado}
-                  id={OTDats.id}
+                  encabezado={OTDats.tabla}
+                  OTDats={OTDats}
+
                 />
               </th> 
               <td>{formatFecha(OTDats.fechaHorneado)}</td>

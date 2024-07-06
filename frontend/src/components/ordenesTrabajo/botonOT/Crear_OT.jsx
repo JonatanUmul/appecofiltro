@@ -65,7 +65,7 @@ console.log('propr recibios', encabezado, id)
       case 'otip':
             return <DTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
         
-      case 'DTHH':
+      case 'cthh':
             return <DTCC id={id} encabezado={encabezado} codInicio={codInicio} codFin={codFin} fecha_creacion={fecha_creacion}/>
         
   
