@@ -164,9 +164,9 @@ const styles = StyleSheet.create({
 
 });
 
-const MyDocument = ({ datos, FirmaJefe, NombreJefe}) => {
+const MyDocument = ({ dats,datos, FirmaJefe, NombreJefe}) => {
 
-    const UltimaFirma=datos[datos.length-1]
+    const UltimaFirma=dats[dats.length-1]
   const Firma= UltimaFirma?.firma || null
 
     const nombreEncargado=UltimaFirma?.NombreCreador || null
@@ -200,44 +200,40 @@ const MyDocument = ({ datos, FirmaJefe, NombreJefe}) => {
         <View style={styles.headd}>
           <View style={styles.container}>
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderTopLeftRadius: 5 }]}>Fecha de Horneado:</Text>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].materiaPrima}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}> {formatFecha(datos[0].fechaHorneado)}</Text>
 
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>FECHA:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Fecha Control de Calidad:</Text>
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>
-              {formatFecha(datos[0].fecha_creacion)}
+              {formatFecha(datos[0].fechaCC)}
             </Text>
           </View>
 
           <View style={styles.container}>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Patio:</Text>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].patio}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Horno:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{dats[0].horno}</Text>
           </View>
           <View style={styles.container}>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderBottomLeftRadius: 5 }]}>Hora Tendido: {datos[0].hora_creacion}</Text>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Hora Recolección: {datos[datos.length - 1].hora_creacion}</Text>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 0, borderBottomRightRadius: 5 }]}>Cantidad Recolectada</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderBottomLeftRadius: 5 }]}>Hora Inicio: {dats[0].hora_creacion}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Hora Fin: {dats[dats.length - 1].hora_creacion}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 0, borderBottomRightRadius: 5 }]}>Tiempo de Horneado  </Text>
           </View>
         </View>
 
         <View style={styles.table}>
           <View style={styles.tableHeader}>
             <Text style={styles.tableCell}>Hora</Text>
-            <Text style={styles.tableCell}>Aserradero</Text>
-            <Text style={styles.tableCell}>Centro</Text>
-            <Text style={styles.tableCell}>Esquina Inferior Derecha</Text>
-            <Text style={styles.tableCell}>Esquina Inferior Izquierda</Text>
-            <Text style={styles.tableCell}>Esquina Superior Derecha</Text>
-            <Text style={styles.tableCell}>Esquina Superior Izquierda</Text>
+            <Text style={styles.tableCell}>Cabeza Izquierda</Text>
+            <Text style={styles.tableCell}>Pie Izquierdo</Text>
+            <Text style={styles.tableCell}>Cabeza Derecha</Text>
+            <Text style={styles.tableCell}>Pie Derecha</Text>
           </View>
-          {datos.map((fila, index) => (
+          {dats.map((fila, index) => (
           <View key={index} style={styles.tableRow}>
             <Text style={styles.tableCell}>{fila.hora_creacion}</Text>
-            <Text style={styles.tableCell}>{fila.aserradero}</Text>
-            <Text style={styles.tableCell}>{fila.esquinaCentro}</Text>
-            <Text style={styles.tableCell}>{fila.esquinaInfDR}</Text>
-            <Text style={styles.tableCell}>{fila.esquinaInfIZ}</Text>
-            <Text style={styles.tableCell}>{fila.esquinaSupDA}</Text>
-            <Text style={styles.tableCell}>{fila.esquinaSupIZ}</Text>
+            <Text style={styles.tableCell}>{fila.tempCabezaIZ}</Text>
+            <Text style={styles.tableCell}>{fila.tempPieIZ}</Text>
+            <Text style={styles.tableCell}>{fila.tempCabezaDR}</Text>
+            <Text style={styles.tableCell}>{fila.tempPieDR}</Text>
           </View>
           ))}
         </View>
@@ -271,7 +267,7 @@ const MyDocument = ({ datos, FirmaJefe, NombreJefe}) => {
   )
 };
 
-const PdfROTHP = ({ dats, FirmaJefe, NombreJefe }) => {
+const PdfROTHP = ({ dats,datos, FirmaJefe, NombreJefe }) => {
   const [isOpen, setIsOpen] = useState(false);
 console.log('Firma Jefe', FirmaJefe)
 
@@ -286,7 +282,7 @@ console.log('Firma Jefe', FirmaJefe)
       <Modal isOpen={isOpen} toggle={togglePDFViewer} size="lg">
         <ModalBody>
           <PDFViewer style={{ width: '100%', height: '80vh' }}>
-            <MyDocument datos={dats} FirmaJefe={FirmaJefe} NombreJefe={NombreJefe} />
+            <MyDocument dats={dats} datos={datos} FirmaJefe={FirmaJefe} NombreJefe={NombreJefe} />
           </PDFViewer>
         </ModalBody>
       </Modal>

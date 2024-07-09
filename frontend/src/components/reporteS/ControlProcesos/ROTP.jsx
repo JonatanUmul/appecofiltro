@@ -6,8 +6,7 @@
     import { Divider } from 'antd';
 
     const URL = process.env.REACT_APP_URL
-
-
+    
     const ROTHP = () => {
       const [datos, setDatos] = useState([]);
       // const [fecha_creacion_inicio, setFecha] = useState('2024/04/01');

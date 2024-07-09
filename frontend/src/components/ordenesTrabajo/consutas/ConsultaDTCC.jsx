@@ -48,7 +48,7 @@ console.log('id seleccionado', id)
       {Array.isArray(fila) && fila.length > 0 && fila.map((fila, index) => (
         <tr key={index}>
           <td>{index + 1}</td>
-          <td className="text-wrap">{formatFecha(fila.fecha_real)}</td>
+          <td className="text-wrap">{formatFecha(OTDats.fechaHorneado)}</td>
           <td>{OTDats.codigoInicio}</td>
           <td>{OTDats.codigoFin}</td>
           <td>{fila.aprobados}</td>

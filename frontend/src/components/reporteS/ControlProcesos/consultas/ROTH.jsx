@@ -48,7 +48,7 @@ console.log(dats)
   
 
   <div className="col-md-3 d-flex align-items-center justify-content-center">
-  <PdfROTH dats={dats} />
+  <PdfROTH dats={dats} datos={datos} />
   <ExcelROTHP datos={dats} />
 </div>
   

@@ -32,7 +32,6 @@ const ConsultaDTHH = ({ id, onDataLoaded }) => {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Fecha de Producción</th>
-            <th scope="col">OTHH</th>
             <th scope="col">Horneado</th>
             <th scope="col">Mermas Crudas</th>
             <th scope="col">barro</th>
@@ -52,20 +51,20 @@ const ConsultaDTHH = ({ id, onDataLoaded }) => {
           {Array.isArray(fila) && fila.length > 0 && fila.map((fila, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{formatFecha(fila.fecha_creacion)}</td>
-              <td>{fila.id_othh}</td>
+              <td>{formatFecha(fila.fechaHorneado)}</td>
+      
               <td>{fila.horneado}</td>
               <td>{fila.mermasCrudas}</td>
               <td>{fila.librasBarro}</td>
-              <td>{fila.librasAserrin}</td>
+              <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
               <td>{fila.codigoInicio}</td>
-              <td>{fila.CodigoFin}</td>
-              <td>{fila.turno}</td>
+              <td>{fila.codigoFin}</td>
+              <td>{fila.turnoHorneado}</td>
               <td>{fila.aserradero}</td>
-              <td>{fila.tipocernido}</td>
-              <td>{fila.ufmodelo}</td>
-              <td>{fila.enc_maq}</td>
-              <td>{fila.operarios}</td>
+              <td>{fila.tipocernido1}/{fila.tipocernido2}</td>
+              <td>{fila.ModeloEco}</td>
+              <td>{fila.Horno}</td>
+              <td>{fila.Hornero}</td>
               
             </tr>
           ))}
