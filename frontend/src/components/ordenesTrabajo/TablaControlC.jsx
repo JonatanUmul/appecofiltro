@@ -63,6 +63,7 @@ console.log('Abiliti en tabla OT', ability)
   const currentPageData = estOT.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(estOT.length / itemsPerPage);
 
+ 
   return (
     <div>
    
@@ -112,11 +113,12 @@ console.log('Abiliti en tabla OT', ability)
         <tbody>
         { currentPageData.map((OTDats, index) => (
             <tr key={index} onClick={() => selectForm(OTDats.tabla)}>
-             <th>
+             <th  >
                 <Detalle
                   encabezado={OTDats.tabla}
+                  id={OTDats.id}
                   OTDats={OTDats}
-
+                  porcentaje={OTDats.porcentaje}
                 />
               </th> 
               <td>{formatFecha(OTDats.fechaHorneado)}</td>

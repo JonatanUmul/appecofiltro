@@ -4,20 +4,24 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
 const URL = process.env.REACT_APP_URL
 
-const ConsultaDTHH = ({ encabezado, EncName, fecha_creacion, id }) => {
+const ConsultaDTHH = ({ id, onDataLoaded }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
+  
 
   useEffect(() => {
     axios.get(`${URL}/DTHH/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
         console.log(response.data.data)
+        const respuestaApi=response.data.data
+        if(onDataLoaded){onDataLoaded(respuestaApi)}
+
       })
       .catch((error) => {
         setError("Error al obtener los datos: " + error.message);
       });
-  }, []);
+  }, [onDataLoaded]);
 
  console.log('Orden seleccionada',id)
   return (

@@ -5,13 +5,11 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
 const URL = process.env.REACT_APP_URL
 
-const ConsultaDTHP = ({  OTDats }) => {
+const ConsultaDTHP = ({OTDats,  id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
-const [id]= OTDats.length>0?OTDats[0].id:''
-
-
-
+// const [id]= OTDats.length>0?OTDats[0].id:''
+console.log('id seleccionado', id)
   useEffect(() => {
     axios.get(`${URL}/DTCC/${id || 'null'} `)
       .then((response) => {
@@ -43,7 +41,7 @@ const [id]= OTDats.length>0?OTDats[0].id:''
         <th scope="col">Quemados</th>
         <th scope="col">Ahumados</th>
         <th scope="col">Modelo</th>
-        <th scope="col">Turno C.c</th>
+        <th scope="col">%</th>
       </tr>
     </thead>
     <tbody>
@@ -51,8 +49,8 @@ const [id]= OTDats.length>0?OTDats[0].id:''
         <tr key={index}>
           <td>{index + 1}</td>
           <td className="text-wrap">{formatFecha(fila.fecha_real)}</td>
-          <td>{fila.codigoInicio}</td>
-          <td>{fila.codigoFin}</td>
+          <td>{OTDats.codigoInicio}</td>
+          <td>{OTDats.codigoFin}</td>
           <td>{fila.aprobados}</td>
           <td>{fila.altos}</td>
           <td>{fila.bajos}</td>
@@ -60,8 +58,8 @@ const [id]= OTDats.length>0?OTDats[0].id:''
           <td>{fila.crudoCC}</td>
           <td>{fila.quemados}</td>
           <td>{fila.ahumados}</td>
-          <td>{fila.modeloUF}</td>
-          <td><strong>{fila.turnoCC}</strong></td>
+          <td>{OTDats.ModeloEco}</td>
+          <td><strong>{OTDats.porcentaje}</strong></td>
         </tr>
       ))}
     </tbody>

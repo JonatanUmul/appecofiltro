@@ -13,11 +13,10 @@ import ConsultaDTFM from '../consutas/ConsultaDTFM'
 import ConsultaDTHH from '../consutas/ConsultaDTHH'
 import ConsultaDTIP from '../consutas/ConsultaDTIP'
 import ConsultaDTCC from '../consutas/ConsultaDTCC'
-const Detalle = ({ encabezado, id,OTDats,EncName, fecha_creacion }) => {
+
+const Detalle = ({porcentaje,OTDats, encabezado, id,EncName, fecha_creacion }) => {
   const [modalVisible, setModalVisible] = useState(false); 
-
-
-
+const[datosdeConsu, setDatosConsu]=useState('')
   // Función para abrir el modal cuando se hace clic en el botón
   const handleOpenModal = () => {
     setModalVisible(true);
@@ -28,8 +27,11 @@ const Detalle = ({ encabezado, id,OTDats,EncName, fecha_creacion }) => {
     setModalVisible(false);
   };
 
+  const handleDataLoaded = (respuestaApi) => {
+    setDatosConsu(respuestaApi);
+  };
 
-
+console.log('Prueba consulta de',datosdeConsu.id)
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {
@@ -62,7 +64,7 @@ const Detalle = ({ encabezado, id,OTDats,EncName, fecha_creacion }) => {
               return <ConsultaDTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
   
       case 'cthh':
-            return <ConsultaDTCC OTDats={OTDats}/>
+            return <ConsultaDTCC OTDats={OTDats} id={id}/>
             
     
 
@@ -73,8 +75,6 @@ const Detalle = ({ encabezado, id,OTDats,EncName, fecha_creacion }) => {
 
   // Definir una función de manejo de clics
   const handleClick = () => {
-    console.log(`Se ha seleccionado la orden de trabajo con ID: ${encabezado}`);
-    console.log(`Se ha seleccionado la orden de trabajo con ID: ${id}`);
     // Aquí puedes realizar cualquier acción necesaria con el ID seleccionado
     // Por ejemplo, abrir el modal correspondiente
     handleOpenModal();
@@ -83,8 +83,10 @@ const Detalle = ({ encabezado, id,OTDats,EncName, fecha_creacion }) => {
   return (
     <div>
       {/* Botón para abrir el modal */}
+      
       <a type="button"  onClick={handleClick}>
-      <i class="bi bi-arrow-bar-right"></i>
+      {porcentaje? <i style={{color:'red'}} class="icon ion-md-attach"></i>:<i class="bi bi-arrow-bar-right"></i> }
+      
       </a>
       {/* Modal */}
       <Modal isOpen={modalVisible} toggle={handleCloseModal} size="xl">
