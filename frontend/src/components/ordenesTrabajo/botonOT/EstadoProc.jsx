@@ -65,7 +65,7 @@ const EstadoProc = ({ id, encabezado }) => {
       case 'otcc':
         ruta = 'otcc';
         break;
-      case 'DTHH':
+      case 'cthh':
         ruta = 'dthh';
         break;
       default:
