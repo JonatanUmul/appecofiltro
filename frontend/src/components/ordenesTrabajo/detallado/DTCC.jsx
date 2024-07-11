@@ -70,7 +70,29 @@ console.log(operario)
         ahumados: formData.ahumados,
         id_creador:id_creador
        
-      });
+      }
+    );await axios.post(`${URL}/SendEmail`, {
+      to: ['jumul@ecofiltro.com',  'codigos@ecofiltro.com', 'ddelacruz@ecofiltro.com'],
+      subject: 'Formulario enviado',
+      text: `Prueba Envio Automatico de Formulario con AWS:
+      Código Inicio: ${formData.codigoInicio}
+      Código Fin: ${formData.codigoFin}
+      Horneados: ${formData.horneados}
+      Modelo: ${formData.modelo}
+      Horno: ${formData.id_horno}
+      Fecha Horneado: ${formData.fechaHorneado}
+      Turno de Horneado: ${formData.turnoHorneado}
+      Turno CC: ${formData.turnoCC}
+      Aprobados: ${formData.aprobados}
+      Altos: ${formData.altos}
+      Bajos: ${formData.bajos}
+      Mermas Hornos: ${formData.mermas_hornos}
+      Rajados CC: ${formData.rajadosCC}
+      Crudos CC: ${formData.crudoCC}
+      Quemados CC: ${formData.quemados}
+      Ahumados CC: ${formData.ahumados}`
+    });
+
       Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',
