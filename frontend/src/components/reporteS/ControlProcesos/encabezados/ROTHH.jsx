@@ -98,7 +98,7 @@ console.log('porcentage',porcentaje );
             <td>{fila.ModeloEco}</td>
             <td>{fila.Horno}</td>
             
-           <td class="text-muted" value={porcentaje} onChange={(e)=>setPorcentaje(e.target.value)}>{fila.porcentaje}%  
+           <td style={{color:'red'}} class="text-muted" value={porcentaje} onChange={(e)=>setPorcentaje(e.target.value)}>{fila.porcentaje}
            <DetalleCC
            datos={datos}
            nombretabla={fila.tabla}

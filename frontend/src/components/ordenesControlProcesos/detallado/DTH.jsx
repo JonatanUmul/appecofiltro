@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+import { Skeleton, Space } from 'antd';
+
 const URL = process.env.REACT_APP_URL;
 const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
@@ -12,7 +14,9 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
   const [btn, setBtn]= useState(false)
   const maquinaria="Horno"; 
   const [id_creador, setid_creador] = useState('');
-  
+  const [loading, setLoading] = useState(false);
+
+
   useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
@@ -31,6 +35,16 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         console.log("Error al obtener los datos:", error);
       });
   }, []);
+
+
+  
+  const showSkeleton = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
 
   const onSubmit = async (formData) => {
     try {
@@ -66,6 +80,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
+    showSkeleton();
   };
 
 
@@ -101,6 +116,22 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
+
+      {loading?(
+        <Space
+          direction="vertical"
+          style={{
+            width: '100%',
+          }}
+          size={16}
+        >
+        <p>Enviando los datos... espere...</p>
+          <Skeleton loading={loading}>
+          
+          </Skeleton>
+         
+        </Space>
+      ):(<>
         <div>
        
         <div className="row text-center" >
@@ -242,10 +273,12 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
         </div>
        
         <div className="col-3 m2-3">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" disabled={loading}>
             Guardar
           </button>
         </div>
+        </>
+)}
       </form>
     </div>
   );

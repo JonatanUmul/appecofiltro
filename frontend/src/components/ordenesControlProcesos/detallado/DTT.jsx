@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+import { Skeleton, Space } from 'antd';
+
 const URL = process.env.REACT_APP_URL;
 const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFinal }) => {
   const { handleSubmit, register } = useForm();
@@ -13,7 +15,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id, codigoInicio, codigoFina
 
   const maquinaria="Tunel"; 
   const [id_creador, setid_creador] = useState('');
-  
+  const [loading, setLoading] = useState(false);
+
 useEffect(()=>{
   setid_creador(localStorage.getItem('id_creador'))
 })
@@ -33,6 +36,16 @@ useEffect(()=>{
         console.log("Error al obtener los datos:", error);
       });
   }, []);
+
+
+  
+  const showSkeleton = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
 
   const onSubmit = async (formData) => {
     try {
@@ -68,6 +81,7 @@ useEffect(()=>{
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
+    showSkeleton();
   };
 
 
@@ -108,6 +122,23 @@ function onclick(){
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
+
+      {loading?(
+        <Space
+          direction="vertical"
+          style={{
+            width: '100%',
+          }}
+          size={16}
+        >
+        <p>Enviando los datos... espere...</p>
+          <Skeleton loading={loading}>
+          
+          </Skeleton>
+         
+        </Space>
+      ):(<>
+
         <div>
        
         <div className="row text-center"  >
@@ -278,6 +309,9 @@ function onclick(){
             Guardar
           </button>
         </div>
+        </>
+)}
+
       </form>
     </div>
   );
