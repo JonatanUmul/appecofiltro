@@ -28,7 +28,7 @@ console.log('Abiliti en tabla OT', ability)
     const obtenerDatos = async () => {
       try {
         
-        const response = await axios.get(`${URL}/DTHH/${'null'}/${'null'}/${'null'}/${'null'}/${'null'}/${id_est ? id_est : 'null'}`)
+        const response = await axios.get(`${URL}/DTHH/${'null'}/${'null'}/${'null'}/${'null'}/${'null'}/${id_est ? id_est : 'null'}/${ 'null'}`)
         setEstot(response.data.data);
       } catch (error) {
         setError("No hay órdenes de trabajo activas en este momento.");
