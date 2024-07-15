@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 0,
     marginLeft: 2,
-    // border:'1px'
+    // border:'1px'<
   },
   title: {
     // padding: 8,
@@ -164,16 +164,14 @@ const styles = StyleSheet.create({
 
 });
 
-const MyDocument = ({ dats,datos, FirmaJefe, NombreJefe}) => {
+const MyDocument = ({ dats,datos}) => {
 
     const UltimaFirma=dats[dats.length-1]
-  const Firma= UltimaFirma?.firma || null
-
-    const nombreEncargado=UltimaFirma?.NombreCreador || null
-
-  
-  console.log('Nombre Jefe', FirmaJefe)
-  return(
+    const firmaJefe=datos[0].firmaJefe
+    console.log('firma jefe',firmaJefe)
+  const Firma= UltimaFirma?.firmaHornero || null
+  const fechaCC=datos[0].fechaCC
+  const tiempoTotal = (new Date(dats[dats.length - 1].hora_creacion) - new Date(dats[0].hora_creacion)) / (1000 * 60 * 60);  return( 
   <Document>
    
       <Page style={styles.page} >
@@ -183,7 +181,7 @@ const MyDocument = ({ dats,datos, FirmaJefe, NombreJefe}) => {
           </View>
           <View style={[styles.titleContainer, { flex: 4,alignItems:'center', justifyContent:'center' }]}>
             <Text style={[styles.Header, styles.title,{textAlign:'center'}]}>GESTIÓN DE CALIDAD</Text>
-            <Text style={[styles.Header, styles.title,{textAlign:'center'}]}>CONTROL DE HUMEDAD DE SECADO EN MATERIAS PRIMAS</Text>
+            <Text style={[styles.Header, styles.title,{textAlign:'center'}]}>CONTROL DE TEMPERATURAS DE HORNO</Text>
           </View>
           <View style={[styles.titleContainer, { flex: 1 ,alignItems:'center', justifyContent:'center'}]}>
             <Text style={[styles.Header, styles.title,{textAlign:'center',alignItems:'center', justifyContent:'center'}]}>CÓDIGO:</Text>
@@ -204,7 +202,7 @@ const MyDocument = ({ dats,datos, FirmaJefe, NombreJefe}) => {
 
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Fecha Control de Calidad:</Text>
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>
-              {formatFecha(datos[0].fechaCC)}
+              {fechaCC?(formatFecha(fechaCC)):''}
             </Text>
           </View>
 
@@ -212,10 +210,20 @@ const MyDocument = ({ dats,datos, FirmaJefe, NombreJefe}) => {
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Horno:</Text>
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{dats[0].horno}</Text>
           </View>
+
+          <View style={styles.container}>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Horneado:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].horneado}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Aprobados:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].aprobados}</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>% Aprobado:</Text>
+            <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>{datos[0].porcentaje}</Text>
+
+            </View>
+
           <View style={styles.container}>
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3, borderBottomLeftRadius: 5 }]}>Hora Inicio: {dats[0].hora_creacion}</Text>
             <Text style={[styles.sectionHeader, { flex: 1, padding: 3 }]}>Hora Fin: {dats[dats.length - 1].hora_creacion}</Text>
-            <Text style={[styles.sectionHeader, { flex: 1, padding: 0, borderBottomRightRadius: 5 }]}>Tiempo de Horneado  </Text>
           </View>
         </View>
 
@@ -249,17 +257,16 @@ const MyDocument = ({ dats,datos, FirmaJefe, NombreJefe}) => {
         </View>
 
         
-        <View style={styles.firmas}>  
-                                                    
-       {Firma  ?(<Image style={[styles.FirmasIMG]}  src={Firma}></Image>):(<Text style={styles.lineas}> __________________________ </Text>)} 
-       <Text></Text>
-       {FirmaJefe ?(<Image style={styles.FirmasIMG}  src={FirmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
-       
-        </View>
-        <View style={[styles.firmasText,{}]}>
-          <Text style={[styles.firmasText,{}]}>Encargado de Secado</Text>
-          <Text style={[styles.firmasText,{}]}>Jefe de Producción</Text>
-        </View>
+        <View style={styles.firmas}>                                                  
+        {Firma  ?(<Image style={[styles.FirmasIMG]}  src={Firma}></Image>):(<Text style={styles.lineas}> __________________________ </Text>)} 
+        <Text></Text>
+        {firmaJefe ?(<Image style={styles.FirmasIMG}  src={firmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
+        
+         </View>
+         <View style={[styles.firmasText,{}]}>
+           <Text style={[styles.firmasText,{}]}>Encargado de Horno</Text>
+           <Text style={[styles.firmasText,{}]}>Jefe de Producción</Text>
+         </View>
    
       </Page>
     
@@ -267,9 +274,8 @@ const MyDocument = ({ dats,datos, FirmaJefe, NombreJefe}) => {
   )
 };
 
-const PdfROTHP = ({ dats,datos, FirmaJefe, NombreJefe }) => {
+const PdfROTHP = ({ dats,datos }) => {
   const [isOpen, setIsOpen] = useState(false);
-console.log('Firma Jefe', FirmaJefe)
 
   const togglePDFViewer = () => {
     setIsOpen(!isOpen);
@@ -282,7 +288,7 @@ console.log('Firma Jefe', FirmaJefe)
       <Modal isOpen={isOpen} toggle={togglePDFViewer} size="lg">
         <ModalBody>
           <PDFViewer style={{ width: '100%', height: '80vh' }}>
-            <MyDocument dats={dats} datos={datos} FirmaJefe={FirmaJefe} NombreJefe={NombreJefe} />
+            <MyDocument dats={dats} datos={datos} />
           </PDFViewer>
         </ModalBody>
       </Modal>
