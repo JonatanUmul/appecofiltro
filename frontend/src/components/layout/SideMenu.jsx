@@ -1,7 +1,7 @@
 // SideMenu.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FileDoneOutlined, FundProjectionScreenOutlined, SettingOutlined, SnippetsOutlined, BarChartOutlined, FileExclamationOutlined } from '@ant-design/icons';
+import { FileDoneOutlined, FundProjectionScreenOutlined, SettingOutlined, SnippetsOutlined, BarChartOutlined, FileExclamationOutlined, ExperimentOutlined } from '@ant-design/icons';
 import { Layout, Menu} from 'antd'; // Importa Popover
 const { Sider } = Layout;
 
@@ -22,10 +22,12 @@ const SideMenu = () => {
         <Menu.Item key="3" icon={<SnippetsOutlined />}><Link to="/Home/TablaCP" style={{ textDecoration: 'none'}}>Control de Procesos</Link></Menu.Item>
         <Menu.SubMenu key="sub" icon={<SettingOutlined />} title="Maquinaria">
         <Menu.Item key="4" icon={<SettingOutlined />}><Link to="/Home/TablaMaq" style={{ textDecoration: 'none'}}>CK Maquinaria</Link></Menu.Item>
+
         <Menu.Item key="12" icon={<SettingOutlined />}><Link to="/Home/TableMantenimientoMaq" style={{ textDecoration: 'none'}}>Mantenimientos</Link></Menu.Item>
         
          </Menu.SubMenu>
-       
+         <Menu.Item key="14" icon={<ExperimentOutlined />}><Link to="/Home/TablaLab" style={{ textDecoration: 'none'}}>Laboratorio</Link></Menu.Item>
+
 
         <Menu.SubMenu key="sub1" icon={<SettingOutlined />} title="Mantenimiento">
           <Menu.Item key="5"> <Link to="/Home/TablaRoles"  style={{ textDecoration: 'none'}}>Roles</Link></Menu.Item>

@@ -29,7 +29,7 @@ import TablaReportesOT from './components/reporteS/ControlProcesos/TablaReportes
 import TablaControlProcesosOT from './components/reporteS/AreasReportes/TablaControlProcesosOT.jsx'
 import ProtectedRoute from './components/ProtectedRoute.js'
 import { AbilityProvider } from './components/AbilityContext.js';
-
+import TablaLab from './components/laboratorio/TablaLab.jsx'
 
 
    
@@ -85,6 +85,7 @@ function App() {
           <Route path="/Home/TablaReportesOT" element={<TablaReportesOT />} />
           <Route path="/Home/TablaControlProcesosOT" element={<TablaReportesOT />} />
 
+          <Route path="/Home/TablaLab" element={<TablaLab />} />
 
           
 

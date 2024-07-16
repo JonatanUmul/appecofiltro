@@ -14,7 +14,7 @@ import TablaMaq from '../maquinaria/TablaMaq'
 import TableMantenimientoMaq from '../mantenimientosMaq/TablaMantenimientosMaq'
 import TablaReportesOT from '../reporteS/ControlProcesos/TablaReportesOT'
 import TablaControlProcesosOT from '../reporteS/AreasReportes/TablaControlProcesosOT'
-
+import TablaLab from '../laboratorio/TablaLab'
 
 export const renderContent = (pathname) => {
     switch (pathname) {
@@ -72,7 +72,11 @@ export const renderContent = (pathname) => {
                 return <TablaReportesOT />;
                 case "/Home/TablaControlProcesosOT":
                   return <TablaControlProcesosOT />;
-                  
+
+                  case "/Home/TablaLab":
+                    return <TablaLab />;
+                    
+                   
      
       default:
         return null;
