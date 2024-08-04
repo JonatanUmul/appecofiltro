@@ -64,7 +64,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
     try {
       const response = await axios.post(`${URL}/DOTDMP` ,
       {
-        id_OTDMP: id.toString(),
+        id_dtp: id.toString(),
         id_creador:id_creador,
     id_aserradero:formData.id_aserradero,
     id_aserradero2:formData.id_aserradero2,

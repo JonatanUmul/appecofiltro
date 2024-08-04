@@ -75,13 +75,31 @@ console.log('Datos de lab',estOT)
                 <i className="bi bi-calendar"></i>
               </th>
               <th scope="col" style={{ width: "1%" }}>
+              Modelo
+            </th>
+              <th scope="col" style={{ width: "1%" }}>
                 Orden
               </th>
               <th scope="col" style={{ width: "1%" }}>
-                Area
+                Inicio
+              </th>
+              <th scope="col" style={{ width: "1%" }}>
+              Fin
+            </th>
+            <th scope="col" style={{ width: "1%" }}>
+            Producido
+          </th>
+          <th scope="col" style={{ width: "1%" }}>
+          Lb Aserrín
+        </th>
+        <th scope="col" style={{ width: "1%" }}>
+          Aserradero
+        </th>
+              <th scope="col" style={{ width: "0%" }}>
+                Aserrín
               </th>
               <th scope="col" style={{ width: "0%" }}>
-                Crear OT
+                Barro
               </th>
               <th scope="col" style={{ width: "0%" }}>
                 Estado
@@ -92,19 +110,33 @@ console.log('Datos de lab',estOT)
             {currentPageData.map((OTDats, index) => (
               <tr key={index} onClick={() => selectForm(OTDats.encabezado)}>
                 <th>
-                  <Detalle
+               <Detalle
                     encabezado={OTDats.encabezado}
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}
                     id={OTDats.id}
-                  />
+                  /> 
                 </th>
                 <td>{formatFecha(OTDats.fecha_creacion)}</td>
+                <td>{OTDats.modelo}</td>
                 <td>{OTDats.encabezado}-{OTDats.id}</td>
-                <td>{OTDats.EncName}</td>
+                <td>{OTDats.codigoInicio}</td>
+                <td>{OTDats.codigoFinal}</td>
+                <td>{OTDats.producido}</td>
+
+                <td>{OTDats.LibrasAserrin}/{OTDats.LibrasAserrin2}</td>
+                <td>{OTDats.nombre_aserradero}/{OTDats.nombre_aserradero2}</td>
                 <td>
                   <CrearOT
-                    encabezado={OTDats.encabezado}
+                    encabezado="otdmp"
+                    EncName={OTDats.EncName}
+                    fecha_creacion={OTDats.fecha_creacion}
+                    id={OTDats.id}
+                  />
+                </td>
+                <td>
+                  <CrearOT
+                    encabezado="otdmpb"
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}
                     id={OTDats.id}

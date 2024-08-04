@@ -23,34 +23,63 @@ console.log('id seleccionado', fila)
 
  
   return (
+
+   
     
-<div className="table-responsive">
-  {error && <div>Error: {error}</div>}
-  <table className="table text-center">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Aserradero</th>
-        <th scope="col">Lb Aserrin</th>
-        <th scope="col">Tipo Cernido</th>
+
+   
+
+
+ 
+ 
+   
+   
      
-      </tr>
-    </thead>
-    <tbody>
-      {Array.isArray(fila) && fila.length > 0 && fila.map((fila, index) => (
-        <tr key={index}>
-          <td>{index + 1}</td>
-          <td className="text-wrap">{formatFecha(fila.fecha_creacion)}</td>
-          <td>{fila.lbaserrin}/{fila.lbaserrin2}</td>
-          <td>{fila.aserradero1}/{fila.aserradero2}</td>
-          <td>{fila.tipocernido1}/{fila.tipocernido2}</td>
-     
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+        <>
+        {Array.isArray(fila) && fila.length > 0 && fila.map((fila, index) => (
+        
+       
+        <div class="row">
+        {error && <div>Error: {error}</div>}
+        {fila.lbaserrin && fila.aserradero1 ?(
+        <div class="col-sm-12 mb-4">
+        <div class="card" >
+        <div class="card-header">
+          Aserrín
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">Libras de aserrín: {fila.lbaserrin} {fila.lbaserrin2 ? `/${fila.lbaserrin2}`:''} </li>
+          <li class="list-group-item">Aserradero: {fila.aserradero1} {fila.aserradero2 ? `/${fila.aserradero2}`:``}</li>
+          <li class="list-group-item">Tipo Cernido: {fila.tipocernido1} {fila.tipocernido2 ? `/${fila.tipocernido2}`:``}</li>
+        </ul>
+      </div>
+      </div>):<p>Sin datos de aserrín</p>}
+      {fila.lbbarro && fila.carcilla ?(
+        <div class="col-sm-12 ">
+      <div class="card" >
+        <div class="card-header">
+          Barro
+        </div>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">Lb Barro: {fila.lbbarro ? fila.lbbarro:''} </li>
+        <li class="list-group-item">Cantidad Arcilla: {fila.carcilla ? fila.carcilla:''}</li>
+        <li class="list-group-item">Cantidad Limo: {fila.climo ? fila.climo:''}</li>
+          <li class="list-group-item">Cantidad Arena:{fila.carena ? fila.carena:''}</li>
+          <li class="list-group-item">Cantidad Humedad Barro: {fila.iplastico ? fila.iplastico:''}</li>
+
+
+          </ul>
+      </div>
+      </div>
+      ):<p>Sin datos de Barro</p>}
+      
+      </div>
+    ))}
+      </>
+    
+    
+
+
 
     
   );

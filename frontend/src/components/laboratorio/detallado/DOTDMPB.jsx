@@ -64,7 +64,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
     try {
       const response = await axios.post(`${URL}/DOTDMPB` ,
       {
-        id_otdmpb: id.toString(),
+        id_dtp: id.toString(),
     id_creador:id_creador,
     lbbarro:formData.lbbarro,
     carcilla:formData.carcilla,
@@ -95,7 +95,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
   }
   return (
     <div className="mt-4">
-      <h4 style={{ textAlign: 'center', color: 'gray' }}>Aserrín</h4>
+      <h4 style={{ textAlign: 'center', color: 'gray' }}>Barro</h4>
       <div className="card">
         <div className="card-body">
           <label htmlFor="materiaPrima" className="form-label">

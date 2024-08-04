@@ -26,8 +26,10 @@ const SideMenu = () => {
         <Menu.Item key="12" icon={<SettingOutlined />}><Link to="/Home/TableMantenimientoMaq" style={{ textDecoration: 'none'}}>Mantenimientos</Link></Menu.Item>
         
          </Menu.SubMenu>
+         <Menu.SubMenu icon={<ExperimentOutlined />} title='Laboratorio' >
          <Menu.Item key="14" icon={<ExperimentOutlined />}><Link to="/Home/TablaLab" style={{ textDecoration: 'none'}}>Laboratorio</Link></Menu.Item>
-
+         <Menu.Item key="15" icon={<ExperimentOutlined />}><Link to="/Home/TablaPorCodigos" style={{ textDecoration: 'none'}}>Produccin</Link></Menu.Item>
+         </Menu.SubMenu>
 
         <Menu.SubMenu key="sub1" icon={<SettingOutlined />} title="Mantenimiento">
           <Menu.Item key="5"> <Link to="/Home/TablaRoles"  style={{ textDecoration: 'none'}}>Roles</Link></Menu.Item>

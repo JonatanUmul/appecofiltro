@@ -28,10 +28,6 @@ console.log('Prueba consulta de',datosdeConsu.id)
     switch (encabezado) {
       case 'otdmp':
         return <ConsultaDOTDMP id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-
-        case 'dotdmpb':
-          return <ConsultaDOTDMPB id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-     
       default:
         return <p>Formulario no encontrado</p>;
     }
@@ -53,7 +49,7 @@ console.log('Prueba consulta de',datosdeConsu.id)
       
       </a>
       {/* Modal */}
-      <Modal isOpen={modalVisible} toggle={handleCloseModal} size="xl">
+      <Modal isOpen={modalVisible} toggle={handleCloseModal} size="sm" style={{alignItems:'center'}}>
         <ModalHeader toggle={handleCloseModal}>{encabezado } - {EncName}</ModalHeader>
         <ModalBody>
           {/* Renderiza el componente correspondiente al formulario seleccionado dentro del modal */}

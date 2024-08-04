@@ -28,8 +28,9 @@ import Buttn from './components/ordenesTrabajo/botonOT/BotonOT'
 import TablaReportesOT from './components/reporteS/ControlProcesos/TablaReportesOT'
 import TablaControlProcesosOT from './components/reporteS/AreasReportes/TablaControlProcesosOT.jsx'
 import ProtectedRoute from './components/ProtectedRoute.js'
-import { AbilityProvider } from './components/AbilityContext.js';
+import { AbilityProvider } from './components/AbilityContext.js'
 import TablaLab from './components/laboratorio/TablaLab.jsx'
+import TablaPorCodigos from './components/laboratorio/TablaPorCodigos.jsx'
 
 
    
@@ -84,8 +85,8 @@ function App() {
           <Route path="/Home/Buttn" element={<Buttn />} />
           <Route path="/Home/TablaReportesOT" element={<TablaReportesOT />} />
           <Route path="/Home/TablaControlProcesosOT" element={<TablaReportesOT />} />
-
           <Route path="/Home/TablaLab" element={<TablaLab />} />
+          <Route path="/Home/TablaPorCodigos" element={<TablaPorCodigos />} />
 
           
 
