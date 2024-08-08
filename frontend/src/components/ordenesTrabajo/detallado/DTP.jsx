@@ -6,6 +6,7 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
 const URL = process.env.REACT_APP_URL
 
+const maquinaria="Mezcladora "; 
 const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
   const [aserradero, setAserradero] = useState([]);
@@ -16,7 +17,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [error, setError]= useState('');
   const [formula2, setFormula2]=useState(false)
   const [id_creador, setid_creador] = useState('');
-  
+  const [mezcladora, setMezcladora]=useState([])
   useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
@@ -28,14 +29,16 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/ModelosUF`),
       axios.get(`${URL}/CernidoDetalle`),
-      axios.get(`${URL}/GrupodeTrabajo`)
+      axios.get(`${URL}/GrupodeTrabajo`),
+       axios.get(`${URL}/maquinaria/${maquinaria}`),
     ])
-      .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, CernidodetalleResponse, GrupodeTrabajoResponse]) => {
+      .then(([TurnosResponse, AserraderoResponse, ModelosufResponse, CernidodetalleResponse, GrupodeTrabajoResponse, MezcladoraResponse]) => {
         setTurno(TurnosResponse.data);
         setAserradero(AserraderoResponse.data);
         setModelos(ModelosufResponse.data);
         setCernidoDetalle(CernidodetalleResponse.data);
-        setGrupodetrabajo(GrupodeTrabajoResponse.data)
+        setGrupodetrabajo(GrupodeTrabajoResponse.data);
+        setMezcladora(MezcladoraResponse.data)
       })
       .catch((error) => {
         setError("Error al obtener los datos", error);
@@ -62,7 +65,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         id_Aserradero2:formData.id_Aserradero2,
         librasAserrin2:formData.librasAserrin2,
         id_cernidodetalle2: formData.id_cernidodetalle2,
-id_creador:id_creador
+        id_creador:id_creador,
+        id_mezcladora:formData.id_mezcladora
       });Swal.fire({
         icon: 'success',
         title: 'Guardado exitosamente',
@@ -185,6 +189,20 @@ id_creador:id_creador
       </select>
     </div>
        
+    <div className="col-md-6">
+    <label htmlFor="aserradero" className="form-label">
+        Mezcladora
+    </label>
+    <select className="form-select" id="id_mezcladora" {...register("id_mezcladora")}>
+    <option value="" disabled selected>Seleccione...</option>
+    {Array.isArray(mezcladora.rows)
+      && mezcladora.rows.length>0 && mezcladora.rows.map((mezcladora) => (
+        <option key={mezcladora.id_maq} value={mezcladora.id_maq}>
+          {mezcladora.nombre_maq}
+        </option>
+      ))}
+    </select>
+  </div>
    
         
     
