@@ -69,8 +69,10 @@ const EstadoProc = ({ id, encabezado }) => {
         ruta = 'dthh';
         break;
       case 'otdmp':
-          ruta = 'otdmp';
+          ruta = 'TablaLab';
+          
           break;
+          
       default:
         ruta = '';
         break;  

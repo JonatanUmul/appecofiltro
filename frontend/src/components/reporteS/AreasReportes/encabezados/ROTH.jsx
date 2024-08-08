@@ -4,26 +4,36 @@ import { formatFecha } from "../../../utilidades/FormatearFecta.js";
 import PdfROTHP from '../pdfECO/PdfROTHH.jsx';
 import ExcelROTHP from '../Excel/ExcelRothp.jsx';
 import Detalle from '../detalles/Detalle_ROTT.jsx';
+import ReactPaginate from 'react-paginate';
+
 const URL = process.env.REACT_APP_URL;
 
 const ROTH = () => {
   const [datos, setDatos] = useState([]);
   const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
   const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
+  const id_est='';
+  const fecha_CC='';
 const [ufmodelo, setUfmodelo]= useState([]);
 const [modeloUF, setModeloUF]=useState('')
 const [turno, setTurno] = useState([]);
 const [turn, setTurn]=useState('')
-const[horno, setHorno]=useState('')
+const[horno, setTHorno]=useState('')
+const [hornos, setTHornos] = useState([]);
+const [currentPage, setCurrentPage] = useState(0);
+const itemsPerPage = 20;
+const maquinaria="Horno"; 
   useEffect(() => {
     axios.all([
       axios.get(`${URL}/ModelosUF`),
       axios.get(`${URL}/Turnos`),
+      axios.get(`${URL}/maquinaria/${maquinaria}`),
       // axios.get(`${URL}/GrupodeTrabajo`)
     ])
-    .then(axios.spread((ModelosufResponse, TurnosResponse) => {
+    .then(axios.spread((ModelosufResponse, TurnosResponse, HornosResponse) => {
       setUfmodelo(ModelosufResponse.data)
       setTurno(TurnosResponse.data);
+      setTHornos(HornosResponse.data);
     }))
     .catch((error) => {
       console.error('Error al obtener los datos:', error);
@@ -36,14 +46,24 @@ const[horno, setHorno]=useState('')
 
     axios.get(url)
       .then((response) => {
-        setDatos(response.data);
+        setDatos(response.data.data);
 
       })
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
-      });
-  }, [fecha_creacion_inicio, fecha_creacion_fin]);
 
+    
+      });
+  }, [fecha_creacion_inicio, fecha_creacion_fin,modeloUF,turn,horno]);
+console.log('Prueba de datos',datos)
+
+const handlePageClick = (data) => {
+  setCurrentPage(data.selected);
+};
+
+const offset = currentPage * itemsPerPage;
+const currentPageData = datos.slice(offset, offset + itemsPerPage);
+const pageCount = Math.ceil(datos.length / itemsPerPage);
   return (
     <div className="row mb-3">
       <div className="row mb-3">
@@ -66,6 +86,20 @@ const[horno, setHorno]=useState('')
         ))}
       </select>
     </div>
+    <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+              Horno
+          </label>
+          <select className="form-select" id="id_horno">
+          <option value="" disabled selected>Seleccione...</option>
+          {Array.isArray(hornos.rows)
+            && hornos.rows.length>0 && hornos.rows.map((horno) => (
+              <option key={horno.id_maq} value={horno.id_maq}>
+                {horno.nombre_maq}
+              </option>
+            ))}
+          </select>
+        </div>
     
     <div className="col-md-6">
     <label htmlFor="aserradero" className="form-label">
@@ -93,30 +127,55 @@ const[horno, setHorno]=useState('')
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>
-            <th scope="col"></th>
             <th scope="col">Fecha Creación</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Horno</th>
             <th scope="col">Turno</th>
-            <th scope="col">Estado</th>
+            <th scope="col">Cabeza DR</th>
+            <th scope="col">Pie DR</th>
+            <th scope="col">Cabeza IZ</th>
+            <th scope="col">Pie IZ</th>
+            <th scope="col">Promedio</th>
+          
            
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(datos) && datos.map((fila, index) => (
+          {Array.isArray(currentPageData) && currentPageData.map((fila, index) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
-              <th>
+         {/*     <th>
                 <Detalle
                   nombretabla={fila.tabla}
                   id={fila.id}
                 />
-              </th>
-              <td>{formatFecha(fila.fecha_creacion)}</td>
-              <td>{fila.turnos}</td>
-              <td>{fila.estadoOrden}</td>
+              </th> */}
+              <td>{formatFecha(fila.fecha_real)}</td>
+              <td>{fila.hora_creacion}</td>
+              <td>{fila.horno}</td>
+              <td>{fila.turno}</td>
+              <td>{fila.tempCabezaDR}</td>
+              <td>{fila.tempCabezaIZ}</td>
+              <td>{fila.tempPieDR}</td>
+              <td>{fila.tempPieIZ}</td>
+              <td>{fila.promedio}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+      previousLabel={'Anterior'}
+      nextLabel={'Siguiente'}
+      breakLabel={'...'}
+      breakClassName={'break-me'}
+      pageCount={pageCount}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={handlePageClick}
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+    />
     </div>
   );
 }

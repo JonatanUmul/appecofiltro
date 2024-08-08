@@ -3,6 +3,7 @@ import axios from 'axios'
 import { formatFecha } from "../utilidades/FormatearFecta.js";
 // import PdfROTCA1 from './pdfECO/PdfROTCA1.jsx'
 import ExcelROTCA1 from './Excel/ExcelPorCodigoscopy.jsx'
+import ExcelROTCA2 from './Excel/ExcelPorCodigos.jsx'
 // import { Divider } from 'antd';
 import ReactPaginate from 'react-paginate';
 const URL = process.env.REACT_APP_URL
@@ -143,6 +144,7 @@ console.log(aprobados)
 
  {/*<p>{(porcentageAprobado.toFixed(2))}</p> */}
   <ExcelROTCA1 datos={datos}/>
+  <ExcelROTCA2 datos={datos}/>
 {/*<PdfROTCA1 datos={datos}/> */}
   </div>
  
