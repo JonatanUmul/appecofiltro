@@ -1,38 +1,50 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Estilos para el modo oscuro */
+body.dark-mode {
+  background-color: #121212;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+body.dark-mode .ant-layout {
+  background-color: #1f1f1f;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+body.dark-mode .ant-btn {
+  background-color: #333;
+  color: white;
+}
+
+/* Estilos para tablas */
+body.dark-mode .ant-table {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+body.dark-mode .ant-table-thead > tr > th {
+  background-color: #2a2a2a;
+  color: white;
+}
+
+body.dark-mode .ant-table-tbody > tr > td {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+/* Estilos para formularios */
+body.dark-mode .ant-form {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+/* Estilos para entradas y campos */
+body.dark-mode .ant-input {
+  background-color: #333;
+  color: white;
+}
+
+body.dark-mode .ant-select-selector {
+  background-color: #333;
+  color: white;
+}
+
+/* Continúa con otros estilos necesarios */

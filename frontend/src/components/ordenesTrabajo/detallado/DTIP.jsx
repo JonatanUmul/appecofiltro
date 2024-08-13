@@ -41,8 +41,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         TipoPlata:formData.TipoPlata,
         fecha_real:fecha_creacion,
         id_modelo: formData.id_modelo,
-        codigoInicio: formData.codigoInicio,
-        codigoFinal: formData.codigoFinal,
+        codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
+        codigoFinal: formData.codigoFinal.replace(/\s+/g, ''),
         impregnados: formData.impregnados,
         mermas: formData.mermas,
         id_creador:id_creador
@@ -116,15 +116,15 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
 
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">
-            Codigo de Inicio
+          Código de Inicio
           </label>
-          <input type="text" className="form-control" id="codigoInicio" {...register("codigoInicio")} required />
+          <input autocomplete="off"  style={{textTransform:'uppercase'}} placeholder="Formato: AA00000" type="text" className="form-control" id="codigoInicio" {...register("codigoInicio")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">
-            Codigo Final
+          Código Final
           </label>
-          <input type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
+          <input autocomplete="off"  style={{textTransform:'uppercase'}} placeholder="Formato: AA00000" type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
         </div>
       
   

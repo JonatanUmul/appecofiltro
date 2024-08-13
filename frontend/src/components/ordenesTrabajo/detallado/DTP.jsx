@@ -57,8 +57,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         id_Aserradero: formData.id_Aserradero,
         id_ufmodelo: formData.id_ufmodelo,
         producido: formData.producido,
-        codigoInicio: formData.codigoInicio,
-        codigoFinal: formData.codigoFinal,
+        codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
+        codigoFinal: formData.codigoFinal.replace(/\s+/g, ''),
         librasBarro: formData.librasBarro,
         librasAserrin: formData.librasAserrin,
         observacion: formData.observacion,
@@ -214,15 +214,15 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">
-            Codigo de Inicio
+          Código de Inicio
           </label>
-          <input type="text" className="form-control" id="codigoInicio" {...register("codigoInicio")} required />
+          <input autocomplete="off"  style={{textTransform:'uppercase'}} placeholder="Formato: AA00000" type="text" className="form-control" id="codigoInicio" {...register("codigoInicio")} required />
         </div>
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">
-            Codigo Final
+          Código Final
           </label>
-          <input type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
+          <input autocomplete="off" style={{textTransform:'uppercase'}} placeholder="Formato: AA00000" type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
         </div>
       
         <div className="col-md-6">

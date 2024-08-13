@@ -93,6 +93,9 @@ console.log('Datos de lab',estOT)
           Lb Aserrín
         </th>
         <th scope="col" style={{ width: "1%" }}>
+        Peso total
+      </th>
+        <th scope="col" style={{ width: "1%" }}>
           Aserradero
         </th>
               <th scope="col" style={{ width: "0%" }}>
@@ -124,7 +127,8 @@ console.log('Datos de lab',estOT)
                 <td>{OTDats.codigoFinal}</td>
                 <td>{OTDats.producido}</td>
 
-                <td>{OTDats.LibrasAserrin}/{OTDats.LibrasAserrin2}</td>
+                <td>{OTDats.LibrasAserrin}/{OTDats.librasAserrin2}</td>
+                <td>{OTDats.formulaTot}</td>
                 <td>{OTDats.nombre_aserradero}/{OTDats.nombre_aserradero2}</td>
                 <td>
                   <CrearOT

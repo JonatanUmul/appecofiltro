@@ -26,9 +26,11 @@ const HeaderMenu = () => {
       }}
     >
       <LogoEco />
+
       <Menu >
         <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
           <span >Cerrar sesión</span>
+          
         </Menu.Item>
       </Menu>
     </Header>

@@ -40,8 +40,8 @@ const CTT = () => {
       // Actualizar el estado 'datos' con los valores del formulario
       setDatos({
       
-        codigoInicio: formData.codigoInicio,
-        codigoFinal:formData.codigoFinal,
+        codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
+        codigoFinal:formData.codigoFinal.replace(/\s+/g, ''),
         cantidad:formData.cantidad
     });
    
@@ -68,16 +68,16 @@ const CTT = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
       <div className="mb-3">
         <label htmlFor="estados" className="form-label">
-          Codigo de inicio
+        Código de inicio
         </label>
-        <input type="text" className="form-control" id="codigoInicio" {...register("codigoInicio")} required />
+        <input autocomplete="off"  style={{textTransform:'uppercase'}}  placeholder="Formato: AA00000" type="text" className="form-control" id="codigoInicio" {...register("codigoInicio")} required />
 
       </div>
       <div className="mb-3">
         <label htmlFor="estados" className="form-label">
-          Codigo Final
+        Código Final
         </label>
-        <input type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
+        <input autocomplete="off"  style={{textTransform:'uppercase'}}  placeholder="Formato: AA00000" type="text" className="form-control" id="codigoFinal" {...register("codigoFinal")} required />
 
       </div>
       <div className="mb-3">

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
-
+import { Layout, Button } from 'antd';
 import SideMenu from './SideMenu';
 import HeaderMenu from './HeaderMenu';
 import ContentMenu from './ContenteMenu';
@@ -8,20 +7,21 @@ import FooterMenu from './FooterMenu';
 
 const { Content } = Layout;
 
-const MainLayout = () => {
+const MainLayout = ({ toggleDarkMode, darkMode }) => {
   return (
-   
-    <Layout className="min-vh-100">
-      <SideMenu />
+    <Layout className={`min-vh-100 ${darkMode ? 'dark-mode' : ''}`}>
+      <SideMenu darkMode={darkMode} />
       <Layout>
-        <HeaderMenu />
-        <Content className="p-3">
-          <ContentMenu />
+        <HeaderMenu darkMode={darkMode} />
+        <Content className={`p-3 ${darkMode ? 'dark-mode' : ''}`}>
+          <Button onClick={toggleDarkMode} style={{ marginBottom: '16px' }}>
+            {darkMode ? 'Modo Claro' : 'Modo Oscuro'}
+          </Button>
+          <ContentMenu darkMode={darkMode} />
         </Content>
-        <FooterMenu />
+        <FooterMenu darkMode={darkMode} />
       </Layout>
     </Layout>
- 
   );
 };
 

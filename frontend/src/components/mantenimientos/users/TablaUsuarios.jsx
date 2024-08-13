@@ -6,7 +6,7 @@ import { Button, Modal, ModalFooter, ModalBody, ModalHeader} from 'reactstrap';
 import '../EstiloModal.css'
 const URL = process.env.REACT_APP_URL;
 
-const TablaUsuarios = () => {
+const TablaUsuarios = ({darkMode }) => {
     const [datos, setDatos] = useState([]);
     const [modal, setModal] = useState(false)
 const [verFirma, setVerFirma]=useState(true)
@@ -32,7 +32,7 @@ const [verFirma, setVerFirma]=useState(true)
         setVerFirma(false)
     }
     return (
-        <div >
+        <div className={`table-container ${darkMode ? 'dark-mode' : ''}`} >
     
     <Button className='btn btn-primary btn-xl btn-block w-25' onClick={toggleModal}>Crear Usuario</Button>
             <Modal isOpen={modal} toggle={toggleModal} backdrop="static" collapse={true}>

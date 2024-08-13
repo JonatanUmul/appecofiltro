@@ -15,7 +15,7 @@ import OTCC from '../encabezados/OTCC'
 // import { useAbility } from '../AbilityContext';
 
 
-const BotonOT = () => {
+const BotonOT = ({darkMode }) => {
   // const ability = useAbility();
   const [modal, setModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);

@@ -13,7 +13,7 @@ import { Divider } from 'antd';
 
 const URL = process.env.REACT_APP_URL;
 
-const TablaOT = () => {
+const TablaOT = ({ darkMode }) => {
   const ability = useAbility();
   const [estOT, setEstot] = useState([]);
   const [error, setError] = useState("");
@@ -59,13 +59,12 @@ const TablaOT = () => {
   const pageCount = Math.ceil(estOT.length / itemsPerPage);
 
   return (
-    <div>
+    <div className={`table-container ${darkMode ? 'dark-mode' : ''}`}>
       <Divider style={{ color: '#f5222d' }}>Ordenes de Trabajo</Divider>
-        <div className="mb-3">
-          <BotonOT />
-        </div>
-  
-      
+      <div className="mb-3">
+        <BotonOT darkMode={darkMode} />
+      </div>
+
       <div style={{ overflowX: "auto" }} className="table-responsive-sm">
         {error && <p>{error}</p>}
         <table className="table text-center">
@@ -94,6 +93,7 @@ const TablaOT = () => {
               <tr key={index} onClick={() => selectForm(OTDats.encabezado)}>
                 <th>
                   <Detalle
+                    darkMode={darkMode}
                     encabezado={OTDats.encabezado}
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}
@@ -105,6 +105,7 @@ const TablaOT = () => {
                 <td>{OTDats.EncName}</td>
                 <td>
                   <CrearOT
+                    darkMode={darkMode}
                     encabezado={OTDats.encabezado}
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}
@@ -113,6 +114,7 @@ const TablaOT = () => {
                 </td>
                 <td>
                   <ButtnEst
+                    darkMode={darkMode}
                     handleClickButton={handleClickButton}
                     id={OTDats.id}
                     encabezado={OTDats.encabezado}
@@ -137,7 +139,7 @@ const TablaOT = () => {
         />
       </div>
       <Divider style={{ color: '#f5222d' }}>Horneados</Divider>
-      <TablaControlC />
+      <TablaControlC darkMode={darkMode} />
     </div>
   );
 };

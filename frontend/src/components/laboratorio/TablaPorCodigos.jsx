@@ -65,6 +65,7 @@ console.log('datos', datos)
   const offset = currentPage * itemsPerPage;
   const currentPageData = datos.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(datos.length / itemsPerPage);
+
   const[produccion, setProduccion]=useState(0) 
   const [aprobados, setAprobados]=useState(0)
   const[altos, setAltos]=useState(0)
@@ -73,6 +74,7 @@ console.log('datos', datos)
   const[ahumado,setAhumado]=useState(0)
   const[porcentageAprobado, setPorcentageAprobados]=useState(0)
   const[rajadoCrudo, SetRajadoCrudo]=useState(0)
+  
   useEffect(()=>{
     setProduccion(datos.filter(dato=> dato.estadouf).length);    
     setAprobados(datos.filter(dato=> dato.estadouf === 'OK').length);
