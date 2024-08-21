@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+import { Skeleton, Space } from 'antd';
 const URL = process.env.REACT_APP_URL
 
 const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
@@ -12,7 +13,16 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [plata, setPlata]=useState([])
   const [error, setError]= useState('')
   const [id_creador, setid_creador] = useState('');
-  
+  const [loading, setLoading] = useState(false);
+
+  const showSkeleton = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
+
   useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
@@ -60,6 +70,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
     } catch (error) {
       setError("Error al enviar los datos:", error);
     }
+    showSkeleton();
   };
 
 console.log('datos props',encabezado, EncName, fecha_creacion,id)
@@ -83,13 +94,28 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
 
 
-        
+      {loading?(
+        <Space
+          direction="vertical"
+          style={{
+            width: '100%',
+          }}
+          size={16}
+        >
+        <p>Enviando los datos... espere...</p>
+          <Skeleton loading={loading}>
+          
+          </Skeleton>
+         
+        </Space>
+      ):(<>
+      
    
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
               Modelo
           </label>
-          <select className="form-select" id="id_modelo" {...register("id_modelo")}>
+          <select className="form-select" id="id_modelo" {...register("id_modelo")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(modelos.rows)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
@@ -103,7 +129,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
               Tipo de Plata
           </label>
-          <select className="form-select" id="TipoPlata" {...register("TipoPlata")}>
+          <select className="form-select" id="TipoPlata" {...register("TipoPlata")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(plata.rows)
             && plata.rows.length>0 && plata.rows.map((plata) => (
@@ -146,6 +172,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>
         </div>
+          </>)}
       </form>
     </div>
   );

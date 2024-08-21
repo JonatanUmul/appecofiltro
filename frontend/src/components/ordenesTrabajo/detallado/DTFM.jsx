@@ -99,7 +99,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
             Materia Prima
           </label>
-          <select className="form-select" id="id_matPrim" {...register("id_matPrim")}>
+          <select className="form-select" id="id_matPrim" {...register("id_matPrim")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(matPrima.rows)
             && matPrima.rows.length>0 && matPrima.rows.map((matPrima) => (
@@ -113,7 +113,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
             Aserradero
           </label>
-          <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")}>
+          <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
@@ -182,7 +182,7 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
             Aserradero
           </label>
-          <select className="form-select" id="id_Aserradero2" {...register("id_Aserradero2")}>
+          <select className="form-select" id="id_Aserradero2" {...register("id_Aserradero2")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (

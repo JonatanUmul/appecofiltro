@@ -83,7 +83,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
             Materia Prima
           </label>
-          <select className="form-select" id="id_matPrima" {...register("id_matPrima")}>
+          <select className="form-select" id="id_matPrima" {...register("id_matPrima")} required>
           <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
@@ -97,7 +97,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="aserradero" className="form-label">
             Aserradero
           </label>
-          <select className="form-select" id="id_asrd" {...register("id_asrd")}>
+          <select className="form-select" id="id_asrd" {...register("id_asrd")} required>
           <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
@@ -111,7 +111,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
           <label htmlFor="patio" className="form-label">
             Patio
           </label>
-          <select className="form-select" id="id_patio" {...register("id_patio")}>
+          <select className="form-select" id="id_patio" {...register("id_patio")} required>
           <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
               <option key={patio.id} value={patio.id}>

@@ -81,7 +81,7 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
           <label htmlFor="aserradero" className="form-label">
             Materia Prima
           </label>
-          <select className="form-select" id="id_MP" {...register("id_MP")}>
+          <select className="form-select" id="id_MP" {...register("id_MP")} required>
           <option value="" disabled selected>Seleccione...</option>
         
             {Array.isArray(matPrim.rows)
@@ -96,7 +96,7 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
           <label htmlFor="aserradero" className="form-label">
             Aserradero
           </label>
-          <select className="form-select" id="id_asrd" {...register("id_asrd")}>
+          <select className="form-select" id="id_asrd" {...register("id_asrd")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
@@ -110,7 +110,7 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
           <label htmlFor="patio" className="form-label">
             Patio
           </label>
-          <select className="form-select" id="id_patio" {...register("id_patio")}>
+          <select className="form-select" id="id_patio" {...register("id_patio")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(patio.rows)&& patio.rows.length>0 &&patio.rows.map((patio) => (
               <option key={patio.id} value={patio.id}>

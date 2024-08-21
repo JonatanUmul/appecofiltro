@@ -141,7 +141,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
               Turno de Horneado
           </label>
-          <select className="form-select" id="id_turno" {...register("id_turno")}>
+          <select className="form-select" id="id_turno" {...register("id_turno")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(turno.rows)
             && turno.rows.length>0 && turno.rows.map((turno) => (
@@ -156,7 +156,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
               Aserradero
           </label>
-          <select className="form-select" id="id_aserradero" {...register("id_aserradero")}>
+          <select className="form-select" id="id_aserradero" {...register("id_aserradero")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
@@ -187,7 +187,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
               Modelo
           </label>
-          <select className="form-select" id="id_modelo" {...register("id_modelo")}>
+          <select className="form-select" id="id_modelo" {...register("id_modelo")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(modelos.rows)
             && modelos.rows.length>0 && modelos.rows.map((modelo) => (
@@ -203,7 +203,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
               Horno
           </label>
-          <select className="form-select" id="id_horno" {...register("id_horno")}>
+          <select className="form-select" id="id_horno" {...register("id_horno")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(hornos.rows)
             && hornos.rows.length>0 && hornos.rows.map((horno) => (
@@ -218,7 +218,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
               Hornero
           </label>
-          <select className="form-select" id="id_hornero" {...register("id_hornero")}>
+          <select className="form-select" id="id_hornero" {...register("id_hornero")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(hornero.rows)
             && hornero.rows.length>0 && hornero.rows.map((hornero) => (
@@ -283,7 +283,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="aserradero" className="form-label">
             Aserradero 2
           </label>
-          <select className="form-select" id="id_aserradero2" {...register("id_aserradero2")}>
+          <select className="form-select" id="id_aserradero2" {...register("id_aserradero2")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
@@ -327,6 +327,8 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         <div className="col-4">
         <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
         </div>
+
+    
           <button type="submit" className="btn btn-primary" disabled={loading}>Guardar</button>
         </div>
         </>

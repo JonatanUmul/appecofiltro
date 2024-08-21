@@ -90,7 +90,7 @@ useEffect(()=>{
           <label htmlFor="aserradero" className="form-label">
             Materia Prima
           </label>
-          <select className="form-select" id="id_MP" {...register("id_MP")}>
+          <select className="form-select" id="id_MP" {...register("id_MP")} required>
           <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(matPrim.rows)
             && matPrim.rows.length>0 && matPrim.rows.map((matPrim) => (
@@ -104,7 +104,7 @@ useEffect(()=>{
           <label htmlFor="aserradero" className="form-label">
             Aserradero
           </label>
-          <select className="form-select" id="id_asrd" {...register("id_asrd")}>
+          <select className="form-select" id="id_asrd" {...register("id_asrd")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(aserradero.rows)
             && aserradero.rows.length>0 && aserradero.rows.map((aserrado) => (

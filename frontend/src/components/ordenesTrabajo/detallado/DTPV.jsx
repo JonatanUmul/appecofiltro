@@ -3,13 +3,24 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
+import { Skeleton, Space } from 'antd';
 const URL = process.env.REACT_APP_URL
 
 const DTPV = ({ encabezado, EncName, fecha_creacion,id }) => {
   const { handleSubmit, register } = useForm();
  const [matPrim, setMatPrim]=useState([])
  const [id_creador, setid_creador] = useState('');
-  
+ const [loading, setLoading] = useState(false);
+
+
+ const showSkeleton = () => {
+   setLoading(true);
+
+   setTimeout(() => {
+     setLoading(false);
+   }, 3000);
+ };
+
  useEffect(()=>{
    setid_creador(localStorage.getItem('id_creador'))
  })
@@ -51,6 +62,7 @@ console.log(matPrim)
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
+    showSkeleton()
   };
 console.log('datos props',encabezado, EncName, fecha_creacion,id)
   return (
@@ -69,7 +81,21 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
-       
+      {loading?(
+        <Space
+          direction="vertical"
+          style={{
+            width: '100%',
+          }}
+          size={16}
+        >
+        <p>Enviando los datos... espere...</p>
+          <Skeleton loading={loading}>
+          
+          </Skeleton>
+         
+        </Space>
+      ):(<>
 
       <div className="form-group mt-3">
 
@@ -77,7 +103,7 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
             Materia Prima
           </label>
           <div class="form-group">
-          <select class="form-control" name="" id="id_MP" {...register('id_MP')}>
+          <select class="form-control" name="" id="id_MP" {...register('id_MP')} required>
           <option value="" disabled selected>Seleccione...</option>
             {Array.isArray(matPrim.rows)&& matPrim.rows.length>0&& matPrim.rows.map((Primas)=>(
               
@@ -105,7 +131,8 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
         <div className="col-12">
           <button type="submit" className="btn btn-primary">Guardar</button>
         </div>
-         
+         </>
+)}
       </form>
     </div>
   );

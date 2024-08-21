@@ -207,7 +207,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin }) =>
   <label htmlFor="aserradero" className="form-label">
     Responsable de CC
   </label>
-  <select className="form-select" id="id_operarioCC" {...register("id_operarioCC")}>
+  <select className="form-select" id="id_operarioCC" {...register("id_operarioCC")} required>
   <option value="" disabled selected>Seleccione...</option>
   {operario.rows && Array.isArray(operario.rows) && operario.rows.filter(operario => operario.id_area === 4 ).map((operario) => (
     <option key={operario.id} value={operario.id}>
@@ -221,7 +221,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin }) =>
 <label htmlFor="aserradero" className="form-label">
   Auditor de Procesos
 </label>
-<select className="form-select" id="id_auditor" {...register("id_auditor")}>
+<select className="form-select" id="id_auditor" {...register("id_auditor")} required>
 <option value="" disabled selected>Seleccione...</option>
   {operario.rows && Array.isArray(operario.rows) && operario.rows.filter(operario =>  operario.id_area === 9).map((operario) => (
     <option key={operario.id} value={operario.id}>
@@ -235,7 +235,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin }) =>
   <label htmlFor="aserradero" className="form-label">
     Turno de CC
   </label>
-  <select className="form-select" id="turnoCC" {...register("turnoCC")}>
+  <select className="form-select" id="turnoCC" {...register("turnoCC")} required>
   <option value="" disabled selected>Seleccione...</option>
     {Array.isArray(turno.rows)
     && turno.rows.length>0 && turno.rows.map((turno) => (
