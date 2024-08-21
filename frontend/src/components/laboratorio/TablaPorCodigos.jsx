@@ -6,8 +6,9 @@ import ExcelROTCA1 from './Excel/ExcelPorCodigoscopy.jsx'
 import ExcelROTCA2 from './Excel/ExcelPorCodigos.jsx'
 // import { Divider } from 'antd';
 import ReactPaginate from 'react-paginate';
+import Detalle from '../reporteS/ControlProcesos/detalles/RedireccionDetalle_ROTT.jsx'
 const URL = process.env.REACT_APP_URL
-
+const nombretabla='ROTHTablaxCodigos'
 const ROTHP = () => {
   const [datos, setDatos] = useState([]);
   const [aserradero, setAserradero] = useState([]);
@@ -15,21 +16,26 @@ const ROTHP = () => {
   const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
   const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
   const [id_aserradero, setIdAserradero] = useState('');
-
+  const [codigos, setCodigos]=useState('')
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 20;
+const [mouseover, setmouseover]=useState(false)
+ 
+    const codigo=codigos.toUpperCase()
 
+console.log(codigo)
   const limpiarInputs = () => {
     setFecha(formatFecha(new Date()));
     setFecha2(formatFecha(new Date()));
     setIdAserradero('');
+    setCodigos('')
 
   };
   console.log(fecha_creacion_inicio, fecha_creacion_fin)
   // Solicitud GET desde React
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-    const url = `${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}`;
+    const url = `${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${codigo || 'null'}`;
 
     axios.get(url)
       .then((response) => {
@@ -39,7 +45,7 @@ const ROTHP = () => {
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
       });
-  }, [fecha_creacion_inicio,fecha_creacion_fin, id_aserradero]);
+  }, [fecha_creacion_inicio,fecha_creacion_fin, id_aserradero,codigo]);
 console.log('datos', datos)
   // Realizar las solicitudes para obtener datos
   useEffect(() => {
@@ -87,7 +93,12 @@ console.log('datos', datos)
   })
 console.log(aprobados)
 
-
+const handleMouseOver=(index)=>{
+  setmouseover(index)
+}
+const handleMouseOut=()=>{
+  setmouseover(false)
+}
   return (
     <div className="row mb-3">
 {/*    <Divider style={{ color: '#1d39c4'}}>Cernido 1</Divider> */}
@@ -101,6 +112,10 @@ console.log(aprobados)
     <label htmlFor="fecha" className="form-label">Fecha 2</label>
     <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
   </div>
+  <div className="col-md-3">
+  <label htmlFor="codigo" className="form-label">Código</label>
+  <input className="form-control" type="text" value={codigos} onChange={(e) => setCodigos(e.target.value)} />
+</div>
   <div className="col-md-3">
     <label htmlFor="aserradero" className="form-label">Aserradero:</label>
     <select className="form-select" name="id_aserradero" value={id_aserradero} onChange={(e) => setIdAserradero(e.target.value)}>
@@ -163,7 +178,7 @@ console.log(aprobados)
             <th scope="col">Tipo de Filtro</th>
             <th scope="col">Proveedor</th>
             <th scope="col">Cantidad de aserrín</th>
-          
+            <th scope="col">Total</th>
             <th scope="col">Horno</th>
             <th scope="col">Estado</th>
             <th scope="col">Tasa</th>
@@ -178,14 +193,15 @@ console.log(aprobados)
               <td>{formatFecha(fila.fecha_produccion) }</td>
               <td>{fila.codigos}</td>
               <td>{fila.ufmodelo}</td>
-              <td>{fila.Aserraderos}</td>
+              <td>{fila.aserradero1}/{fila.aserradero2}</td>
      
-              <td>{fila.formulaC}</td>
-      
+              <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
+              <td>{fila.formulatotal}</td>
               <td>{fila.horno}</td>
               <td>{fila.estadouf}</td>
               <td>{fila.tasa}</td>
-              <td>{fila.promedio}</td>
+              <td onMouseOver={()=>handleMouseOver(index)} onMouseOut={handleMouseOut}>
+              {mouseover===index ? (<Detalle nombretabla={nombretabla} datos={datos} />):((fila.promedio))}</td>
             </tr>
           ))}
           <tr>

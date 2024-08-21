@@ -5,6 +5,7 @@ import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 
 import ROTT from '../consultas/ROTT'
 import ROTH from '../consultas/ROTH'
+import ROTHTablaxCodigos from '../consultas/ROTHTablaxCodigos'
 
 const Detalle = ({  
   id_modelo,
@@ -53,7 +54,9 @@ console.log('verificacndo fecha',turnoHorn)
         return <ROTT id={id}  nombretabla={nombretabla} codigoInicio={codigoInicio} codigoFinal={codigoFinal} cantidad={cantidad}  />
       case 'cthh':
           return <ROTH datos={datos}  id_modelo={id_modelo} id_turno={id_turno} id_horno={id_horno} />
-          
+      case 'ROTHTablaxCodigos':
+            return <ROTHTablaxCodigos datos={datos}  />
+            
      
       default:
         return <p>Formulario no encontrado</p>;
@@ -73,10 +76,10 @@ console.log('verificacndo fecha',turnoHorn)
     
     <div className="container-fluid">
     <div className="d-flex justify-content-center align-items-center">
-  <a type="button" onClick={handleClick}>
+  <a style={{alignItems:'center'}} type="button" onClick={handleClick}>
     <i className="bi bi-arrow-bar-right"></i>
   </a>
-  <Modal isOpen={modalVisible} toggle={handleCloseModal} className="responsive-modal">
+  <Modal isOpen={modalVisible} toggle={handleCloseModal} className="responsive-modal" backdrop="static">
     <ModalHeader toggle={handleCloseModal}>{nombretabla}</ModalHeader>
     <ModalBody>{renderSelectedForm()}</ModalBody>
     <ModalFooter></ModalFooter>
