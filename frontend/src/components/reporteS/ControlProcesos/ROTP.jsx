@@ -4,7 +4,7 @@
     import PdfROTP from './pdfECO/PdfROTP'
     import ExcelROTHP from './Excel/ExcelRotP'
     import { Divider } from 'antd';
-
+    import DatosProduccion from './consultas/DatosProducción'
     const URL = process.env.REACT_APP_URL
     
     const ROTHP = () => {
@@ -19,6 +19,8 @@
       const [turn, setTurn]=useState('')
       const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
+     const [detalleProduccion, setDetalleProduccion]=useState(false)
+     
       useEffect(() => {
         axios.all([
           axios.get(`${URL}/ModelosUF`),
@@ -59,6 +61,13 @@
           });
       }, [ id_ufmodelo, id_grupoproduccion, fecha_creacion_inicio,fecha_creacion_fin]);
 
+      const Mouseevent=(index)=>{
+        setDetalleProduccion(index)
+      }
+      const MouseeventOt=()=>{
+        setDetalleProduccion(false)
+        
+      }
   
       return (
         <div className="row mb-3">
@@ -125,6 +134,7 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">id</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Turno</th>
                 <th scope="col">Modelo</th>
@@ -140,8 +150,11 @@
             <tbody>
               {Array.isArray(datos) && datos.map((fila, index) => (
                 <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{formatFecha(fila.fecha_real) }</td>
+                  <th scope="row">{index + 1}</th> 
+                  <td onMouseOver={()=>Mouseevent(index)} onMouseOut={MouseeventOt}>
+                  {detalleProduccion===index?(<DatosProduccion datos={fila}/>):(formatFecha(fila.fecha_real))}
+                  </td>
+                  <td>{fila.id}</td>
                   <td>{fila.nombre_turno}</td>
                   <td>{fila.nombre_ufmodelo}</td>
                   <td>{fila.producido}</td>

@@ -35,7 +35,7 @@ console.log(codigo)
   // Solicitud GET desde React
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-    const url = `${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${codigo || 'null'}`;
+    const url = `${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${codigo || 'null'}/${ 'null'}`;
 
     axios.get(url)
       .then((response) => {
