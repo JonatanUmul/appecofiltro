@@ -151,19 +151,19 @@
               {Array.isArray(datos) && datos.map((fila, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th> 
-                  <td onMouseOver={()=>Mouseevent(index)} onMouseOut={MouseeventOt}>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}  onMouseOver={()=>Mouseevent(index)} onMouseOut={MouseeventOt} >
                   {detalleProduccion===index?(<DatosProduccion datos={fila}/>):(formatFecha(fila.fecha_real))}
                   </td>
-                  <td>{fila.id}</td>
-                  <td>{fila.nombre_turno}</td>
-                  <td>{fila.nombre_ufmodelo}</td>
-                  <td>{fila.producido}</td>
-                  <td>{fila.grupoProd}</td>
-                  <td>{fila.codigoInicio}</td>
-                  <td>{fila.codigoFinal}</td>
-                  <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
-                  <td>{fila.aserradero1}/{fila.aserradero2}</td>
-                  <td>{fila.pesototal}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.id}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.nombre_turno}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.nombre_ufmodelo}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.producido}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.grupoProd}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.codigoInicio}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.codigoFinal}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.librasAserrin}/{fila.librasAserrin2}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.aserradero1}/{fila.aserradero2}</td>
+                  <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}>{fila.pesototal}</td>
                   
                   
                

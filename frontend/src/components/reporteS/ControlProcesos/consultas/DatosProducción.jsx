@@ -61,7 +61,7 @@ const DatosProduccion = ({ datos }) => {
   return (
     <>
       <Space>
-        <a className='btn' onClick={showLargeDrawer}>
+        <a onClick={showLargeDrawer}>
           <BsArrowRight />
         </a>
       </Space>
