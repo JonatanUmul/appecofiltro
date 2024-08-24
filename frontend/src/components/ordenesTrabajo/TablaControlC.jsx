@@ -69,7 +69,7 @@ console.log('Abiliti en tabla OT', ability)
    
     <div class="table-responsive-sm" style={{ overflowX: "auto", justifyContent:'center', alignItems:'center' }}>
       {error && <p>{error}</p>}
-      <table className=" text-center table" style={{justifyContent:'space-between', textAlign:'center'}}>
+      <table className=" text-center table table-striped table-hover" style={{justifyContent:'space-between', textAlign:'center'}}>
         <thead >
           <tr>
            <th scope="col" style={{ width: "1%" }}></th>
@@ -124,7 +124,7 @@ console.log('Abiliti en tabla OT', ability)
               <td>{formatFecha(OTDats.fechaHorneado)}</td>
               <td>{OTDats.id}</td>
               <td>{OTDats.codigoInicio}</td>
-              <td>{OTDats.codigoInicio}</td>
+              <td>{OTDats.CodigoFin}</td>
               <td>{OTDats.horneado}</td>
               <td>{OTDats.Horno}</td>
               <td>{OTDats.Hornero}</td>

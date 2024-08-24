@@ -45,7 +45,7 @@ const TablaCP = () => {
       </div>
       <div style={{ overflowX: "auto" }}>
         {error && <p>{error}</p>}
-        <table className="table text-center ">
+        <table className="table table-striped table-hover text-center ">
           <thead>
             <tr>
               <th scope="col" style={{ width: "0%" }}></th>

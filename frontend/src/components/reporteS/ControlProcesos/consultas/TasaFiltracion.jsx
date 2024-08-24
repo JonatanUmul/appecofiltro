@@ -52,7 +52,7 @@ const TasasChart = ({ data }) => {
 
       const option = {
         backgroundColor: '#0f375f',
-        tooltip: {
+        tooltip: {  
           trigger: 'item',
           formatter: '{b}: {c}'
         },

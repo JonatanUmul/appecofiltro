@@ -67,7 +67,7 @@ const TablaOT = ({ darkMode }) => {
 
       <div style={{ overflowX: "auto" }} className="table-responsive-sm">
         {error && <p>{error}</p>}
-        <table className="table text-center">
+        <table className="table table-striped table-hover text-center">
           <thead>
             <tr>
               <th scope="col" style={{ width: "0%" }}></th>
