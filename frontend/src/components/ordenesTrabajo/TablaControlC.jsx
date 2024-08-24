@@ -125,6 +125,7 @@ console.log('Abiliti en tabla OT', ability)
               <td>{OTDats.id}</td>
               <td>{OTDats.codigoInicio}</td>
               <td>{OTDats.codigoFin}</td>
+              
               <td>{OTDats.horneado}</td>
               <td>{OTDats.Horno}</td>
               <td>{OTDats.Hornero}</td>
