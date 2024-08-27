@@ -3,6 +3,7 @@ import { Button, Drawer, Space } from 'antd';
 import { BsArrowRight } from "react-icons/bs";
 import axios from 'axios';
 import TasaFiltracion from './TasaFiltracion';
+import TablaCodigos from './tablaCodigos'
 const URL = process.env.REACT_APP_URL;
 
 const DatosProduccion = ({ datos }) => {
@@ -70,6 +71,7 @@ const DatosProduccion = ({ datos }) => {
         placement="right"
         size={size}
         onClose={onClose}
+        maskClosable={false}  // Esto desactiva el cierre al hacer clic fuera
         open={open}
         style={{ backgroundColor: '#000', color: '#fff' }}
         bodyStyle={{ backgroundColor: '#333', color: '#fff' }}
@@ -124,12 +126,9 @@ const DatosProduccion = ({ datos }) => {
             <div className="col">
               <ul className="list-group dark fs-6">
                 <h5>Aserrín</h5>
-                <li className="list-group-item">Indice Plastico: <strong>{data.length > 0 && data[0].iplastico != null ? data[0].iplastico : 'Sin Datos'}</strong></li>
-                <li className="list-group-item">Cantidad Arcilla: <strong>{data.length > 0 && data[0].carcilla != null ? data[0].carcilla : 'Sin Datos'}</strong></li>
-                <li className="list-group-item">Cantidad de Limo: <strong>{data.length > 0 && data[0].climo != null ? data[0].climo : 'Sin Datos'}</strong></li>
-                <li className="list-group-item">Cantidad de Arena: <strong>{data.length > 0 && data[0].carena != null ? data[0].carena : 'Sin Datos'}</strong></li>
-                <li className="list-group-item">Humedad de Barro: <strong>{data.length > 0 && data[0].hbarro != null ? data[0].hbarro : 'Sin Datos'}</strong></li>
-              </ul>
+                <li className="list-group-item">Libras de aserrin: <strong>{data.length > 0 && data[0].lbaserrin != null ? data[0].iplastico : 'Sin Datos'}</strong></li>
+                <li className="list-group-item">Libras de aserrin 2: <strong>{data.length > 0 && data[0].lbaserrin2 != null ? data[0].carcilla : 'Sin Datos'}</strong></li>
+                <li className="list-group-item">Granulometria: <strong>{data.length > 0 && data[0].granulometria != null ? data[0].granulometria : 'Sin Datos'}</strong></li>              </ul>
             </div>
           </div>
         </div>
@@ -162,6 +161,8 @@ const DatosProduccion = ({ datos }) => {
           </table>
         </div>
         <div>
+        <TablaCodigos datos={data}/>
+
           <TasaFiltracion data={data} />
         </div>
       </Drawer>

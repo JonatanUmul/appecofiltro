@@ -188,10 +188,13 @@ console.log(fila)
     
       {fila.length > 0 ? (
         <Table
+          className='table-dark'
           columns={columns}
-          dataSource={fila}
+          // dataSource={dataSource}
           pagination={{ pageSize: 15 }}
           size="small"
+          scroll={{ y: 400 }} // Adjust the height for vertical scroll
+          bordered
         />
       ) : (
         <div>Cargando...</div>
