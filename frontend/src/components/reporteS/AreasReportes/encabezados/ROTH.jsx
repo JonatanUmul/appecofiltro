@@ -17,7 +17,7 @@ const [ufmodelo, setUfmodelo]= useState([]);
 const [modeloUF, setModeloUF]=useState('')
 const [turno, setTurno] = useState([]);
 const [turn, setTurn]=useState('')
-const[horno, setTHorno]=useState('')
+const[horno, setHorno]=useState('')
 const [hornos, setTHornos] = useState([]);
 const [currentPage, setCurrentPage] = useState(0);
 const itemsPerPage = 20;
@@ -54,7 +54,7 @@ const maquinaria="Horno";
     
       });
   }, [fecha_creacion_inicio, fecha_creacion_fin,modeloUF,turn,horno]);
-console.log('Prueba de datos',datos)
+console.log('Prueba de datos',fecha_creacion_inicio, fecha_creacion_fin,modeloUF,turn,horno )
 
 const handlePageClick = (data) => {
   setCurrentPage(data.selected);
@@ -89,7 +89,7 @@ const pageCount = Math.ceil(datos.length / itemsPerPage);
           <label htmlFor="aserradero" className="form-label">
               Horno
           </label>
-          <select className="form-select" id="id_horno">
+          <select className="form-select" id="id_horno" value={horno} onChange={(e) => setHorno(e.target.value)}>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(hornos.rows)
             && hornos.rows.length>0 && hornos.rows.map((horno) => (
