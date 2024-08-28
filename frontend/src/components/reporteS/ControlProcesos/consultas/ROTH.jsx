@@ -16,7 +16,7 @@ const ROTHP = ({ datos }) => {
   const [turn, setTurnoProd] = useState(datos[0].id_turno)
   const [horno, setHornos] = useState(datos[0].id_horno);
 console.log('datos seleccionados', fecha_creacion_fin,fecha_creacion_inicio,modeloUF,turn,horno)
-console.log('prueba de dats', datos[0].id_modelo) 
+console.log('prueba de dats', datos[0].fechaHorneado, datos[0].id_modelo, datos[0].id_horno, datos[0].id_turno) 
 // Realizar las solicitudes para obtener dats
  
   useEffect(() => {

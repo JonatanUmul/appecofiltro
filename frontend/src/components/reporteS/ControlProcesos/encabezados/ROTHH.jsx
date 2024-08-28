@@ -58,7 +58,7 @@ console.log('porcentage',porcentaje );
       <thead className="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Temperatura</th>
+        {/*<th scope="col">Temperatura</th> */}  
           <th scope="col">Fecha Horneado</th>
           <th scope="col">Turno</th>
           <th scope="col">C.Inicio</th>
@@ -80,13 +80,13 @@ console.log('porcentage',porcentaje );
         {Array.isArray(datos) && datos.map((fila, index) => (
           <tr key={index}>
             <th scope="row">{index + 1}</th>
-            <th style={{ width: "0%" }}>
+           {/* <th style={{ width: "0%" }}>
               <Detalle
               datos={datos}
               nombretabla={fila.tabla}
               
               />
-            </th>
+            </th>*/}
             <td>{formatFecha(fila.fechaHorneado)}</td>
             <td>{fila.turnoHorneado}</td>
             <td>{fila.codigoInicio}</td>

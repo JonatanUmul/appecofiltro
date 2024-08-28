@@ -14,7 +14,7 @@ const ExcelROTHP = ({ datos }) => {
     CodigoFinal: dato.codigoFin,
     Modelo: dato.ModeloEco,
     fechaHorneado:formatFecha(dato.fechaHorneado),
-    fechaCC:formatFecha(dato.fechaCC),
+    fechaCC:dato.fechaCC != null && dato.fechaCC.length>0? formatFecha(dato.fechaCC):null ,
     LibrasBarro: dato.librasBarro,
     LibrasAserrin1: dato.librasAserrin,
     LibrasAserrin2:dato.librasAserrin2,
