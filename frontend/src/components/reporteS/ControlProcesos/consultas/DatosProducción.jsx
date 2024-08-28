@@ -164,20 +164,7 @@ const DatosProduccion = ({ datos }) => {
           </table>
         </div>
         <div>
-        <table className='table table-dark'>
-        <thead>
-        <tr>
-        <th>fechas de Horneado</th>
-        <th>Cantidad por horno</th>
-        </tr>
-        </thead>
-          <tbody>
-          <tr>
-          <td>{data.fechaHorneado!=null && data.length>0 ? data.fechaHorneado:null  }</td>
-          <td></td>
-          </tr>
-          </tbody>
-        </table>
+  
         <TablaCodigos datos={data}/>
 
           <TasaFiltracion data={data} />
