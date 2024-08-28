@@ -4,6 +4,7 @@ import { BsArrowRight } from "react-icons/bs";
 import axios from 'axios';
 import TasaFiltracion from './TasaFiltracion';
 import TablaCodigos from './tablaCodigos'
+import { formatFecha } from '../../../utilidades/FormatearFecta';
 const URL = process.env.REACT_APP_URL;
 
 const DatosProduccion = ({ datos }) => {
@@ -58,6 +59,8 @@ const DatosProduccion = ({ datos }) => {
     setRajadoCrudo(data.filter(dato => dato.estadoCrudo === 'Rajado').length);
     setPorcentageAprobados((aprobados / produccion) * 100);
   }, [data, aprobados, produccion]);
+
+  const horneados=datos[0].fechaHorneado.length;
 
   return (
     <>
@@ -161,6 +164,20 @@ const DatosProduccion = ({ datos }) => {
           </table>
         </div>
         <div>
+        <table className='table table-dark'>
+        <thead>
+        <tr>
+        <th>fechas de Horneado</th>
+        <th>Cantidad por horno</th>
+        </tr>
+        </thead>
+          <tbody>
+          <tr>
+          <td>{data.fechaHorneado!=null && data.length>0 ? data.fechaHorneado:null  }</td>
+          <td></td>
+          </tr>
+          </tbody>
+        </table>
         <TablaCodigos datos={data}/>
 
           <TasaFiltracion data={data} />

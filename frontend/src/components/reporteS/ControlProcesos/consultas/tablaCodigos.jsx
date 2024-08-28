@@ -121,7 +121,15 @@ const[estadouf, setestadouf]=useState([])
       key: 'estadoCrudo',
       filters: estadoCrudo,
       // ...getColumnSearchProps('estadoCrudo'),
-      onFilter: (value, record) => record.estadoCrudo.includes(value),
+      
+      onFilter: (value, record) => {
+        if (value!=null && value.length > 0) {
+          // Verifica si record.estadoCrudo no es nulo o indefinido antes de llamar a includes
+          return record.estadoCrudo && typeof record.estadoCrudo === 'string' && record.estadoCrudo.includes(value);
+        }
+        // Si el valor es vacío o nulo, retorna true para no filtrar
+        return true;
+      },
 
       render: (text) => <span style={{ fontSize: '11px', textAlign: 'center' }}>{text}</span>,
     },
@@ -144,13 +152,21 @@ const[estadouf, setestadouf]=useState([])
       dataIndex: 'estadouf',
       key: 'estadouf',
       filters: estadouf,
-      onFilter: (value, record) => record.estadouf.includes(value),
+      onFilter: (value, record) => {
+        console.log(typeof record.estadouf)
+        if (value!=null && value.length >= 0) {
+          // Verifica si record.estadoCrudo no es nulo o indefinido antes de llamar a includes
+          return record.estadouf && typeof record.estadouf === 'string' && record.estadouf.includes(value);
+        }
+        // Si el valor es vacío o nulo, retorna true para no filtrar
+        return false;
+      },
 
       render: (text) => <span style={{ fontSize: '11px', textAlign: 'center' }}>{text}</span>,
     }
   ];
 
-  return (
+  return  (
     <div>
       <Space>
         <Button type="primary" onClick={showDrawer}>
