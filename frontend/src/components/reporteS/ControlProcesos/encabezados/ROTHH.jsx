@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
 import PdfROTHH from '../pdfECO/PdfROTHH.jsx';
-import ExcelROTHP from '../Excel/ExcelRothp.jsx';
+import ExcelRHorneados from '../Excel/ExcelRHorneados.jsx';
 import Detalle from '../detalles/RedireccionDetalle_ROTT.jsx';
 import DetalleCC from '../detalles/RedireccionDetalleCC.jsx'
 import { Divider } from 'antd';
@@ -49,7 +49,7 @@ console.log('porcentage',porcentaje );
     </div>
     <div className="col-md-3 d-flex align-items-end">
       <PdfROTHH datos={datos} />
-      <ExcelROTHP datos={datos} />
+      <ExcelRHorneados datos={datos} />
     </div>
   </div>
 
@@ -73,6 +73,7 @@ console.log('porcentage',porcentaje );
           <th scope="col">Horno</th>
           <th scope="col">%Aprobado</th>
           <th scope="col">Hornero</th>
+          <th scope='col'>Temperatura</th>
         </tr>
       </thead>
       <tbody>
@@ -107,6 +108,7 @@ console.log('porcentage',porcentaje );
            </td>
      
             <td>{fila.Hornero}</td>
+            <td>{fila.promedio}</td>
           </tr>
         ))}
 
