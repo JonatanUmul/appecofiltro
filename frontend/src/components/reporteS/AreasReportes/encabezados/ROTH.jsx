@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
-import PdfROTHP from '../pdfECO/PdfROTHH.jsx';
-import ExcelROTHP from '../Excel/ExcelRothp.jsx';
+import ExcelROTHP from '../Excel/ExcelRTH';
 import Detalle from '../detalles/Detalle_ROTT.jsx';
 import ReactPaginate from 'react-paginate';
 
@@ -116,7 +115,6 @@ const pageCount = Math.ceil(datos.length / itemsPerPage);
     </select>
   </div>
     <div className="col-md-3 d-flex align-items-end">
-    <PdfROTHP datos={datos} />
     <ExcelROTHP datos={datos} />
   </div>
       </div>
