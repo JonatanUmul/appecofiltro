@@ -138,6 +138,7 @@ console.log('Abiliti en tabla OT', ability)
                   codInicio={OTDats.codigoInicio}
                   codFin={OTDats.CodigoFin}
                   fecha_creacion={OTDats.fecha_creacion}
+                  horneado={OTDats.horneado}
                 />
               </td>
               <td>

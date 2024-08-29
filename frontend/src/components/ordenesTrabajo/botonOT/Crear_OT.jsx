@@ -15,7 +15,7 @@ import DTCC from '../detallado/DTCC'
 
 
 
-const CrearOT = ({ encabezado, id,EncName, fecha_creacion, codInicio,codFin }) => {
+const CrearOT = ({ encabezado, id,EncName, fecha_creacion, codInicio,codFin, horneado }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
   const [nombreRol, setNombrerol]=useState('')
 console.log('propr recibios', encabezado, id)
@@ -66,7 +66,7 @@ console.log('propr recibios', encabezado, id)
             return <DTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
         
       case 'cthh':
-            return <DTCC id={id} encabezado={encabezado} codInicio={codInicio} codFin={codFin} fecha_creacion={fecha_creacion}/>
+            return <DTCC id={id} encabezado={encabezado} codInicio={codInicio} codFin={codFin} fecha_creacion={fecha_creacion} horneado={horneado}/>
         
   
       default:
