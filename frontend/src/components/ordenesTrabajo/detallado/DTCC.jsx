@@ -80,7 +80,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
       await axios.post(`${URL}/DTCC`, {
         id_dthh: id.toString(),
         fecha_real: fecha_creacion,
-        horneados: formData.horneados,
+        horneados: horneado,
         codigoInicio: formData.codigoInicio,
         codigoFin: formData.codigoFin,
         id_operarioCC: formData.id_operarioCC,

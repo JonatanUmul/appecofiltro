@@ -151,6 +151,7 @@
               {Array.isArray(datos) && datos.map((fila, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th> 
+                
                   <td className={detalleProduccion===index?'text-light bg-dark':''} role={detalleProduccion===index?'alert':''}  onMouseOver={()=>Mouseevent(index)} onMouseOut={MouseeventOt} >
                   {detalleProduccion===index?(<DatosProduccion datos={fila}/>):(formatFecha(fila.fecha_real))}
                   </td>
