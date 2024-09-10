@@ -86,7 +86,7 @@ const DatosProduccion = ({ datos }) => {
         }
       >
         <div className="alert alert-dismissible fade show" role="alert">
-          <p className="mb-1 fs-6">Codigos: <strong>{CodigoInicio && CodigoFIN != null ? ({CodigoInicio} / {CodigoFIN}):'' }</strong></p>
+          <p className="mb-1 fs-6">Codigos: <strong>{CodigoInicio} / {CodigoFIN}</strong></p>
           <p className="mb-1 fs-6">Modelo: <strong>{modelo}</strong></p>
           <p className="mb-0 fs-6">Turno: <strong>{datos.nombre_turno}</strong></p>
         </div>

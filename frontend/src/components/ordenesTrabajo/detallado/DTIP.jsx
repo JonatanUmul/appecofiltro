@@ -5,6 +5,9 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
 import { Skeleton, Space } from 'antd';
+import { dark } from "@mui/material/styles/createPalette";
+import { PlusCircleOutlined, CloseOutlined } from '@ant-design/icons';
+
 const URL = process.env.REACT_APP_URL
 
 const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
@@ -14,7 +17,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [error, setError]= useState('')
   const [id_creador, setid_creador] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const [plata2, setplata2]=useState(false)
   const showSkeleton = () => {
     setLoading(true);
 
@@ -49,6 +52,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
       {
         id_OTIP: id.toString(),
         TipoPlata:formData.TipoPlata,
+        TipoPlata2:formData.TipoPlata2,
         fecha_real:fecha_creacion,
         id_modelo: formData.id_modelo,
         codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
@@ -74,6 +78,8 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   };
 
 console.log('datos props',encabezado, EncName, fecha_creacion,id)
+
+
   return (
     <div className="mt-4">
       <h4 style={{ textAlign: 'center', color: 'gray' }}>Impregnación</h4>
@@ -127,18 +133,43 @@ console.log('datos props',encabezado, EncName, fecha_creacion,id)
         </div>
         <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
-              Tipo de Plata
+              Tipo de Plata 
           </label>
-          <select className="form-select" id="TipoPlata" {...register("TipoPlata")} required>
+          <a onClick={() => setplata2(true)} style={{ cursor: 'pointer' }}>
+<PlusCircleOutlined />   
+        </a>
+        
+                  <select className="form-select" id="TipoPlata" {...register("TipoPlata")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(plata.rows)
             && plata.rows.length>0 && plata.rows.map((plata) => (
               <option key={plata.id} value={plata.id}>
                 {plata.insumo}
-              </option>
+              </option>   
             ))}
           </select>
         </div>
+{plata2 === true ? 
+  <div className="col-md-6">
+          <label htmlFor="aserradero" className="form-label">
+              Tipo de Plata 
+          </label>
+          <a onClick={() => setplata2(false)} style={{ cursor: 'pointer' }}>
+<CloseOutlined />
+        </a>
+        
+                  <select className="form-select" id="TipoPlata2" {...register("TipoPlata2")} required>
+          <option value="" disabled selected>Seleccione...</option>
+          {Array.isArray(plata.rows)
+            && plata.rows.length>0 && plata.rows.map((plata) => (
+              <option key={plata.id} value={plata.id}>
+                {plata.insumo}
+              </option>   
+            ))}
+          </select>
+        </div>
+:''}
+       
 
         <div className="col-md-6">
           <label htmlFor="esquinaSD" className="form-label">

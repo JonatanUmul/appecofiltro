@@ -46,7 +46,7 @@ const ConsultaDTP = ({  id }) => {
               <td>{index + 1}</td>
               <td>{formatFecha(fila.fechaCreacion)}</td>
               <td>{fila.id_otip}</td>
-              <td>{fila.TipoPlata}</td>
+              <td>{fila.TipoPlata}/{fila.TipoPlata2}</td>
               <td>{fila.modelo}</td>
               <td>{fila.codigoInicio}</td>
               <td>{fila.codigoFinal}</td>
