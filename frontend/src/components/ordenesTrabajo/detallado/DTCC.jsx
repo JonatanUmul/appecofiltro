@@ -16,7 +16,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
   const [id_creador, setid_creador] = useState('');
   const [loading, setLoading] = useState(false);
   const [suma, setSuma] = useState(0);
-  
+  const [error, setError]=useState('')
   const id_area = 4;
   const id_area2 = 9;
   const maquinaria = "Horno";
@@ -39,6 +39,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
         setTurno(turnoResponse.data);
       } catch (error) {
         console.log("Error al obtener los datos:", error);
+        setError(error)
       }
     };
 
@@ -80,7 +81,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
       await axios.post(`${URL}/DTCC`, {
         id_dthh: id.toString(),
         fecha_real: fecha_creacion,
-        horneados: horneado,
+        horneado: horneado,
         codigoInicio: formData.codigoInicio,
         codigoFin: formData.codigoFin,
         id_operarioCC: formData.id_operarioCC,
@@ -115,6 +116,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
     } catch (error) {
       setLoading(false);
       console.error("Error al enviar los datos:", error);
+      setError(error)
     }
 
     showSkeleton();
@@ -185,7 +187,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
                 ))}
               </select>
             </div>
-
+                 
             <div className="col-md-6">
               <label htmlFor="esquinaSI" className="form-label">Aprobados</label>
               <input type="number" className="form-control" id="aprobados" {...register("aprobados")} required />
