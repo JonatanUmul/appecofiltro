@@ -1,7 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios'
     import { formatFecha } from "../../utilidades/FormatearFecta";
-    // import PdfROTHP from './pdfECO/PdfROTHP'
+    import PdfROPS from './pdfECO/PdfROTPS'
     import ExcelROTHP from './Excel/ExcelRothp'
     const URL = process.env.REACT_APP_URL
 
@@ -126,7 +126,7 @@ console.log('dps',datos)
         <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
       </div>
       <div className="col-md-3 d-flex align-items-end">
-      {/*<PdfROTHP datos={datos}/>*/}     
+      <PdfROPS datos={datos}/>    
       <ExcelROTHP datos={datos}/>
       </div>
 

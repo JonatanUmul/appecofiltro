@@ -39,9 +39,10 @@ const CTT = () => {
     try {
       // Actualizar el estado 'datos' con los valores del formulario
       setDatos({
-      
-        codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
-        codigoFinal:formData.codigoFinal.replace(/\s+/g, ''),
+      // codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
+      //   codigoFinal:formData.codigoFinal.replace(/\s+/g, ''),
+        codigoInicio: formData.codigoInicio,
+        codigoFinal:formData.codigoFinal,
         cantidad:formData.cantidad
     });
    

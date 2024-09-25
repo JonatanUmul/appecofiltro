@@ -6,7 +6,7 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import { Skeleton, Space } from 'antd';
 
 const URL = process.env.REACT_APP_URL;
-
+const url='localhost100'
 const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horneado }) => {
   const { handleSubmit, register, watch } = useForm();
   const [operario, setOperario] = useState([]);
@@ -76,7 +76,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
       });
       return; // Detiene el envío del formulario si la condición no se cumple
     }
-
+    // DTCC
     try {
       await axios.post(`${URL}/DTCC`, {
         id_dthh: id.toString(),
@@ -142,6 +142,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
         <label htmlFor="fecha" className="form-label">
           Suma datos ingresados
         </label>
+
         <p id="fecha" className="form-control-static">{suma}</p>
         </div>
         
@@ -153,8 +154,18 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
             style={{ width: '100%' }}
             size={16}
           >
-            <p>Enviando los datos... espere...</p>
-            <Skeleton loading={loading} />
+          <img 
+  src="/images/laptop.gif" 
+  alt="Logo" 
+  style={{
+    width: '300px', 
+    display: 'block', 
+    margin: '0 auto', 
+    filter: 'brightness(1.2) contrast(1.2)'  // Ajusta el brillo y contraste
+  }} 
+/>
+
+        
           </Space>
         ) : (
           <>

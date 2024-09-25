@@ -111,8 +111,16 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
           }}
           size={16}
         >
-          <Skeleton loading={loading}>
-          </Skeleton>
+        <img 
+        src="/images/laptop.gif" 
+        alt="Logo" 
+        style={{
+          width: '300px', 
+          display: 'block', 
+          margin: '0 auto', 
+          filter: 'brightness(1.2) contrast(1.2)'  // Ajusta el brillo y contraste
+        }} 
+      />
         </Space>
       ) 
       :

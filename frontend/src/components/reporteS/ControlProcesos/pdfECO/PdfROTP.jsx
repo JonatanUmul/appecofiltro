@@ -156,10 +156,10 @@ const styles = StyleSheet.create({
   }
 });
 
-const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
-  const UltimaFirma = datos[datos.length - 1]
-  const FirmaJefe = UltimaFirma?.firmaJefe || null
-
+const MyDocument = ({ datos }) => {
+  const UltimaFirma = datos[datos.length - 1];
+  const FirmaJefe=UltimaFirma?.FirmaJefe || null
+  const Firma= UltimaFirma?.firmaEncargado || null;
   const rowsPerPage = 12; // Ajusta esto según sea necesario
   const totalPages = Math.ceil(datos.length / rowsPerPage);
 
@@ -217,12 +217,11 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
                 <Text style={styles.tableCell}>{fila.producido}</Text>
                 <Text style={styles.tableCell}>{fila.librasAserrin}/{fila.librasAserrin2}</Text>
                 <Text style={styles.tableCell}>{fila.aserradero1}/{fila.aserradero2}</Text>
-                <Image style={styles.tablefirma} src={fila.firmaEncargado}></Image>
+               <Image style={styles.tablefirma} src={Firma}></Image>
               </View>
             ))}
           </View>
 
-       {/* {i === totalPages - 1 && ( */}  
             <View>
               <View style={styles.card}>
                 <View style={[styles.cardHeader]}>
@@ -233,14 +232,18 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
                 </View>
               </View>
 
-              <View style={styles.firmas}>
-                {FirmaJefe ? (<Image style={styles.FirmasIMG} src={FirmaJefe} />) : (<Text style={styles.lineas}> __________________________ </Text>)}
-              </View>
-              <View style={[styles.firmasText, {}]}>
-                <Text style={[styles.firmasText, {}]}>Jefe de Producción</Text>
-              </View>
+              <View style={styles.firmas}>                                                  
+              {Firma  ?(<Image style={[styles.FirmasIMG]}  src={Firma}></Image>):(<Text style={styles.lineas}> __________________________ </Text>)} 
+              <Text></Text>
+              {FirmaJefe ?(<Image style={styles.FirmasIMG}  src={FirmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
+  
+               </View>
+               <View style={[styles.firmasText,{}]}>
+                 <Text style={[styles.firmasText,{}]}>Encargado de Secado</Text>
+                 <Text style={[styles.firmasText,{}]}>Jefe de Producción</Text>
+               </View>
             </View>
-          {/* )}*/}
+    
         </Page>
       );
     }

@@ -173,15 +173,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
+const MyDocument = ({ datos }) => {
   const UltimaFirma=datos[datos.length-1]
   const Firma= UltimaFirma?.firmaEncargado || null
 const FirmaJefe=UltimaFirma?.firmaJefe || null
     const nombreEncargado=UltimaFirma?.NombreCreador || null
 
+    const rowsPerPage = 15; // Ajusta esto según sea necesario
+    const totalPages = Math.ceil(datos.length / rowsPerPage);
   
-  return(
-    <Document>
+    const createPages = () => {
+      const pages = [];
+      for (let i = 0; i < totalPages; i++) {
+        const start = i * rowsPerPage;
+        const end = start + rowsPerPage;
+        const pageData = datos.slice(start, end);
+  
+        pages.push(
+
   <Page style={styles.page}>
     <View style={[styles.container, { textAlign: 'center' }]}>
       <View style={[styles.titleContainer, { flex: 0.7 }]}>
@@ -219,7 +228,7 @@ const FirmaJefe=UltimaFirma?.firmaJefe || null
        
   
       </View>
-      {datos.map((fila, index) => (
+      {pageData.map((fila, index) => (
         <View key={index} style={styles.tableRow}>
           <Text style={styles.tableCell}>{formatFecha(fila.fecha_creacion)}</Text>
           <Text style={styles.tableCell}>{fila.aserradero}</Text>
@@ -257,12 +266,13 @@ const FirmaJefe=UltimaFirma?.firmaJefe || null
      <Text style={[styles.firmasText,{}]}>Encargado de Secado</Text>
      <Text style={[styles.firmasText,{}]}>Jefe de Producción</Text>
    </View>
-  </Page>
-</Document>
-  )
-  
+  </Page>);
+    }
+
+return pages;
   
 };
+return <Document>{createPages()}</Document>;}
 
 const PdfROTHP = ({ datos,  patio, fechaSecado, cantidad_final}) => {
 

@@ -172,7 +172,7 @@ firmas: {
   },
 });
 
-const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
+const MyDocument = ({ datos }) => {
   const UltimaFirma=datos[datos.length-1]
   const Firma= UltimaFirma?.FirmaEncargado || null
 const FirmaJefe=UltimaFirma?.FirmaJefe || null

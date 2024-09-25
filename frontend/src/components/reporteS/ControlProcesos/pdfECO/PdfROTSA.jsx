@@ -155,83 +155,98 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
   const Firma = UltimaFirma?.firma || null;
   const FirmaJefe = UltimaFirma?.firmaJefe || null;
 
-  return (
-    <Document>
+  const rowsPerPage=12;
+  const totalPages = Math.ceil(datos.length/rowsPerPage);
+
+  const createPages=()=>{
+    const pages=[]
+for(let i=0; i<totalPages; i++){
+    const start = i * rowsPerPage;
+    const end= start+rowsPerPage;
+    const pageData= datos.slice(start, end);
+
+    pages.push(
       <Page style={styles.page}>
-        <View style={[styles.container, { textAlign: 'center' }]}>
-          <View style={[styles.titleContainer, { flex: 0.7 }]}>
-            <Image source="/images/LoogoEco.png" style={[styles.logo, styles.section, styles.title]} />
-          </View>
-
-          <View style={[styles.titleContainer, { flex: 4 }]}>
-            <Text style={[styles.title]}>GESTIÓN DE CALIDAD</Text>
-            <Text style={[styles.title]}>CONTROL SECADO DE ASERRIN</Text>
-          </View>
-
-          <View style={[styles.titleContainer, { flex: 1 }]}>
-            <Text style={[styles.title, { justifyContent: 'center' }]}>CODIGO:</Text>
-            <Text style={[styles.title]}>VERSIÓN:</Text>
-            <Text style={[styles.title]}>EMISION:</Text>
-          </View>
-
-          <View style={[styles.titleContainer, { flex: 1 }]}>
-            <Text style={[styles.title]}>PRO-FOR-004</Text>
-            <Text style={[styles.title]}>3</Text>
-            <Text style={[styles.title]}>15/03/24</Text>
-          </View>
+      <View style={[styles.container, { textAlign: 'center' }]}>
+        <View style={[styles.titleContainer, { flex: 0.7 }]}>
+          <Image source="/images/LoogoEco.png" style={[styles.logo, styles.section, styles.title]} />
         </View>
 
-        <View style={styles.table}>
-          <View style={styles.tableHeader}>
-            <Text style={styles.tableCell}>Fecha</Text>
-            <Text style={styles.tableCell}>Aserradero</Text>
-            <Text style={styles.tableCell}>Cantidad Inicial</Text>
-            <Text style={styles.tableCell}>Cantidad Final</Text>
-            <Text style={styles.tableCell}>Merma</Text>
-            <Text style={styles.tableCell}>Patio</Text>
-            <Text style={styles.tablefirma}>Firma</Text>
-          </View>
-          {datos.map((fila, index) => (
-            <View key={index} style={styles.tableRow}>
-              <Text style={styles.tableCell}>{formatFecha(fila.fecha_creacion)}</Text>
-              <Text style={styles.tableCell}>{fila.aserradero}</Text>
-              <Text style={styles.tableCell}>{fila.cantidad_inicial}</Text>
-              <Text style={styles.tableCell}>{fila.cantidad_final}</Text>
-              <Text style={styles.tableCell}>{fila.merma}</Text>
-              <Text style={styles.tableCell}>{fila.patio}</Text>
-              <Image style={styles.tablefirma} src={Firma} />
-            </View>
-          ))}
+        <View style={[styles.titleContainer, { flex: 4 }]}>
+          <Text style={[styles.title]}>GESTIÓN DE CALIDAD</Text>
+          <Text style={[styles.title]}>CONTROL SECADO DE ASERRIN</Text>
         </View>
 
-        <View style={styles.card}>
-          <View style={[styles.cardHeader]}>
-            <Text style={styles.cardTitle}>COMENTARIOS</Text>
-          </View>
-          <View style={styles.cardBody}>
-            <Text style={styles.cardText}></Text>
-          </View>
+        <View style={[styles.titleContainer, { flex: 1 }]}>
+          <Text style={[styles.title, { justifyContent: 'center' }]}>CODIGO:</Text>
+          <Text style={[styles.title]}>VERSIÓN:</Text>
+          <Text style={[styles.title]}>EMISION:</Text>
         </View>
 
-        <View style={styles.firmas}>
-          {Firma ? (
-            <Image style={styles.FirmasIMG} src={Firma} />
-          ) : (
-            <Text style={styles.lineas}> __________________________ </Text>
-          )}
-          {FirmaJefe ? (
-            <Image style={styles.FirmasIMG} src={FirmaJefe} />
-          ) : (
-            <Text style={styles.lineas}> __________________________ </Text>
-          )}
+        <View style={[styles.titleContainer, { flex: 1 }]}>
+          <Text style={[styles.title]}>PRO-FOR-004</Text>
+          <Text style={[styles.title]}>3</Text>
+          <Text style={[styles.title]}>15/03/24</Text>
         </View>
-        <View style={styles.firmasText}>
-          <Text>Encargado de Secado</Text>
-          <Text>Jefe de Producción</Text>
+      </View>
+
+      <View style={styles.table}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableCell}>Fecha</Text>
+          <Text style={styles.tableCell}>Aserradero</Text>
+          <Text style={styles.tableCell}>Cantidad Inicial</Text>
+          <Text style={styles.tableCell}>Cantidad Final</Text>
+          <Text style={styles.tableCell}>Merma</Text>
+          <Text style={styles.tableCell}>Patio</Text>
+          <Text style={styles.tablefirma}>Firma</Text>
         </View>
-      </Page>
-    </Document>
-  );
+        {pageData.map((fila, index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}>{formatFecha(fila.fecha_creacion)}</Text>
+            <Text style={styles.tableCell}>{fila.aserradero}</Text>
+            <Text style={styles.tableCell}>{fila.cantidad_inicial}</Text>
+            <Text style={styles.tableCell}>{fila.cantidad_final}</Text>
+            <Text style={styles.tableCell}>{fila.merma}</Text>
+            <Text style={styles.tableCell}>{fila.patio}</Text>
+            <Image style={styles.tablefirma} src={Firma} />
+          </View>
+        ))}
+      </View>
+
+      <View style={styles.card}>
+        <View style={[styles.cardHeader]}>
+          <Text style={styles.cardTitle}>COMENTARIOS</Text>
+        </View>
+        <View style={styles.cardBody}>
+          <Text style={styles.cardText}></Text>
+        </View>
+      </View>
+
+      <View style={styles.firmas}>
+        {Firma ? (
+          <Image style={styles.FirmasIMG} src={Firma} />
+        ) : (
+          <Text style={styles.lineas}> __________________________ </Text>
+        )}
+        {FirmaJefe ? (
+          <Image style={styles.FirmasIMG} src={FirmaJefe} />
+        ) : (
+          <Text style={styles.lineas}> __________________________ </Text>
+        )}
+      </View>
+      <View style={styles.firmasText}>
+        <Text>Encargado de Secado</Text>
+        <Text>Jefe de Producción</Text>
+      </View>
+    </Page>
+
+    )
+}
+return pages;
+
+  }
+return <Document>{createPages()}</Document>
+
 };
 
 const PdfROTHP = ({ datos, patio, fechaSecado, cantidad_final }) => {
