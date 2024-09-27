@@ -30,6 +30,7 @@ import ProtectedRoute from './components/ProtectedRoute.js';
 import { AbilityProvider } from './components/AbilityContext.js';
 import TablaLab from './components/laboratorio/TablaLab.jsx';
 import TablaPorCodigos from './components/laboratorio/TablaPorCodigos.jsx';
+import Board from './components/planificacionProduccion/Board.jsx';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -61,7 +62,7 @@ function App() {
             <Route path="/Home" element={<Layout toggleDarkMode={toggleDarkMode} darkMode={darkMode} />}>
               {/* Mantenimientos */}
               <Route path="/Home/TablaUser" element={<TablaUser toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
-              <Route path="/Home/User" element={<User toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />} />
+              <Route path="/Home/User" element={<User toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/TablaRoles" element={<TablaRoles toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/Roles" element={<Roles />} />
               <Route path="/Home/TablaTipProv" element={<TablaTipProv toggleDarkMode={toggleDarkMode} darkMode={darkMode} />} />
@@ -85,11 +86,13 @@ function App() {
               <Route path="/Home/TablaControlProcesosOT" element={<TablaControlProcesosOT toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/TablaLab" element={<TablaLab toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/TablaPorCodigos" element={<TablaPorCodigos toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
+              <Route path='/Home/BoardPlanificacion' element={<Board toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
             </Route>
           </Route>
+         
         </Routes>
       </Router>
-    </AbilityProvider>
+      </AbilityProvider>
   );
 }
 

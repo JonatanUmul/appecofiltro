@@ -16,6 +16,7 @@ import TablaReportesOT from '../reporteS/ControlProcesos/TablaReportesOT'
 import TablaControlProcesosOT from '../reporteS/AreasReportes/TablaControlProcesosOT'
 import TablaLab from '../laboratorio/TablaLab'
 import TablaPorCodigos from '../laboratorio/TablaPorCodigos'
+import Board from '../planificacionProduccion/Board'
 export const renderContent = (pathname) => {
     switch (pathname) {
 
@@ -47,8 +48,9 @@ export const renderContent = (pathname) => {
       case "/Home/TableMantenimientoMaq":
         return <TableMantenimientoMaq/>
           //Crear Estados de Maquinaria
-       
-          
+      case "/Home/BoardPlanificacion":
+        return <Board/>
+        
   
     
           case "/Home/TabProvedores":
