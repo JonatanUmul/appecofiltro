@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import TablasBoard from './TablasBoard'
+import TablasBoard from './TablasBoard';
+
 const App = () => {
   // Ref para la sección que se maximizará
   const sectionRef = useRef(null);
@@ -22,9 +23,9 @@ const App = () => {
       {/* Sección de la app que se mostrará en pantalla completa */}
       <div
         ref={sectionRef}
-        style={{ width: '100%', height: '300px', backgroundColor: '#f0f0f0', marginTop: '20px' }}
+        style={{ width: '100%', height: 'calc(110vh - 50px)', backgroundColor: '#f0f0f0', marginTop: '20px', overflow: 'auto' }} // Ajuste en el height y overflow
       >
-        <TablasBoard/>
+        <TablasBoard />
       </div>
     </div>
   );
