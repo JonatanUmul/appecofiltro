@@ -1,142 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import { Table, DatePicker, Tag } from 'antd';
+import { DatePicker } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { formatFecha } from "../utilidades/FormatearFecta.js";
 import './App.css'; // Asegúrate de tener un archivo CSS para los estilos
+import PlanMensual from './graficos/PlanMensual';
+import PorcentajeEficienciaMensual from './graficos/PorcentajeEficienciaMensual.jsx';
+import PlanDiario from './graficos/PlanDiario.jsx';
+import PorcentajeEficienciaDiario from './graficos/PorcentajeEficienciaDiario.jsx';
 
 const App = () => {
   const URL = process.env.REACT_APP_URL;
   const [planMesData, setPlanMesData] = useState([]);
   const [planCumplido, setPlanCumplido] = useState([]);
-  const [hoy, setHoy] = useState(formatFecha(new Date()));
-
+  const [hoy, setHoy] = useState(dayjs().format('YYYY-MM-DD'));
+  const [fechaInicial, setFechaInicial] = useState(dayjs().startOf('month').format('YYYY-MM-DD'));
+  const [fechaFin, setFechaFin] = useState(dayjs().endOf('month').format('YYYY-MM-DD'));
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [planMesResponse, planCumplidoResponse] = await Promise.all([
-          axios.get(`${URL}/PlanMes`),
-          axios.get(`${URL}/PlanCumplido/${hoy}`)
+        const [planCumplidoResponse, planMesResponse] = await Promise.all([
+          axios.get(`${URL}/PlanCumplido/${hoy}`),
+          axios.get(`${URL}/PlanCumplido/${fechaInicial}/${fechaFin}`)
         ]);
-
-        setPlanMesData(planMesResponse.data.rows);
         setPlanCumplido(planCumplidoResponse.data.rows);
+        setPlanMesData(planMesResponse.data.rows);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
     };
 
     fetchData();
-  }, [URL, hoy]);
+  }, [URL, hoy, fechaInicial, fechaFin]);
 
-  const filterPlanCumplidoData = () => {
-    return planCumplido.filter(item => dayjs(item.fecha).isSame(hoy, 'day'));
+  const handleDateChange = (date) => {
+    if (date) {
+      setHoy(date.format('YYYY-MM-DD'));
+      const firstDayOfMonth = date.startOf('month').format('YYYY-MM-DD');
+      const lastDayOfMonth = date.endOf('month').format('YYYY-MM-DD');
+      setFechaInicial(firstDayOfMonth);
+      setFechaFin(lastDayOfMonth);
+    }
   };
-
-  // Columnas para la tabla de planificados
-  const planColumns = [
-    {
-      title: 'Proceso',
-      dataIndex: 'proceso',
-      key: 'proceso',
-    },
-    {
-      title: 'Planificado',
-      dataIndex: 'cantidad_planificada',
-      key: 'cantidad_planificada',
-      render: (text) => parseFloat(text).toLocaleString(), // Formatear números
-    },
-  ];
-
-  // Columnas para la tabla de producidos
-  const producidoColumns = [
-    {
-      title: 'Producido',
-      key: 'producido',
-      render: (_, record) => {
-        const producedValues = Object.keys(record)
-          .filter(key => key !== 'proceso' && key !== 'cantidad_planificada')
-          .map(key => record[key])
-          .filter(value => value > 0); // Filtramos solo valores mayores a 0
-        return producedValues.join(', ');
-      },
-    },
-    {
-      title: '% Efectividad',
-      key: 'efectividad',
-      render: (_, record) => {
-        const planificado = parseFloat(record.cantidad_planificada) || 0;
-        const procesoKey = record.proceso.replace(/\s/g, '');
-        const producido = parseFloat(record[procesoKey]) || 0;
-        const efectividad = planificado > 0 ? ((producido / planificado) * 100).toFixed(2) : '0.00';
-
-        let color;
-        if (efectividad >= 100) {
-          color = 'green';
-        } else if (efectividad >= 75) {
-          color = 'orange';
-        } else {
-          color = 'red';
-        }
-
-        return (
-          <Tag color={color}>
-            {`${efectividad}%`}
-          </Tag>
-        );
-      },
-    },
-  ];
 
   return (
     <div style={{ padding: '20px', backgroundColor: '#f0f2f5', overflow: 'auto', maxHeight: '100vh' }}>
-      <h2 style={{ color: '#1890ff' }}>Plan Mensual</h2>
-      <Table
-        columns={[
-          { title: 'Proceso', dataIndex: 'proceso', key: 'proceso' },
-          { title: 'Cantidad Planificada', dataIndex: 'cantidad_planificada', key: 'cantidad_planificada' },
-          { title: 'Fecha', dataIndex: 'fecha', key: 'fecha' },
-        ]}
-        pagination={{ position: ['topLeft', 'bottomRight'] }}
-        dataSource={planMesData}
-        rowKey="proceso"
-        size="middle"
-        className="large-table"
-        style={{ marginBottom: '20px', backgroundColor: '#fff', borderRadius: '8px' }}
+      <h2 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '24px' }}>Dashboard</h2>
+      
+      <DatePicker 
+          onChange={handleDateChange} 
+          style={{ marginBottom: '20px', width: '100%' }} 
+          getPopupContainer={trigger => trigger.parentNode} // Ajusta el contenedor del popup
       />
 
-      <h2 style={{ color: '#1890ff' }}>Plan Diario</h2>
-      {/* <DatePicker
-        value={dayjs(hoy)}
-        onChange={(date) => date && setHoy(date.format('YYYY-MM-DD'))}
-        style={{ marginBottom: '20px', width: '100%' }}
-      /> */}
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-        <div style={{ width: '100%', maxWidth: '48%', marginRight: '2%' }}>
-          {/* <h3 style={{ color: '#1890ff' }}>Planificado</h3> */}
-          <Table
-            columns={planColumns}
-            pagination={{ position: ['topLeft', 'bottomRight'] }}
-            dataSource={filterPlanCumplidoData()}
-            rowKey="proceso"
-            size="middle"
-            className="large-table"
-            style={{ backgroundColor: '#fff', borderRadius: '8px' }}
-          />
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '20px', marginBottom:'30px' }}>
+        {/* Gráfico 1 */}
+        <div style={{ flex: '1 1 45%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', height: '500px', marginBottom: '10px' }}>
+          <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de Planificación Mensual</p>
+          <PlanMensual planCumplido={planMesData} />
         </div>
 
-        <div style={{ width: '100%', maxWidth: '48%' }}>
-          {/* <h3 style={{ color: '#1890ff' }}>Producido</h3> */}
-          <Table
-            columns={producidoColumns}
-            pagination={{ position: ['topLeft', 'bottomRight'] }}
-            dataSource={filterPlanCumplidoData()}
-            rowKey="proceso"
-            size="middle"
-            className="large-table"
-            style={{ backgroundColor: '#fff', borderRadius: '8px' }}
-          />
+        {/* Gráfico 2 */}
+        <div style={{ flex: '1 1 45%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', height: '500px', marginBottom: '10px' }}>
+          <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de % Eficiencia</p>
+          <PorcentajeEficienciaMensual planCumplido={planMesData} />
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '20px',  marginBottom:'30px'}}>
+        {/* Gráfico 3 */}
+        <div style={{ flex: '1 1 45%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', height: '500px', marginBottom: '10px' }}>
+          <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de Planificación Diario</p>
+          <PlanDiario planCumplido={planCumplido} />
+        </div>
+
+        {/* Gráfico 4 */}
+        <div style={{ flex: '1 1 45%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', height: '500px', marginBottom: '10px' }}>
+          <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de Comparativa</p>
+          <PorcentajeEficienciaDiario planCumplido={planCumplido} />
         </div>
       </div>
     </div>
@@ -144,3 +85,5 @@ const App = () => {
 };
 
 export default App;
+
+
