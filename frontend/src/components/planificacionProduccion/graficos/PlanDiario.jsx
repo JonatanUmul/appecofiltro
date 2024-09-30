@@ -40,7 +40,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
           show: true,
           position: 'top',
           formatter: '{c}',
-          color: '#0d1b2a',
+          color: '#ffffff',
         },
       },
       {
@@ -54,7 +54,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
           show: true,
           position: 'top',
           formatter: '{c}',
-          color: '#0d1b2a',
+          color: '#ffffff',
         },
       },
     ];
