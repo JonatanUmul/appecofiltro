@@ -8,6 +8,7 @@ import PorcentajeEficienciaMensual from './graficos/PorcentajeEficienciaMensual.
 import PlanDiario from './graficos/PlanDiario.jsx';
 import PorcentajeEficienciaDiario from './graficos/PorcentajeEficienciaDiario.jsx';
 import ResponsablesArea from './graficos/ResponsablesArea.jsx';
+import LogoEco from '../utilidades/LogoEco';
 
 const App = () => {
   const URL = process.env.REACT_APP_URL;
@@ -53,12 +54,22 @@ const App = () => {
   return (
     <div style={{ padding: '10px', backgroundColor: '#f0f2f5', height: '100vh', overflow: 'hidden' }}>
       <h2 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>Dashboard</h2>
-      
-      <DatePicker 
-          onChange={handleDateChange} 
-          style={{ marginBottom: '10px', width: '100%' }} 
-          getPopupContainer={trigger => trigger.parentNode} 
+      <div className="justify-content-end mb-3">
+  <div className="row ">
+    <div className="col-4" >
+      <LogoEco />
+    </div>
+    <div className="col-4 ">
+      <DatePicker
+        onChange={handleDateChange}
+        style={{ marginBottom: '10px', width: '100%' }}
+        getPopupContainer={trigger => trigger.parentNode}
       />
+    </div>
+  </div>
+</div>
+
+    
 
       {/* Contenedor de los gráficos */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
