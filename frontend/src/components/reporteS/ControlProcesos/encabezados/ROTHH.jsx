@@ -17,7 +17,7 @@ const [modeloUF, setModeloUF]=useState('')
 const [turn, setMturn]=useState('')
 const [horno, sethorno]=useState('')
 const [porcentaje, setPorcentaje]=useState(0)
-const id_est=''
+const id_est='3'
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
     const url = `${URL}/DTHH/${fecha_creacion_inicio ? fecha_creacion_inicio : 'null'}/${fecha_creacion_fin ? fecha_creacion_fin : 'null'}/${modeloUF ? modeloUF : 'null'}/${turn ? turn : 'null'}/${horno ? horno : 'null'}/${id_est ? id_est : 'null'}/${fecha_CC?fecha_CC:'null'}`;
