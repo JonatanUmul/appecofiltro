@@ -5,7 +5,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current);
+    const myChart = echarts.init(chartRef.current, 'dark');
 
     const procesos = {};
 
@@ -64,7 +64,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
             show: true,
             formatter: '{b}: {c}%',
             fontSize: 11,
-            color: '#333',
+            color: '#fff',
           },
           emphasis: {
             label: {

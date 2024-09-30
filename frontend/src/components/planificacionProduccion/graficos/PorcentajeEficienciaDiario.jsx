@@ -5,7 +5,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current);
+    const myChart = echarts.init(chartRef.current, 'dark');
 
     // Agrupar los datos por proceso y calcular la eficiencia
     const procesos = {};
@@ -54,14 +54,14 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
             show: true, // Mostrar etiquetas
             formatter: '{b}: {c}%', // Formato de las etiquetas
             fontSize: 14, // Aumentar el tamaño de las etiquetas
-            color: '#333', // Color de las etiquetas
+            color: '#ffff', // Color de las etiquetas
           },
           emphasis: {
             label: {
               show: true,
               fontSize: 16, // Aumentar el tamaño de la etiqueta al enfatizar
               fontWeight: 'bold',
-            },
+            },  
           },
           data: data, // Usar los datos calculados
         },

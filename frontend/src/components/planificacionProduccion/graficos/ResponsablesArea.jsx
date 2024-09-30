@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 const TreeChart = ({ data }) => {
   useEffect(() => {
     const chartDom = document.getElementById('main');
-    const myChart = echarts.init(chartDom);
-    
+    const myChart = echarts.init(chartDom, 'dark');
+
     const processData = (data) => {
       const treeData = {
         name: 'Producción',
@@ -23,14 +23,13 @@ const TreeChart = ({ data }) => {
           treeData.children.push(responsablesMap[item.Nombre]);
         }
 
-        // Usar el nombre completo del proceso en lugar de solo la primera parte
         let procesoPrincipal = responsablesMap[item.Nombre].children.find(
           (child) => child.name === item.procesosBuscar
         );
 
         if (!procesoPrincipal) {
           procesoPrincipal = {
-            name: item.procesosBuscar, // Cambiado a nombre completo
+            name: item.procesosBuscar,
             children: [],
           };
           responsablesMap[item.Nombre].children.push(procesoPrincipal);
@@ -63,16 +62,20 @@ const TreeChart = ({ data }) => {
           type: 'tree',
           data: [treeData],
           top: '5%',
-          left: '15%',
+          left: '15%', // Ajusta el espacio para controlar el largo horizontal
           bottom: '5%',
           right: '20%',
-          symbolSize: 10,
+          layout: 'orthogonal', // Cambia a 'radial' si quieres distribución circular
+          orient: 'LR', // 'LR' para izquierda a derecha, 'TB' para arriba hacia abajo
+          symbolSize: 0,
+          gap:1,
           label: {
             position: 'left',
             verticalAlign: 'middle',
             align: 'right',
             fontSize: 12,
-            fontWeight: 'bold',
+            
+            // fontWeight: 'bold',
             overflow: 'break',
             width: 200,
           },
@@ -82,10 +85,16 @@ const TreeChart = ({ data }) => {
               verticalAlign: 'middle',
               align: 'left',
               fontSize: 12,
-              fontWeight: 'bold',
+              // fontWeight: 'bold',
               overflow: 'break',
               width: 200,
             },
+          },
+          lineStyle: {
+            width: 1, // Grosor de las líneas
+            color: '#ccc',
+            
+            curveness: 0.5, // Hace que las líneas sean curvas, puedes ajustarlo según el largo
           },
           emphasis: {
             focus: 'descendant',
@@ -99,23 +108,16 @@ const TreeChart = ({ data }) => {
               fontWeight: 'bold',
             },
           },
-          blur: {
-            itemStyle: {
-              opacity: 0.3,
-            },
-            label: {
-              opacity: 0.5,
-            },
-          },
           expandAndCollapse: true,
+          // initialTreeDepth: -1, // Muestra todos los niveles
           animationDuration: 75,
-          animationDurationUpdate: 750,
+          animationDurationUpdate: 75,
         },
       ],
     });
 
     return () => {
-      myChart.dispose(); // Limpiar el gráfico al desmontar el componente
+      myChart.dispose();
     };
   }, [data]);
 

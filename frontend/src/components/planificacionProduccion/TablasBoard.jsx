@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { DatePicker } from 'antd';
+import { DatePicker, Switch } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
-// import './App.css';
 import PlanMensual from './graficos/PlanMensual';
 import PorcentajeEficienciaMensual from './graficos/PorcentajeEficienciaMensual.jsx';
 import PlanDiario from './graficos/PlanDiario.jsx';
@@ -17,6 +16,9 @@ const App = () => {
   const [hoy, setHoy] = useState(dayjs().format('YYYY-MM-DD'));
   const [fechaInicial, setFechaInicial] = useState(dayjs().startOf('month').format('YYYY-MM-DD'));
   const [fechaFin, setFechaFin] = useState(dayjs().endOf('month').format('YYYY-MM-DD'));
+  const [isDarkMode, setIsDarkMode] = useState(
+    () => JSON.parse(localStorage.getItem('darkMode')) || false
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +43,7 @@ const App = () => {
     return () => clearInterval(intervalId);
   }, [URL, hoy, fechaInicial, fechaFin]);
 
+  // Manejar el cambio de fecha
   const handleDateChange = (date) => {
     if (date) {
       setHoy(date.format('YYYY-MM-DD'));
@@ -51,54 +54,86 @@ const App = () => {
     }
   };
 
-  return (
-    <div style={{ padding: '10px', backgroundColor: '#f0f2f5', height: '100vh', overflow: 'hidden' }}>
-      <h2 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>Dashboard</h2>
-      <div className="justify-content-end mb-3">
-  <div className="row ">
-    <div className="col-4" >
-      <LogoEco />
-    </div>
-    <div className="col-4 ">
-      <DatePicker
-        onChange={handleDateChange}
-        style={{ marginBottom: '10px', width: '100%' }}
-        getPopupContainer={trigger => trigger.parentNode}
-      />
-    </div>
-  </div>
-</div>
+  // Manejar el cambio de modo oscuro
+  const handleDarkModeToggle = () => {
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem('darkMode', JSON.stringify(newMode));
+      return newMode;
+    });
+  };
 
-    
+  // Estilos generales según el modo
+  const appStyle = {
+    padding: '10px',
+    backgroundColor: isDarkMode ? '#1f1f1f' : '#f0f2f5',
+    color: isDarkMode ? '#ffffff' : '#000000',
+    height: '100vh',
+    overflow: 'hidden',
+  };
+
+  const cardStyle = {
+    flex: '1 1 30%',
+    padding: '5px',
+    backgroundColor: isDarkMode ? '#333333' : '#ffffff',
+    borderRadius: '5px',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+  return (
+    <div style={appStyle}>
+      <h2 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '20px' }}>Dashboard</h2>
+      
+      {/* Switch para cambiar entre modo claro y oscuro */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+        <Switch
+          checked={isDarkMode}
+          onChange={handleDarkModeToggle}
+          checkedChildren="🌙 Dark"
+          unCheckedChildren="☀️ Light"
+        />
+      </div>
+
+      <div className="justify-content-end mb-3">
+        <div className="row">
+          <div className="col-4" style={{ boxShadow: 'none' }}>
+            <LogoEco />
+          </div>
+          <div className="col-4">
+            <DatePicker
+              onChange={handleDateChange}
+              style={{ marginBottom: '10px', width: '100%' }}
+              getPopupContainer={trigger => trigger.parentNode}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Contenedor de los gráficos */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {/* Gráficos en una sola fila */}
-        <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            gap: '10px',
-            flexWrap: 'wrap', // Permitir que los gráficos se envuelvan en pantallas más pequeñas
-          }}>
-          {/* Gráfico 1 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Mensual</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
+          <div style={cardStyle}>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Mensual</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanMensual planCumplido={planMesData} />
             </div>
           </div>
 
-          {/* Gráfico 2 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de % Eficiencia</p>
+          <div style={cardStyle}>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de % Eficiencia</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaMensual planCumplido={planMesData} />
             </div>
           </div>
 
-          {/* Gráfico 3 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Responsables</p>
+          <div style={cardStyle}>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Responsables</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ResponsablesArea data={planMesData} />
             </div>
@@ -106,23 +141,16 @@ const App = () => {
         </div>
 
         {/* Gráficos 4 y 5 en otra fila */}
-        <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            gap: '10px',
-            flexWrap: 'wrap', // Permitir que los gráficos se envuelvan en pantallas más pequeñas
-          }}>
-          {/* Gráfico 4 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Diario</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
+          <div style={cardStyle}>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Diario</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanDiario planCumplido={planCumplido} />
             </div>
           </div>
 
-          {/* Gráfico 5 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold',   fontSize: '26px' }}>Gráfico de Comparativa Diario</p>
+          <div style={cardStyle}>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Comparativa Diario</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaDiario planCumplido={planCumplido} />
             </div>

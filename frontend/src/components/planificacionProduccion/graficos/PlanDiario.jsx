@@ -5,7 +5,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current);
+    const myChart = echarts.init(chartRef.current, 'dark');
 
     // Agrupar los datos por proceso
     const procesos = {};
@@ -32,14 +32,15 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         data: planificado,
         type: 'bar',
         name: 'Planificado',
+        
         itemStyle: {
           color: '#5470C6',
         },
         label: {
           show: true,
-          position: 'inside',
+          position: 'top',
           formatter: '{c}',
-          color: '#fff',
+          color: '#0d1b2a',
         },
       },
       {
@@ -51,9 +52,9 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         },
         label: {
           show: true,
-          position: 'inside',
+          position: 'top',
           formatter: '{c}',
-          color: '#fff',
+          color: '#0d1b2a',
         },
       },
     ];
@@ -64,22 +65,25 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         orient: 'horizontal',
         top: 'top',
         textStyle: {
-          fontSize: 14,
+          fontSize: 12,
         },
       },
       xAxis: {
         type: 'category',
         data: nombresProcesos,
         axisLabel: {
-          rotate: 15,
-          fontSize: 8,
+          rotate: 18,
+          fontSize: 12,
+          
 
         },
       },
       yAxis: {
         type: 'value',
+        
         axisLabel: {
           fontSize: 12,
+          
         },
       },
       grid: {
@@ -91,7 +95,9 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
       series: series,
       tooltip: {
         trigger: 'axis',
+        
         axisPointer: {
+          type: 'shadow',
           type: 'shadow',
         },
       },
