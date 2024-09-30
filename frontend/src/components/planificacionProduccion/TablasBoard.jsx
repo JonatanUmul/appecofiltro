@@ -32,6 +32,12 @@ const App = () => {
     };
 
     fetchData();
+
+    // Actualizar datos cada 5 minutos
+    const intervalId = setInterval(fetchData, 5 * 60 * 1000); // 5 minutos
+
+    // Limpiar el intervalo al desmontar el componente
+    return () => clearInterval(intervalId);
   }, [URL, hoy, fechaInicial, fechaFin]);
 
   const handleDateChange = (date) => {
@@ -62,9 +68,10 @@ const App = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             gap: '20px',
+            flexWrap: 'wrap', // Permitir que los gráficos se envuelvan en pantallas más pequeñas
           }}>
           {/* Gráfico 1 */}
-          <div style={{ flex: '1', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de Planificación Mensual</p>
             <div style={{ height: '400px' }}>
               <PlanMensual planCumplido={planMesData} />
@@ -72,7 +79,7 @@ const App = () => {
           </div>
 
           {/* Gráfico 2 */}
-          <div style={{ flex: '1', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de % Eficiencia</p>
             <div style={{ height: '400px' }}>
               <PorcentajeEficienciaMensual planCumplido={planMesData} />
@@ -80,7 +87,7 @@ const App = () => {
           </div>
 
           {/* Gráfico 3 */}
-          <div style={{ flex: '1', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de Responsables</p>
             <div style={{ height: '400px' }}>
               <ResponsablesArea data={planMesData} />
@@ -94,9 +101,10 @@ const App = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             gap: '20px',
+            flexWrap: 'wrap', // Permitir que los gráficos se envuelvan en pantallas más pequeñas
           }}>
           {/* Gráfico 4 */}
-          <div style={{ flex: '1', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de Planificación Diario</p>
             <div style={{ height: '400px' }}>
               <PlanDiario planCumplido={planCumplido} />
@@ -104,7 +112,7 @@ const App = () => {
           </div>
 
           {/* Gráfico 5 */}
-          <div style={{ flex: '1', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '10px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '18px' }}>Gráfico de Comparativa</p>
             <div style={{ height: '400px' }}>
               <PorcentajeEficienciaDiario planCumplido={planCumplido} />
@@ -117,4 +125,3 @@ const App = () => {
 };
 
 export default App;
-
