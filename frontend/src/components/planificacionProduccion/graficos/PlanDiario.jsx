@@ -1,9 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
-
 const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   const chartRef = useRef(null);
-  console.log('Datos en gráfico mensual', planCumplido);
 
   useEffect(() => {
     const myChart = echarts.init(chartRef.current);
@@ -24,25 +22,23 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
       }
     });
 
-    // Extraer los nombres de los procesos y sus cantidades
     const nombresProcesos = Object.keys(procesos);
     const planificado = nombresProcesos.map(proceso => procesos[proceso].planificado);
-    const producido = nombresProcesos.map(proceso => procesos[proceso].producido || 0); // Usar 0 si no hay producción
+    const producido = nombresProcesos.map(proceso => procesos[proceso].producido || 0);
 
-    // Definición de las series de datos
     const series = [
       {
         data: planificado,
         type: 'bar',
         name: 'Planificado',
         itemStyle: {
-          color: '#5470C6', // Color para lo planificado
+          color: '#5470C6',
         },
         label: {
           show: true,
-          position: 'inside', // Colocar las etiquetas dentro de las barras
-          formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color: '#fff', // Color de las etiquetas
+          position: 'inside',
+          formatter: '{c}',
+          color: '#fff',
         },
       },
       {
@@ -50,60 +46,57 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         type: 'bar',
         name: 'Producido',
         itemStyle: {
-          color: '#91CC75', // Color para lo producido
+          color: '#91CC75',
         },
         label: {
           show: true,
-          position: 'inside', // Colocar las etiquetas dentro de las barras
-          formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color: '#fff', // Color de las etiquetas
+          position: 'inside',
+          formatter: '{c}',
+          color: '#fff',
         },
       },
     ];
 
-    // Configuración del gráfico
     const option = {
       legend: {
         data: ['Planificado', 'Producido'],
         orient: 'horizontal',
-        top: 'top', // Colocar la leyenda en la parte superior
+        top: 'top',
         textStyle: {
-          fontSize: 16, // Tamaño de letra de la leyenda
+          fontSize: 16,
         },
       },
       xAxis: {
         type: 'category',
-        data: nombresProcesos, // Usar los nombres de los procesos
+        data: nombresProcesos,
         axisLabel: {
-          rotate: 30, // Rotar las etiquetas para mejorar la legibilidad
-          fontSize: 12, // Ajustar el tamaño de la fuente
+          rotate: 30,
+          fontSize: 12,
         },
       },
       yAxis: {
         type: 'value',
         axisLabel: {
-          fontSize: 12, // Aumentar el tamaño de los números en el eje y
+          fontSize: 12,
         },
       },
       grid: {
-        top: '10%', // Espacio superior
-        bottom: '15%', // Espacio inferior
-        left: '10%', // Espacio izquierdo
-        right: '10%', // Espacio derecho
+        top: '10%',
+        bottom: '15%',
+        left: '10%',
+        right: '10%',
       },
       series: series,
       tooltip: {
         trigger: 'axis',
         axisPointer: {
-          type: 'shadow', // Mostrar puntero de eje
+          type: 'shadow',
         },
       },
     };
 
-    // Establecer las opciones del gráfico
     myChart.setOption(option);
 
-    // Limpiar el gráfico cuando el componente se desmonte
     return () => {
       myChart.dispose();
     };
@@ -112,10 +105,9 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   return (
     <div
       ref={chartRef}
-      style={{ width: '100%', height: '400px' }} // Asegúrate de que la altura sea consistente
+      style={{ width: '100%', height: '300px' }} // Ajusta la altura aquí
     />
   );
 };
 
 export default PorcentajeEficienciaMensual;
-

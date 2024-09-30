@@ -78,10 +78,9 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   return (
     <div
       ref={chartRef}
-      style={{ width: '100%', height: '400px' }} // Ajusta la altura y el ancho como necesites
+      style={{ width: '100%', height: '300px' }} // Ajusta la altura aquí
     />
   );
 };
 
 export default PorcentajeEficienciaMensual;
-
