@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 
-const PorcentajeEficienciaMensual = ({ planCumplido }) => {
+const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
             show: true,
             formatter: '{b}: {c}%',
             fontSize: 11,
-            color: '#fff',
+            color:'#ffffff',
           },
           emphasis: {
             label: {

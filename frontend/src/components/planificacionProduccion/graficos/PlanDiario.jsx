@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { MdPadding } from 'react-icons/md';
-const PorcentajeEficienciaMensual = ({ planCumplido }) => {
+const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current, 'dark');
+    const myChart = echarts.init(chartRef.current, 'dark' );
 
     // Agrupar los datos por proceso
     const procesos = {};

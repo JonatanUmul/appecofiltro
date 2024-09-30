@@ -1,15 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import { MdMargin } from 'react-icons/md';
 import { TbBoxMargin } from 'react-icons/tb';
 import { BiAlignJustify } from 'react-icons/bi';
 
-const PorcentajeEficienciaMensual = ({ planCumplido }) => {
+const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
   const chartRef = useRef(null);
   console.log('Datos en gráfico mensual', planCumplido);
+console.log('dark:',isDarkMode)
 
+
+
+  console.log('isDarkMode',isDarkMode)
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current, 'dark');
+    const myChart = echarts.init(chartRef.current, 'dark' );
 
     // Agrupar los datos por proceso
     const procesos = {};
@@ -39,14 +43,14 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         type: 'bar',
         data: planificado,
         itemStyle: {
-          color: '#1f77b4', // Color para lo planificado
+          color:  '#1f77b4', // Color para lo planificado
 
         },
         label: {
           show: true,
           position: 'right', // Colocar las etiquetas dentro de las barras
           formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color: '#000000', // Color de las etiquetas
+          color:'#ffffff', // Color de las etiquetas
           fontSize:'10px'
         },
         
@@ -64,7 +68,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
           show: true,
           position: 'right', // Colocar las etiquetas dentro de las barras
           formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color: '#000000', // Color de las etiquetas
+          color: '#ffffff', // Color de las etiquetas
           fontSize:'9px',
 
                     

@@ -1,13 +1,13 @@
 import * as echarts from 'echarts';
 import React, { useEffect } from 'react';
 
-const TreeChart = ({ data }) => {
+const TreeChart = ({ data, isDarkMode }) => {
   useEffect(() => {
     const chartDom = document.getElementById('main');
     const myChart = echarts.init(chartDom, 'dark');
 
     const processData = (data) => {
-      const treeData = {
+      const treeData = {  
         name: 'Producción',
         children: [],
       };
@@ -99,13 +99,13 @@ const TreeChart = ({ data }) => {
           emphasis: {
             focus: 'descendant',
             itemStyle: {
-              color: '#ff6600',
+              color:'#ffffff',
               borderWidth: 2,
               borderColor: '#ff6600',
             },
             label: {
               fontSize: 12,
-              fontWeight: 'bold',
+              // fontWeight: 'bold',
             },
           },
           expandAndCollapse: true,
