@@ -37,26 +37,32 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         data: planificado,
         itemStyle: {
           color: '#5470C6', // Color para lo planificado
+          barGap: '20%',
         },
         label: {
           show: true,
-          position: 'inside', // Colocar las etiquetas dentro de las barras
+          position: 'right', // Colocar las etiquetas dentro de las barras
           formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color: '#fff', // Color de las etiquetas
+          color: '#000000', // Color de las etiquetas
+          barGap: '20%',
         },
+        
       },
+      
       {
         name: 'Producido',
         type: 'bar',
         data: producido,
         itemStyle: {
           color: '#FF4C4C', // Cambiar a color rojo para lo producido
+          barGap: '20%',
         },
         label: {
           show: true,
-          position: 'inside', // Colocar las etiquetas dentro de las barras
+          position: 'right', // Colocar las etiquetas dentro de las barras
           formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color: '#fff', // Color de las etiquetas
+          color: '#000000', // Color de las etiquetas
+          barGap: '20%',
         },
       },
     ];
@@ -97,7 +103,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         type: 'category',
         data: nombresProcesos, // Usar los nombres de los procesos
         axisLabel: {
-          rotate: 30, // Rotar las etiquetas para mejorar la legibilidad
+          rotate:0, // Rotar las etiquetas para mejorar la legibilidad
           fontSize: 12, // Ajustar el tamaño de la fuente
         },
       },

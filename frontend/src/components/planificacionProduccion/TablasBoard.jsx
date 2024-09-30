@@ -70,25 +70,25 @@ const App = () => {
             flexWrap: 'wrap', // Permitir que los gráficos se envuelvan en pantallas más pequeñas
           }}>
           {/* Gráfico 1 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Planificación Mensual</p>
-            <div style={{ height: '300px' }}>
+            <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanMensual planCumplido={planMesData} />
             </div>
           </div>
 
           {/* Gráfico 2 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de % Eficiencia</p>
-            <div style={{ height: '300px' }}>
+            <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaMensual planCumplido={planMesData} />
             </div>
           </div>
 
           {/* Gráfico 3 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Responsables</p>
-            <div style={{ height: '300px' }}>
+            <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ResponsablesArea data={planMesData} />
             </div>
           </div>
@@ -96,23 +96,24 @@ const App = () => {
 
         {/* Gráficos 4 y 5 en otra fila */}
         <div style={{
+            height:'100%',
             display: 'flex',
             justifyContent: 'space-between',
             gap: '10px',
             flexWrap: 'wrap', // Permitir que los gráficos se envuelvan en pantallas más pequeñas
           }}>
           {/* Gráfico 4 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Planificación Diario</p>
-            <div style={{ height: '300px' }}>
+            <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanDiario planCumplido={planCumplido} />
             </div>
           </div>
 
           {/* Gráfico 5 */}
-          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+          <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Comparativa</p>
-            <div style={{ height: '300px' }}>
+            <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaDiario planCumplido={planCumplido} />
             </div>
           </div>

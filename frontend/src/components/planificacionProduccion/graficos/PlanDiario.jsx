@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
+import { MdPadding } from 'react-icons/md';
 const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   const chartRef = useRef(null);
 
@@ -63,15 +64,16 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         orient: 'horizontal',
         top: 'top',
         textStyle: {
-          fontSize: 16,
+          fontSize: 14,
         },
       },
       xAxis: {
         type: 'category',
         data: nombresProcesos,
         axisLabel: {
-          rotate: 30,
-          fontSize: 12,
+          rotate: 15,
+          fontSize: 8,
+
         },
       },
       yAxis: {
