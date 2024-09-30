@@ -112,9 +112,10 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   return (
     <div
       ref={chartRef}
-      style={{ width: '100%', height: '500px' }} // Aumentar la altura del gráfico
+      style={{ width: '100%', height: '400px' }} // Asegúrate de que la altura sea consistente
     />
   );
 };
 
 export default PorcentajeEficienciaMensual;
+

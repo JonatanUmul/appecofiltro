@@ -7,7 +7,6 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   useEffect(() => {
     const myChart = echarts.init(chartRef.current);
 
-    // Agrupar los datos por proceso y calcular la eficiencia
     const procesos = {};
 
     planCumplido.forEach((item) => {
@@ -23,19 +22,18 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
       }
     });
 
-    // Calcular la eficiencia
     const data = Object.keys(procesos).map((proceso) => {
       const planificado = procesos[proceso].planificado;
-      const producido = procesos[proceso].producido || 0; // Usar 0 si no hay producción
-      const eficiencia = planificado > 0 ? Math.round((producido / planificado) * 100) : 0; // Redondear a entero
+      const producido = procesos[proceso].producido || 0;
+      const eficiencia = planificado > 0 ? Math.round((producido / planificado) * 100) : 0;
 
-      return { value: eficiencia, name: proceso }; // Sin decimales
+      return { value: eficiencia, name: proceso };
     });
 
     const option = {
       tooltip: {
         trigger: 'item',
-        formatter: '{b}: {c}%', // Formato del tooltip
+        formatter: '{b}: {c}%',
       },
       series: [
         {
@@ -47,23 +45,23 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
             borderRadius: 10,
             color: (params) => {
               const colors = ['#5470C6', '#91CC75', '#EE6666', '#FFA07A', '#FF69B4'];
-              return colors[params.dataIndex % colors.length]; // Colores personalizados
+              return colors[params.dataIndex % colors.length];
             },
           },
           label: {
-            show: true, // Mostrar etiquetas
-            formatter: '{b}: {c}%', // Formato de las etiquetas
-            fontSize: 14, // Aumentar el tamaño de las etiquetas
-            color: '#333', // Color de las etiquetas
+            show: true,
+            formatter: '{b}: {c}%',
+            fontSize: 11,
+            color: '#333',
           },
           emphasis: {
             label: {
               show: true,
-              fontSize: 16, // Aumentar el tamaño de la etiqueta al enfatizar
+              fontSize: 16,
               fontWeight: 'bold',
             },
           },
-          data: data, // Usar los datos calculados
+          data: data,
         },
       ],
     };
@@ -71,17 +69,16 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
     myChart.setOption(option);
 
     return () => {
-      myChart.dispose(); // Limpiar el gráfico cuando el componente se desmonte
+      myChart.dispose();
     };
-  }, [planCumplido]); // Agregar planCumplido como dependencia
+  }, [planCumplido]);
 
   return (
     <div
       ref={chartRef}
-      style={{ width: '100%', height: '400px' }} // Ajusta la altura y el ancho como necesites
+      style={{ width: '100%', height: '100%' }} // Ajustar a 100%
     />
   );
 };
 
 export default PorcentajeEficienciaMensual;
-

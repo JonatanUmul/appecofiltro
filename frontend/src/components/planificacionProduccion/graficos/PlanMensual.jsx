@@ -29,12 +29,12 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
     const planificado = nombresProcesos.map(proceso => procesos[proceso].planificado);
     const producido = nombresProcesos.map(proceso => procesos[proceso].producido || 0); // Usar 0 si no hay producción
 
-    // Definición de las series de datos
+    // Definición de las series de datos usando el nuevo formato
     const series = [
       {
-        data: planificado,
-        type: 'bar',
         name: 'Planificado',
+        type: 'bar',
+        data: planificado,
         itemStyle: {
           color: '#5470C6', // Color para lo planificado
         },
@@ -46,11 +46,11 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         },
       },
       {
-        data: producido,
-        type: 'bar',
         name: 'Producido',
+        type: 'bar',
+        data: producido,
         itemStyle: {
-          color: '#91CC75', // Color para lo producido
+          color: '#FF4C4C', // Cambiar a color rojo para lo producido
         },
         label: {
           show: true,
@@ -63,15 +63,37 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
 
     // Configuración del gráfico
     const option = {
+      title: {
+        // text: 'Planificación Mensual', // Título del gráfico
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
       legend: {
         data: ['Planificado', 'Producido'],
         orient: 'horizontal',
-        top: 'top', // Colocar la leyenda en la parte superior
+        top: 'top',
         textStyle: {
-          fontSize: 16, // Tamaño de letra de la leyenda
+          fontSize: 14, // Tamaño de letra de la leyenda
         },
       },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true,
+      },
       xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01],
+        axisLabel: {
+          fontSize: 12, // Ajustar el tamaño de la fuente
+        },
+      },
+      yAxis: {
         type: 'category',
         data: nombresProcesos, // Usar los nombres de los procesos
         axisLabel: {
@@ -79,25 +101,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
           fontSize: 12, // Ajustar el tamaño de la fuente
         },
       },
-      yAxis: {
-        type: 'value',
-        axisLabel: {
-          fontSize: 12, // Aumentar el tamaño de los números en el eje y
-        },
-      },
-      grid: {
-        top: '10%', // Espacio superior
-        bottom: '15%', // Espacio inferior
-        left: '10%', // Espacio izquierdo
-        right: '10%', // Espacio derecho
-      },
       series: series,
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-          type: 'shadow', // Mostrar puntero de eje
-        },
-      },
     };
 
     // Establecer las opciones del gráfico
@@ -112,7 +116,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
   return (
     <div
       ref={chartRef}
-      style={{ width: '100%', height: '500px' }} // Aumentar la altura del gráfico
+      style={{ width: '100%', height: '100%' }} // Ajustar para ocupar todo el contenedor
     />
   );
 };
