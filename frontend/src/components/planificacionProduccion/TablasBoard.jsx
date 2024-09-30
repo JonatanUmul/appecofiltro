@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DatePicker } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import './App.css';
+// import './App.css';
 import PlanMensual from './graficos/PlanMensual';
 import PorcentajeEficienciaMensual from './graficos/PorcentajeEficienciaMensual.jsx';
 import PlanDiario from './graficos/PlanDiario.jsx';
@@ -71,7 +71,7 @@ const App = () => {
           }}>
           {/* Gráfico 1 */}
           <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Planificación Mensual</p>
+            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Mensual</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanMensual planCumplido={planMesData} />
             </div>
@@ -79,7 +79,7 @@ const App = () => {
 
           {/* Gráfico 2 */}
           <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de % Eficiencia</p>
+            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de % Eficiencia</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaMensual planCumplido={planMesData} />
             </div>
@@ -87,7 +87,7 @@ const App = () => {
 
           {/* Gráfico 3 */}
           <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Responsables</p>
+            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Responsables</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ResponsablesArea data={planMesData} />
             </div>
@@ -96,7 +96,6 @@ const App = () => {
 
         {/* Gráficos 4 y 5 en otra fila */}
         <div style={{
-            height:'100%',
             display: 'flex',
             justifyContent: 'space-between',
             gap: '10px',
@@ -104,7 +103,7 @@ const App = () => {
           }}>
           {/* Gráfico 4 */}
           <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Planificación Diario</p>
+            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Diario</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanDiario planCumplido={planCumplido} />
             </div>
@@ -112,7 +111,7 @@ const App = () => {
 
           {/* Gráfico 5 */}
           <div style={{ flex: '1 1 30%', padding: '5px', backgroundColor: '#ffffff', borderRadius: '5px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.1)', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>Gráfico de Comparativa</p>
+            <p style={{ textAlign: 'center', fontFamily:'Poppins', fontWeight: 'bold',   fontSize: '26px' }}>Gráfico de Comparativa Diario</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaDiario planCumplido={planCumplido} />
             </div>

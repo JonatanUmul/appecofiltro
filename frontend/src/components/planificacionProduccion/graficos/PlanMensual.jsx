@@ -36,7 +36,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         type: 'bar',
         data: planificado,
         itemStyle: {
-          color: '#5470C6', // Color para lo planificado
+          color: '#1f77b4', // Color para lo planificado
           barGap: '20%',
         },
         label: {
@@ -54,7 +54,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
         type: 'bar',
         data: producido,
         itemStyle: {
-          color: '#FF4C4C', // Cambiar a color rojo para lo producido
+          color: '#2ca02c', // Cambiar a color rojo para lo producido
           barGap: '20%',
         },
         label: {

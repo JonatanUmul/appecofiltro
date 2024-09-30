@@ -44,7 +44,19 @@ const PorcentajeEficienciaMensual = ({ planCumplido }) => {
           itemStyle: {
             borderRadius: 10,
             color: (params) => {
-              const colors = ['#5470C6', '#91CC75', '#EE6666', '#FFA07A', '#FF69B4'];
+             const colors = [
+  '#5470C6', // Azul 
+  '#91CC75', // Verde
+  '#EE6666', // Rojo
+  '#FAC858', // Amarillo
+  '#73C0DE', // Celeste
+  '#3BA272', // Verde oscuro
+  '#FC8452', // Naranja
+  '#9A60B4', // Morado
+  '#D14A61', // Rojo oscuro
+  '#6E7074'  // Gris
+];
+
               return colors[params.dataIndex % colors.length];
             },
           },

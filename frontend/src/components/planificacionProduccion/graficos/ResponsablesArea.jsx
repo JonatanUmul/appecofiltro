@@ -108,7 +108,7 @@ const TreeChart = ({ data }) => {
             },
           },
           expandAndCollapse: true,
-          animationDuration: 750,
+          animationDuration: 75,
           animationDurationUpdate: 750,
         },
       ],
