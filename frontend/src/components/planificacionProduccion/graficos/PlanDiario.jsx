@@ -72,8 +72,8 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
         type: 'category',
         data: nombresProcesos,
         axisLabel: {
-          rotate: 18,
-          fontSize: 10,
+          rotate: 22,
+          fontSize: 9,
           
 
         },
@@ -82,7 +82,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
         type: 'value',
         
         axisLabel: {
-          fontSize: 10,
+          fontSize: 9,
           
         },
       },
