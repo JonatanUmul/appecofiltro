@@ -44,6 +44,7 @@ console.log('Datos de IP',ipregnacion)
 
   return (
     <div className="">
+      
       <div className="col-md-3 mb-5">
         <input
           className="form-control"

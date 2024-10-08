@@ -1,50 +1,62 @@
-import React, { useState } from 'react';
-import { Button, Dropdown, Flex } from 'antd';
-import { redirect } from 'react-router-dom';
-import PlanificacionDiario from './PlanificacionDiario'
+import React, { useEffect, useState } from 'react';
+import DashBoard from './DashBoard';
+import Inicio from './Board';
+import PlanificarMes from './PlanificacionDiario';
+
 const App = () => {
-  const [item, setItem]=useState('')  
-const items = [
-    {
-      key: '1',
-      label: 'Mensual',
-    },
-    {
-      key: '2',
-      label: 'Diario',
-    },
-    
-  ];
+  const [opcion, setOpcion] = useState(null);
+  console.log('Opción seleccionada', opcion);
+
+  const BuscarOpcion = (e, option) => {
+    e.preventDefault(); // Prevenir el comportamiento por defecto de los enlaces
+    setOpcion(option);
+  };
+
+const seleccionMenu=()=>{
+  console.log('Entro a seleccion',opcion)
+  switch (opcion) {
+    case '1':
+      return <PlanificarMes />;
+    case '2':
+      return <DashBoard/>
+    default:
+      return null;
+  }
+};
   
-    const onMenuClick = (e) => {
-  
-        console.log(item)
-      console.log('click', e);
-      setItem(e.key)
-      
-    };
-    console.log('Item capturado', item)
-switch(item){
-    case "1":
-        return ''
-    case "2": 
-        return <PlanificacionDiario/>
-    
-}
 
-    return(
-  <Flex align="flex-start" gap="small" vertical>
-       <Dropdown.Button
-      menu={{
-        items,
-        onClick: onMenuClick,
-      }}
-    >
-      Plan
-    </Dropdown.Button>
-  </Flex>
+   
 
 
+  return (
+    <div className="btn-group" role="group">
+      <button
+        type="button"
+        className="btn btn-primary dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Dropdown
+      </button>
+      <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-)};
+      <ul className="dropdown-menu">
+        <li>
+          <a className="dropdown-item" href="#" onClick={(e) => BuscarOpcion(e, "1")}>
+            Planificar Mes
+          </a>
+        </li>
+        <li>
+          <a className="dropdown-item" href="#" onClick={(e) => BuscarOpcion(e, "2")}>
+            DashBoard
+          </a>
+        </li>
+      </ul>
+      </div>
+     {opcion>0 ? seleccionMenu():<Inicio/>}
+     
+    </div>
+  );
+};
+
 export default App;

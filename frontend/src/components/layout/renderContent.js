@@ -17,6 +17,8 @@ import TablaControlProcesosOT from '../reporteS/AreasReportes/TablaControlProces
 import TablaLab from '../laboratorio/TablaLab'
 import TablaPorCodigos from '../laboratorio/TablaPorCodigos'
 import Board from '../planificacionProduccion/Board'
+import AsignarIsuue from '../../components/planificacionProduccion/Isuues/TablaIsuues'
+
 export const renderContent = (pathname) => {
     switch (pathname) {
 
@@ -80,7 +82,8 @@ export const renderContent = (pathname) => {
                     
                     case "/Home/TablaPorCodigos":
                       return <TablaPorCodigos />;
-                      
+                   case '/Home/AsignarIsuue':
+                    return <AsignarIsuue/>   
                    
      
       default:

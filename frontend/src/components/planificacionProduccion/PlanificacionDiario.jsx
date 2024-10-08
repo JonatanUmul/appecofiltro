@@ -6,8 +6,7 @@ import Draggable from 'react-draggable';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import Swal from 'sweetalert2'; // Importar SweetAlert
-
-const URL = process.env.REACT_APP_URL;
+// const URL = process.env.REACT_APP_URL;
 const { Option } = Select;
 
 const App = () => {
@@ -228,11 +227,10 @@ console.log("ID del creador:", id_creador);
     console.log("Día inicial capturado:", primerDia);
     console.log("Día final capturado:", ultimoDia);
   }, [primerDia, ultimoDia]);
-  
-  
-  
+
   return (
     <>
+    
       <Form handleInputChange={onSubmit} name="time_related_controls">
         <Space>
           <Form.Item label="Mes">
