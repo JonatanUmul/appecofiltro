@@ -67,6 +67,7 @@ const App = () => {
                   hoverable
                   className={Issue.id_planDiario > 0 ? null : 'card pulse'}
                   style={{
+                    fontSize:'9px',
                     borderRadius: '10px',
                     boxShadow: Issue.id_planDiario > 0 ? '0 4px 12px rgba(0, 0, 0, 0.2)' : '0 4px 12px rgba(250, 128, 114)',
                     transition: 'transform 0.2s, box-shadow 0.2s',

@@ -8,7 +8,7 @@ import PlanDiario from './graficos/PlanDiario.jsx';
 import PorcentajeEficienciaDiario from './graficos/PorcentajeEficienciaDiario.jsx';
 import ResponsablesArea from './graficos/ResponsablesArea.jsx';
 import LogoEco from '../utilidades/LogoEco';
-
+import { formatFecha } from "../utilidades/FormatearFecta.js";
 const App = () => {
   const URL = process.env.REACT_APP_URL;
   const [planMesData, setPlanMesData] = useState([]);
@@ -16,10 +16,10 @@ const App = () => {
   const [hoy, setHoy] = useState(dayjs().format('YYYY-MM-DD'));
   const [fechaInicial, setFechaInicial] = useState(dayjs().startOf('month').format('YYYY-MM-DD'));
   const [fechaFin, setFechaFin] = useState(dayjs().endOf('month').format('YYYY-MM-DD'));
-  const [noche, setNoche]=useState()
-//   const [isDarkMode, setIsDarkMode] = useState(
-//     () => JSON.parse(localStorage.getItem('darkMode')) || false
-//   );
+  const [noche, setNoche]=useState();
+  const [mostrarFecha, setMostrar]=useState([])
+  const [mes, setMes]=useState([])
+  const [formatearMes, setFormatear]=useState()
 const [isDarkMode, setIsDarkMode] = useState(true)
   
     useEffect(()=>{
@@ -28,6 +28,20 @@ const [isDarkMode, setIsDarkMode] = useState(true)
         }
         nocheD()
     })
+
+      useEffect(()=>{
+        setMostrar(formatFecha(planCumplido[3]?.fecha))
+
+      },[planCumplido])
+
+      useEffect(() => {
+        if (mostrarFecha.length > 0) {
+          const fechaObjeto = new Date(mostrarFecha); // Convertir la primera fecha a un objeto Date
+          setMes(fechaObjeto.toDateString()); // Formatear la fecha
+        }
+      }, [mostrarFecha]);
+      
+
 
 
 
@@ -41,7 +55,6 @@ const [isDarkMode, setIsDarkMode] = useState(true)
         setPlanCumplido(planCumplidoResponse.data.rows);
         setPlanMesData(planMesResponse.data.rows);
       } catch (error) {
-        console.error('Error al obtener los datos:', error);
       }
     };
 
@@ -74,6 +87,7 @@ const [isDarkMode, setIsDarkMode] = useState(true)
     });
   };
 
+
   // Estilos generales según el modo
   const appStyle = {
     padding: '10px',
@@ -95,6 +109,7 @@ const [isDarkMode, setIsDarkMode] = useState(true)
     alignItems: 'center',
     justifyContent: 'center',
   };
+
 
   return (
     <div style={appStyle}>
@@ -130,21 +145,21 @@ const [isDarkMode, setIsDarkMode] = useState(true)
         {/* Gráficos en una sola fila */}
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Mensual</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Mensual   Octubre</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanMensual isDarkMode={noche} planCumplido={planMesData} />
             </div>
           </div>
 
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de % Eficiencia</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de % Eficiencia   Octubre</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaMensual isDarkMode={noche} planCumplido={planMesData} />
             </div>
           </div>
 
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Responsables</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Responsables   Octubre</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ResponsablesArea isDarkMode={noche} data={planMesData} />
             </div>
@@ -153,15 +168,16 @@ const [isDarkMode, setIsDarkMode] = useState(true)
 
         {/* Gráficos 4 y 5 en otra fila */}
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
+          
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Diario</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Diario  {mostrarFecha}</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanDiario  isDarkMode={noche} planCumplido={planCumplido} />
             </div>
           </div>
 
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Comparativa Diario</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Comparativa Diario {mostrarFecha}</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaDiario isDarkMode={noche} planCumplido={planCumplido} />
             </div>
