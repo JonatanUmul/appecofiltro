@@ -27,13 +27,13 @@ const ConsultaDCPB = ({  id }) => {
           <tr>
             <th scope="col">#</th>
             <th scope="col">Fecha de Creación</th>
-            <th scope="col">Fecha de Producción</th>
+            {/* <th scope="col">Fecha de Producción</th> */}
             <th scope="col">CPB</th>
             <th scope="col">Pulido</th>
             <th scope="col">Modelo</th>
-            <th scope="col">Pulidor</th>
+            {/* <th scope="col">Pulidor</th>
             <th scope="col">Prensa</th>
-            <th scope="col">Modulo</th>
+            <th scope="col">Modulo</th> */}
             <th scope="col">Calificación</th>
          
          
@@ -45,13 +45,13 @@ const ConsultaDCPB = ({  id }) => {
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{formatFecha(fila.fecha_creacion)}</td>
-              <td>{fila.fechaProduccion}</td>
+              {/* <td>{fila.fechaProduccion}</td> */}
               <td>{fila.id_cpb}</td>
               <td>{fila.pulido}</td>
               <td>{fila.modelo}</td>
-              <td>{fila.pulidor}</td>
+              {/* <td>{fila.pulidor}</td>
               <td>{fila.prensa}</td>
-              <td>{fila.modulo}</td>
+              <td>{fila.modulo}</td> */}
               <td>{fila.calificacion}</td>
               
             </tr>

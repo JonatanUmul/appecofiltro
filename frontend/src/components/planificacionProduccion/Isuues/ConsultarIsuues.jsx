@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { FolderOpenOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 const URL = process.env.REACT_APP_URL;
@@ -44,7 +44,7 @@ const App = ({ Issue }) => {
           border: null
         }}
       >
-        <PlusOutlined />
+        <FolderOpenOutlined />
       </Button>
 
       <Modal 

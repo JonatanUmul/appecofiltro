@@ -47,16 +47,14 @@ const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
       const response = await axios.post(`${URL}/DCPB`, {
         id_CPB: id.toString(),
         id_modelo: formData.id_modelo ,
-        id_pulidor: formData.id_pulidor,  
-        id_prensa: formData.id_prensa,
-        id_modulo: formData.id_modulo,
+        // id_pulidor: formData.id_pulidor,  
+        // id_prensa: formData.id_prensa,
+        // id_modulo: formData.id_modulo,
         pulido: formData.pulido,
         id_calificacion: formData.id_calificacion,
-        fechaProduccion:formatFecha( formData.fechaProduccion),
+        // fechaProduccion:formatFecha( formData.fechaProduccion),
         id_creador:id_creador
         
-        
-      
       }); // Mostrar SweetAlert de éxito
       Swal.fire({
         icon: 'success',
@@ -78,7 +76,7 @@ console.log('modulos',modulos)
 
   return (
     <div className="mt-4">
-      <h4 style={{ textAlign: 'center', color: 'gray' }}>Pulida Superior</h4>
+      <h4 style={{ textAlign: 'center', color: 'gray' }}>Pulida Base</h4>
       <div className="card">
         <div className="card-body">
           <label htmlFor="materiaPrima" className="form-label">
@@ -99,7 +97,7 @@ console.log('modulos',modulos)
           <label htmlFor="aserradero" className="form-label">
             Modelo
           </label>
-          <select className="form-select" id="id_modelo" {...register("id_modelo")}>
+          <select className="form-select" id="id_modelo" {...register("id_modelo")} required>
           <option value="" disabled selected>Seleccione...</option>
           {Array.isArray(modeloUF.rows)
             && modeloUF.rows.length>0 && modeloUF.rows.map((modelo) => (
@@ -109,7 +107,7 @@ console.log('modulos',modulos)
             ))}
           </select>
         </div>
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Pulidor
           </label>
@@ -122,8 +120,8 @@ console.log('modulos',modulos)
               </option>
             ))}
           </select>
-        </div>
-        <div className="col-md-6">
+        </div> */}
+        {/* <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Molde
           </label>
@@ -136,9 +134,9 @@ console.log('modulos',modulos)
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <label htmlFor="aserradero" className="form-label">
             Modulo
           </label>
@@ -151,16 +149,16 @@ console.log('modulos',modulos)
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
       <div className="col-md-6">
         <label htmlFor="Codigo">Pulido</label>
-        <input className="form-control" type="number" id='pulido' {...register('pulido')}/>  
+        <input className="form-control" type="number" id='pulido' {...register('pulido')} required/>  
       </div>
 
-      <div className="col-md-6">
+      {/* <div className="col-md-6">
         <label htmlFor="Codigo">Fecha de Producción</label>
         <input className="form-control" type="date" id='fechaProduccion  ' {...register('fechaProduccion')}/>  
-      </div>  
+      </div>   */}
 
         <div className="form-check form-check-inline mt-5">
 
@@ -168,14 +166,15 @@ console.log('modulos',modulos)
     {/* Itera sobre el array de calificaciones y muestra las opciones de radio */}
    
     {Array.isArray(calificacion.rows)&& calificacion.rows.length>0 && calificacion.rows.map((calificacion) => (
-      <div key={calificacion.id} className="form-check">
+      <div style={{display:'flex'}} key={calificacion.id} className="form-check ">
         <input
-          className="form-check-input"
+          className="form-check-input ml-3"
           type="radio"
           name='calificacion'
           id={`checkbox-calificacion-${calificacion.id}`}
           value={calificacion.id}
           {...register("id_calificacion")}
+          required
         />
         <label className="form-check-label" htmlFor={`calificacion-${calificacion.id}`}>
           {calificacion.calificacion}

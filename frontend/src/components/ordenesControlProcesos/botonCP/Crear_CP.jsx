@@ -66,7 +66,7 @@ console.log('propr recibios', encabezado, id)
         OT
       </button>
       {/* Modal */}
-      <Modal isOpen={modalVisible} toggle={handleCloseModal} size='xl' backdrop="static" style={ {maxwidth: '90%'}}>
+      <Modal isOpen={modalVisible} toggle={handleCloseModal} size='md' backdrop="static" style={ {maxwidth: '90%'}}>
         <ModalHeader toggle={handleCloseModal}><LogoEco/></ModalHeader>
         <ModalBody>
           {/* Renderiza el componente correspondiente al formulario seleccionado dentro del modal */}
