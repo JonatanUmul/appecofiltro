@@ -7,6 +7,7 @@ import Detalle from "./botonOT/Detalle";
 // import '../maquinaria/TablaEstilos.css'
 import { useAbility } from '../AbilityContext';
 import ReactPaginate from 'react-paginate';
+import {Button} from 'antd'
 const URL = process.env.REACT_APP_URL
 
 
@@ -21,7 +22,6 @@ const TablaOT = () => {
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
-console.log('Datos para el CC',estOT)
   const id_est=2;
 console.log('Abiliti en tabla OT', ability)
   useEffect(() => {
@@ -44,11 +44,8 @@ console.log('Abiliti en tabla OT', ability)
   };
 
 
-  const puedeGestionar = ability.can('manage', 'all');
-  // const puedeGestionar = ability.can('manage', 'all');
-  const puedeCrear = ability.can('create', 'OT');
-  const puedeVerEstado = ability.can('view', 'Estado');
-  console.log('Puede gestionar:', puedeGestionar);
+
+  
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
@@ -132,6 +129,8 @@ console.log('Abiliti en tabla OT', ability)
               <td>{OTDats.turnoHorneado}</td>
              
                 <td>
+                {(ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                 <CrearOT
                   encabezado={OTDats.tabla}
                   id={OTDats.id}
@@ -140,13 +139,22 @@ console.log('Abiliti en tabla OT', ability)
                   fecha_creacion={OTDats.fecha_creacion}
                   horneado={OTDats.horneado}
                 />
+              ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+              OT
+            </Button>}
+
               </td>
               <td>
-                <ButtnEst
+      {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
+              <ButtnEst
                 handleClickButton={handleClickButton}
                   id={OTDats.id}
                   encabezado={OTDats.tabla}
                 />
+      ): <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+      Estado
+    </Button>}
               </td>
            
               {/* 

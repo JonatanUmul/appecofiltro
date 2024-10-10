@@ -33,12 +33,14 @@ const Login = () => {
 
       if (response.data.token) { // Verificar si hay un token en la respuesta
         const token = response.data.token;
+        console.log(token)
         localStorage.setItem('token', token);
 
         const decodedToken = parseJwt(token);
         const userRoleId = decodedToken.id_rol;
+        console.log('ROlNumer',userRoleId)
         localStorage.setItem('id_rol', userRoleId);
-
+        
         const nombre= decodedToken.nombre;
         localStorage.setItem('nombre', nombre)
 

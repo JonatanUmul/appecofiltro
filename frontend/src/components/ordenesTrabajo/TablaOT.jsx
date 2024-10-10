@@ -9,8 +9,7 @@ import '../maquinaria/TablaEstilos.css';
 import { useAbility } from '../AbilityContext';
 import ReactPaginate from 'react-paginate';
 import TablaControlC from './TablaControlC';
-import { Divider } from 'antd';
-
+import { Divider, Button } from 'antd';
 const URL = process.env.REACT_APP_URL;
 
 const TablaOT = ({ darkMode }) => {
@@ -19,11 +18,13 @@ const TablaOT = ({ darkMode }) => {
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
-  const [nombreRol, setNombrerol] = useState('');
-
+  const [nombreRol, setNombrerol] = useState(localStorage.getItem('id_rol') || '');
+  
   useEffect(() => {
-    setNombrerol(localStorage.getItem('rol'));
-  }, []);
+    if (!nombreRol) {
+      setNombrerol(localStorage.getItem('id_rol'));
+    }
+  }, [nombreRol]);
 
   useEffect(() => {
     const obtenerDatos = async () => {
@@ -60,9 +61,14 @@ const TablaOT = ({ darkMode }) => {
 
   return (
     <div className={`table-container ${darkMode ? 'dark-mode' : ''}`}>
-      <Divider style={{ color: '#f5222d' }}>Ordenes de Trabajo</Divider>
+      <Divider style={{ color: '#f5222d' }}>Órdenes de Trabajo</Divider>
       <div className="mb-3">
+      {(ability && ability.can('manage', 'all')|| ability.can('manage', 'Supervisor'))?(
+
         <BotonOT darkMode={darkMode} />
+      ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+      Crear OT
+    </Button>}
       </div>
 
       <div style={{ overflowX: "auto" }} className="table-responsive-sm">
@@ -78,7 +84,7 @@ const TablaOT = ({ darkMode }) => {
                 Orden
               </th>
               <th scope="col" style={{ width: "1%" }}>
-                Area
+                Área
               </th>
               <th scope="col" style={{ width: "0%" }}>
                 Crear OT
@@ -101,9 +107,11 @@ const TablaOT = ({ darkMode }) => {
                   />
                 </th>
                 <td>{formatFecha(OTDats.fecha_creacion)}</td>
-                <td>{OTDats.encabezado}-{OTDats.id}</td>
+                <td>{`${OTDats.encabezado}-${OTDats.id}`}</td>
                 <td>{OTDats.EncName}</td>
                 <td>
+                {(ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                   <CrearOT
                     darkMode={darkMode}
                     encabezado={OTDats.encabezado}
@@ -111,14 +119,25 @@ const TablaOT = ({ darkMode }) => {
                     fecha_creacion={OTDats.fecha_creacion}
                     id={OTDats.id}
                   />
+                  ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                  OT
+                </Button>}
                 </td>
                 <td>
-                  <ButtnEst
-                    darkMode={darkMode}
-                    handleClickButton={handleClickButton}
-                    id={OTDats.id}
-                    encabezado={OTDats.encabezado}
-                  />
+                  
+  {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+    <ButtnEst
+    disabled
+      darkMode={darkMode}
+      handleClickButton={handleClickButton}
+      id={OTDats.id}
+      encabezado={OTDats.encabezado}
+    />
+  ) : <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+  Estado
+</Button>}
+
+
                 </td>
               </tr>
             ))}

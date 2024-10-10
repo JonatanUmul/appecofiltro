@@ -6,9 +6,12 @@ import { formatFecha } from "../utilidades/FormatearFecta";
 import CrearOT from "./botonOT/Crear_OT";
 import Detalle from "./botonOT/Detalle";
 import './TablaEstilos.css'
+import { useAbility } from '../AbilityContext';
+import {Button} from 'antd'
 const URL = process.env.REACT_APP_URL;
 
 const TablaMaq = ({ OTDats }) => {
+  const ability=useAbility();
   const [estOT, setEstot] = useState([]);
   const [error, setError] = useState("");
 
@@ -41,7 +44,13 @@ const TablaMaq = ({ OTDats }) => {
   return (
     <div>
       <div className="mb-3">
+      {(ability && ability.can('manage', 'all')|| ability.can('manage', 'Supervisor'))?(
+
         <BotonOT />
+      ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+      Crear
+    </Button>}
+
       </div>
       <div className="table-container" style={{ overflowX: "auto", maxHeight: "500px" }}>
         {error && <p>{error}</p>}
@@ -87,20 +96,32 @@ const TablaMaq = ({ OTDats }) => {
                 {/* <td>{OTDats.id_maquina}</td> */}
                 <td>{OTDats.EncName}</td>
                 <td>
+                {(ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                   <CrearOT
                     encabezado={OTDats.encabezado}
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fechaCreacion}
                     id={OTDats.id}
                   />
+                ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                OT
+              </Button>}
+
                 </td>{" "}
                 {/* Pasando el ID como propiedad */}
                 <td>
+                {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                   <ButtnEst
                     handleClickButton={handleClickButton} // Pasar la función handleClickButton como prop
                     id={OTDats.id}
                     encabezado={OTDats.encabezado}
                   />
+                ) : <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                Estado
+              </Button>}
+              
                 </td>
                
               </tr>

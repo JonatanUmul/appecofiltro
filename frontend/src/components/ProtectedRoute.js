@@ -24,7 +24,7 @@ function isTokenValid(token) {
 
 const ProtectedRoute = () => {
   const token = localStorage.getItem('token');
-
+console.log('desde Token',token)
   if (!token || !isTokenValid(token)) {
     return <Navigate to="/" />;
   }

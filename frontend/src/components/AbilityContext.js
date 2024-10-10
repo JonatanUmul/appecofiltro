@@ -10,8 +10,10 @@ export const AbilityProvider = ({ children }) => {
   // Función para actualizar las habilidades basadas en el token
   const updateAbilities = () => {
     const token = localStorage.getItem('token');
+    console.log(token)
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      console.log('Aqui Token',decodedToken)
       const userRole = decodedToken.id_rol;
       const newAbility = defineAbilitiesFor(userRole); // Define las habilidades según el rol del usuario
       setAbility(newAbility);

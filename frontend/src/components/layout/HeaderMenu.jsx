@@ -11,7 +11,7 @@ const HeaderMenu = () => {
   } = theme.useToken();
 
   const handleLogout = () => {
-    localStorage.removeItem('');
+    localStorage.clear();
     window.location.href = '/'; // Redirigir al inicio de sesión
   };
 

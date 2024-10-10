@@ -5,9 +5,12 @@ import axios from "axios";
 import { formatFecha } from "../utilidades/FormatearFecta";
 import CrearCP from "./botonCP/Crear_CP";
 import Detalle from "./botonCP/Detalle";
-import '../maquinaria/TablaEstilos.css'
+import '../maquinaria/TablaEstilos.css';
+import { useAbility } from '../AbilityContext';
+import {Button} from 'antd' 
 const URL = process.env.REACT_APP_URL
 const TablaCP = () => {
+  const ability=useAbility();
   const [estOT, setEstot] = useState([]);
   const [error, setError] = useState("");
 
@@ -41,7 +44,12 @@ const TablaCP = () => {
   return (
     <div>
       <div className="mb-3">
+      {(ability && ability.can('manage', 'all')|| ability.can('manage', 'Supervisor'))?(
+      
         <BotonOT />
+      ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+      Crear OT
+    </Button>}
       </div>
       <div style={{ overflowX: "auto" }}>
         {error && <p>{error}</p>}
@@ -98,6 +106,8 @@ const TablaCP = () => {
                 <td>{CPDats.codigoFinal}</td>
                 <td>{CPDats.EncName}</td>
                 <td>
+                {(ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                   <CrearCP
                     encabezado={CPDats.encabezado}
                     EncName={CPDats.EncName}
@@ -106,14 +116,23 @@ const TablaCP = () => {
                     codigoInicio={CPDats.codigoInicio}
                     codigoFinal= {CPDats.codigoFinal}
                   />
-                </td>{" "}
-                {/* Pasando el ID como propiedad */}
+                ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                OT
+              </Button>}
+
+                </td>
                 <td>
+                {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                   <ButtnEst
                     handleClickButton={handleClickButton} // Pasar la función handleClickButton como prop
                     id={CPDats.id}
                     encabezado={CPDats.encabezado}
                   />
+                ) : <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                Estado
+              </Button>}
+              
                 </td>
                   {/* <td>
                     <button className="btn btn-danger bt-sm" style={{ width: '60px', fontSize: '0.8rem', padding: '0.2rem 0.4rem' }}>Eliminar</button>

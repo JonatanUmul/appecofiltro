@@ -8,7 +8,7 @@ import Detalle from "./botonOT/Detalle";
 import '../maquinaria/TablaEstilos.css';
 import { useAbility } from '../AbilityContext';
 import ReactPaginate from 'react-paginate';
-import { Divider } from 'antd';
+import { Divider, Button } from 'antd';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -60,9 +60,9 @@ console.log('Datos de lab',estOT)
   return (
     <div>
       <Divider style={{ color: '#f5222d' }}>Ordenes de trabajo formulación</Divider>
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <BotonOT />
-        </div>
+        </div> */}
   
       
       <div style={{ overflowX: "auto" }} className="table-responsive-sm">
@@ -130,29 +130,46 @@ console.log('Datos de lab',estOT)
                 <td>{OTDats.LibrasAserrin}/{OTDats.librasAserrin2}</td>
                 <td>{OTDats.formulaTot}</td>
                 <td>{OTDats.nombre_aserradero}/{OTDats.nombre_aserradero2}</td>
+               
                 <td>
+                {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+ 
                   <CrearOT
                     encabezado="otdmp"
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}
                     id={OTDats.id}
                   />
+                ) : <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                OT
+              </Button>}
+              
                 </td>
                 <td>
+                {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                   <CrearOT
                     encabezado="otdmpb"
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}
                     id={OTDats.id}
-                  />
+                  />   ) : <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                  OT
+                </Button>}
                 </td>
                 <td>
+                {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
                   <ButtnEst
                     handleClickButton={handleClickButton}
                     id={OTDats.id}
                     encabezado={OTDats.encabezado}
                   />
+                ) : <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                Estado
+              </Button>}
                 </td>
+                
               </tr>
             ))}
           </tbody>
