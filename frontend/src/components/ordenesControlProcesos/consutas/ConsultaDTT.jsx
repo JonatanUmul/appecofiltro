@@ -21,7 +21,7 @@ console.log(fila)
  
   return (
     
-<div className="table-responsive">
+<div className="table-responsive ">
   {error && <div>Error: {error}</div>}
   <table className="table text-center" style={{ fontSize: '5px' }}>
     <thead>

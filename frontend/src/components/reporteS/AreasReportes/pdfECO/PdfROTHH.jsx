@@ -296,7 +296,7 @@ const PdfROTHP = ({ datos }) => {
         <i className="bi bi-file-earmark-pdf"></i>
       </button>
       <button className="btn" onClick={downloadPDF}>
-        Descargar PDF
+        {/* Descargar PDF */}
       </button>
       <Modal isOpen={isOpen} toggle={togglePDFViewer} size="xl">
         <div style={{ position: 'absolute', top: '10px', right: '20px', zIndex: 1 }}>

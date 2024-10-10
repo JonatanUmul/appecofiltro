@@ -52,7 +52,7 @@ const Detalle = ({  id, nombretabla,codigoInicio,codigoFinal,cantidad }) => {
     <a type="button" onClick={handleClick}>
       <i className="bi bi-arrow-bar-right"></i>
     </a>
-    <Modal isOpen={modalVisible} toggle={handleCloseModal} style={{ width: '100%', maxWidth: '100%', height: '100%', maxHeight: '100%' }}>
+    <Modal isOpen={modalVisible} toggle={handleCloseModal} size="md" >
       <ModalHeader toggle={handleCloseModal}>{nombretabla}</ModalHeader>
       <ModalBody>{renderSelectedForm()}</ModalBody>
       <ModalFooter></ModalFooter>

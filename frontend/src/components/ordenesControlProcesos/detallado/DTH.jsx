@@ -96,7 +96,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
 
     
     <div className="mt-2">
-      <h4 style={{ textAlign: "center", color: "gray" }}>Control de Temperatura Tunel</h4>
+      <h4 style={{ textAlign: "center", color: "gray" }}>{EncName}</h4>
       <div className="card">
         <div className="card-body">
           <label htmlFor="materiaPrima" className="form-label">
@@ -132,11 +132,11 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
          
         </Space>
       ):(<>
-        <div>
+    <div className="col-sm-6 col-md-12 col-lg-12">
        
         <div className="row text-center" >
-    <div className="col-sm-3">
-      <label htmlFor={`modelo`} className="form-label">
+        <div className='col-sm-2 col-md-4 col-lg-4'>
+        <label htmlFor={`modelo`} className="form-label">
         Modelo
         <strong> <a  onClick={onclick}><i class="bi bi-clipboard-plus"></i></a></strong>
         
@@ -159,7 +159,7 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
     </div>
 
     {btn?(
-      <div className="col-sm-3 ">
+      <div className='col-sm-2 col-md-4 col-lg-4'>
       <label htmlFor={`modelo`} className="form-label">
         Modelo 2
         <strong> <a  onClick={onclick}><i class="bi bi-clipboard-plus"></i></a></strong>
@@ -185,8 +185,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
 
     ):false}
 
-    <div className="col-sm-3">
-      <label htmlFor={`turno`} className="form-label">
+<div className='col-sm-2 col-md-4 col-lg-4'>
+<label htmlFor={`turno`} className="form-label">
         Turno
       </label>
       <select
@@ -205,8 +205,8 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
           ))}
       </select>
     </div>
-    <div className="col-sm-3">
-      <label htmlFor={`horno`} className="form-label">
+    <div className='col-sm-2 col-md-4 col-lg-4'>
+    <label htmlFor={`horno`} className="form-label">
         Horno
       </label>
       <select
@@ -229,45 +229,47 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
     </div>
     </div>
 
-    <div className="row text-center mt-2">
-  <div className="col-md-auto">
+    <div class="container text-center mt-3">
+    <div class="row"> 
+    <div class="col-4"> 
     <label htmlFor={`Cabeza Izquierda`} className="form-label">
       Cabeza Izquierda
     </label>
     <input type="text" className="form-control" id="tempCabezaIZ" {...register(`tempCabezaIZ`)} required />
   </div>
-  <div className="col-md-auto">
+  {/* <div class="col">
     <label htmlFor={`Centro Izquierdo`} className="form-label">
       Centro Izquierdo
     </label>
     <input type="text" className="form-control" id="tempCentroIZ" {...register(`tempCentroIZ`)} required />
-  </div>
-  <div className="col-md-auto">
+  </div> */}
+  <div class="col-4">   
     <label htmlFor={`Pie Izquierdo`} className="form-label">
       Pie Izquierdo
     </label>
     <input type="text" className="form-control" id="tempPieIZ" {...register(`tempPieIZ`)} required />
   </div>
-  <div className="col-md-auto">
+
+  <div class="col-4">
     <label htmlFor={`Cabeza Derecha`} className="form-label">
       Cabeza Derecha
     </label>
     <input type="text" className="form-control" id="tempCabezaDR" {...register(`tempCabezaDR`)} required />
   </div>
-  <div className="col-md-auto">
+  {/* <div class="col">
     <label htmlFor={`Centro Derecho`} className="form-label">
       Centro Derecho
     </label>
     <input type="text" className="form-control" id="tempCentroDR" {...register(`tempCentroDR`)} required />
-  </div>
-  <div className="col-md-auto">
+  </div> */}
+  <div class="col-4">
     <label htmlFor={`Pie Derecho`} className="form-label">
       Pie Derecho
     </label>
     <input type="text" className="form-control" id="tempPieDR" {...register(`tempPieDR`)} required />
   </div>
 </div>
-
+</div>
 
 
         </div>

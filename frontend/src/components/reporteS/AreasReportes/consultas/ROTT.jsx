@@ -60,10 +60,10 @@ console.log('datos en dtt', id, nombretabla, codigoInicio, codigoFinal, cantidad
 
   return (
     
-    <div className="">
+    <div className="" >
     <div className="row mb-3">
-    <div className="col-md-3">
-    <strong style={{ display: 'flex' }}>
+    <div className="col-sm-12 col-md-12 col-lg-12">
+    <strong >
   <div className="card shadow-sm bg-light" style={{ fontSize: 'smaller', alignItems: 'center' }}>
     <div className="card-body">
       <h5 className="card-title">Datos:</h5>
@@ -84,10 +84,9 @@ console.log('datos en dtt', id, nombretabla, codigoInicio, codigoFinal, cantidad
  
     </div>
   </div>
-  <div className="row mb-3">
-    <div className="col-md-6">
-      <div className="row mb-3">
-        <div className="col-sm-4">
+  <div class="container text-center">    {/* <div className="col-sm-12 col-md-12 col-lg-12"> */}
+  <div class="row">
+  <div class="col">
           <label htmlFor="id_turno" className="form-label">
             Turno
           </label>
@@ -109,8 +108,8 @@ console.log('datos en dtt', id, nombretabla, codigoInicio, codigoFinal, cantidad
           </select>
         </div>
 
-        <div className="col-sm-4">
-          <label htmlFor="id_tunel" className="form-label">
+        <div class="col">
+         <label htmlFor="id_tunel" className="form-label">
             Tunel
           </label>
           <select
@@ -131,7 +130,7 @@ console.log('datos en dtt', id, nombretabla, codigoInicio, codigoFinal, cantidad
           </select>
         </div>
 
-        <div className="col-sm-4">
+        <div class="col">
           <label htmlFor="id_modelo" className="form-label">
             Modelo
           </label>
@@ -155,11 +154,11 @@ console.log('datos en dtt', id, nombretabla, codigoInicio, codigoFinal, cantidad
       </div>
     </div>
 
-    <div className="col-md-3 d-flex align-items-end">
-      <button className="btn btn-primary ms-2" onClick={limpiarInputs}>
+    <div class="col">
+    <button className="btn btn-primary ms-2" onClick={limpiarInputs}>
         Limpiar
       </button>
-    </div>
+    {/* </div> */}
 
 
   </div>
