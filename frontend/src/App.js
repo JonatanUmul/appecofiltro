@@ -31,7 +31,8 @@ import { AbilityProvider } from './components/AbilityContext.js';
 import TablaLab from './components/laboratorio/TablaLab.jsx';
 import TablaPorCodigos from './components/laboratorio/TablaPorCodigos.jsx';
 import Board from './components/planificacionProduccion/Board.jsx';
-import AsignarIsuue from './components/planificacionProduccion/Isuues/TablaIsuues.jsx'
+import AsignarIsuue from './components/planificacionProduccion/Isuues/TablaIsuues.jsx';
+import OrdenesSap from './components/SapOrdenes/TablaOT.jsx'
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -88,7 +89,7 @@ function App() {
               <Route path="/Home/TablaPorCodigos" element={<TablaPorCodigos toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path='/Home/BoardPlanificacion' element={<Board toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/AsignarIsuue' element={<AsignarIsuue/>}></Route>
-
+              <Route path='/Home/OrdenesSap' element={<OrdenesSap  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
             </Route>
           </Route>
          

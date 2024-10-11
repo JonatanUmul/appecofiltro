@@ -18,7 +18,7 @@ import TablaLab from '../laboratorio/TablaLab'
 import TablaPorCodigos from '../laboratorio/TablaPorCodigos'
 import Board from '../planificacionProduccion/Board'
 import AsignarIsuue from '../../components/planificacionProduccion/Isuues/TablaIsuues'
-
+import OrdenesSap from '../../components/ordenesTrabajo/TablaOT'
 export const renderContent = (pathname) => {
     switch (pathname) {
 
@@ -53,8 +53,6 @@ export const renderContent = (pathname) => {
       case "/Home/BoardPlanificacion":
         return <Board/>
         
-  
-    
           case "/Home/TabProvedores":
           return <TabProvedores />;
   
@@ -85,6 +83,8 @@ export const renderContent = (pathname) => {
                    case '/Home/AsignarIsuue':
                     return <AsignarIsuue/>   
                    
+                    case '/Home/OrdenesSap':
+                    return <OrdenesSap/>
      
       default:
         return null;

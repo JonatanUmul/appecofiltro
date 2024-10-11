@@ -15,10 +15,10 @@ import DTCC from '../detallado/DTCC'
 
 
 
-const CrearOT = ({ encabezado, id, EncName, fecha_creacion, codInicio, codFin, horneado,hornero,ModeloEco }) => {
+const CrearOT = ({ encabezado, id,EncName, fecha_creacion, codInicio,codFin, horneado }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
   const [nombreRol, setNombrerol]=useState('')
-console.log('propr recibios',encabezado, id, EncName, fecha_creacion, codInicio, codFin, horneado)
+console.log('propr recibios', encabezado, id)
 
   // Función para abrir el modal cuando se hace clic en el botón
   const handleOpenModal = () => {
@@ -66,8 +66,7 @@ console.log('propr recibios',encabezado, id, EncName, fecha_creacion, codInicio,
             return <DTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
         
       case 'cthh':
-            return <DTCC id={id} encabezado={encabezado} codInicio={codInicio} codFin={codFin} fecha_creacion={fecha_creacion} horneado={horneado}
-            hornero={hornero} ModeloEco={ModeloEco} />
+            return <DTCC id={id} encabezado={encabezado} codInicio={codInicio} codFin={codFin} fecha_creacion={fecha_creacion} horneado={horneado}/>
         
   
       default:
@@ -87,7 +86,7 @@ console.log('propr recibios',encabezado, id, EncName, fecha_creacion, codInicio,
   return (
     <div>
    
-        <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem',  justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
+        <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
         OT
       </button>
 

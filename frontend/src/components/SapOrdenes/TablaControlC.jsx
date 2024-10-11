@@ -59,10 +59,10 @@ console.log('Abiliti en tabla OT', ability)
   const offset = currentPage * itemsPerPage;
   const currentPageData = estOT.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(estOT.length / itemsPerPage);
-console.log('En tabla para C.c',currentPageData)
+
  
   return (
-    // <div>
+    <div>
    
     <div class="table-responsive-sm" style={{ overflowX: "auto", justifyContent:'center', alignItems:'center' }}>
       {error && <p>{error}</p>}
@@ -135,11 +135,9 @@ console.log('En tabla para C.c',currentPageData)
                   encabezado={OTDats.tabla}
                   id={OTDats.id}
                   codInicio={OTDats.codigoInicio}
-                  codFin={OTDats.codigoFin}
-                  fecha_creacion={OTDats.fechaHorneado}
+                  codFin={OTDats.CodigoFin}
+                  fecha_creacion={OTDats.fecha_creacion}
                   horneado={OTDats.horneado}
-                  hornero={OTDats.Hornero}
-                  ModeloEco={OTDats.ModeloEco}
                 />
               ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
               OT
@@ -185,7 +183,7 @@ console.log('En tabla para C.c',currentPageData)
       activeClassName={'active'}
     /> 
     </div>
-  // </div>
+  </div>
   );
 };
 

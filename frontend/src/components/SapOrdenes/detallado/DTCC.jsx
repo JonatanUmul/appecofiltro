@@ -7,7 +7,7 @@ import { Skeleton, Space } from 'antd';
 
 const URL = process.env.REACT_APP_URL;
 const url='localhost100'
-const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horneado, hornero,ModeloEco }) => {
+const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horneado }) => {
   const { handleSubmit, register, watch } = useForm();
   const [operario, setOperario] = useState([]);
   const [modelo, setModelo] = useState([]);
@@ -99,7 +99,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
         crudoCC: formData.crudoCC,
         quemados: formData.quemados,
         ahumados: formData.ahumados,
-        fecha_real: formData.fecha_real,
         id_creador: id_creador
       });
 
@@ -128,14 +127,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
       <h4 style={{ textAlign: 'center', color: 'gray' }}>Control de Calidad</h4>
       <div className="card">
         <div className="card-body">
-        <label htmlFor="fecha" className="form-label">
-          Hornero
-        </label>
-        <p id="fecha" className="form-control-static">{hornero}</p>
-        <label htmlFor="materiaPrima" className="form-label">
-            Modelo
-          </label>
-          <p id="materiaPrima" className="form-control-static">{ModeloEco}</p>
           <label htmlFor="materiaPrima" className="form-label">
             Codigo Inicio
           </label>
@@ -151,6 +142,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
         <label htmlFor="fecha" className="form-label">
           Suma datos ingresados
         </label>
+
         <p id="fecha" className="form-control-static">{suma}</p>
         </div>
         
@@ -238,10 +230,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
             <div className="col-md-6">
               <label htmlFor="ahumados" className="form-label">Ahumados</label>
               <input type="number" className="form-control" id="ahumados" {...register("ahumados")} required />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="ahumados" className="form-label">Control de calidad</label>
-              <input type="date" className="form-control" id="fecha_real" {...register("fecha_real")} required />
             </div>
             <div className="col-md-12">
               <button type="submit" className="btn btn-primary">Guardar</button>
