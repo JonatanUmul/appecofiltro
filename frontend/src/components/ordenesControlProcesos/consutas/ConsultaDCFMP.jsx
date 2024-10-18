@@ -32,7 +32,6 @@ const ConsultaDTT = ({  id }) => {
             <th scope="col">Modelo</th>
             <th scope="col">Barro Lb</th>
             <th scope="col">Aserradero</th>
-
             <th scope="col">Aserrin LB</th>
             <th scope="col">Humedad Barro</th>
             <th scope="col">Humedad Aserrín</th>

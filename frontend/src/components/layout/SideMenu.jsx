@@ -14,9 +14,9 @@ const SideMenu = () => {
       <div className="demo-logo-vertical" />
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Menu.Item key="1" icon={<FundProjectionScreenOutlined />}><Link to="/Home/Dashboard" style={{ textDecoration: 'none'}}>Dashboard</Link></Menu.Item>
-        {/* <Menu.SubMenu key="sub4" icon={<AppstoreOutlined />} title="Ordenes Sap">
+        <Menu.SubMenu key="sub4" icon={<AppstoreOutlined />} title="Ordenes Sap">
         <Menu.Item key="17" icon={<AppstoreOutlined  />}><Link to="/Home/BoardPlanificacion" style={{ textDecoration: 'none'}}>Planificación Producción</Link></Menu.Item>
-        </Menu.SubMenu> */}
+        </Menu.SubMenu>
         <Menu.SubMenu key="sub3" icon={<FileExclamationOutlined />} title="Planificación">
         <Menu.Item key="16" icon={<BarChartOutlined />}><Link to="/Home/BoardPlanificacion" style={{ textDecoration: 'none'}}>Planificación Producción</Link></Menu.Item>
         </Menu.SubMenu>
